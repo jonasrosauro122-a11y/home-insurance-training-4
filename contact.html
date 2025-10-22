@@ -1,45 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact | Home Insurance Training Portal</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contact | Home Insurance Training</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <h1>Home Insurance Training Portal</h1>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="course.html">Course</a></li>
-        <li><a href="assignments.html">Assignments</a></li>
-        <li><a href="contact.html" class="active">Contact</a></li>
-      </ul>
-    </nav>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html"><span class="logo-dot"></span> Home Insurance Training</a>
+      <nav class="main-nav" id="mainNavContact"><ul>
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="course.html" class="nav-link">Course</a></li>
+        <li><a href="assignments.html" class="nav-link">Assignments</a></li>
+        <li><a href="contact.html" class="nav-link active">Contact</a></li>
+      </ul></nav>
+      <button id="navToggleContact" class="nav-toggle" aria-expanded="false" aria-controls="mainNavContact"><span class="hamburger"></span></button>
+    </div>
   </header>
 
-  <section class="content">
-    <h2>Contact & Feedback</h2>
-    <p>We’d love to hear your feedback or questions about this training. Use the form below to reach out!</p>
+  <main class="container content">
+    <h1 class="section-title reveal">Contact & Feedback</h1>
+    <p class="lead reveal delay-1">Have questions or suggestions for improving this training? Send us a message.</p>
 
-    <form class="contact-form">
-      <label for="name">Name:</label><br>
-      <input type="text" id="name" name="name" placeholder="Enter your name"><br><br>
+    <form class="contact-form reveal delay-2" id="contactForm" action="#" onsubmit="handleContact(event)">
+      <label for="name">Name</label>
+      <input id="name" name="name" required placeholder="Your name">
 
-      <label for="email">Email:</label><br>
-      <input type="email" id="email" name="email" placeholder="Enter your email"><br><br>
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" required placeholder="you@example.com">
 
-      <label for="message">Message:</label><br>
-      <textarea id="message" name="message" placeholder="Write your message..." rows="5"></textarea><br><br>
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="5" required placeholder="Your message..."></textarea>
 
-      <button type="submit" class="btn">Send Message</button>
+      <button class="btn primary" type="submit">Send Message</button>
+      <p id="contactStatus" class="muted" aria-live="polite"></p>
     </form>
-  </section>
+  </main>
 
-  <footer>
-    <p>© 2025 Home Insurance Training Portal | Designed for Classroom Presentation</p>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© 2025 Home Insurance Training Portal • <a href="index.html">Home</a></p>
+    </div>
   </footer>
+
+  <script>
+    document.getElementById('navToggleContact').addEventListener('click',function(){const nav=document.getElementById('mainNavContact');const expanded=this.getAttribute('aria-expanded')==='true'||false;this.setAttribute('aria-expanded',!expanded);nav.classList.toggle('open');});
+
+    function handleContact(e){
+      e.preventDefault();
+      // Basic client-side confirmation (no backend). Optionally wire to email service.
+      const status = document.getElementById('contactStatus');
+      status.textContent = 'Thanks — your message was captured (demo).';
+      e.target.reset();
+    }
+
+    function revealOnScroll(){document.querySelectorAll('.reveal').forEach(el=>{const r=el.getBoundingClientRect(); if(r.top<window.innerHeight-80) el.classList.add('visible');});}
+    window.addEventListener('scroll',revealOnScroll); window.addEventListener('load',revealOnScroll);
+  </script>
 </body>
 </html>
