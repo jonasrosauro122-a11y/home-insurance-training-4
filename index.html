@@ -1,33 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Home Insurance Training Portal</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <h1>Home Insurance Training Portal</h1>
-    <nav>
-      <ul>
-        <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="course.html">Course</a></li>
-        <li><a href="assignments.html">Assignments</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">
+        <span class="logo-dot" aria-hidden="true"></span>
+        Home Insurance Training
+      </a>
+
+      <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+        <ul>
+          <li><a href="index.html" class="nav-link active">Home</a></li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="course.html" class="nav-link">Course</a></li>
+          <li><a href="assignments.html" class="nav-link">Assignments</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <button id="navToggle" class="nav-toggle" aria-expanded="false" aria-controls="mainNav">
+        <span class="hamburger"></span>
+      </button>
+    </div>
   </header>
 
-  <section class="hero">
-    <h2>Welcome to Home Insurance Training</h2>
-    <p>Learn the fundamentals of Home Insurance coverage, policies, and agency operations — designed for Virtual Assistants and Insurance professionals.</p>
-    <a href="course.html" class="btn">Explore Course</a>
-  </section>
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <h1 class="reveal">Welcome to the <em>Home Insurance Training Portal</em></h1>
+          <p class="lead reveal delay-1">A compact, practical training hub designed for Virtual Assistants and agency staff — learn coverages, policy processing, and agency workflows.</p>
+          <div class="hero-actions reveal delay-2">
+            <a class="btn primary" href="course.html">Explore Course</a>
+            <a class="btn outline" href="#download">Download Slides</a>
+          </div>
+          <div class="quick-stats reveal delay-3">
+            <div><strong>4</strong><span>Modules</span></div>
+            <div><strong>10+</strong><span>Activities</span></div>
+            <div><strong>Self-paced</strong><span>Classroom friendly</span></div>
+          </div>
+        </div>
 
-  <footer>
-    <p>© 2025 Home Insurance Training Portal | Designed for Classroom Presentation</p>
+        <div class="hero-card reveal delay-4">
+          <div class="card-top">
+            <h3>Today's Module</h3>
+            <p class="muted">Module 1 — Introduction to Home Insurance</p>
+          </div>
+          <div class="card-body">
+            <ul>
+              <li>Coverage A–D explained</li>
+              <li>Key policy terms</li>
+              <li>Sample declaration review</li>
+            </ul>
+            <a class="btn small" href="course.html">Open Module</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features container">
+      <h2 class="section-title reveal">Why use this training?</h2>
+      <div class="grid-3">
+        <article class="feature-card reveal delay-1">
+          <div class="feature-icon">📘</div>
+          <h3>Structured Modules</h3>
+          <p>Short focused lessons built for quick comprehension and practice.</p>
+        </article>
+
+        <article class="feature-card reveal delay-2">
+          <div class="feature-icon">🧭</div>
+          <h3>Agency Workflows</h3>
+          <p>Real tasks and assignments connecting learning to agency systems.</p>
+        </article>
+
+        <article class="feature-card reveal delay-3">
+          <div class="feature-icon">⚡</div>
+          <h3>Fast Onboarding</h3>
+          <p>Designed to help new VAs support agents quickly and accurately.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="download container" id="download">
+      <div class="download-inner reveal">
+        <h2>Download classroom slides</h2>
+        <p>Bring the slides to your offline session or share them with attendees.</p>
+        <div class="download-actions">
+          <!-- place your PPTX or Canva export named "training.pptx" inside assets/ -->
+          <a class="btn primary" href="assets/training.pptx" download>Download .pptx</a>
+          <a class="btn outline" href="https://www.canva.com" target="_blank" rel="noopener">Open Canva (edit slides)</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta container reveal delay-1">
+      <h3>Ready to start the first module?</h3>
+      <p class="muted">Quick practice tasks on the Course page — perfect for hands-on learning.</p>
+      <a class="btn primary" href="course.html">Go to Course</a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© 2025 Home Insurance Training Portal — Classroom Materials • <a href="contact.html">Contact</a></p>
+      <div class="social">
+        <a href="#" aria-label="email">✉️</a>
+      </div>
+    </div>
   </footer>
+
+  <script>
+    // Mobile nav toggle
+    const navToggle = document.getElementById('navToggle');
+    const nav = document.getElementById('mainNav');
+    navToggle.addEventListener('click', () => {
+      const expanded = navToggle.getAttribute('aria-expanded') === 'true' || false;
+      navToggle.setAttribute('aria-expanded', !expanded);
+      nav.classList.toggle('open');
+    });
+
+    // Simple reveal on scroll
+    function revealOnScroll() {
+      document.querySelectorAll('.reveal').forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 80) el.classList.add('visible');
+      });
+    }
+    window.addEventListener('scroll', revealOnScroll);
+    window.addEventListener('load', revealOnScroll);
+  </script>
 </body>
 </html>
