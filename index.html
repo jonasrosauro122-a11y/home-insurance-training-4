@@ -3,119 +3,132 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Home Insurance Training Portal</title>
+  <title>LAVA Classroom — Home Insurance Training</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Loading overlay -->
+  <div id="loader" class="loader">
+    <div class="loader-inner">
+      <div class="lava-dot"></div>
+      <div class="loader-text">LAVA Classroom</div>
+    </div>
+  </div>
+
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="index.html">
-        <span class="logo-dot" aria-hidden="true"></span>
-        Home Insurance Training
+        <span class="logo-square" aria-hidden="true"></span>
+        LAVA Classroom
       </a>
 
       <nav class="main-nav" id="mainNav" aria-label="Main navigation">
         <ul>
           <li><a href="index.html" class="nav-link active">Home</a></li>
           <li><a href="about.html" class="nav-link">About</a></li>
-          <li><a href="course.html" class="nav-link">Course</a></li>
+          <li><a href="courses.html" class="nav-link">Courses</a></li>
           <li><a href="assignments.html" class="nav-link">Assignments</a></li>
           <li><a href="contact.html" class="nav-link">Contact</a></li>
         </ul>
       </nav>
 
-      <button id="navToggle" class="nav-toggle" aria-expanded="false" aria-controls="mainNav">
+      <button id="navToggle" class="nav-toggle" aria-expanded="false" aria-controls="mainNav" aria-label="Toggle menu">
         <span class="hamburger"></span>
       </button>
     </div>
   </header>
 
   <main>
-    <section class="hero">
+    <section class="hero white-hero">
       <div class="container hero-grid">
         <div class="hero-content">
-          <h1 class="reveal">Welcome to the <em>Home Insurance Training Portal</em></h1>
-          <p class="lead reveal delay-1">A compact, practical training hub designed for Virtual Assistants and agency staff — learn coverages, policy processing, and agency workflows.</p>
+          <h1 class="reveal">Welcome to <span class="accent-red">LAVA Classroom</span><br/><small class="muted">Learn, Apply, and Grow in the Insurance World</small></h1>
+          <p class="lead reveal delay-1">Classroom-friendly, self-paced training for Virtual Assistants and agency support staff. Clear modules, practical tasks, and trainer support.</p>
+
           <div class="hero-actions reveal delay-2">
-            <a class="btn primary" href="course.html">Explore Course</a>
-            <a class="btn outline" href="#download">Download Slides</a>
+            <a class="btn btn-red" href="courses.html">Start Learning</a>
+            <a class="btn btn-black" href="about.html">Meet the Trainers</a>
           </div>
+
           <div class="quick-stats reveal delay-3">
+            <div><strong>14</strong><span>Days</span></div>
             <div><strong>4</strong><span>Modules</span></div>
-            <div><strong>10+</strong><span>Activities</span></div>
-            <div><strong>Self-paced</strong><span>Classroom friendly</span></div>
+            <div><strong>Certificate</strong><span>On Completion</span></div>
           </div>
         </div>
 
         <div class="hero-card reveal delay-4">
-          <div class="card-top">
-            <h3>Today's Module</h3>
-            <p class="muted">Module 1 — Introduction to Home Insurance</p>
-          </div>
-          <div class="card-body">
-            <ul>
-              <li>Coverage A–D explained</li>
-              <li>Key policy terms</li>
-              <li>Sample declaration review</li>
-            </ul>
-            <a class="btn small" href="course.html">Open Module</a>
-          </div>
+          <h3>Today: Intro Module</h3>
+          <p class="muted">Module 1 — Getting to know you, roles, admin tasks</p>
+          <a class="btn small btn-red" href="courses.html#day1">Open Day 1</a>
         </div>
       </div>
     </section>
 
     <section class="features container">
-      <h2 class="section-title reveal">Why use this training?</h2>
+      <h2 class="section-title reveal">Why LAVA Classroom?</h2>
       <div class="grid-3">
         <article class="feature-card reveal delay-1">
           <div class="feature-icon">📘</div>
-          <h3>Structured Modules</h3>
-          <p>Short focused lessons built for quick comprehension and practice.</p>
+          <h3>Practical Modules</h3>
+          <p>Short lessons that map directly to agency tasks.</p>
         </article>
 
         <article class="feature-card reveal delay-2">
-          <div class="feature-icon">🧭</div>
-          <h3>Agency Workflows</h3>
-          <p>Real tasks and assignments connecting learning to agency systems.</p>
+          <div class="feature-icon">🛠️</div>
+          <h3>Hands-On Activities</h3>
+          <p>Assignments, sample policies, and AMS simulations.</p>
         </article>
 
         <article class="feature-card reveal delay-3">
-          <div class="feature-icon">⚡</div>
-          <h3>Fast Onboarding</h3>
-          <p>Designed to help new VAs support agents quickly and accurately.</p>
+          <div class="feature-icon">🏆</div>
+          <h3>Recognition</h3>
+          <p>Certificates and trainer feedback on completion day.</p>
         </article>
       </div>
     </section>
 
     <section class="download container" id="download">
       <div class="download-inner reveal">
-        <h2>Download classroom slides</h2>
-        <p>Bring the slides to your offline session or share them with attendees.</p>
+        <div>
+          <h2>Download Slides</h2>
+          <p class="muted">Bring the slides to offline sessions or share them with trainees.</p>
+        </div>
         <div class="download-actions">
-          <!-- place your PPTX or Canva export named "training.pptx" inside assets/ -->
-          <a class="btn primary" href="assets/training.pptx" download>Download .pptx</a>
-          <a class="btn outline" href="https://www.canva.com" target="_blank" rel="noopener">Open Canva (edit slides)</a>
+          <a class="btn btn-red" href="assets/training.pptx" download>Download .pptx</a>
+          <a class="btn btn-black" href="https://www.canva.com" target="_blank" rel="noopener">Open Canva</a>
         </div>
       </div>
     </section>
 
     <section class="cta container reveal delay-1">
-      <h3>Ready to start the first module?</h3>
-      <p class="muted">Quick practice tasks on the Course page — perfect for hands-on learning.</p>
-      <a class="btn primary" href="course.html">Go to Course</a>
+      <div class="cta-inner">
+        <div>
+          <h3>Ready to begin?</h3>
+          <p class="muted">Start with Day 1 and follow the daily tasks for hands-on practice.</p>
+        </div>
+        <div>
+          <a class="btn btn-red" href="courses.html">Go to Courses</a>
+        </div>
+      </div>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <p>© 2025 Home Insurance Training Portal — Classroom Materials • <a href="contact.html">Contact</a></p>
-      <div class="social">
-        <a href="#" aria-label="email">✉️</a>
-      </div>
+      <p>© 2025 LAVA Classroom • Home Insurance Training</p>
+      <div class="social muted">LAVA • Training Portal</div>
     </div>
   </footer>
 
   <script>
+    // Loader
+    window.addEventListener('load', function(){
+      const l = document.getElementById('loader');
+      l.classList.add('loaded');
+      setTimeout(()=>l.style.display='none',400);
+    });
+
     // Mobile nav toggle
     const navToggle = document.getElementById('navToggle');
     const nav = document.getElementById('mainNav');
@@ -123,9 +136,10 @@
       const expanded = navToggle.getAttribute('aria-expanded') === 'true' || false;
       navToggle.setAttribute('aria-expanded', !expanded);
       nav.classList.toggle('open');
+      navToggle.classList.toggle('open');
     });
 
-    // Simple reveal on scroll
+    // Reveal on scroll
     function revealOnScroll() {
       document.querySelectorAll('.reveal').forEach(el => {
         const rect = el.getBoundingClientRect();
