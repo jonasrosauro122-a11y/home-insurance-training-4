@@ -3,55 +3,67 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Assignments | Home Insurance Training</title>
+  <title>Assignments • LAVA Classroom</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="index.html"><span class="logo-dot"></span> Home Insurance Training</a>
-      <nav class="main-nav" id="mainNavAssign"><ul>
-        <li><a href="index.html" class="nav-link">Home</a></li>
-        <li><a href="about.html" class="nav-link">About</a></li>
-        <li><a href="course.html" class="nav-link">Course</a></li>
-        <li><a href="assignments.html" class="nav-link active">Assignments</a></li>
-        <li><a href="contact.html" class="nav-link">Contact</a></li>
-      </ul></nav>
-      <button id="navToggleAssign" class="nav-toggle" aria-expanded="false" aria-controls="mainNavAssign"><span class="hamburger"></span></button>
+      <a class="brand" href="index.html"><span class="logo-square"></span> LAVA Classroom</a>
+      <nav class="main-nav" id="mainNavAssign" aria-label="Main navigation">
+        <ul>
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="courses.html" class="nav-link">Courses</a></li>
+          <li><a href="assignments.html" class="nav-link active">Assignments</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+      <button id="navToggleAssign" class="nav-toggle" aria-expanded="false" aria-controls="mainNavAssign" aria-label="Toggle menu"><span class="hamburger"></span></button>
     </div>
   </header>
 
   <main class="container content">
     <h1 class="section-title reveal">Assignments & Activities</h1>
-    <p class="lead reveal delay-1">Practice tasks to reinforce learning — trainers can provide sample files or AMS access for hands-on work.</p>
+    <p class="lead reveal delay-1">Each module has a hands-on assignment. Trainers can provide sample files and AMS recordings for practice.</p>
 
     <ol class="assign-list reveal delay-2">
-      <li><strong>Module 1</strong>: Identify Coverage A–D on a sample declaration. <em>Deliverable:</em> 1-page summary.</li>
-      <li><strong>Module 2</strong>: Fill a simplified ACORD fields worksheet. <em>Deliverable:</em> Completed worksheet.</li>
-      <li><strong>Module 3</strong>: Simulate entering a new policy in AMS (record your steps). <em>Deliverable:</em> Short video or step list.</li>
-      <li><strong>Module 4</strong>: Audit a sample policy for data issues. <em>Deliverable:</em> Error log.</li>
+      <li><strong>Day 1</strong>: Identify Coverage A–D on a sample declaration. <em>Deliverable:</em> 1-page summary.</li>
+      <li><strong>Day 2</strong>: Create a short policy cycle diagram. <em>Deliverable:</em> Image or PDF.</li>
+      <li><strong>Day 3</strong>: Label components of an insurance document. <em>Deliverable:</em> Annotated screenshot.</li>
+      <li><strong>Day 4</strong>: Mock CSRs calls (recording). <em>Deliverable:</em> Short audio/video clip.</li>
+      <li><strong>Day 5</strong>: AMS walkthrough checklist. <em>Deliverable:</em> Steps log.</li>
+      <li><strong>Day 6–11</strong>: Quoting & declaration analysis activities. <em>Deliverable:</em> Quote summary & screenshots.</li>
+      <li><strong>Day 12</strong>: ACORD fields worksheet. <em>Deliverable:</em> Completed worksheet.</li>
+      <li><strong>Day 13</strong>: SOP draft. <em>Deliverable:</em> SOP PDF.</li>
+      <li><strong>Day 14</strong>: Final reflection & certificate request.</li>
     </ol>
 
     <div class="muted-card reveal delay-3">
-      <h4>How agencies can help</h4>
+      <h4>Trainer resources</h4>
       <ul>
-        <li>Provide read-only sample policies</li>
-        <li>Share recorded AMS navigation</li>
-        <li>Offer brief Q&A sessions after activities</li>
+        <li>Sample policies (redacted)</li>
+        <li>Recorded AMS navigation</li>
+        <li>ACORD sample forms</li>
       </ul>
     </div>
   </main>
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <p>© 2025 Home Insurance Training Portal • <a href="index.html">Home</a></p>
+      <p>© 2025 LAVA Classroom</p>
     </div>
   </footer>
 
   <script>
-    document.getElementById('navToggleAssign').addEventListener('click',function(){const nav=document.getElementById('mainNavAssign');const expanded=this.getAttribute('aria-expanded')==='true'||false;this.setAttribute('aria-expanded',!expanded);nav.classList.toggle('open');});
+    document.getElementById('navToggleAssign').addEventListener('click', function(){
+      const nav = document.getElementById('mainNavAssign');
+      const expanded = this.getAttribute('aria-expanded') === 'true' || false;
+      this.setAttribute('aria-expanded', !expanded);
+      nav.classList.toggle('open');
+    });
     function revealOnScroll(){document.querySelectorAll('.reveal').forEach(el=>{const r=el.getBoundingClientRect(); if(r.top<window.innerHeight-80) el.classList.add('visible');});}
-    window.addEventListener('scroll',revealOnScroll); window.addEventListener('load',revealOnScroll);
+    window.addEventListener('scroll', revealOnScroll); window.addEventListener('load', revealOnScroll);
   </script>
 </body>
 </html>
