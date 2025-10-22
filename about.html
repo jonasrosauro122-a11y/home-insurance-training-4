@@ -3,46 +3,49 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>About | Home Insurance Training</title>
+  <title>About • LAVA Classroom</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="index.html"><span class="logo-dot"></span> Home Insurance Training</a>
-      <nav class="main-nav" id="mainNavAbout"><ul>
-        <li><a href="index.html" class="nav-link">Home</a></li>
-        <li><a href="about.html" class="nav-link active">About</a></li>
-        <li><a href="course.html" class="nav-link">Course</a></li>
-        <li><a href="assignments.html" class="nav-link">Assignments</a></li>
-        <li><a href="contact.html" class="nav-link">Contact</a></li>
-      </ul></nav>
-      <button id="navToggleAbout" class="nav-toggle" aria-expanded="false" aria-controls="mainNavAbout"><span class="hamburger"></span></button>
+      <a class="brand" href="index.html"><span class="logo-square"></span> LAVA Classroom</a>
+      <nav class="main-nav" id="mainNavAbout" aria-label="Main navigation">
+        <ul>
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="about.html" class="nav-link active">About</a></li>
+          <li><a href="courses.html" class="nav-link">Courses</a></li>
+          <li><a href="assignments.html" class="nav-link">Assignments</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+      <button id="navToggleAbout" class="nav-toggle" aria-expanded="false" aria-controls="mainNavAbout" aria-label="Toggle menu"><span class="hamburger"></span></button>
     </div>
   </header>
 
   <main class="container content">
-    <h1 class="section-title reveal">About this training</h1>
-    <p class="lead reveal delay-1">This portal was created to help Virtual Assistants and agency support staff gain practical knowledge in Home Insurance — policy structure, endorsements, and daily agency workflows.</p>
+    <h1 class="section-title reveal">About LAVA Classroom</h1>
+    <p class="lead reveal delay-1">LAVA Classroom was created to upskill Virtual Assistants and support teams in practical Home Insurance tasks — from policy understanding to AMS support.</p>
 
     <div class="grid-2 reveal delay-2">
       <div>
-        <h3>Who it's for</h3>
-        <p>New VAs, junior agents, and support staff who handle policy documents, endorsements, or billing tasks.</p>
+        <h3>Who is this for?</h3>
+        <p>New VAs, junior agents, and support staff who handle policy documents, endorsements, and client communications.</p>
+
         <h4>Learning outcomes</h4>
         <ul>
           <li>Explain Coverages A–D</li>
-          <li>Recognize common endorsements and ACORD forms</li>
-          <li>Complete simple policy data tasks in an AMS</li>
+          <li>Identify common endorsements and ACORD forms</li>
+          <li>Complete key AMS tasks and support renewals</li>
         </ul>
       </div>
 
       <aside class="card-muted">
-        <h4>Trainer tips</h4>
+        <h4>Trainer notes</h4>
         <ul>
           <li>Use sample policies for hands-on practice</li>
-          <li>Record AMS navigation for trainees</li>
-          <li>Encourage trainees to ask questions live</li>
+          <li>Record AMS navigation for trainee review</li>
+          <li>Provide short quizzes after modules</li>
         </ul>
       </aside>
     </div>
@@ -50,12 +53,11 @@
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <p>© 2025 Home Insurance Training Portal • <a href="index.html">Home</a></p>
+      <p>© 2025 LAVA Classroom</p>
     </div>
   </footer>
 
   <script>
-    // About page nav toggle + reveal
     document.getElementById('navToggleAbout').addEventListener('click', function(){
       const nav = document.getElementById('mainNavAbout');
       const expanded = this.getAttribute('aria-expanded') === 'true' || false;
