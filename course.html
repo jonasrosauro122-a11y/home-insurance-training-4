@@ -1,60 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Course | Home Insurance Training Portal</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Course | Home Insurance Training</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <h1>Home Insurance Training Portal</h1>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="course.html" class="active">Course</a></li>
-        <li><a href="assignments.html">Assignments</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html"><span class="logo-dot"></span> Home Insurance Training</a>
+      <nav class="main-nav" id="mainNavCourse"><ul>
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="course.html" class="nav-link active">Course</a></li>
+        <li><a href="assignments.html" class="nav-link">Assignments</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul></nav>
+      <button id="navToggleCourse" class="nav-toggle" aria-expanded="false" aria-controls="mainNavCourse"><span class="hamburger"></span></button>
+    </div>
   </header>
 
-  <section class="content">
-    <h2>Training Course Overview</h2>
-    <p>The Home Insurance Training course covers core areas that every insurance VA or agent support staff should master. Below are the main modules included:</p>
+  <main class="container content">
+    <h1 class="section-title reveal">Course overview & modules</h1>
+    <p class="lead reveal delay-1">The course is split into concise modules with a practical assignment after each section.</p>
 
-    <table class="course-table">
-      <tr>
-        <th>Module</th>
-        <th>Topic</th>
-        <th>Learning Focus</th>
-      </tr>
-      <tr>
-        <td>Module 1</td>
-        <td>Introduction to Home Insurance</td>
-        <td>Understand policy structure, coverages A–D, and basic terms.</td>
-      </tr>
-      <tr>
-        <td>Module 2</td>
-        <td>Policy Documentation</td>
-        <td>Learn about ACORD forms, endorsements, and declarations.</td>
-      </tr>
-      <tr>
-        <td>Module 3</td>
-        <td>Processing & Support</td>
-        <td>Handling renewals, endorsements, and billing inquiries efficiently.</td>
-      </tr>
-      <tr>
-        <td>Module 4</td>
-        <td>Quality and Compliance</td>
-        <td>Ensuring data accuracy and adherence to agency standards.</td>
-      </tr>
-    </table>
-  </section>
+    <div class="modules-grid reveal delay-2">
+      <article class="module">
+        <h3>Module 1 — Introduction to Home Insurance</h3>
+        <p>Understanding policy layout, Coverages A–D, and common terms.</p>
+        <a class="btn small" href="assignments.html">See assignment</a>
+      </article>
 
-  <footer>
-    <p>© 2025 Home Insurance Training Portal | Designed for Classroom Presentation</p>
+      <article class="module">
+        <h3>Module 2 — Policy Documentation</h3>
+        <p>ACORD, endorsements, declarations page review, and proper labeling.</p>
+        <a class="btn small" href="assignments.html">See assignment</a>
+      </article>
+
+      <article class="module">
+        <h3>Module 3 — Processing & Support</h3>
+        <p>Renewals, endorsements, billing questions and how VAs assist agents.</p>
+        <a class="btn small" href="assignments.html">See assignment</a>
+      </article>
+
+      <article class="module">
+        <h3>Module 4 — Quality & Compliance</h3>
+        <p>Data accuracy checks, audit sample, and best practices.</p>
+        <a class="btn small" href="assignments.html">See assignment</a>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© 2025 Home Insurance Training Portal • <a href="index.html">Home</a></p>
+    </div>
   </footer>
+
+  <script>
+    document.getElementById('navToggleCourse').addEventListener('click',function(){const nav=document.getElementById('mainNavCourse');const expanded=this.getAttribute('aria-expanded')==='true'||false;this.setAttribute('aria-expanded',!expanded);nav.classList.toggle('open');});
+    function revealOnScroll(){document.querySelectorAll('.reveal').forEach(el=>{const r=el.getBoundingClientRect(); if(r.top<window.innerHeight-80) el.classList.add('visible');});}
+    window.addEventListener('scroll',revealOnScroll); window.addEventListener('load',revealOnScroll);
+  </script>
 </body>
 </html>
