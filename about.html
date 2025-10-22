@@ -1,71 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>About • LAVA Classroom</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About | LAVA Classroom</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="index.html"><span class="logo-square"></span> LAVA Classroom</a>
-      <nav class="main-nav" id="mainNavAbout" aria-label="Main navigation">
-        <ul>
-          <li><a href="index.html" class="nav-link">Home</a></li>
-          <li><a href="about.html" class="nav-link active">About</a></li>
-          <li><a href="courses.html" class="nav-link">Courses</a></li>
-          <li><a href="assignments.html" class="nav-link">Assignments</a></li>
-          <li><a href="contact.html" class="nav-link">Contact</a></li>
-        </ul>
-      </nav>
-      <button id="navToggleAbout" class="nav-toggle" aria-expanded="false" aria-controls="mainNavAbout" aria-label="Toggle menu"><span class="hamburger"></span></button>
-    </div>
+  <header>
+    <h1>LAVA Classroom</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html" class="active">About</a></li>
+        <li><a href="courses.html">Courses</a></li>
+        <li><a href="assignments.html">Assignments</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
   </header>
 
-  <main class="container content">
-    <h1 class="section-title reveal">About LAVA Classroom</h1>
-    <p class="lead reveal delay-1">LAVA Classroom was created to upskill Virtual Assistants and support teams in practical Home Insurance tasks — from policy understanding to AMS support.</p>
+  <section class="about-intro">
+    <h2>About LAVA Classroom</h2>
+    <p>
+      LAVA Classroom is designed to help Virtual Assistants and insurance professionals
+      develop the skills needed to support agencies in the modern insurance industry.
+      Our trainers bring real-world experience and a passion for learning.
+    </p>
+  </section>
 
-    <div class="grid-2 reveal delay-2">
-      <div>
-        <h3>Who is this for?</h3>
-        <p>New VAs, junior agents, and support staff who handle policy documents, endorsements, and client communications.</p>
+  <section class="trainers">
+    <h2>Meet the Trainers</h2>
+    <p>Our dedicated mentors guide Virtual Assistants through real-world insurance training and support.</p>
 
-        <h4>Learning outcomes</h4>
-        <ul>
-          <li>Explain Coverages A–D</li>
-          <li>Identify common endorsements and ACORD forms</li>
-          <li>Complete key AMS tasks and support renewals</li>
-        </ul>
+    <div class="trainer-gallery">
+      <div class="trainer-card">
+        <img src="https://i.imgur.com/6oK4hPZ.jpg" alt="Trainer 1">
+        <h3>Alex Johnson</h3>
+        <p>Lead Trainer – Home Insurance</p>
       </div>
-
-      <aside class="card-muted">
-        <h4>Trainer notes</h4>
-        <ul>
-          <li>Use sample policies for hands-on practice</li>
-          <li>Record AMS navigation for trainee review</li>
-          <li>Provide short quizzes after modules</li>
-        </ul>
-      </aside>
+      <div class="trainer-card">
+        <img src="https://i.imgur.com/4YbBvYg.jpg" alt="Trainer 2">
+        <h3>Maria Lopez</h3>
+        <p>Trainer – Auto & Umbrella</p>
+      </div>
+      <div class="trainer-card">
+        <img src="https://i.imgur.com/nW3Vv7B.jpg" alt="Trainer 3">
+        <h3>James Carter</h3>
+        <p>Technical Specialist – AMS Systems</p>
+      </div>
+      <div class="trainer-card">
+        <img src="https://i.imgur.com/F0i0yGV.jpg" alt="Trainer 4">
+        <h3>Sarah Lee</h3>
+        <p>Coordinator – LAVA Operations</p>
+      </div>
+      <div class="trainer-card">
+        <img src="https://i.imgur.com/y9pR2oA.jpg" alt="Trainer 5">
+        <h3>Michael Brown</h3>
+        <p>Mentor – Policy Workflow</p>
+      </div>
     </div>
-  </main>
+  </section>
 
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p>© 2025 LAVA Classroom</p>
-    </div>
-  </footer>
-
-  <script>
-    document.getElementById('navToggleAbout').addEventListener('click', function(){
-      const nav = document.getElementById('mainNavAbout');
-      const expanded = this.getAttribute('aria-expanded') === 'true' || false;
-      this.setAttribute('aria-expanded', !expanded);
-      nav.classList.toggle('open');
-    });
-    function revealOnScroll(){document.querySelectorAll('.reveal').forEach(el=>{const r=el.getBoundingClientRect(); if(r.top<window.innerHeight-80) el.classList.add('visible');});}
-    window.addEventListener('scroll', revealOnScroll); window.addEventListener('load', revealOnScroll);
-  </script>
-</body>
-</html>
+  <footer>
+    <p>© 2025 LAVA Classroom
