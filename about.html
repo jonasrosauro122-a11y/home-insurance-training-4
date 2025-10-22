@@ -1,25 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About | Home Insurance Training Portal</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>About | Home Insurance Training</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <h1>Home Insurance Training Portal</h1>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html" class="active">About</a></li>
-        <li><a href="course.html">Course</a></li>
-        <li><a href="assignments.html">Assignments</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html"><span class="logo-dot"></span> Home Insurance Training</a>
+      <nav class="main-nav" id="mainNavAbout"><ul>
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link active">About</a></li>
+        <li><a href="course.html" class="nav-link">Course</a></li>
+        <li><a href="assignments.html" class="nav-link">Assignments</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul></nav>
+      <button id="navToggleAbout" class="nav-toggle" aria-expanded="false" aria-controls="mainNavAbout"><span class="hamburger"></span></button>
+    </div>
   </header>
 
-  <section class="content">
-    <h2>About This Training</h2>
-    <p>This portal is designed to help Virtual Assistants and agency team members understand the essential concepts of <strong>Home Insurance</strong>. Our goal is to strengthen knowledge of coverages, policy processing, and agency workflows.</p>
+  <main class="container content">
+    <h1 class="section-title reveal">About this training</h1>
+    <p class="lead reveal delay-1">This portal was created to help Virtual Assistants and agency support staff gain practical knowledge in Home Insurance — policy structure, endorsements, and daily agency workflows.</p>
+
+    <div class="grid-2 reveal delay-2">
+      <div>
+        <h3>Who it's for</h3>
+        <p>New VAs, junior agents, and support staff who handle policy documents, endorsements, or billing tasks.</p>
+        <h4>Learning outcomes</h4>
+        <ul>
+          <li>Explain Coverages A–D</li>
+          <li>Recognize common endorsements and ACORD forms</li>
+          <li>Complete simple policy data tasks in an AMS</li>
+        </ul>
+      </div>
+
+      <aside class="card-muted">
+        <h4>Trainer tips</h4>
+        <ul>
+          <li>Use sample policies for hands-on practice</li>
+          <li>Record AMS navigation for trainees</li>
+          <li>Encourage trainees to ask questions live</li>
+        </ul>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© 2025 Home Insurance Training Portal • <a href="index.html">Home</a></p>
+    </div>
+  </footer>
+
+  <script>
+    // About page nav toggle + reveal
+    document.getElementById('navToggleAbout').addEventListener('click', function(){
+      const nav = document.getElementById('mainNavAbout');
+      const expanded = this.getAttribute('aria-expanded') === 'true' || false;
+      this.setAttribute('aria-expanded', !expanded);
+      nav.classList.toggle('open');
+    });
+    function revealOnScroll(){document.querySelectorAll('.reveal').forEach(el=>{const r=el.getBoundingClientRect(); if(r.top<window.innerHeight-80) el.classList.add('visible');});}
+    window.addEventListener('scroll', revealOnScroll); window.addEventListener('load', revealOnScroll);
+  </script>
+</body>
+</html>
