@@ -3,64 +3,165 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About | LAVA Classroom</title>
+  <title>Meet the Trainers | LAVA Classroom</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      background-color: #ffffff;
+      color: #000;
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+    }
+
+    header {
+      background-color: #000;
+      color: #fff;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      color: #e50914;
+      font-size: 1.5rem;
+      margin: 0;
+    }
+
+    nav a {
+      color: white;
+      margin-left: 1rem;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #e50914;
+    }
+
+    .trainers {
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    .trainers h2 {
+      color: #e50914;
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+    }
+
+    .trainer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .trainer-card {
+      background-color: #f9f9f9;
+      border: 2px solid #000;
+      border-radius: 15px;
+      padding: 1rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s forwards;
+    }
+
+    .trainer-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    .trainer-card img {
+      width: 100%;
+      border-radius: 15px;
+      height: 200px;
+      object-fit: cover;
+      border: 3px solid #e50914;
+    }
+
+    .trainer-card h3 {
+      color: #000;
+      margin-top: 0.8rem;
+    }
+
+    .trainer-card p {
+      color: #e50914;
+      font-weight: bold;
+      margin: 0.3rem 0 0;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      background-color: #000;
+      color: #fff;
+      margin-top: 2rem;
+    }
+  </style>
 </head>
 <body>
   <header>
     <h1>LAVA Classroom</h1>
     <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html" class="active">About</a></li>
-        <li><a href="courses.html">Courses</a></li>
-        <li><a href="assignments.html">Assignments</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
+      <a href="index.html">Home</a>
+      <a href="about.html">Trainers</a>
+      <a href="course.html">Courses</a>
+      <a href="assignments.html">Assignments</a>
+      <a href="contact.html">Contact</a>
     </nav>
   </header>
 
-  <section class="about-intro">
-    <h2>About LAVA Classroom</h2>
-    <p>
-      LAVA Classroom is designed to help Virtual Assistants and insurance professionals
-      develop the skills needed to support agencies in the modern insurance industry.
-      Our trainers bring real-world experience and a passion for learning.
-    </p>
-  </section>
-
   <section class="trainers">
-    <h2>Meet the Trainers</h2>
-    <p>Our dedicated mentors guide Virtual Assistants through real-world insurance training and support.</p>
+    <h2>Meet Our Trainers</h2>
+    <div class="trainer-grid">
 
-    <div class="trainer-gallery">
       <div class="trainer-card">
-        <img src="https://i.imgur.com/6oK4hPZ.jpg" alt="Trainer 1">
-        <h3>Alex Johnson</h3>
-        <p>Lead Trainer – Home Insurance</p>
+        <img src="trainer1.jpg" alt="Karl Sison">
+        <h3>Karl Sison</h3>
+        <p>Trainer Manager</p>
       </div>
+
       <div class="trainer-card">
-        <img src="https://i.imgur.com/4YbBvYg.jpg" alt="Trainer 2">
-        <h3>Maria Lopez</h3>
-        <p>Trainer – Auto & Umbrella</p>
+        <img src="trainer2.jpg" alt="Nash">
+        <h3>Nash</h3>
+        <p>Trainer</p>
       </div>
+
       <div class="trainer-card">
-        <img src="https://i.imgur.com/nW3Vv7B.jpg" alt="Trainer 3">
-        <h3>James Carter</h3>
-        <p>Technical Specialist – AMS Systems</p>
+        <img src="trainer3.jpg" alt="AU">
+        <h3>AU</h3>
+        <p>Trainer</p>
       </div>
+
       <div class="trainer-card">
-        <img src="https://i.imgur.com/F0i0yGV.jpg" alt="Trainer 4">
-        <h3>Sarah Lee</h3>
-        <p>Coordinator – LAVA Operations</p>
+        <img src="trainer4.jpg" alt="Kyle">
+        <h3>Kyle</h3>
+        <p>Trainer</p>
       </div>
+
       <div class="trainer-card">
-        <img src="https://i.imgur.com/y9pR2oA.jpg" alt="Trainer 5">
-        <h3>Michael Brown</h3>
-        <p>Mentor – Policy Workflow</p>
+        <img src="trainer5.jpg" alt="Chanie">
+        <h3>Chanie</h3>
+        <p>Trainer</p>
       </div>
+
     </div>
   </section>
 
   <footer>
-    <p>© 2025 LAVA Classroom
+    <p>© 2025 LAVA Classroom. All Rights Reserved.</p>
+  </footer>
+</body>
+</html>
