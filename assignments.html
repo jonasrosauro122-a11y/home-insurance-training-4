@@ -5,210 +5,50 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LAVA University | LAVA Classroom</title>
   <link rel="stylesheet" href="style.css" />
-  <style>
-    /* --- Global Styles --- */
-    body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      color: #fff;
-      background: linear-gradient(135deg, #000000, #660000);
-      background-size: 200% 200%;
-      animation: gradientShift 10s ease infinite;
-      overflow-x: hidden;
-    }
-
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    /* --- Header --- */
-    header {
-      background-color: rgba(0, 0, 0, 0.8);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-
-    header h1 {
-      color: #e50914;
-      font-size: 1.6rem;
-      margin: 0;
-    }
-
-    nav a {
-      color: white;
-      margin-left: 1.5rem;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s ease;
-    }
-
-    nav a:hover {
-      color: #e50914;
-    }
-
-    /* --- Hero Section --- */
-    .hero {
-      text-align: center;
-      padding: 5rem 2rem;
-      background: rgba(0, 0, 0, 0.5);
-    }
-
-    .hero h2 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      color: #fff;
-      animation: fadeInDown 1.5s ease;
-    }
-
-    .hero p {
-      font-size: 1.1rem;
-      color: #ccc;
-      max-width: 700px;
-      margin: 0 auto 2rem;
-    }
-
-    .hero a {
-      background-color: #e50914;
-      color: white;
-      text-decoration: none;
-      padding: 0.8rem 1.6rem;
-      border-radius: 8px;
-      font-weight: bold;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-    }
-
-    .hero a:hover {
-      background-color: #b0060e;
-      transform: scale(1.05);
-    }
-
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* --- Courses Grid --- */
-    .courses {
-      padding: 4rem 2rem;
-      text-align: center;
-    }
-
-    .courses h2 {
-      font-size: 2rem;
-      color: #fff;
-      margin-bottom: 2rem;
-    }
-
-    .course-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .course-card {
-      background-color: rgba(255, 255, 255, 0.1);
-      border: 2px solid rgba(255, 255, 255, 0.2);
-      border-radius: 15px;
-      padding: 2rem 1rem;
-      backdrop-filter: blur(10px);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInUp 1s forwards;
-    }
-
-    .course-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 8px 20px rgba(229, 9, 20, 0.4);
-    }
-
-    .course-card h3 {
-      color: #fff;
-      margin-bottom: 0.5rem;
-      font-size: 1.2rem;
-    }
-
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* --- Footer --- */
-    footer {
-      text-align: center;
-      padding: 1.5rem;
-      background-color: rgba(0, 0, 0, 0.9);
-      color: #fff;
-      margin-top: 2rem;
-    }
-
-    footer p {
-      margin: 0;
-      font-size: 0.9rem;
-    }
-  </style>
 </head>
-<body>
-  <!-- HEADER -->
-  <header>
-    <h1>LAVA Classroom</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="about.html">Trainers</a>
-      <a href="course.html">Courses</a>
-      <a href="assignments.html" style="color:#e50914;">LAVA University</a>
-      <a href="contact.html">Contact</a>
-    </nav>
+<body style="background:linear-gradient(135deg,#000,#660000);color:#fff;">
+
+  <header class="site-header">
+    <div class="header-inner container">
+      <a href="index.html" class="brand">
+        <img src="images/logo.png" alt="LAVA Logo">
+        <span style="color:#fff">LAVA Classroom</span>
+      </a>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">Trainers</a></li>
+          <li><a href="courses.html">Courses</a></li>
+          <li><a href="assignments.html" class="active">Assignments</a></li>
+          <li><a href="game.html">Games</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
-  <!-- HERO SECTION -->
-  <section class="hero">
-    <h2>Welcome to LAVA University</h2>
-    <p>Enhance your insurance and automation skills with expert-designed training programs.  
-       Access the full learning experience through our official LAVA University portal.</p>
-    <a href="https://university.lavaautomation.com/" target="_blank">Visit LAVA University</a>
-  </section>
+  <main>
+    <section class="container" style="padding:48px 20px;">
+      <h2 style="color:#fff;margin-bottom:12px;">LAVA University</h2>
+      <p style="color:#ddd;max-width:900px;">Enhance your insurance and automation skills with expert-designed training programs. Access the full learning experience through our official LAVA University portal.</p>
+      <a class="btn btn-red" href="https://university.lavaautomation.com/" target="_blank" rel="noopener" style="margin-top:18px;">Visit LAVA University</a>
 
-  <!-- COURSES GRID -->
-  <section class="courses">
-    <h2>Available Courses</h2>
-    <div class="course-grid">
-      <div class="course-card"><h3>AMS 360</h3></div>
-      <div class="course-card"><h3>Applied Epic</h3></div>
-      <div class="course-card"><h3>Auto Owners Commercial Lines Course</h3></div>
-      <div class="course-card"><h3>Auto Owners Personal Lines Course</h3></div>
-      <div class="course-card"><h3>Bamboo</h3></div>
-      <div class="course-card"><h3>California Fair Plan</h3></div>
-      <div class="course-card"><h3>Certificate of Insurance Simulator</h3></div>
-      <div class="course-card"><h3>Erie Course</h3></div>
-      <div class="course-card"><h3>EZLynx</h3></div>
-      <div class="course-card"><h3>Fillable Acord Library</h3></div>
-      <div class="course-card"><h3>Final Exam</h3></div>
-      <div class="course-card"><h3>Hawk Soft</h3></div>
-      <div class="course-card"><h3>Hubspot - User Course</h3></div>
-      <div class="course-card"><h3>Insurance 101</h3></div>
-      <div class="course-card"><h3>Insurance Documents Activity</h3></div>
-      <div class="course-card"><h3>InsuredMine - User Course</h3></div>
-      <div class="course-card"><h3>Mercury Course</h3></div>
-      <div class="course-card"><h3>Personal Lines</h3></div>
-      <div class="course-card"><h3>PL Rater</h3></div>
+      <h3 style="color:#fff;margin-top:32px;">Available Courses</h3>
+      <div class="grid-3" style="margin-top:18px;">
+        <div class="feature-card">AMS 360</div>
+        <div class="feature-card">Applied Epic</div>
+        <div class="feature-card">EZLynx</div>
+        <div class="feature-card">PL Rater</div>
+        <div class="feature-card">Insurance 101</div>
+        <div class="feature-card">Final Exam</div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner container">
+      <p style="color:#ddd;">© 2025 LAVA Classroom. All Rights Reserved.</p>
     </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <p>© 2025 LAVA Classroom. All Rights Reserved.</p>
   </footer>
 </body>
 </html>
