@@ -5,126 +5,46 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Courses • LAVA Classroom</title>
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
-
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body {
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #000000 40%, #5b0000 100%);
-      color: #fff;
-      overflow-x: hidden;
-      min-height: 100%;
-    }
-
-    header.site-header {
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      position: sticky; top: 0; z-index: 1000;
-    }
-    .header-inner {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 1rem 2rem; max-width: 1200px; margin: auto;
-    }
-    .brand { font-weight: 700; color: #fff; text-decoration: none; display: flex; align-items: center; gap: .5rem; }
-    .logo-square { width: 14px; height: 14px; background: linear-gradient(90deg, #5b0000, #000); border-radius: 2px; }
-    .main-nav ul { list-style: none; display: flex; gap: 1.5rem; }
-    .main-nav a { color: #fff; text-decoration: none; font-weight: 500; transition: color .3s; }
-    .main-nav a:hover, .main-nav a.active { color: #ff4d4d; }
-
+    /* keep the page-specific dark layout for courses */
+    body.courses-body { background: linear-gradient(135deg, #000000 40%, #5b0000 100%); color: #fff; }
     .section-title {
-      font-size: 2.8rem; font-weight: 800; text-align: center;
-      margin-top: 3rem;
+      font-size: 2.4rem; font-weight: 800; text-align: center; margin-top: 2.4rem;
       background: linear-gradient(270deg, #5b0000, #000000, #5b0000);
       background-size: 300% 300%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       animation: shimmer 6s ease infinite;
     }
-
-    .lead { text-align: center; color: rgba(255,255,255,0.85); margin: 1rem auto 2rem; max-width: 700px; }
-
-    .days-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem; padding: 2rem;
-      max-width: 1200px; margin: auto;
-    }
-
-    .day-card {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 16px; padding: 1.5rem;
-      text-align: left;
-      transition: transform .3s, box-shadow .3s;
-      cursor: pointer;
-    }
-    .day-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.4); }
-
-    .day-card h3 { font-size: 1.4rem; margin-bottom: .5rem; color: #fff; }
-    .day-card p { color: rgba(255,255,255,0.8); }
-
-    footer.site-footer {
-      text-align: center;
-      padding: 1.5rem 0;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      color: rgba(255,255,255,0.7);
-      background: rgba(0,0,0,0.6);
-    }
-
-    /* Modal */
-    .modal {
-      display: none;
-      position: fixed; top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.8);
-      backdrop-filter: blur(5px);
-      justify-content: center; align-items: center;
-      z-index: 2000; padding: 2rem;
-    }
-    .modal-content {
-      background: #111; border-radius: 16px;
-      padding: 2rem; max-width: 800px; max-height: 90vh;
-      overflow-y: auto; color: #fff; box-shadow: 0 0 20px rgba(0,0,0,0.5);
-    }
-    .modal-content h2 { color: #ff4d4d; margin-bottom: 1rem; }
-    .modal-content p { margin-bottom: 1rem; line-height: 1.6; color: rgba(255,255,255,0.85); }
-    .close-btn {
-      position: absolute; top: 20px; right: 30px;
-      background: none; border: none; color: #fff;
-      font-size: 2rem; cursor: pointer;
-    }
-
-    @keyframes shimmer { 0% {background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%} }
-
-    @media(max-width:768px){
-      .section-title{font-size:2rem;}
-      .modal-content{width:90%;padding:1.5rem;}
-    }
+    .lead { text-align:center; color: rgba(255,255,255,0.85); margin: 1rem auto 2rem; max-width:700px; }
+    .modal { display:none; }
   </style>
 </head>
-<body>
+<body class="courses-body">
+
   <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="index.html"><span class="logo-square"></span>LAVA Classroom</a>
-      <nav class="main-nav" id="mainNavCourses" aria-label="Main navigation">
+    <div class="header-inner container">
+      <a href="index.html" class="brand">
+        <img src="images/logo.png" alt="LAVA Logo">
+        <span style="color:#fff;">LAVA Classroom</span>
+      </a>
+      <nav class="main-nav">
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="about.html">About</a></li>
-          <li><a href="course.html" class="active">Courses</a></li>
+          <li><a href="courses.html" class="active">Courses</a></li>
           <li><a href="assignments.html">Assignments</a></li>
+          <li><a href="game.html">Games</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <main style="padding-top:110px;">
+  <main style="padding-top:100px;">
     <h1 class="section-title reveal">14-Day Training Topics</h1>
     <p class="lead reveal delay-1">Tap a day to explore its full content and learning purpose.</p>
 
-    <div class="days-grid reveal delay-2">
+    <div class="container days-grid reveal delay-2">
       <article class="day-card" data-day="2"><h3>Day 2</h3><p><strong>Insurance 101</strong>, Policy Cycle</p></article>
       <article class="day-card" data-day="3"><h3>Day 3</h3><p><strong>Insurance Documents</strong></p></article>
       <article class="day-card" data-day="4"><h3>Day 4</h3><p><strong>English 101</strong>, CSR, Mock Calls</p></article>
@@ -140,51 +60,68 @@
   </main>
 
   <footer class="site-footer">
-    <p>© 2025 LAVA Classroom</p>
+    <div class="footer-inner container">
+      <p style="color:rgba(255,255,255,0.7)">© 2025 LAVA Classroom</p>
+    </div>
   </footer>
 
-  <!-- Modal -->
+  <!-- Modal container (content loaded by JS) -->
   <div class="modal" id="dayModal">
-    <button class="close-btn" id="closeModal">&times;</button>
-    <div class="modal-content" id="modalContent"></div>
+    <div class="modal-content container" id="modalContent"></div>
+    <button id="closeModal" style="position:fixed;right:28px;top:28px;background:none;border:0;font-size:28px;color:#fff;cursor:pointer;">&times;</button>
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <script>
-    gsap.registerPlugin(ScrollTrigger);
-    gsap.utils.toArray('.reveal').forEach((el,i)=>{
-      gsap.fromTo(el,{opacity:0,y:40},{opacity:1,y:0,duration:1,delay:i*0.1,scrollTrigger:{trigger:el,start:"top 85%"}})
-    });
+    // Simple reveal
+    function revealOnScroll() {
+      document.querySelectorAll('.reveal').forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) el.classList.add('visible');
+      });
+    }
+    window.addEventListener('scroll', revealOnScroll);
+    window.addEventListener('load', revealOnScroll);
 
-    const modal = document.getElementById('dayModal');
-    const modalContent = document.getElementById('modalContent');
-    const closeModal = document.getElementById('closeModal');
-
+    // Modal content (shortened excerpts — expand as needed)
     const lessons = {
-      "2": `<h2>Day 2: Insurance 101 and Policy Cycle</h2><p>1. To Understand the Foundation of Their Work ...</p><p>2. To Communicate Effectively with Agents and Clients ...</p><p>3. To Support the Full Insurance Policy Cycle ...</p><p>4. To Build Confidence and Independence ...</p><p>5. To Add More Value to the Agency ...</p><p>6. To Prevent Costly Mistakes ...</p><p>7. To Build a Long-Term Career Path ...</p>`,
-      "3": `<h2>Day 3: Why VAs Need to Learn About Insurance Documents</h2><p>1. Foundation of Every Insurance Transaction ...</p><p>2. Ensures Accuracy and Reduces Errors ...</p><p>3. Improves Task Efficiency and Workflow ...</p><p>4. Supports Compliance and Record-Keeping ...</p><p>5. Builds Confidence in Handling Client and Carrier Requests ...</p><p>6. Strengthens Understanding of Coverage and Policy Details ...</p><p>7. Prepares VAs for More Advanced Roles ...</p>`,
-      "4": `<h2>Day 4: English 101, CSR, and Mock Calls</h2><p>1. English 101 – Building Professional Communication Skills ...</p><p>2. Insurance CSR – Understanding the Role and Mindset ...</p><p>3. Mock Calls – Practicing Real-Life Scenarios ...</p>`,
-      "5": `<h2>Day 5: AMS and CRM in Insurance</h2><p>1. AMS (Agency Management System) – The Core of Agency Operations ...</p><p>2. CRM (Customer Relationship Management) – Strengthening Client Connections ...</p><p>3. Combined Importance of AMS and CRM ...</p>`,
-      "6": `<h2>Day 6: Raters and Carriers</h2><p>1. To Understand How Quotes Are Created ...</p><p>2. To Ensure Accuracy in Submissions ...</p><p>3. To Support the Agency’s Quoting and Binding Process ...</p><p>4. To Strengthen Product and Coverage Knowledge ...</p><p>5. To Improve Communication with Agents and Carriers ...</p><p>6. To Develop Technical and Analytical Skills ...</p><p>7. To Be a Reliable Part of the Agency Workflow ...</p>`,
-      "7": `<h2>Day 7: Home Insurance Topics</h2><p>1. Home Insurance Types – Understanding the Foundation ...</p><p>2. Coverages in Home Insurance – Knowing What’s Protected ...</p><p>3. Home Construction Knowledge – Ensuring Accurate Quoting ...</p><p>4. Home Quoting – Applying Knowledge into Action ...</p>`,
-      "8": `<h2>Day 8: Auto Insurance Topics</h2><p>1. Introduction to Auto Insurance – Understanding the Basics ...</p><p>2. Coverages and Endorsements – Knowing What’s Protected ...</p><p>3. Auto Quoting – Applying Knowledge to Real Agency Work ...</p>`,
-      "9": `<h2>Day 9: Specialty Personal Lines & Umbrella Insurance</h2><p>1. Trailer Overview and Quoting ...</p><p>2. Boat & RV Overview and Quoting ...</p><p>3. Umbrella Insurance – Protecting Clients Beyond Standard Limits ...</p>`,
-      "10": `<h2>Day 10: Auto Dec Page Activity & Quote Simulation</h2><p>1. Analyzing a Sample Auto Dec Page Activity ...</p><p>2. Auto Quote Simulation – Practical Application ...</p>`,
-      "11": `<h2>Day 11: Auto Dec Page & Quote Simulation</h2><p>1. Analyzing a Sample Auto Dec Page – Activity ...</p><p>2. Auto Quote Simulation – Activity ...</p>`,
-      "12": `<h2>Day 12: Personal and Commercial ACORD Forms</h2><p>1. Understanding the Role of ACORD Forms ...</p><p>2. Importance for Virtual Assistants ...</p><p>3. Activity-Focused Learning: Reviewing and Filling Out ACORD Forms ...</p>`
+      "2": `<h2>Day 2: Insurance 101 and Policy Cycle</h2>
+<p><strong>Why this matters:</strong> Insurance is the core product... (full training content is best added from your source doc)</p>
+<ul>
+<li>Understand the foundation of agency work</li>
+<li>Communicate with agents and clients</li>
+<li>Support the policy cycle: quote → bind → issue → renew → service → cancel</li>
+</ul>`,
+      "3": `<h2>Day 3: Insurance Documents</h2><p>Applications, policies, endorsements, certificates and binders — the backbone of transactions...</p>`,
+      "4": `<h2>Day 4: English 101, CSR & Mock Calls</h2><p>Communication skills and practical mock calls to prepare VAs for client contact.</p>`,
+      "5": `<h2>Day 5: AMS & CRM</h2><p>Agency Management Systems and CRMs — the two systems every VA needs to master.</p>`,
+      "6": `<h2>Day 6: Raters & Carriers</h2><p>How quotes are produced and carrier-specific requirements.</p>`,
+      "7": `<h2>Day 7: Home Insurance Topics</h2><p>Home policy types, coverages, construction details, and quoting.</p>`,
+      "8": `<h2>Day 8: Auto Insurance Topics</h2><p>Auto coverages, endorsements, and quoting practice.</p>`,
+      "9": `<h2>Day 9: Specialty Personal Lines & Umbrella</h2><p>Trailer, boat, RV, and umbrella coverage basics.</p>`,
+      "10": `<h2>Day 10: Auto Dec Page & Quote Simulation</h2><p>Hands-on activity reading dec pages and simulating quotes.</p>`,
+      "11": `<h2>Day 11: Activity Session</h2><p>Practice and review: dec pages and quote simulations.</p>`,
+      "12": `<h2>Day 12: ACORD Forms</h2><p>Practice filling and reviewing ACORD forms for personal & commercial lines.</p>`
     };
 
-    document.querySelectorAll('.day-card').forEach(card => {
-      card.addEventListener('click', () => {
+    document.querySelectorAll('.day-card').forEach(card=>{
+      card.addEventListener('click', ()=>{
         const day = card.getAttribute('data-day');
-        modalContent.innerHTML = lessons[day] || `<h2>Coming Soon</h2><p>Content not available yet.</p>`;
-        modal.style.display = 'flex';
-        gsap.fromTo('.modal-content', {y:-40,opacity:0}, {y:0,opacity:1,duration:0.6,ease:'power2.out'});
+        const modal = document.getElementById('dayModal');
+        const content = document.getElementById('modalContent');
+        content.innerHTML = lessons[day] || '<h2>Coming soon</h2><p>No content yet.</p>';
+        modal.style.display = 'block';
+        document.getElementById('closeModal').style.display = 'block';
       });
     });
-    closeModal.addEventListener('click', ()=> modal.style.display='none');
-    modal.addEventListener('click', e=>{ if(e.target===modal) modal.style.display='none'; });
+
+    document.getElementById('closeModal').addEventListener('click', ()=>{
+      document.getElementById('dayModal').style.display = 'none';
+    });
+
+    window.addEventListener('click', (e)=>{
+      const modal = document.getElementById('dayModal');
+      if (e.target === modal) modal.style.display = 'none';
+    });
   </script>
 </body>
 </html>
