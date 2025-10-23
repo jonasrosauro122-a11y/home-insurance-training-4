@@ -11,7 +11,7 @@
   <header class="site-header">
     <div class="header-inner container">
       <a href="index.html" class="brand">
-        <img src="images/logo.png" alt="LAVA Logo" style="height:36px;">
+        <img src="images/logo.png" alt="LAVA Logo">
         <span>LAVA Classroom</span>
       </a>
       <nav class="main-nav">
@@ -27,36 +27,41 @@
     </div>
   </header>
 
-  <section class="container">
-    <h2>Meet Our Trainers</h2>
+  <main class="container">
+    <h2 style="margin-top:28px;">Meet Our Trainers</h2>
+
     <div class="trainer-grid">
       <div class="trainer-card">
         <img src="images/karl.jpg" alt="Karl Sison">
         <h3>Karl Sison</h3>
         <p>Trainer Manager</p>
       </div>
+
       <div class="trainer-card">
         <img src="images/nash.jpg" alt="Nash">
         <h3>Nash</h3>
         <p>Trainer</p>
       </div>
+
       <div class="trainer-card">
         <img src="images/au.jpg" alt="AU">
         <h3>AU</h3>
         <p>Trainer</p>
       </div>
+
       <div class="trainer-card">
         <img src="images/kyle.jpg" alt="Kyle">
         <h3>Kyle</h3>
         <p>Trainer</p>
       </div>
+
       <div class="trainer-card">
         <img src="images/chanie.jpg" alt="Chanie">
         <h3>Chanie</h3>
         <p>Trainer</p>
       </div>
     </div>
-  </section>
+  </main>
 
   <footer class="site-footer">
     <div class="footer-inner container">
@@ -64,5 +69,15 @@
     </div>
   </footer>
 
+  <script>
+    function revealOnScroll() {
+      document.querySelectorAll('.trainer-card').forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) el.classList.add('visible');
+      });
+    }
+    window.addEventListener('scroll', revealOnScroll);
+    window.addEventListener('load', revealOnScroll);
+  </script>
 </body>
 </html>
