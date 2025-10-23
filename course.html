@@ -9,11 +9,7 @@
 
   <style>
     /* ===== RESET & BASE ===== */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     html, body {
       font-family: 'Inter', sans-serif;
       background: linear-gradient(135deg, #000000 40%, #5b0000 100%);
@@ -41,40 +37,12 @@
       margin: auto;
     }
 
-    .brand {
-      font-weight: 700;
-      color: #fff;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: .5rem;
-    }
+    .brand { font-weight: 700; color: #fff; text-decoration: none; display: flex; align-items: center; gap: .5rem; }
+    .logo-square { width: 14px; height: 14px; background: linear-gradient(90deg, #5b0000, #000); border-radius: 2px; display: inline-block; }
 
-    .logo-square {
-      width: 14px;
-      height: 14px;
-      background: linear-gradient(90deg, #5b0000, #000);
-      border-radius: 2px;
-      display: inline-block;
-    }
-
-    .main-nav ul {
-      list-style: none;
-      display: flex;
-      gap: 1.5rem;
-    }
-
-    .main-nav a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color .3s;
-    }
-
-    .main-nav a:hover,
-    .main-nav a.active {
-      color: #ff4d4d;
-    }
+    .main-nav ul { list-style: none; display: flex; gap: 1.5rem; }
+    .main-nav a { color: #fff; text-decoration: none; font-weight: 500; transition: color .3s; }
+    .main-nav a:hover, .main-nav a.active { color: #ff4d4d; }
 
     /* ===== HERO / TITLE ===== */
     .section-title {
@@ -89,93 +57,31 @@
       animation: shimmer 6s ease infinite;
     }
 
-    .lead {
-      text-align: center;
-      color: rgba(255,255,255,0.85);
-      margin: 1rem auto 2rem;
-      max-width: 700px;
-    }
+    .lead { text-align: center; color: rgba(255,255,255,0.85); margin: 1rem auto 2rem; max-width: 700px; }
 
     /* ===== GRID ===== */
-    .days-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-      padding: 2rem;
-      max-width: 1200px;
-      margin: auto;
-    }
+    .days-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; padding: 2rem; max-width: 1200px; margin: auto; }
+    .day-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 1.5rem; text-align: left; transition: transform .3s, box-shadow .3s; }
+    .day-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.4); }
 
-    .day-card {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 16px;
-      padding: 1.5rem;
-      text-align: left;
-      transition: transform .3s, box-shadow .3s;
-    }
+    .day-card h3 { font-size: 1.4rem; color: #fff; margin-bottom: .5rem; }
+    .day-card p { color: rgba(255,255,255,0.8); line-height: 1.5; }
 
-    .day-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.4);
-    }
+    .note { text-align: center; color: rgba(255,255,255,0.6); padding: 2rem; font-size: .95rem; }
 
-    .day-card h3 {
-      font-size: 1.4rem;
-      color: #fff;
-      margin-bottom: .5rem;
-    }
-
-    .day-card p {
-      color: rgba(255,255,255,0.8);
-      line-height: 1.5;
-    }
-
-    .note {
-      text-align: center;
-      color: rgba(255,255,255,0.6);
-      padding: 2rem;
-      font-size: .95rem;
-    }
-
-    footer.site-footer {
-      text-align: center;
-      padding: 1.5rem 0;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      color: rgba(255,255,255,0.7);
-      background: rgba(0,0,0,0.6);
-    }
+    footer.site-footer { text-align: center; padding: 1.5rem 0; border-top: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.7); background: rgba(0,0,0,0.6); }
 
     /* ===== ANIMATIONS ===== */
-    @keyframes shimmer {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+    @keyframes shimmer { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
-    .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 1s ease;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .reveal { opacity: 0; transform: translateY(30px); transition: all 1s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
 
     /* ===== RESPONSIVE ===== */
     @media (max-width: 768px) {
-      .section-title {
-        font-size: 2rem;
-      }
-      .header-inner {
-        flex-direction: column;
-      }
-      .main-nav ul {
-        flex-direction: column;
-        align-items: center;
-        padding: 1rem 0;
-      }
+      .section-title { font-size: 2rem; }
+      .header-inner { flex-direction: column; }
+      .main-nav ul { flex-direction: column; align-items: center; padding: 1rem 0; }
     }
   </style>
 </head>
@@ -184,22 +90,26 @@
   <!-- HEADER -->
   <header class="site-header">
     <div class="container header-inner">
+      <!-- NOTE: link points to course.html (singular) to match your file -->
       <a class="brand" href="index.html"><span class="logo-square"></span> LAVA Classroom</a>
+
+      <!-- NOTE: nav links use course.html (singular) -->
       <nav class="main-nav" id="mainNavCourses" aria-label="Main navigation">
         <ul>
           <li><a href="index.html" class="nav-link">Home</a></li>
           <li><a href="about.html" class="nav-link">About</a></li>
-          <li><a href="courses.html" class="nav-link active">Courses</a></li>
+          <li><a href="course.html" class="nav-link active">Courses</a></li>
           <li><a href="assignments.html" class="nav-link">Assignments</a></li>
           <li><a href="contact.html" class="nav-link">Contact</a></li>
         </ul>
       </nav>
+
       <button id="navToggleCourses" class="nav-toggle" aria-expanded="false" aria-controls="mainNavCourses" aria-label="Toggle menu"><span class="hamburger"></span></button>
     </div>
   </header>
 
   <!-- MAIN CONTENT -->
-  <main class="container content">
+  <main class="container content" style="padding-top: 110px;">
     <h1 class="section-title reveal">14-Day Training Topics</h1>
     <p class="lead reveal delay-1">Follow the 14-day plan below. Each day has a short lecture + a practical activity or simulation.</p>
 
@@ -237,6 +147,7 @@
   <script>
     gsap.registerPlugin(ScrollTrigger);
 
+    // Reveal animations
     gsap.utils.toArray('.reveal').forEach((el, i) => {
       gsap.fromTo(el,
         { opacity: 0, y: 40 },
@@ -244,7 +155,7 @@
           opacity: 1,
           y: 0,
           duration: 1,
-          delay: i * 0.1,
+          delay: i * 0.08,
           scrollTrigger: {
             trigger: el,
             start: "top 85%",
@@ -256,14 +167,11 @@
     // Optional shimmer speed effect on scroll
     ScrollTrigger.create({
       onUpdate: (self) => {
-        document.documentElement.style.setProperty(
-          "--scroll-speed",
-          (1 + self.getVelocity() / 2000).toFixed(2)
-        );
+        document.documentElement.style.setProperty("--scroll-speed", (1 + self.getVelocity() / 2000).toFixed(2));
       },
     });
 
-    // Mobile nav toggle
+    // Mobile nav toggle (works with the button in the header)
     document.getElementById('navToggleCourses').addEventListener('click', function(){
       const nav = document.getElementById('mainNavCourses');
       const expanded = this.getAttribute('aria-expanded') === 'true' || false;
