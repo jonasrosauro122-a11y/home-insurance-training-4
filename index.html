@@ -8,13 +8,21 @@
 </head>
 <body>
 
+  <!-- Optional loader -->
+  <div id="loader" class="loader">
+    <div class="loader-inner">
+      <div class="lava-dot"></div>
+      <div class="loader-text">LAVA Classroom</div>
+    </div>
+  </div>
+
   <header class="site-header">
     <div class="header-inner container">
       <a href="index.html" class="brand">
-        <img src="images/logo.png" alt="LAVA Logo" style="height:36px;">
+        <img src="images/logo.png" alt="LAVA Logo">
         <span>LAVA Classroom</span>
       </a>
-      <nav class="main-nav">
+      <nav class="main-nav" id="mainNav">
         <ul>
           <li><a href="index.html" class="active">Home</a></li>
           <li><a href="about.html">About</a></li>
@@ -27,20 +35,24 @@
     </div>
   </header>
 
-  <section class="white-hero">
-    <div class="container hero-grid">
-      <div class="hero-content">
-        <h1>Welcome to LAVA Classroom</h1>
-        <p class="lead">Learn, Apply, and Grow in the Insurance World.</p>
-        <a class="btn btn-red" href="courses.html">Go to Courses</a>
+  <main>
+    <section class="white-hero">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <h1>Welcome to LAVA Classroom</h1>
+          <p class="lead">Learn, Apply, and Grow in the Insurance World.</p>
+          <a class="btn btn-red" href="courses.html">Go to Courses</a>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="features container">
-    <h2>Why LAVA Classroom?</h2>
-    <p>Classroom-friendly, self-paced training for Virtual Assistants and agency support staff.</p>
-  </section>
+    <section class="features">
+      <div class="container">
+        <h2 class="section-title">Why LAVA Classroom?</h2>
+        <p>Classroom-friendly, self-paced training for Virtual Assistants and agency support staff.</p>
+      </div>
+    </section>
+  </main>
 
   <footer class="site-footer">
     <div class="footer-inner container">
@@ -48,5 +60,15 @@
     </div>
   </footer>
 
+  <script>
+    // Loader hide
+    window.addEventListener('load', function(){
+      const loader = document.getElementById('loader');
+      if (loader) {
+        loader.classList.add('loaded');
+        setTimeout(()=> loader.style.display='none', 500);
+      }
+    });
+  </script>
 </body>
 </html>
