@@ -1,121 +1,307 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About • LAVA Classroom</title>
-  <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ========= GENERAL STYLES ========= */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Poppins", sans-serif;
+      color: #fff;
+      background: linear-gradient(135deg, #800000, #000000);
+      background-size: 400% 400%;
+      animation: gradientShift 20s ease infinite;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* ========= MOVING CLOUDS ========= */
+    .clouds {
+      position: absolute;
+      top: 0; left: 0;
+      width: 200%;
+      height: 200%;
+      background: url('images/clouds.png') repeat;
+      background-size: contain;
+      opacity: 0.1;
+      animation: cloudMove 120s linear infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    @keyframes cloudMove {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ========= HEADER ========= */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(0,0,0,0.6);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+
+    .brand {
+      color: #fff;
+      font-size: 1.4rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .logo-square {
+      width: 14px;
+      height: 14px;
+      display: inline-block;
+      background: linear-gradient(135deg, #ff1e1e, #800000);
+      margin-right: 8px;
+      border-radius: 3px;
+      vertical-align: middle;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 20px;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover { color: #ff5c5c; }
+    nav a.active { color: #ff1e1e; }
+
+    /* ========= TRAINER SECTION ========= */
+    .container {
+      max-width: 1150px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      position: relative;
+      z-index: 5;
+    }
+
+    .trainers {
+      text-align: center;
+      margin-top: 40px;
+      animation: fadeIn 1.5s ease forwards;
+    }
+
+    .trainers h2 {
+      color: #ff5c5c;
+      font-size: 2.4rem;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .trainers p {
+      color: #ddd;
+      margin-bottom: 40px;
+    }
+
+    .trainer-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+    }
+
+    .trainer-card {
+      background: #fff;
+      color: #000;
+      border-radius: 15px;
+      padding: 1rem;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      transform: translateY(60px);
+      opacity: 0;
+      transition: transform 0.5s ease, opacity 0.5s ease;
+    }
+
+    .trainer-card.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .trainer-card img {
+      width: 100%;
+      height: 230px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 3px solid #ff1e1e;
+      transition: transform 0.3s ease;
+    }
+
+    .trainer-card img:hover {
+      transform: scale(1.05);
+    }
+
+    .trainer-card h3 {
+      color: #800000;
+      margin: 10px 0 5px;
+      font-size: 1.2rem;
+    }
+
+    .trainer-card p {
+      color: #333;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    /* ========= INFO SECTION ========= */
+    .info-section {
+      margin-top: 80px;
+      animation: fadeIn 2s ease forwards;
+    }
+
+    .info-section h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+
+    .info-section p.lead {
+      color: #f1f1f1;
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+    }
+
+    .info-section h3 {
+      color: #ff5c5c;
+      margin-top: 25px;
+      margin-bottom: 10px;
+    }
+
+    .info-section ul {
+      color: #ddd;
+      list-style: disc inside;
+      margin-left: 10px;
+    }
+
+    .info-section li {
+      margin-bottom: 8px;
+    }
+
+    /* ========= FOOTER ========= */
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      background: #111;
+      color: #bbb;
+      margin-top: 60px;
+    }
+
+    /* ========= ANIMATIONS ========= */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @media(max-width: 900px) {
+      .info-section h1 { font-size: 2rem; }
+      .trainers h2 { font-size: 2rem; }
+    }
+  </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="header-inner container">
-      <a class="brand" href="index.html"><span class="logo-square"></span> LAVA Classroom</a>
+  <div class="clouds"></div>
 
-      <nav class="main-nav" id="mainNavAbout">
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html" class="nav-link active">About</a></li>
-          <li><a href="courses.html">Courses</a></li>
-          <li><a href="assignments.html">Assignments</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </nav>
-
-      <button id="navToggleAbout" class="nav-toggle" aria-expanded="false" aria-controls="mainNavAbout"><span class="hamburger"></span></button>
-    </div>
+  <!-- HEADER -->
+  <header>
+    <a href="index.html" class="brand">
+      <span class="logo-square"></span> LAVA Classroom
+    </a>
+    <nav id="mainNavAbout">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html" class="active">About</a></li>
+        <li><a href="courses.html">Courses</a></li>
+        <li><a href="assignments.html">Assignments</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
   </header>
 
-  <main class="container content" style="padding-top:60px;">
-    <h1 class="section-title reveal">About LAVA Classroom</h1>
-    <p class="lead reveal delay-1">LAVA Classroom was created to upskill Virtual Assistants and support teams in practical Home Insurance tasks — from policy understanding to AMS support.</p>
-
-    <div class="grid-2 reveal delay-2" style="margin-top:18px;">
-      <div>
-        <h3 style="color:var(--accent)">Who is this for?</h3>
-        <p>New VAs, junior agents, and support staff who handle policy documents, endorsements, and client communications.</p>
-
-        <h4 style="color:var(--maroon-2); margin-top:12px;">Learning outcomes</h4>
-        <ul>
-          <li>Explain Coverages A–D</li>
-          <li>Identify common endorsements and ACORD forms</li>
-          <li>Complete key AMS tasks and support renewals</li>
-        </ul>
-      </div>
-
-      <aside class="card" style="background:rgba(255,255,255,0.03);">
-        <h4 style="color:var(--maroon-2)">Trainer notes</h4>
-        <ul style="color:var(--muted); margin-top:8px;">
-          <li>Use sample policies for hands-on practice</li>
-          <li>Record AMS navigation for trainee review</li>
-          <li>Provide short quizzes after modules</li>
-        </ul>
-      </aside>
-    </div>
-
-    <section class="trainers reveal delay-3" style="margin-top:32px;">
-      <h2 style="text-transform:uppercase; color:var(--maroon-2); margin-bottom:12px;">Meet Our Trainers</h2>
-
+  <main class="container">
+    <!-- TRAINERS AT TOP -->
+    <section class="trainers">
+      <h2>Meet Our Trainers</h2>
+      <p>Our dedicated mentors guide Virtual Assistants through every stage of learning and application.</p>
       <div class="trainer-gallery">
-        <div class="trainer-card reveal">
+        <div class="trainer-card">
           <img src="images/karl.jpg" alt="Karl Sison">
           <h3>Karl Sison</h3>
           <p>Trainer Manager</p>
         </div>
-        <div class="trainer-card reveal">
+        <div class="trainer-card">
           <img src="images/nash.jpg" alt="Nash">
           <h3>Nash</h3>
           <p>Trainer</p>
         </div>
-        <div class="trainer-card reveal">
+        <div class="trainer-card">
           <img src="images/au.jpg" alt="AU">
           <h3>AU</h3>
           <p>Trainer</p>
         </div>
-        <div class="trainer-card reveal">
+        <div class="trainer-card">
           <img src="images/kyle.jpg" alt="Kyle">
           <h3>Kyle</h3>
           <p>Trainer</p>
         </div>
-        <div class="trainer-card reveal">
+        <div class="trainer-card">
           <img src="images/chanie.jpg" alt="Chanie">
           <h3>Chanie</h3>
           <p>Trainer</p>
         </div>
       </div>
     </section>
+
+    <!-- INFO SECTION UNDERNEATH -->
+    <section class="info-section">
+      <h1>About LAVA Classroom</h1>
+      <p class="lead">LAVA Classroom empowers Virtual Assistants with insurance knowledge and hands-on agency operations training. We focus on practical learning and system mastery.</p>
+
+      <h3>Who is this for?</h3>
+      <p>New Virtual Assistants, junior agents, and support staff who assist with client policies, renewals, and endorsements.</p>
+
+      <h3>Learning Outcomes</h3>
+      <ul>
+        <li>Explain key Home Insurance coverages (A–D).</li>
+        <li>Identify common endorsements and ACORD forms.</li>
+        <li>Perform AMS and CRM support tasks accurately.</li>
+      </ul>
+    </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p>© 2025 LAVA Classroom</p>
-    </div>
+  <footer>
+    <p>© 2025 LAVA Classroom. All Rights Reserved.</p>
   </footer>
 
   <script>
-    // nav toggle
-    document.getElementById('navToggleAbout').addEventListener('click', function(){
-      const nav = document.getElementById('mainNavAbout');
-      const expanded = this.getAttribute('aria-expanded') === 'true' || false;
-      this.setAttribute('aria-expanded', !expanded);
-      nav.classList.toggle('open');
-    });
-
-    // reveal
-    function revealOnScroll(){
-      document.querySelectorAll('.reveal').forEach(el=>{
-        const r = el.getBoundingClientRect();
-        if(r.top < window.innerHeight - 80) el.classList.add('visible');
-      });
-
-      // also add slide-left/right for course page (if present)
-      document.querySelectorAll('.slide-left, .slide-right').forEach(el=>{
-        const r = el.getBoundingClientRect();
-        if(r.top < window.innerHeight - 80) el.classList.add('visible');
+    // Animate trainer cards on scroll
+    function revealCards() {
+      document.querySelectorAll('.trainer-card').forEach(card => {
+        const rect = card.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) card.classList.add('visible');
       });
     }
-    window.addEventListener('load', revealOnScroll);
-    window.addEventListener('scroll', revealOnScroll);
+    window.addEventListener('scroll', revealCards);
+    window.addEventListener('load', revealCards);
   </script>
 </body>
 </html>
