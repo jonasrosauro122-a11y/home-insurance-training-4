@@ -5,161 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Meet the Trainers | LAVA Classroom</title>
   <link rel="stylesheet" href="style.css" />
-  <style>
-    /* General Setup */
-    body {
-      margin: 0;
-      font-family: "Poppins", sans-serif;
-      color: #fff;
-      background: linear-gradient(120deg, #000000, #420000, #000000);
-      background-size: 400% 400%;
-      animation: gradientShift 15s ease infinite;
-      overflow-x: hidden;
-    }
-
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    /* Header */
-    header {
-      background: rgba(0, 0, 0, 0.85);
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-    }
-
-    header h1 {
-      color: #ff2a2a;
-      font-weight: 700;
-      margin: 0;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    header h1 img {
-      height: 40px;
-      width: auto;
-    }
-
-    nav a {
-      color: #fff;
-      margin-left: 1rem;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s;
-    }
-
-    nav a:hover,
-    nav a.active {
-      color: #ff2a2a;
-    }
-
-    /* Trainers Section */
-    .trainers {
-      text-align: center;
-      padding: 4rem 2rem;
-    }
-
-    .trainers h2 {
-      font-size: 2.8rem;
-      margin-bottom: 2rem;
-      color: #ff4d4d;
-    }
-
-    .trainer-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 2rem;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .trainer-card {
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 15px;
-      padding: 1rem;
-      text-align: center;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      opacity: 0;
-      transform: translateY(30px);
-    }
-
-    .trainer-card.visible {
-      opacity: 1;
-      transform: translateY(0);
-      transition: opacity 1s ease, transform 1s ease;
-    }
-
-    .trainer-card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 8px 30px rgba(255, 0, 0, 0.2);
-    }
-
-    .trainer-card img {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-      border-radius: 12px;
-      border: 3px solid #ff2a2a;
-    }
-
-    .trainer-card h3 {
-      color: #fff;
-      margin-top: 0.8rem;
-      font-size: 1.2rem;
-    }
-
-    .trainer-card p {
-      color: #ff2a2a;
-      font-weight: 500;
-      margin: 0.3rem 0 0;
-    }
-
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 1.5rem;
-      background: rgba(0, 0, 0, 0.9);
-      color: #fff;
-      font-size: 0.9rem;
-    }
-
-    /* Responsive tweaks */
-    @media (max-width: 600px) {
-      .trainer-card img {
-        height: 180px;
-      }
-    }
-  </style>
 </head>
 <body>
-  <!-- Header -->
+
   <header>
-    <h1>
-      <img src="images/logo.png" alt="LAVA Logo">
-      LAVA Classroom
-    </h1>
+    <h1><img src="images/logo.png" alt="LAVA Logo">LAVA Classroom</h1>
     <nav>
       <a href="index.html">Home</a>
-      <a href="about.html" class="active">Trainers</a>
+      <a href="about.html" class="active">About</a>
       <a href="courses.html">Courses</a>
-      <a href="assignments.html">LAVA University</a>
+      <a href="assignments.html">Assignments</a>
       <a href="games.html">Games</a>
       <a href="contact.html">Contact</a>
     </nav>
   </header>
 
-  <!-- Trainers Section -->
   <section class="trainers">
     <h2>Meet Our Trainers</h2>
     <div class="trainer-grid">
@@ -197,12 +57,10 @@
     </div>
   </section>
 
-  <!-- Footer -->
   <footer>
     <p>© 2025 LAVA Classroom. All Rights Reserved.</p>
   </footer>
 
-  <!-- Scroll Animation Script -->
   <script>
     function revealOnScroll() {
       document.querySelectorAll('.trainer-card').forEach(el => {
