@@ -2,210 +2,40 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>About • LAVA Classroom</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    /* Animated maroon-to-black gradient background */
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: "Poppins", sans-serif;
-      color: #fff;
-      background: linear-gradient(135deg, #800000, #000000);
-      background-size: 400% 400%;
-      animation: gradientShift 15s ease infinite;
-    }
-
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    .site-header {
-      background: rgba(0,0,0,0.7);
-      position: sticky;
-      top: 0;
-      width: 100%;
-      z-index: 100;
-      padding: 20px 60px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .site-header .brand {
-      color: #fff;
-      font-size: 1.8rem;
-      font-weight: 700;
-      text-decoration: none;
-    }
-
-    .main-nav ul {
-      list-style: none;
-      display: flex;
-      gap: 30px;
-    }
-
-    .main-nav a {
-      text-decoration: none;
-      color: #fff;
-      font-weight: 500;
-      transition: color 0.3s ease;
-    }
-
-    .main-nav a:hover {
-      color: #ff4b4b;
-    }
-
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 80px 20px;
-    }
-
-    .content h1.section-title {
-      font-size: 2.8rem;
-      margin-bottom: 20px;
-      animation: slideDown 1.5s ease-in-out;
-    }
-
-    .content p.lead {
-      font-size: 1.2rem;
-      color: #ddd;
-      margin-bottom: 40px;
-      animation: fadeIn 2s ease-in-out;
-    }
-
-    .grid-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      margin-bottom: 60px;
-      animation: fadeIn 2s ease-in-out;
-    }
-
-    .grid-2 h3 {
-      font-size: 1.5rem;
-      color: #ff4b4b;
-    }
-
-    .trainers {
-      text-align: center;
-      padding: 3rem 0;
-    }
-
-    .trainers h2 {
-      font-size: 2.4rem;
-      color: #ff4b4b;
-      margin-bottom: 20px;
-      text-transform: uppercase;
-    }
-
-    .trainer-gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 30px;
-    }
-
-    .trainer-card {
-      background: #fff;
-      color: #000;
-      border-radius: 12px;
-      padding: 20px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      opacity: 0;
-      transform: translateY(40px);
-      animation: fadeUp 1s ease forwards;
-    }
-
-    .trainer-card:nth-child(1) { animation-delay: 0.3s; }
-    .trainer-card:nth-child(2) { animation-delay: 0.5s; }
-    .trainer-card:nth-child(3) { animation-delay: 0.7s; }
-    .trainer-card:nth-child(4) { animation-delay: 0.9s; }
-    .trainer-card:nth-child(5) { animation-delay: 1.1s; }
-
-    .trainer-card img {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-      border-radius: 12px;
-      margin-bottom: 15px;
-    }
-
-    .trainer-card h3 {
-      margin: 0;
-      font-size: 1.3rem;
-      color: #800000;
-    }
-
-    .trainer-card p {
-      margin: 5px 0 0;
-      color: #555;
-      font-size: 1rem;
-    }
-
-    @keyframes slideDown {
-      from { transform: translateY(-50px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @keyframes fadeUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    footer.site-footer {
-      text-align: center;
-      padding: 30px 20px;
-      background: #111;
-      color: #ccc;
-    }
-
-    @media (max-width: 900px) {
-      .grid-2 {
-        grid-template-columns: 1fr;
-        gap: 30px;
-      }
-      .container {
-        padding: 60px 20px;
-      }
-    }
-  </style>
 </head>
 <body>
-
   <header class="site-header">
-    <a class="brand" href="index.html">LAVA Classroom</a>
-    <nav class="main-nav" id="mainNavAbout">
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html" class="nav-link active">About</a></li>
-        <li><a href="courses.html">Courses</a></li>
-        <li><a href="assignments.html">Assignments</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
-    <button id="navToggleAbout" class="nav-toggle" aria-expanded="false" aria-controls="mainNavAbout" aria-label="Toggle menu"><span class="hamburger"></span></button>
+    <div class="header-inner container">
+      <a class="brand" href="index.html"><span class="logo-square"></span> LAVA Classroom</a>
+
+      <nav class="main-nav" id="mainNavAbout">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html" class="nav-link active">About</a></li>
+          <li><a href="courses.html">Courses</a></li>
+          <li><a href="assignments.html">Assignments</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+
+      <button id="navToggleAbout" class="nav-toggle" aria-expanded="false" aria-controls="mainNavAbout"><span class="hamburger"></span></button>
+    </div>
   </header>
 
-  <div class="container content">
+  <main class="container content" style="padding-top:60px;">
     <h1 class="section-title reveal">About LAVA Classroom</h1>
     <p class="lead reveal delay-1">LAVA Classroom was created to upskill Virtual Assistants and support teams in practical Home Insurance tasks — from policy understanding to AMS support.</p>
 
-    <div class="grid-2 reveal delay-2">
+    <div class="grid-2 reveal delay-2" style="margin-top:18px;">
       <div>
-        <h3>Who is this for?</h3>
+        <h3 style="color:var(--accent)">Who is this for?</h3>
         <p>New VAs, junior agents, and support staff who handle policy documents, endorsements, and client communications.</p>
 
-        <h4>Learning outcomes</h4>
+        <h4 style="color:var(--maroon-2); margin-top:12px;">Learning outcomes</h4>
         <ul>
           <li>Explain Coverages A–D</li>
           <li>Identify common endorsements and ACORD forms</li>
@@ -213,9 +43,9 @@
         </ul>
       </div>
 
-      <aside class="card-muted">
-        <h4>Trainer notes</h4>
-        <ul>
+      <aside class="card" style="background:rgba(255,255,255,0.03);">
+        <h4 style="color:var(--maroon-2)">Trainer notes</h4>
+        <ul style="color:var(--muted); margin-top:8px;">
           <li>Use sample policies for hands-on practice</li>
           <li>Record AMS navigation for trainee review</li>
           <li>Provide short quizzes after modules</li>
@@ -223,57 +53,69 @@
       </aside>
     </div>
 
-    <section class="trainers reveal delay-3">
-      <h2>Meet Our Trainers</h2>
+    <section class="trainers reveal delay-3" style="margin-top:32px;">
+      <h2 style="text-transform:uppercase; color:var(--maroon-2); margin-bottom:12px;">Meet Our Trainers</h2>
+
       <div class="trainer-gallery">
-        <div class="trainer-card">
+        <div class="trainer-card reveal">
           <img src="images/karl.jpg" alt="Karl Sison">
           <h3>Karl Sison</h3>
           <p>Trainer Manager</p>
         </div>
-        <div class="trainer-card">
+        <div class="trainer-card reveal">
           <img src="images/nash.jpg" alt="Nash">
           <h3>Nash</h3>
           <p>Trainer</p>
         </div>
-        <div class="trainer-card">
+        <div class="trainer-card reveal">
           <img src="images/au.jpg" alt="AU">
           <h3>AU</h3>
           <p>Trainer</p>
         </div>
-        <div class="trainer-card">
+        <div class="trainer-card reveal">
           <img src="images/kyle.jpg" alt="Kyle">
           <h3>Kyle</h3>
           <p>Trainer</p>
         </div>
-        <div class="trainer-card">
+        <div class="trainer-card reveal">
           <img src="images/chanie.jpg" alt="Chanie">
           <h3>Chanie</h3>
           <p>Trainer</p>
         </div>
       </div>
     </section>
-  </div>
+  </main>
 
   <footer class="site-footer">
-    <p>© 2025 LAVA Classroom. All Rights Reserved.</p>
+    <div class="container footer-inner">
+      <p>© 2025 LAVA Classroom</p>
+    </div>
   </footer>
 
   <script>
+    // nav toggle
     document.getElementById('navToggleAbout').addEventListener('click', function(){
       const nav = document.getElementById('mainNavAbout');
       const expanded = this.getAttribute('aria-expanded') === 'true' || false;
       this.setAttribute('aria-expanded', !expanded);
       nav.classList.toggle('open');
     });
+
+    // reveal
     function revealOnScroll(){
       document.querySelectorAll('.reveal').forEach(el=>{
         const r = el.getBoundingClientRect();
-        if (r.top < window.innerHeight - 80) el.classList.add('visible');
+        if(r.top < window.innerHeight - 80) el.classList.add('visible');
+      });
+
+      // also add slide-left/right for course page (if present)
+      document.querySelectorAll('.slide-left, .slide-right').forEach(el=>{
+        const r = el.getBoundingClientRect();
+        if(r.top < window.innerHeight - 80) el.classList.add('visible');
       });
     }
-    window.addEventListener('scroll', revealOnScroll);
     window.addEventListener('load', revealOnScroll);
+    window.addEventListener('scroll', revealOnScroll);
   </script>
 </body>
 </html>
