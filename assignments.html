@@ -5,47 +5,70 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Assignments • LAVA Classroom</title>
   <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <header class="site-header">
-    <div class="container header-inner">
+    <div class="header-inner container">
       <a class="brand" href="index.html"><span class="logo-square"></span> LAVA Classroom</a>
-      <nav class="main-nav" id="mainNavAssign" aria-label="Main navigation">
+      <nav class="main-nav" id="mainNavAssign">
         <ul>
-          <li><a href="index.html" class="nav-link">Home</a></li>
-          <li><a href="about.html" class="nav-link">About</a></li>
-          <li><a href="courses.html" class="nav-link">Courses</a></li>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="courses.html">Courses</a></li>
           <li><a href="assignments.html" class="nav-link active">Assignments</a></li>
-          <li><a href="contact.html" class="nav-link">Contact</a></li>
+          <li><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
-      <button id="navToggleAssign" class="nav-toggle" aria-expanded="false" aria-controls="mainNavAssign" aria-label="Toggle menu"><span class="hamburger"></span></button>
+      <button id="navToggleAssign" class="nav-toggle" aria-expanded="false" aria-controls="mainNavAssign"><span class="hamburger"></span></button>
     </div>
   </header>
 
-  <main class="container content">
+  <main class="container content" style="padding-top:60px;">
     <h1 class="section-title reveal">Assignments & Activities</h1>
-    <p class="lead reveal delay-1">Each module has a hands-on assignment. Trainers can provide sample files and AMS recordings for practice.</p>
+    <p class="lead reveal delay-1">Each module contains practical tasks — download templates, complete exercises, and upload results to your LMS or trainer inbox.</p>
 
-    <ol class="assign-list reveal delay-2">
-      <li><strong>Day 1</strong>: Identify Coverage A–D on a sample declaration. <em>Deliverable:</em> 1-page summary.</li>
-      <li><strong>Day 2</strong>: Create a short policy cycle diagram. <em>Deliverable:</em> Image or PDF.</li>
-      <li><strong>Day 3</strong>: Label components of an insurance document. <em>Deliverable:</em> Annotated screenshot.</li>
-      <li><strong>Day 4</strong>: Mock CSR calls (recording). <em>Deliverable:</em> Short audio/video clip.</li>
-      <li><strong>Day 5</strong>: AMS walkthrough checklist. <em>Deliverable:</em> Steps log.</li>
-      <li><strong>Day 6–11</strong>: Quoting & declaration analysis activities. <em>Deliverable:</em> Quote summary & screenshots.</li>
-      <li><strong>Day 12</strong>: ACORD fields worksheet. <em>Deliverable:</em> Completed worksheet.</li>
-      <li><strong>Day 13</strong>: SOP draft. <em>Deliverable:</em> SOP PDF.</li>
-      <li><strong>Day 14</strong>: Final reflection & certificate request.</li>
-    </ol>
+    <div class="assign-list reveal delay-2">
+      <div class="assign-card">
+        <h4>Day 1 — Coverage Identification</h4>
+        <p>Identify Coverages A–D on a sample declaration. Deliverable: 1-page summary.</p>
+        <div class="actions" style="margin-top:10px;">
+          <a href="#" class="btn btn-black">View</a>
+          <a href="assets/templates/day1-template.docx" class="btn btn-red" download>Download Template</a>
+        </div>
+      </div>
 
-    <div class="muted-card reveal delay-3">
-      <h4>Trainer resources</h4>
-      <ul>
-        <li>Sample policies (redacted)</li>
-        <li>Recorded AMS navigation</li>
-        <li>ACORD sample forms</li>
-      </ul>
+      <div class="assign-card">
+        <h4>Day 2 — Policy Cycle Diagram</h4>
+        <p>Create a short policy cycle diagram. Deliverable: image or PDF.</p>
+        <div class="actions" style="margin-top:10px;">
+          <a href="#" class="btn btn-black">View</a>
+          <a href="assets/templates/day2-template.docx" class="btn btn-red" download>Download Template</a>
+        </div>
+      </div>
+
+      <div class="assign-card">
+        <h4>Day 3 — Document Annotation</h4>
+        <p>Label components of an insurance document. Deliverable: annotated screenshot.</p>
+        <div class="actions" style="margin-top:10px;">
+          <a href="#" class="btn btn-black">View</a>
+          <a href="#" class="btn btn-red">Resources</a>
+        </div>
+      </div>
+
+      <div class="assign-card">
+        <h4>Day 4 — Mock Calls</h4>
+        <p>Record a short CSR-style call. Deliverable: audio or video clip.</p>
+        <div class="actions" style="margin-top:10px;">
+          <a href="#" class="btn btn-black">Guidelines</a>
+          <a href="#" class="btn btn-red">Submit</a>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:18px;" class="card reveal delay-3">
+      <h4 style="color:var(--accent)">Trainer resources</h4>
+      <p class="lead">Upload sample files to the trainer resources folder and link them here. Trainers can provide feedback and grade submissions.</p>
     </div>
   </main>
 
@@ -62,8 +85,15 @@
       this.setAttribute('aria-expanded', !expanded);
       nav.classList.toggle('open');
     });
-    function revealOnScroll(){document.querySelectorAll('.reveal').forEach(el=>{const r=el.getBoundingClientRect(); if(r.top<window.innerHeight-80) el.classList.add('visible');});}
-    window.addEventListener('scroll', revealOnScroll); window.addEventListener('load', revealOnScroll);
+
+    function revealOnScroll(){
+      document.querySelectorAll('.reveal').forEach(el=>{
+        const r = el.getBoundingClientRect();
+        if(r.top < window.innerHeight - 80) el.classList.add('visible');
+      });
+    }
+    window.addEventListener('load', revealOnScroll);
+    window.addEventListener('scroll', revealOnScroll);
   </script>
 </body>
 </html>
