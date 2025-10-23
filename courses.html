@@ -5,89 +5,105 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Courses • LAVA Classroom</title>
   <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <header class="site-header">
-    <div class="container header-inner">
+    <div class="header-inner container">
       <a class="brand" href="index.html"><span class="logo-square"></span> LAVA Classroom</a>
-      <nav class="main-nav" id="mainNavCourses" aria-label="Main navigation">
+      <nav class="main-nav" id="mainNavCourses">
         <ul>
-          <li><a href="index.html" class="nav-link">Home</a></li>
-          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
           <li><a href="courses.html" class="nav-link active">Courses</a></li>
-          <li><a href="assignments.html" class="nav-link">Assignments</a></li>
-          <li><a href="contact.html" class="nav-link">Contact</a></li>
+          <li><a href="assignments.html">Assignments</a></li>
+          <li><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
-      <button id="navToggleCourses" class="nav-toggle" aria-expanded="false" aria-controls="mainNavCourses" aria-label="Toggle menu"><span class="hamburger"></span></button>
+      <button id="navToggleCourses" class="nav-toggle" aria-expanded="false" aria-controls="mainNavCourses"><span class="hamburger"></span></button>
     </div>
   </header>
 
-  <main class="container content">
-    <h1 class="section-title reveal">14-Day Training Topics</h1>
-    <p class="lead reveal delay-1">Follow the 14-day plan below. Each day has a short lecture + a practical activity or simulation.</p>
+  <main class="container content" style="padding-top:60px;">
+    <h1 class="section-title reveal">14-Day Training Plan</h1>
+    <p class="lead reveal delay-1">Each day includes a short lecture and a practical activity. Follow the sequence for full coverage.</p>
 
-    <div class="days-grid reveal delay-2">
-      <article id="day1" class="day-card reveal">
-        <h3>Day 1</h3>
-        <p><strong>Getting to know you</strong>, Different Roles of a LAVA VA, Admin Tasks</p>
+    <div class="days-grid" style="margin-top:22px;">
+      <!-- We'll alternate slide-left/slide-right classes for headers and keep cards for details -->
+      <article class="day-card reveal slide-left">
+        <h3>Day 1 — Getting to know you</h3>
+        <p>Different Roles of a LAVA VA, Admin Tasks</p>
       </article>
-      <article id="day2" class="day-card reveal delay-1">
-        <h3>Day 2</h3>
-        <p><strong>Insurance 101</strong>, Policy Cycle</p>
+
+      <article class="day-card reveal slide-right">
+        <h3>Day 2 — Insurance 101</h3>
+        <p>Policy Cycle</p>
       </article>
-      <article id="day3" class="day-card reveal delay-2">
-        <h3>Day 3</h3>
-        <p><strong>Insurance Documents</strong></p>
+
+      <article class="day-card reveal slide-left">
+        <h3>Day 3 — Insurance Documents</h3>
+        <p>Forms, declarations, and document types</p>
       </article>
-      <article id="day4" class="day-card reveal delay-3">
-        <h3>Day 4</h3>
-        <p><strong>English 101</strong>, Insurance CSR, Mock Calls</p>
+
+      <article class="day-card reveal slide-right">
+        <h3>Day 4 — English 101 & Mock Calls</h3>
+        <p>CSR basics and simulated calls</p>
       </article>
-      <article id="day5" class="day-card reveal delay-4">
-        <h3>Day 5</h3>
-        <p><strong>Intro to AMS</strong>, Intro to CRM</p>
+
+      <article class="day-card reveal slide-left">
+        <h3>Day 5 — Intro to AMS & CRM</h3>
+        <p>Basic navigation and data entry</p>
       </article>
-      <article id="day6" class="day-card reveal">
-        <h3>Day 6</h3>
-        <p><strong>Introduction to Raters</strong>, Carriers</p>
+
+      <article class="day-card reveal slide-right">
+        <h3>Day 6 — Raters & Carriers</h3>
+        <p>Overview of rating systems and common carriers</p>
       </article>
-      <article id="day7" class="day-card reveal delay-1">
-        <h3>Day 7</h3>
-        <p><strong>Home Insurance Types</strong>, Coverages in Home Insurance, Home Construction Knowledge, Home Quoting</p>
+
+      <article class="day-card reveal slide-left">
+        <h3>Day 7 — Home Insurance Types</h3>
+        <p>Coverages, construction knowledge & quoting</p>
       </article>
-      <article id="day8" class="day-card reveal delay-2">
-        <h3>Day 8</h3>
-        <p><strong>Intro to Auto Insurance</strong>, Coverages and Endorsements, Auto Quoting</p>
+
+      <article class="day-card reveal slide-right">
+        <h3>Day 8 — Auto Insurance Intro</h3>
+        <p>Coverages, endorsements & quoting basics</p>
       </article>
-      <article id="day9" class="day-card reveal delay-3">
-        <h3>Day 9</h3>
-        <p><strong>Trailer Overview & Quoting</strong>, Boat & RV Overview and Quoting, Umbrella Insurance</p>
+
+      <article class="day-card reveal slide-left">
+        <h3>Day 9 — Trailer / Boat / RV / Umbrella</h3>
+        <p>Overview and quoting specifics</p>
       </article>
-      <article id="day10" class="day-card reveal delay-4">
-        <h3>Day 10</h3>
-        <p><strong>Analyzing a Sample Home Dec Page</strong> Activity, Home Quote Simulation</p>
+
+      <article class="day-card reveal slide-right">
+        <h3>Day 10 — Home Dec Page Activity</h3>
+        <p>Analyze sample home declaration & quote simulation</p>
       </article>
-      <article id="day11" class="day-card reveal">
-        <h3>Day 11</h3>
-        <p><strong>Analyzing a Sample Auto Dec Page</strong> Activity, Auto Quote Simulation</p>
+
+      <article class="day-card reveal slide-left">
+        <h3>Day 11 — Auto Dec Page Activity</h3>
+        <p>Analyze sample auto declaration & quote simulation</p>
       </article>
-      <article id="day12" class="day-card reveal delay-1">
-        <h3>Day 12</h3>
-        <p><strong>Personal/Commercial Insurance</strong> ACORD Forms</p>
+
+      <article class="day-card reveal slide-right">
+        <h3>Day 12 — ACORD Forms</h3>
+        <p>Personal and commercial ACORD files and key fields</p>
       </article>
-      <article id="day13" class="day-card reveal delay-2">
-        <h3>Day 13</h3>
-        <p><strong>SOP Lecture</strong>, SOP Writing, Insurance Final Exam</p>
+
+      <article class="day-card reveal slide-left">
+        <h3>Day 13 — SOP & Exam</h3>
+        <p>SOP lecture, writing practice, and final exam</p>
       </article>
-      <article id="day14" class="day-card reveal delay-3">
-        <h3>Day 14</h3>
-        <p><strong>Recognition</strong> with TL's and Trainers (Certificate)</p>
+
+      <article class="day-card reveal slide-right">
+        <h3>Day 14 — Recognition & Certificates</h3>
+        <p>Presentation of certificates and feedback</p>
       </article>
     </div>
 
-    <div class="note reveal delay-4">
-      <p class="muted">Trainers: attach sample files, AMS access notes, or recorded walkthroughs to each day in your trainer resources.</p>
+    <div style="margin-top:20px;" class="card reveal delay-2">
+      <h4 style="color:var(--accent)">Trainer resources</h4>
+      <p class="lead">Trainers: attach sample policies, AMS screenshots or recorded walkthroughs to each day using your trainer resources folder.</p>
     </div>
   </main>
 
@@ -98,14 +114,27 @@
   </footer>
 
   <script>
+    // nav
     document.getElementById('navToggleCourses').addEventListener('click', function(){
       const nav = document.getElementById('mainNavCourses');
       const expanded = this.getAttribute('aria-expanded') === 'true' || false;
       this.setAttribute('aria-expanded', !expanded);
       nav.classList.toggle('open');
     });
-    function revealOnScroll(){document.querySelectorAll('.reveal').forEach(el=>{const r=el.getBoundingClientRect(); if(r.top<window.innerHeight-80) el.classList.add('visible');});}
-    window.addEventListener('scroll', revealOnScroll); window.addEventListener('load', revealOnScroll);
+
+    // reveal + slide on scroll
+    function revealOnScroll(){
+      document.querySelectorAll('.reveal').forEach(el=>{
+        const r = el.getBoundingClientRect();
+        if(r.top < window.innerHeight - 80) el.classList.add('visible');
+      });
+      document.querySelectorAll('.slide-left, .slide-right').forEach(el=>{
+        const r = el.getBoundingClientRect();
+        if(r.top < window.innerHeight - 80) el.classList.add('visible');
+      });
+    }
+    window.addEventListener('load', revealOnScroll);
+    window.addEventListener('scroll', revealOnScroll);
   </script>
 </body>
 </html>
