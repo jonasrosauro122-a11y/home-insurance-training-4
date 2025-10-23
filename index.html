@@ -1,74 +1,167 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>LAVA Classroom — Home Insurance Training</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Training — LAVA Classroom</title>
+  <meta name="description" content="Training courses and trainers" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-
-  <!-- Optional loader -->
-  <div id="loader" class="loader">
-    <div class="loader-inner">
-      <div class="lava-dot"></div>
-      <div class="loader-text">LAVA Classroom</div>
-    </div>
-  </div>
-
-  <header class="site-header">
-    <div class="header-inner container">
-      <a href="index.html" class="brand">
-        <img src="images/logo.png" alt="LAVA Logo">
-        <span>LAVA Classroom</span>
+  <header class="top-nav">
+    <div class="nav-inner">
+      <a class="brand" href="#home">
+        <img src="images/logo.png" alt="Logo" class="logo" />
       </a>
-      <nav class="main-nav" id="mainNav">
-        <ul>
-          <li><a href="index.html" class="active">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="courses.html">Courses</a></li>
-          <li><a href="assignments.html">Assignments</a></li>
-          <li><a href="game.html">Games</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </nav>
+      <button class="menu-btn" aria-label="Open menu">
+        <span class="menu-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </span>
+      </button>
     </div>
   </header>
 
-  <main>
-    <section class="white-hero">
-      <div class="container hero-grid">
-        <div class="hero-content">
-          <h1>Welcome to LAVA Classroom</h1>
-          <p class="lead">Learn, Apply, and Grow in the Insurance World.</p>
-          <a class="btn btn-red" href="courses.html">Go to Courses</a>
+  <main id="home" class="page-root">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="hero-text">
+          <h1 class="headline reveal-hero">LAVA Classroom</h1>
+          <p class="subhead reveal-hero">Training modules &amp; certifications for Virtual Assistants — Insurance-focused curricula taught by expert trainers.</p>
+          <div class="hero-ctas reveal-hero">
+            <a href="#trainers" class="btn btn-primary">Meet the Trainers</a>
+            <a href="#courses" class="btn btn-ghost">Course Outline</a>
+          </div>
+        </div>
+
+        <div class="hero-media" aria-hidden="true">
+          <!-- Decorative/Parallax image - replace with an image if you have one -->
+          <div class="device-mockup">
+            <img src="images/hero-device.jpg" alt="" class="device-img" />
+          </div>
+        </div>
+      </div>
+      <div class="hero-edge"></div>
+    </section>
+
+    <!-- TRAINERS -->
+    <section id="trainers" class="section section--trainers">
+      <div class="container">
+        <h2 class="section-title reveal">Our Trainers</h2>
+        <p class="section-lead reveal">Experienced instructors, practical activities, and certs upon completion.</p>
+
+        <div class="cards">
+          <!-- Card: Karl -->
+          <article class="card reveal">
+            <div class="card-media">
+              <img src="images/karl.jpg" alt="Karl Sison">
+            </div>
+            <div class="card-body">
+              <h3>Karl Sison</h3>
+              <p class="muted">Trainer Manager</p>
+              <p class="card-text">Lead trainer focused on SOP writing, classroom direction, and final exams certifying completion.</p>
+            </div>
+          </article>
+
+          <!-- Card: Nash -->
+          <article class="card reveal">
+            <div class="card-media">
+              <img src="images/nash.jpg" alt="Nash">
+            </div>
+            <div class="card-body">
+              <h3>Nash</h3>
+              <p class="muted">Trainer</p>
+              <p class="card-text">Specializes in ACORD forms and commercial insurance applications.</p>
+            </div>
+          </article>
+
+          <!-- Card: AU -->
+          <article class="card reveal">
+            <div class="card-media">
+              <img src="images/au.jpg" alt="AU">
+            </div>
+            <div class="card-body">
+              <h3>AU</h3>
+              <p class="muted">Trainer</p>
+              <p class="card-text">Focus on cyber liability, agency operations support and accuracy.</p>
+            </div>
+          </article>
+
+          <!-- Card: Kyle -->
+          <article class="card reveal">
+            <div class="card-media">
+              <img src="images/kyle.jpg" alt="Kyle">
+            </div>
+            <div class="card-body">
+              <h3>Kyle</h3>
+              <p class="muted">Trainer</p>
+              <p class="card-text">Covers auto insurance and quoting activities with interactive simulations.</p>
+            </div>
+          </article>
+
+          <!-- Card: Chanie -->
+          <article class="card reveal">
+            <div class="card-media">
+              <img src="images/chanie.jpg" alt="Chanie">
+            </div>
+            <div class="card-body">
+              <h3>Chanie</h3>
+              <p class="muted">Trainer</p>
+              <p class="card-text">Leads modules on SOPs, recognition, and classroom coordination.</p>
+            </div>
+          </article>
         </div>
       </div>
     </section>
 
-    <section class="features">
+    <!-- COURSES / OUTLINE (Placeholder - keep / edit as wanted) -->
+    <section id="courses" class="section section--courses">
       <div class="container">
-        <h2 class="section-title">Why LAVA Classroom?</h2>
-        <p>Classroom-friendly, self-paced training for Virtual Assistants and agency support staff.</p>
+        <h2 class="section-title reveal">Course Outline</h2>
+        <p class="section-lead reveal">Quick glance at modules: Auto, Home, Commercial, ACORD Forms, Cyber, Billing &amp; SOPs.</p>
+
+        <div class="grid reveal">
+          <div class="feature">
+            <h4>Auto Insurance</h4>
+            <p>Coverages, dec page analysis, quoting simulations and activities.</p>
+          </div>
+          <div class="feature">
+            <h4>Home Insurance</h4>
+            <p>Coverages A–D explained with examples and claim scenarios.</p>
+          </div>
+          <div class="feature">
+            <h4>Commercial</h4>
+            <p>Commercial forms, coverages, and ACORD handling for agency accuracy.</p>
+          </div>
+        </div>
       </div>
     </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-inner">
+          <div class="brandline">
+            <img src="images/logo.png" alt="Logo" class="logo-sm" />
+            <div>
+              <p class="muted">LAVA Classroom</p>
+              <p class="muted small">© <span id="year"></span> LAVA — All rights reserved</p>
+            </div>
+          </div>
+          <nav class="footer-nav">
+            <a href="#trainers">Trainers</a>
+            <a href="#courses">Courses</a>
+            <a href="#home">Home</a>
+          </nav>
+        </div>
+      </div>
+    </footer>
   </main>
 
-  <footer class="site-footer">
-    <div class="footer-inner container">
-      <p>© 2025 LAVA Classroom • Home Insurance Training</p>
-    </div>
-  </footer>
-
-  <script>
-    // Loader hide
-    window.addEventListener('load', function(){
-      const loader = document.getElementById('loader');
-      if (loader) {
-        loader.classList.add('loaded');
-        setTimeout(()=> loader.style.display='none', 500);
-      }
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
