@@ -5,40 +5,45 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Contact • LAVA Classroom</title>
   <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <header class="site-header">
-    <div class="container header-inner">
+    <div class="header-inner container">
       <a class="brand" href="index.html"><span class="logo-square"></span> LAVA Classroom</a>
-      <nav class="main-nav" id="mainNavContact" aria-label="Main navigation">
+      <nav class="main-nav" id="mainNavContact">
         <ul>
-          <li><a href="index.html" class="nav-link">Home</a></li>
-          <li><a href="about.html" class="nav-link">About</a></li>
-          <li><a href="courses.html" class="nav-link">Courses</a></li>
-          <li><a href="assignments.html" class="nav-link">Assignments</a></li>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="courses.html">Courses</a></li>
+          <li><a href="assignments.html">Assignments</a></li>
           <li><a href="contact.html" class="nav-link active">Contact</a></li>
         </ul>
       </nav>
-      <button id="navToggleContact" class="nav-toggle" aria-expanded="false" aria-controls="mainNavContact" aria-label="Toggle menu"><span class="hamburger"></span></button>
+      <button id="navToggleContact" class="nav-toggle" aria-expanded="false" aria-controls="mainNavContact"><span class="hamburger"></span></button>
     </div>
   </header>
 
-  <main class="container content">
+  <main class="container content" style="padding-top:60px;">
     <h1 class="section-title reveal">Contact & Feedback</h1>
     <p class="lead reveal delay-1">Questions, suggestions, or trainer notes? Send a message and we'll get back to you.</p>
 
-    <form class="contact-form reveal delay-2" id="contactForm" action="#" onsubmit="handleContact(event)">
+    <form class="card reveal delay-2" id="contactForm" style="margin-top:18px;" onsubmit="handleContact(event)">
       <label for="name">Name</label>
-      <input id="name" name="name" required placeholder="Your name">
+      <input id="name" name="name" required placeholder="Your name" style="width:100%; padding:10px; border-radius:8px; margin-top:8px; border:1px solid rgba(255,255,255,0.06); background:transparent; color:var(--white)">
 
-      <label for="email">Email</label>
-      <input id="email" name="email" type="email" required placeholder="you@example.com">
+      <label for="email" style="margin-top:12px;">Email</label>
+      <input id="email" name="email" type="email" required placeholder="you@example.com" style="width:100%; padding:10px; border-radius:8px; margin-top:8px; border:1px solid rgba(255,255,255,0.06); background:transparent; color:var(--white)">
 
-      <label for="message">Message</label>
-      <textarea id="message" name="message" rows="5" required placeholder="Your message..."></textarea>
+      <label for="message" style="margin-top:12px;">Message</label>
+      <textarea id="message" name="message" rows="5" required placeholder="Your message..." style="width:100%; padding:10px; border-radius:8px; margin-top:8px; border:1px solid rgba(255,255,255,0.06); background:transparent; color:var(--white)"></textarea>
 
-      <button class="btn btn-red" type="submit">Send Message</button>
-      <p id="contactStatus" class="muted" aria-live="polite"></p>
+      <div style="margin-top:12px; display:flex; gap:12px;">
+        <button class="btn btn-red" type="submit">Send Message</button>
+        <button class="btn btn-black" type="reset">Reset</button>
+      </div>
+
+      <p id="contactStatus" style="color:var(--muted); margin-top:10px;"></p>
     </form>
   </main>
 
@@ -63,8 +68,14 @@
       e.target.reset();
     }
 
-    function revealOnScroll(){document.querySelectorAll('.reveal').forEach(el=>{const r=el.getBoundingClientRect(); if(r.top<window.innerHeight-80) el.classList.add('visible');});}
-    window.addEventListener('scroll', revealOnScroll); window.addEventListener('load', revealOnScroll);
+    function revealOnScroll(){
+      document.querySelectorAll('.reveal').forEach(el=>{
+        const r = el.getBoundingClientRect();
+        if(r.top < window.innerHeight - 80) el.classList.add('visible');
+      });
+    }
+    window.addEventListener('load', revealOnScroll);
+    window.addEventListener('scroll', revealOnScroll);
   </script>
 </body>
 </html>
