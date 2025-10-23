@@ -3,151 +3,234 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>LAVA Classroom — Home Insurance Training</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>LAVA Classroom | Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <style>
+    /* RESET */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #000;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* HEADER */
+    header {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 100;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 0;
+    }
+
+    .brand {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .main-nav ul {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .main-nav a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .main-nav a:hover,
+    .main-nav a.active {
+      color: #ff1c1c;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: linear-gradient(120deg, #000000, #8b0000, #000000);
+      background-size: 300% 300%;
+      animation: gradientMove 10s ease infinite;
+      padding: 0 1rem;
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      line-height: 1.2;
+      background: linear-gradient(270deg, #ff3333, #ffffff, #ff3333);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 6s ease infinite;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: rgba(255, 255, 255, 0.8);
+      margin-top: 1rem;
+      max-width: 700px;
+    }
+
+    /* SECTIONS */
+    section {
+      min-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4rem 1rem;
+    }
+
+    .section-dark {
+      background: linear-gradient(135deg, #5b0000 0%, #000000 100%);
+    }
+
+    .section-light {
+      background: #111;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      max-width: 700px;
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #000;
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.6);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.4rem;
+      }
+      h2 {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
 </head>
+
 <body>
-  <!-- Loading overlay -->
-  <div id="loader" class="loader">
-    <div class="loader-inner">
-      <div class="lava-dot"></div>
-      <div class="loader-text">LAVA Classroom</div>
-    </div>
-  </div>
-
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="index.html">
-        <span class="logo-square" aria-hidden="true"></span>
-        LAVA Classroom
-      </a>
-
-      <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+  <header>
+    <div class="container">
+      <a href="index.html" class="brand">LAVA Classroom</a>
+      <nav class="main-nav">
         <ul>
-          <li><a href="index.html" class="nav-link active">Home</a></li>
-          <li><a href="about.html" class="nav-link">About</a></li>
-          <li><a href="courses.html" class="nav-link">Courses</a></li>
-          <li><a href="assignments.html" class="nav-link">Assignments</a></li>
-          <li><a href="contact.html" class="nav-link">Contact</a></li>
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="courses.html">Courses</a></li>
+          <li><a href="assignments.html">Assignments</a></li>
+          <li><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
-
-      <button id="navToggle" class="nav-toggle" aria-expanded="false" aria-controls="mainNav" aria-label="Toggle menu">
-        <span class="hamburger"></span>
-      </button>
     </div>
   </header>
 
   <main>
-    <section class="hero white-hero">
-      <div class="container hero-grid">
-        <div class="hero-content">
-          <h1 class="reveal">Welcome to <span class="accent-red">LAVA Classroom</span><br/><small class="muted">Learn, Apply, and Grow in the Insurance World</small></h1>
-          <p class="lead reveal delay-1">Classroom-friendly, self-paced training for Virtual Assistants and agency support staff. Clear modules, practical tasks, and trainer support.</p>
-
-          <div class="hero-actions reveal delay-2">
-            <a class="btn btn-red" href="courses.html">Start Learning</a>
-            <a class="btn btn-black" href="about.html">Meet the Trainers</a>
-          </div>
-
-          <div class="quick-stats reveal delay-3">
-            <div><strong>14</strong><span>Days</span></div>
-            <div><strong>4</strong><span>Modules</span></div>
-            <div><strong>Certificate</strong><span>On Completion</span></div>
-          </div>
-        </div>
-
-        <div class="hero-card reveal delay-4">
-          <h3>Today: Intro Module</h3>
-          <p class="muted">Module 1 — Getting to know you, roles, admin tasks</p>
-          <a class="btn small btn-red" href="courses.html#day1">Open Day 1</a>
-        </div>
-      </div>
+    <!-- HERO -->
+    <section class="hero">
+      <h1>Welcome to LAVA Classroom</h1>
+      <p>Empowering learners through innovation, technology, and creativity.</p>
     </section>
 
-    <section class="features container">
-      <h2 class="section-title reveal">Why LAVA Classroom?</h2>
-      <div class="grid-3">
-        <article class="feature-card reveal delay-1">
-          <div class="feature-icon">📘</div>
-          <h3>Practical Modules</h3>
-          <p>Short lessons that map directly to agency tasks.</p>
-        </article>
-
-        <article class="feature-card reveal delay-2">
-          <div class="feature-icon">🛠️</div>
-          <h3>Hands-On Activities</h3>
-          <p>Assignments, sample policies, and AMS simulations.</p>
-        </article>
-
-        <article class="feature-card reveal delay-3">
-          <div class="feature-icon">🏆</div>
-          <h3>Recognition</h3>
-          <p>Certificates and trainer feedback on completion day.</p>
-        </article>
-      </div>
+    <!-- ABOUT -->
+    <section class="section-dark">
+      <h2>Learn with Purpose</h2>
+      <p>Discover interactive lessons, modern skills, and practical experiences that prepare you for the real world.</p>
     </section>
 
-    <section class="download container" id="download">
-      <div class="download-inner reveal">
-        <div>
-          <h2>Download Slides</h2>
-          <p class="muted">Bring the slides to offline sessions or share them with trainees.</p>
-        </div>
-        <div class="download-actions">
-          <a class="btn btn-red" href="assets/training.pptx" download>Download .pptx</a>
-          <a class="btn btn-black" href="https://www.canva.com" target="_blank" rel="noopener">Open Canva</a>
-        </div>
-      </div>
+    <!-- COURSES -->
+    <section class="section-light">
+      <h2>Dynamic Training System</h2>
+      <p>Our courses are built to evolve — adapting with every new skill, idea, and learner.</p>
     </section>
 
-    <section class="cta container reveal delay-1">
-      <div class="cta-inner">
-        <div>
-          <h3>Ready to begin?</h3>
-          <p class="muted">Start with Day 1 and follow the daily tasks for hands-on practice.</p>
-        </div>
-        <div>
-          <a class="btn btn-red" href="courses.html">Go to Courses</a>
-        </div>
-      </div>
+    <!-- CALL TO ACTION -->
+    <section class="section-dark">
+      <h2>Start Your Journey</h2>
+      <p>Join our growing community of passionate learners and professionals today.</p>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p>© 2025 LAVA Classroom • Home Insurance Training</p>
-      <div class="social muted">LAVA • Training Portal</div>
-    </div>
+  <footer>
+    <p>© 2025 LAVA Classroom. All rights reserved.</p>
   </footer>
 
+  <!-- GSAP Scroll Animation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <script>
-    // Loader
-    window.addEventListener('load', function(){
-      const l = document.getElementById('loader');
-      l.classList.add('loaded');
-      setTimeout(()=>l.style.display='none',400);
-    });
+    gsap.registerPlugin(ScrollTrigger);
 
-    // Mobile nav toggle
-    const navToggle = document.getElementById('navToggle');
-    const nav = document.getElementById('mainNav');
-    navToggle.addEventListener('click', () => {
-      const expanded = navToggle.getAttribute('aria-expanded') === 'true' || false;
-      navToggle.setAttribute('aria-expanded', !expanded);
-      nav.classList.toggle('open');
-      navToggle.classList.toggle('open');
-    });
-
-    // Reveal on scroll
-    function revealOnScroll() {
-      document.querySelectorAll('.reveal').forEach(el => {
-        const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight - 80) el.classList.add('visible');
+    gsap.utils.toArray("section").forEach((section) => {
+      gsap.from(section.children, {
+        scrollTrigger: {
+          trigger: section,
+          start: "top 85%",
+          toggleActions: "play none none reverse"
+        },
+        y: 80,
+        opacity: 0,
+        duration: 1.2,
+        ease: "power3.out",
+        stagger: 0.2
       });
-    }
-    window.addEventListener('scroll', revealOnScroll);
-    window.addEventListener('load', revealOnScroll);
+    });
   </script>
 </body>
 </html>
