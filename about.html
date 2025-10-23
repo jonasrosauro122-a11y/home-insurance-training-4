@@ -2,243 +2,191 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <title>Meet the Trainers • LAVA Classroom</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meet the Trainers | LAVA Classroom</title>
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
-
   <style>
-    /* ===== RESET ===== */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    /* Background and general setup */
     body {
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #000000 40%, #5b0000 100%);
+      margin: 0;
+      font-family: "Poppins", sans-serif;
       color: #fff;
-      min-height: 100vh;
+      background: linear-gradient(120deg, #000000, #420000, #000000);
+      background-size: 400% 400%;
+      animation: gradientShift 10s ease infinite;
       overflow-x: hidden;
     }
 
-    /* ===== HEADER ===== */
-    header.site-header {
-      background: rgba(0, 0, 0, 0.8);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-
-    .header-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    .brand {
-      font-weight: 700;
-      color: #fff;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: .5rem;
-    }
-    .logo-square {
-      width: 14px;
-      height: 14px;
-      background: linear-gradient(90deg, #5b0000, #000);
-      border-radius: 2px;
-    }
-
-    .main-nav ul {
-      list-style: none;
-      display: flex;
-      gap: 1.5rem;
-    }
-
-    .main-nav a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color .3s;
-    }
-
-    .main-nav a:hover,
-    .main-nav a.active {
-      color: #ff4d4d;
-    }
-
-    /* ===== HERO ===== */
-    .section-title {
-      font-size: 2.8rem;
-      font-weight: 800;
-      text-align: center;
-      margin-top: 3rem;
-      background: linear-gradient(270deg, #5b0000, #000000, #5b0000);
-      background-size: 300% 300%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: shimmer 6s ease infinite;
-    }
-
-    .lead {
-      text-align: center;
-      color: rgba(255,255,255,0.85);
-      margin: 1rem auto 2rem;
-      max-width: 700px;
-    }
-
-    /* ===== TRAINERS GRID ===== */
-    .trainer-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 2rem;
-      padding: 2rem;
-      max-width: 1000px;
-      margin: auto;
-    }
-
-    .trainer-card {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 16px;
-      padding: 1rem;
-      text-align: center;
-      transition: transform .3s, box-shadow .3s;
-    }
-
-    .trainer-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.4);
-    }
-
-    .trainer-card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 12px;
-      border: 3px solid #5b0000;
-    }
-
-    .trainer-card h3 {
-      color: #fff;
-      margin-top: .8rem;
-    }
-
-    .trainer-card p {
-      color: #ff4d4d;
-      font-weight: 600;
-      margin: 0.3rem 0 0;
-    }
-
-    footer.site-footer {
-      text-align: center;
-      padding: 1.5rem 0;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      color: rgba(255,255,255,0.7);
-      background: rgba(0,0,0,0.6);
-      margin-top: 2rem;
-    }
-
-    /* ===== ANIMATIONS ===== */
-    @keyframes shimmer {
+    @keyframes gradientShift {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
-    .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 1s ease;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
+
+    /* Header */
+    header {
+      background: rgba(0, 0, 0, 0.85);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
     }
 
-    @media (max-width: 768px) {
-      .section-title { font-size: 2rem; }
-      .header-inner { flex-direction: column; }
-      .main-nav ul { flex-direction: column; align-items: center; padding: 1rem 0; }
+    header h1 {
+      color: #ff2a2a;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    nav a {
+      color: #fff;
+      margin-left: 1rem;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #ff2a2a;
+    }
+
+    /* Trainers section */
+    .trainers {
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+
+    .trainers h2 {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      color: #ff4d4d;
+    }
+
+    .trainer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .trainer-card {
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 15px;
+      padding: 1rem;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .trainer-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .trainer-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 30px rgba(255, 0, 0, 0.2);
+    }
+
+    .trainer-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 3px solid #ff2a2a;
+    }
+
+    .trainer-card h3 {
+      color: #fff;
+      margin-top: 0.8rem;
+      font-size: 1.2rem;
+    }
+
+    .trainer-card p {
+      color: #ff2a2a;
+      font-weight: 500;
+      margin: 0.3rem 0 0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      background: rgba(0, 0, 0, 0.9);
+      color: #fff;
+      font-size: 0.9rem;
     }
   </style>
 </head>
-
 <body>
-  <!-- HEADER -->
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="index.html"><span class="logo-square"></span> LAVA Classroom</a>
-      <nav class="main-nav" id="mainNavAbout" aria-label="Main navigation">
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html" class="active">Trainers</a></li>
-          <li><a href="courses.html">Courses</a></li>
-          <li><a href="assignments.html">Assignments</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
+  <header>
+    <h1>LAVA Classroom</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">Trainers</a>
+      <a href="courses.html">Courses</a>
+      <a href="assignments.html">LAVA University</a>
+      <a href="contact.html">Contact</a>
+    </nav>
   </header>
 
-  <!-- MAIN CONTENT -->
-  <main class="container content">
-    <h1 class="section-title reveal">Meet Our Trainers</h1>
-    <p class="lead reveal">The dedicated mentors who guide every LAVA VA to success.</p>
+  <section class="trainers">
+    <h2>Meet Our Trainers</h2>
+    <div class="trainer-grid">
 
-    <section class="trainer-grid reveal">
       <div class="trainer-card">
-        <img src="trainer1.jpg" alt="Karl Sison">
+        <img src="images/karl.jpg" alt="Karl Sison">
         <h3>Karl Sison</h3>
         <p>Trainer Manager</p>
       </div>
 
       <div class="trainer-card">
-        <img src="trainer2.jpg" alt="Nash">
+        <img src="images/nash.jpg" alt="Nash">
         <h3>Nash</h3>
         <p>Trainer</p>
       </div>
 
       <div class="trainer-card">
-        <img src="trainer3.jpg" alt="AU">
+        <img src="images/au.jpg" alt="AU">
         <h3>AU</h3>
         <p>Trainer</p>
       </div>
 
       <div class="trainer-card">
-        <img src="trainer4.jpg" alt="Kyle">
+        <img src="images/kyle.jpg" alt="Kyle">
         <h3>Kyle</h3>
         <p>Trainer</p>
       </div>
 
       <div class="trainer-card">
-        <img src="trainer5.jpg" alt="Chanie">
+        <img src="images/chanie.jpg" alt="Chanie">
         <h3>Chanie</h3>
         <p>Trainer</p>
       </div>
-    </section>
-  </main>
 
-  <!-- FOOTER -->
-  <footer class="site-footer">
-    <p>© 2025 LAVA Classroom</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 LAVA Classroom. All Rights Reserved.</p>
   </footer>
 
-  <!-- SCROLL ANIMATIONS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <script>
-    gsap.registerPlugin(ScrollTrigger);
-    gsap.utils.toArray('.reveal').forEach((el, i) => {
-      gsap.fromTo(el,
-        { opacity: 0, y: 40 },
-        {
-          opacity: 1, y: 0, duration: 1, delay: i * 0.1,
-          scrollTrigger: { trigger: el, start: "top 85%", toggleActions: "play none none reverse" }
-        });
-    });
+    // Scroll reveal animation
+    function revealOnScroll() {
+      document.querySelectorAll('.trainer-card').forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) el.classList.add('visible');
+      });
+    }
+    window.addEventListener('scroll', revealOnScroll);
+    window.addEventListener('load', revealOnScroll);
   </script>
 </body>
 </html>
