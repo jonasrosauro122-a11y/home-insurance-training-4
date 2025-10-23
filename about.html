@@ -2,131 +2,193 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Meet the Trainers | LAVA Classroom</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Meet the Trainers • LAVA Classroom</title>
   <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+
   <style>
+    /* ===== RESET ===== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      background-color: #ffffff;
-      color: #000;
-      font-family: 'Poppins', sans-serif;
-      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #000000 40%, #5b0000 100%);
+      color: #fff;
+      min-height: 100vh;
+      overflow-x: hidden;
     }
 
-    header {
-      background-color: #000;
-      color: #fff;
-      padding: 1rem 2rem;
+    /* ===== HEADER ===== */
+    header.site-header {
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .header-inner {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding: 1rem 2rem;
+      max-width: 1200px;
+      margin: auto;
     }
 
-    header h1 {
-      color: #e50914;
-      font-size: 1.5rem;
-      margin: 0;
+    .brand {
+      font-weight: 700;
+      color: #fff;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .logo-square {
+      width: 14px;
+      height: 14px;
+      background: linear-gradient(90deg, #5b0000, #000);
+      border-radius: 2px;
     }
 
-    nav a {
-      color: white;
-      margin-left: 1rem;
+    .main-nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .main-nav a {
+      color: #fff;
       text-decoration: none;
       font-weight: 500;
-      transition: color 0.3s;
+      transition: color .3s;
     }
 
-    nav a:hover {
-      color: #e50914;
+    .main-nav a:hover,
+    .main-nav a.active {
+      color: #ff4d4d;
     }
 
-    .trainers {
-      padding: 3rem 2rem;
+    /* ===== HERO ===== */
+    .section-title {
+      font-size: 2.8rem;
+      font-weight: 800;
       text-align: center;
+      margin-top: 3rem;
+      background: linear-gradient(270deg, #5b0000, #000000, #5b0000);
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 6s ease infinite;
     }
 
-    .trainers h2 {
-      color: #e50914;
-      margin-bottom: 1.5rem;
-      font-size: 2rem;
+    .lead {
+      text-align: center;
+      color: rgba(255,255,255,0.85);
+      margin: 1rem auto 2rem;
+      max-width: 700px;
     }
 
+    /* ===== TRAINERS GRID ===== */
     .trainer-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 2rem;
+      padding: 2rem;
       max-width: 1000px;
-      margin: 0 auto;
+      margin: auto;
     }
 
     .trainer-card {
-      background-color: #f9f9f9;
-      border: 2px solid #000;
-      border-radius: 15px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
       padding: 1rem;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInUp 1s forwards;
+      text-align: center;
+      transition: transform .3s, box-shadow .3s;
     }
 
     .trainer-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.4);
     }
 
     .trainer-card img {
       width: 100%;
-      border-radius: 15px;
       height: 200px;
       object-fit: cover;
-      border: 3px solid #e50914;
+      border-radius: 12px;
+      border: 3px solid #5b0000;
     }
 
     .trainer-card h3 {
-      color: #000;
-      margin-top: 0.8rem;
+      color: #fff;
+      margin-top: .8rem;
     }
 
     .trainer-card p {
-      color: #e50914;
-      font-weight: bold;
+      color: #ff4d4d;
+      font-weight: 600;
       margin: 0.3rem 0 0;
     }
 
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    footer.site-footer {
+      text-align: center;
+      padding: 1.5rem 0;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.7);
+      background: rgba(0,0,0,0.6);
+      margin-top: 2rem;
     }
 
-    footer {
-      text-align: center;
-      padding: 1.5rem;
-      background-color: #000;
-      color: #fff;
-      margin-top: 2rem;
+    /* ===== ANIMATIONS ===== */
+    @keyframes shimmer {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 1s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 768px) {
+      .section-title { font-size: 2rem; }
+      .header-inner { flex-direction: column; }
+      .main-nav ul { flex-direction: column; align-items: center; padding: 1rem 0; }
     }
   </style>
 </head>
+
 <body>
-  <header>
-    <h1>LAVA Classroom</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="about.html">Trainers</a>
-      <a href="course.html">Courses</a>
-      <a href="assignments.html">Assignments</a>
-      <a href="contact.html">Contact</a>
-    </nav>
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html"><span class="logo-square"></span> LAVA Classroom</a>
+      <nav class="main-nav" id="mainNavAbout" aria-label="Main navigation">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html" class="active">Trainers</a></li>
+          <li><a href="courses.html">Courses</a></li>
+          <li><a href="assignments.html">Assignments</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
-  <section class="trainers">
-    <h2>Meet Our Trainers</h2>
-    <div class="trainer-grid">
+  <!-- MAIN CONTENT -->
+  <main class="container content">
+    <h1 class="section-title reveal">Meet Our Trainers</h1>
+    <p class="lead reveal">The dedicated mentors who guide every LAVA VA to success.</p>
 
+    <section class="trainer-grid reveal">
       <div class="trainer-card">
         <img src="trainer1.jpg" alt="Karl Sison">
         <h3>Karl Sison</h3>
@@ -156,12 +218,27 @@
         <h3>Chanie</h3>
         <p>Trainer</p>
       </div>
+    </section>
+  </main>
 
-    </div>
-  </section>
-
-  <footer>
-    <p>© 2025 LAVA Classroom. All Rights Reserved.</p>
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <p>© 2025 LAVA Classroom</p>
   </footer>
+
+  <!-- SCROLL ANIMATIONS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.utils.toArray('.reveal').forEach((el, i) => {
+      gsap.fromTo(el,
+        { opacity: 0, y: 40 },
+        {
+          opacity: 1, y: 0, duration: 1, delay: i * 0.1,
+          scrollTrigger: { trigger: el, start: "top 85%", toggleActions: "play none none reverse" }
+        });
+    });
+  </script>
 </body>
 </html>
