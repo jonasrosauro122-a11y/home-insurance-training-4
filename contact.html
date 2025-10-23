@@ -7,13 +7,9 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
   <header class="site-header">
-    <div class="header-inner container">
-      <a class="brand" href="index.html">
-        <img src="images/logo.png" alt="LAVA Logo">
-        <span>LAVA Classroom</span>
-      </a>
+    <div class="container header-inner">
+      <a class="brand" href="index.html"><span class="logo-square"></span> LAVA Classroom</a>
       <nav class="main-nav" id="mainNavContact" aria-label="Main navigation">
         <ul>
           <li><a href="index.html" class="nav-link">Home</a></li>
@@ -23,10 +19,11 @@
           <li><a href="contact.html" class="nav-link active">Contact</a></li>
         </ul>
       </nav>
+      <button id="navToggleContact" class="nav-toggle" aria-expanded="false" aria-controls="mainNavContact" aria-label="Toggle menu"><span class="hamburger"></span></button>
     </div>
   </header>
 
-  <main class="container content" style="padding:40px 20px;">
+  <main class="container content">
     <h1 class="section-title reveal">Contact & Feedback</h1>
     <p class="lead reveal delay-1">Questions, suggestions, or trainer notes? Send a message and we'll get back to you.</p>
 
@@ -52,6 +49,13 @@
   </footer>
 
   <script>
+    document.getElementById('navToggleContact').addEventListener('click', function(){
+      const nav = document.getElementById('mainNavContact');
+      const expanded = this.getAttribute('aria-expanded') === 'true' || false;
+      this.setAttribute('aria-expanded', !expanded);
+      nav.classList.toggle('open');
+    });
+
     function handleContact(e){
       e.preventDefault();
       const status = document.getElementById('contactStatus');
