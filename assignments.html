@@ -1,54 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LAVA University | LAVA Classroom</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Assignments • LAVA Classroom</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body style="background:linear-gradient(135deg,#000,#660000);color:#fff;">
-
+<body>
   <header class="site-header">
-    <div class="header-inner container">
-      <a href="index.html" class="brand">
-        <img src="images/logo.png" alt="LAVA Logo">
-        <span style="color:#fff">LAVA Classroom</span>
-      </a>
-      <nav class="main-nav">
+    <div class="container header-inner">
+      <a class="brand" href="index.html"><span class="logo-square"></span> LAVA Classroom</a>
+      <nav class="main-nav" id="mainNavAssign" aria-label="Main navigation">
         <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">Trainers</a></li>
-          <li><a href="courses.html">Courses</a></li>
-          <li><a href="assignments.html" class="active">Assignments</a></li>
-          <li><a href="game.html">Games</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="courses.html" class="nav-link">Courses</a></li>
+          <li><a href="assignments.html" class="nav-link active">Assignments</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
         </ul>
       </nav>
+      <button id="navToggleAssign" class="nav-toggle" aria-expanded="false" aria-controls="mainNavAssign" aria-label="Toggle menu"><span class="hamburger"></span></button>
     </div>
   </header>
 
-  <main>
-    <section class="container" style="padding:48px 20px;">
-      <h2 style="color:#fff;margin-bottom:12px;">LAVA University</h2>
-      <p style="color:#ddd;max-width:900px;">Enhance your insurance and automation skills with expert-designed training programs. Access the full learning experience through our official LAVA University portal.</p>
-      <a class="btn btn-red" href="https://university.lavaautomation.com/" target="_blank" rel="noopener" style="margin-top:18px;">Visit LAVA University</a>
+  <main class="container content">
+    <h1 class="section-title reveal">Assignments & Activities</h1>
+    <p class="lead reveal delay-1">Each module has a hands-on assignment. Trainers can provide sample files and AMS recordings for practice.</p>
 
-      <h3 style="color:#fff;margin-top:32px;">Available Courses</h3>
-      <div class="grid-3" style="margin-top:18px;">
-        <div class="feature-card">AMS 360</div>
-        <div class="feature-card">Applied Epic</div>
-        <div class="feature-card">EZLynx</div>
-        <div class="feature-card">PL Rater</div>
-        <div class="feature-card">Insurance 101</div>
-        <div class="feature-card">Final Exam</div>
-      </div>
-    </section>
+    <ol class="assign-list reveal delay-2">
+      <li><strong>Day 1</strong>: Identify Coverage A–D on a sample declaration. <em>Deliverable:</em> 1-page summary.</li>
+      <li><strong>Day 2</strong>: Create a short policy cycle diagram. <em>Deliverable:</em> Image or PDF.</li>
+      <li><strong>Day 3</strong>: Label components of an insurance document. <em>Deliverable:</em> Annotated screenshot.</li>
+      <li><strong>Day 4</strong>: Mock CSR calls (recording). <em>Deliverable:</em> Short audio/video clip.</li>
+      <li><strong>Day 5</strong>: AMS walkthrough checklist. <em>Deliverable:</em> Steps log.</li>
+      <li><strong>Day 6–11</strong>: Quoting & declaration analysis activities. <em>Deliverable:</em> Quote summary & screenshots.</li>
+      <li><strong>Day 12</strong>: ACORD fields worksheet. <em>Deliverable:</em> Completed worksheet.</li>
+      <li><strong>Day 13</strong>: SOP draft. <em>Deliverable:</em> SOP PDF.</li>
+      <li><strong>Day 14</strong>: Final reflection & certificate request.</li>
+    </ol>
+
+    <div class="muted-card reveal delay-3">
+      <h4>Trainer resources</h4>
+      <ul>
+        <li>Sample policies (redacted)</li>
+        <li>Recorded AMS navigation</li>
+        <li>ACORD sample forms</li>
+      </ul>
+    </div>
   </main>
 
   <footer class="site-footer">
-    <div class="footer-inner container">
-      <p style="color:#ddd;">© 2025 LAVA Classroom. All Rights Reserved.</p>
+    <div class="container footer-inner">
+      <p>© 2025 LAVA Classroom</p>
     </div>
   </footer>
+
+  <script>
+    document.getElementById('navToggleAssign').addEventListener('click', function(){
+      const nav = document.getElementById('mainNavAssign');
+      const expanded = this.getAttribute('aria-expanded') === 'true' || false;
+      this.setAttribute('aria-expanded', !expanded);
+      nav.classList.toggle('open');
+    });
+    function revealOnScroll(){document.querySelectorAll('.reveal').forEach(el=>{const r=el.getBoundingClientRect(); if(r.top<window.innerHeight-80) el.classList.add('visible');});}
+    window.addEventListener('scroll', revealOnScroll); window.addEventListener('load', revealOnScroll);
+  </script>
 </body>
 </html>
