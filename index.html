@@ -8,43 +8,45 @@
 </head>
 <body>
 
-  <header>
-    <h1><img src="images/logo.png" alt="LAVA Logo">LAVA Classroom</h1>
-    <nav>
-      <a href="index.html" class="active">Home</a>
-      <a href="about.html">About</a>
-      <a href="courses.html">Courses</a>
-      <a href="assignments.html">Assignments</a>
-      <a href="games.html">Games</a>
-      <a href="contact.html">Contact</a>
-    </nav>
+  <header class="site-header">
+    <div class="header-inner container">
+      <a href="index.html" class="brand">
+        <img src="images/logo.png" alt="LAVA Logo" style="height:36px;">
+        <span>LAVA Classroom</span>
+      </a>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="courses.html">Courses</a></li>
+          <li><a href="assignments.html">Assignments</a></li>
+          <li><a href="game.html">Games</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
-  <section class="hero">
-    <h1>Welcome to LAVA Classroom</h1>
-    <p>Learn, Apply, and Grow in the Insurance World.</p>
-    <a class="btn btn-red" href="courses.html">Go to Courses</a>
+  <section class="white-hero">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <h1>Welcome to LAVA Classroom</h1>
+        <p class="lead">Learn, Apply, and Grow in the Insurance World.</p>
+        <a class="btn btn-red" href="courses.html">Go to Courses</a>
+      </div>
+    </div>
   </section>
 
-  <section class="features">
+  <section class="features container">
     <h2>Why LAVA Classroom?</h2>
     <p>Classroom-friendly, self-paced training for Virtual Assistants and agency support staff.</p>
   </section>
 
-  <footer>
-    <p>© 2025 LAVA Classroom • Home Insurance Training</p>
+  <footer class="site-footer">
+    <div class="footer-inner container">
+      <p>© 2025 LAVA Classroom • Home Insurance Training</p>
+    </div>
   </footer>
 
-  <script>
-    // Trainer reveal animation (if needed)
-    function revealOnScroll() {
-      document.querySelectorAll('.trainer-card').forEach(el => {
-        const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight - 100) el.classList.add('visible');
-      });
-    }
-    window.addEventListener('scroll', revealOnScroll);
-    window.addEventListener('load', revealOnScroll);
-  </script>
 </body>
 </html>
