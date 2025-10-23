@@ -1,169 +1,81 @@
-/* General setup */
-body {
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  color: white;
-  overflow-x: hidden;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contact • LAVA Classroom</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner container">
+      <a class="brand" href="index.html"><span class="logo-square"></span> LAVA Classroom</a>
+      <nav class="main-nav" id="mainNavContact">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="courses.html">Courses</a></li>
+          <li><a href="assignments.html">Assignments</a></li>
+          <li><a href="contact.html" class="nav-link active">Contact</a></li>
+        </ul>
+      </nav>
+      <button id="navToggleContact" class="nav-toggle" aria-expanded="false" aria-controls="mainNavContact"><span class="hamburger"></span></button>
+    </div>
+  </header>
 
-/* Moving gradient background */
-.animated-bg {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: linear-gradient(120deg, maroon, black, #000000, #800000);
-  background-size: 300% 300%;
-  animation: moveGradient 15s ease infinite;
-  z-index: -1;
-}
+  <main class="container content" style="padding-top:60px;">
+    <h1 class="section-title reveal">Contact & Feedback</h1>
+    <p class="lead reveal delay-1">Questions, suggestions, or trainer notes? Send a message and we'll get back to you.</p>
 
-@keyframes moveGradient {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
+    <form class="card reveal delay-2" id="contactForm" style="margin-top:18px;" onsubmit="handleContact(event)">
+      <label for="name">Name</label>
+      <input id="name" name="name" required placeholder="Your name" style="width:100%; padding:10px; border-radius:8px; margin-top:8px; border:1px solid rgba(255,255,255,0.06); background:transparent; color:var(--white)">
 
-/* Header */
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 60px;
-  background: rgba(0,0,0,0.4);
-  backdrop-filter: blur(5px);
-}
+      <label for="email" style="margin-top:12px;">Email</label>
+      <input id="email" name="email" type="email" required placeholder="you@example.com" style="width:100%; padding:10px; border-radius:8px; margin-top:8px; border:1px solid rgba(255,255,255,0.06); background:transparent; color:var(--white)">
 
-.logo {
-  font-weight: 700;
-  font-size: 1.5rem;
-}
-.logo span {
-  color: #ff4d4d;
-}
+      <label for="message" style="margin-top:12px;">Message</label>
+      <textarea id="message" name="message" rows="5" required placeholder="Your message..." style="width:100%; padding:10px; border-radius:8px; margin-top:8px; border:1px solid rgba(255,255,255,0.06); background:transparent; color:var(--white)"></textarea>
 
-nav a {
-  color: white;
-  margin: 0 15px;
-  text-decoration: none;
-  transition: 0.3s;
-}
-nav a:hover {
-  color: #ff4d4d;
-}
+      <div style="margin-top:12px; display:flex; gap:12px;">
+        <button class="btn btn-red" type="submit">Send Message</button>
+        <button class="btn btn-black" type="reset">Reset</button>
+      </div>
 
-/* Hero Section */
-.hero {
-  height: 90vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 0 20px;
-}
+      <p id="contactStatus" style="color:var(--muted); margin-top:10px;"></p>
+    </form>
+  </main>
 
-.hero h1 {
-  font-size: 3rem;
-  font-weight: 700;
-}
-.hero h1 span {
-  color: #ff4d4d;
-}
-.hero p {
-  font-size: 1.3rem;
-  margin-top: 10px;
-}
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© 2025 LAVA Classroom</p>
+    </div>
+  </footer>
 
-.buttons {
-  margin-top: 30px;
-}
+  <script>
+    document.getElementById('navToggleContact').addEventListener('click', function(){
+      const nav = document.getElementById('mainNavContact');
+      const expanded = this.getAttribute('aria-expanded') === 'true' || false;
+      this.setAttribute('aria-expanded', !expanded);
+      nav.classList.toggle('open');
+    });
 
-.btn {
-  padding: 12px 30px;
-  border-radius: 30px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: 0.3s;
-  margin: 10px;
-}
+    function handleContact(e){
+      e.preventDefault();
+      const status = document.getElementById('contactStatus');
+      status.textContent = 'Thanks — your message was captured (demo).';
+      e.target.reset();
+    }
 
-.btn.red {
-  background-color: #ff4d4d;
-  color: white;
-}
-.btn.red:hover {
-  background-color: #e03a3a;
-}
-
-.btn.black {
-  background-color: black;
-  color: white;
-}
-.btn.black:hover {
-  background-color: #222;
-}
-
-/* Trainers Section */
-.trainers-section {
-  text-align: center;
-  padding: 80px 20px;
-}
-
-.trainers {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 30px;
-  margin-top: 30px;
-}
-
-.trainer {
-  background: rgba(255,255,255,0.1);
-  border-radius: 15px;
-  padding: 20px;
-  width: 180px;
-  text-align: center;
-  transition: transform 0.3s ease;
-}
-.trainer:hover {
-  transform: translateY(-10px);
-}
-.trainer img {
-  width: 100%;
-  border-radius: 50%;
-  margin-bottom: 15px;
-}
-
-/* About Info */
-.about-info {
-  max-width: 800px;
-  margin: 50px auto;
-  text-align: center;
-  padding: 0 20px;
-}
-
-/* Footer */
-footer {
-  text-align: center;
-  padding: 20px;
-  background: rgba(0,0,0,0.5);
-}
-
-/* Animations */
-.fade-slide {
-  opacity: 0;
-  transform: translateY(30px);
-  animation: fadeSlideIn 1.2s forwards;
-}
-.delay { animation-delay: 0.3s; }
-.delay2 { animation-delay: 0.6s; }
-.delay3 { animation-delay: 0.9s; }
-.delay4 { animation-delay: 1.2s; }
-.delay5 { animation-delay: 1.5s; }
-
-@keyframes fadeSlideIn {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+    function revealOnScroll(){
+      document.querySelectorAll('.reveal').forEach(el=>{
+        const r = el.getBoundingClientRect();
+        if(r.top < window.innerHeight - 80) el.classList.add('visible');
+      });
+    }
+    window.addEventListener('load', revealOnScroll);
+    window.addEventListener('scroll', revealOnScroll);
+  </script>
+</body>
+</html>
