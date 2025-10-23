@@ -1,168 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LAVA Classroom</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>LAVA Classroom — Home</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    /* Reset and Base Styles */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Poppins", sans-serif;
-    }
-
-    body {
-      background: linear-gradient(135deg, #800000, #000);
-      color: #fff;
-      overflow-x: hidden;
-    }
-
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 60px;
-      background: rgba(0, 0, 0, 0.6);
-      position: fixed;
-      width: 100%;
-      z-index: 1000;
-      backdrop-filter: blur(10px);
-    }
-
-    header h1 {
-      font-size: 1.8rem;
-      color: #fff;
-      font-weight: 700;
-    }
-
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      margin-left: 30px;
-      font-weight: 500;
-      transition: color 0.3s ease;
-    }
-
-    nav a:hover {
-      color: #ff4b4b;
-    }
-
-    /* Hero Section */
-    .hero {
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      background: linear-gradient(135deg, #800000, #000);
-      padding: 0 20px;
-      animation: fadeIn 2s ease-in-out;
-    }
-
-    .hero h1 {
-      font-size: 3rem;
-      font-weight: 700;
-      margin-bottom: 15px;
-      animation: slideDown 1.5s ease-in-out;
-    }
-
-    .hero p {
-      font-size: 1.3rem;
-      margin-bottom: 40px;
-      animation: fadeIn 2.5s ease-in-out;
-    }
-
-    .btn-container {
-      display: flex;
-      gap: 20px;
-      animation: slideUp 2.5s ease-in-out;
-    }
-
-    .btn {
-      padding: 14px 30px;
-      font-size: 1rem;
-      font-weight: 600;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .btn-red {
-      background-color: #ff4b4b;
-      color: white;
-    }
-
-    .btn-red:hover {
-      background-color: #ff6b6b;
-      transform: scale(1.05);
-    }
-
-    .btn-black {
-      background-color: black;
-      color: white;
-    }
-
-    .btn-black:hover {
-      background-color: #333;
-      transform: scale(1.05);
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: #111;
-      color: #ccc;
-      font-size: 0.9rem;
-    }
-
-    /* Animations */
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @keyframes slideDown {
-      from { transform: translateY(-50px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-
-    @keyframes slideUp {
-      from { transform: translateY(50px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-  </style>
 </head>
 <body>
+  <header class="site-header">
+    <div class="header-inner container">
+      <a class="brand" href="index.html"><span class="logo-square"></span> LAVA Classroom</a>
 
-  <header>
-    <h1>LAVA Classroom</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="courses.html">Courses</a>
-      <a href="assignments.html">Assignments</a>
-      <a href="contact.html">Contact</a>
-    </nav>
+      <nav class="main-nav" id="mainNav">
+        <ul>
+          <li><a href="index.html" class="nav-link active">Home</a></li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="courses.html" class="nav-link">Courses</a></li>
+          <li><a href="assignments.html" class="nav-link">Assignments</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <button id="navToggle" class="nav-toggle" aria-expanded="false" aria-controls="mainNav"><span class="hamburger"></span></button>
+    </div>
   </header>
 
-  <section class="hero">
-    <h1>Welcome to LAVA Classroom</h1>
-    <p>Learn. Apply. Grow.</p>
-    <div class="btn-container">
-      <a href="courses.html"><button class="btn btn-red">Start Learning</button></a>
-      <a href="about.html"><button class="btn btn-black">Meet the Trainers</button></a>
-    </div>
-  </section>
+  <main>
+    <section class="hero">
+      <div class="hero-inner container">
+        <h1 class="reveal">Welcome to <span style="color:var(--maroon-2)">LAVA Classroom</span></h1>
+        <p class="sub reveal">Learn. Apply. Grow.</p>
 
-  <footer>
-    © 2025 LAVA Classroom. All Rights Reserved.
+        <div class="btns reveal" style="display:flex;gap:16px;justify-content:center;">
+          <a href="courses.html" class="btn btn-red">Start Learning</a>
+          <a href="about.html" class="btn btn-black">Meet the Trainers</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="container features reveal delay-1" style="margin-top:18px;">
+      <h2 class="section-title">Why LAVA Classroom?</h2>
+      <div class="grid-3" style="margin-top:12px;">
+        <div class="card">
+          <h4>Practical Modules</h4>
+          <p class="lead">Short, focused lessons mapped to agency tasks for fast learning.</p>
+        </div>
+        <div class="card">
+          <h4>Hands-on Activities</h4>
+          <p class="lead">Simulations, assignments, and sample documents for practice.</p>
+        </div>
+        <div class="card">
+          <h4>Recognition</h4>
+          <p class="lead">Certificate of completion and trainer feedback.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="container" style="margin-top:28px;">
+      <div class="card reveal">
+        <h3 style="color:var(--accent);">Download Slides</h3>
+        <p class="lead">Bring the classroom slides to offline sessions or share with trainees.</p>
+        <div style="margin-top:12px;">
+          <a href="assets/training.pptx" class="btn btn-red" download>Download .pptx</a>
+          <a href="https://www.canva.com" class="btn btn-black" target="_blank" rel="noopener">Open in Canva</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© 2025 LAVA Classroom</p>
+    </div>
   </footer>
 
+  <script>
+    // Mobile nav toggle
+    const navToggle = document.getElementById('navToggle');
+    const nav = document.getElementById('mainNav');
+    navToggle.addEventListener('click', ()=> {
+      const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+      navToggle.setAttribute('aria-expanded', !expanded);
+      nav.classList.toggle('open');
+    });
+
+    // Simple reveal on scroll
+    function revealOnScroll(){
+      document.querySelectorAll('.reveal').forEach(el=>{
+        const rect = el.getBoundingClientRect();
+        if(rect.top < window.innerHeight - 80) el.classList.add('visible');
+      });
+    }
+    window.addEventListener('scroll', revealOnScroll);
+    window.addEventListener('load', revealOnScroll);
+  </script>
 </body>
 </html>
