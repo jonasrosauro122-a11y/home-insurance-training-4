@@ -1,125 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Courses • LAVA Classroom</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lava Classroom | Course</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+
+  <style>
+    /* GLOBAL STYLE */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #000;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      background: linear-gradient(135deg, #000000 40%, #5b0000 100%);
+      text-align: center;
+      padding: 0 20px;
+      position: relative;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, #5b0000, #000000);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.2;
+      max-width: 900px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: rgba(255, 255, 255, 0.7);
+      margin-top: 20px;
+    }
+
+    /* SCROLL SECTIONS */
+    section {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .section-dark {
+      background: linear-gradient(135deg, #5b0000 0%, #000000 100%);
+    }
+
+    .section-light {
+      background: #111;
+    }
+
+    h2 {
+      font-size: 3rem;
+      background: linear-gradient(90deg, #5b0000, #000000);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+      max-width: 800px;
+    }
+
+    p {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.75);
+      margin-top: 20px;
+      max-width: 700px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+
+      h2 {
+        font-size: 2rem;
+      }
+
+      .hero p, p {
+        font-size: 1rem;
+      }
+    }
+  </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="index.html"><span class="logo-square"></span> LAVA Classroom</a>
-      <nav class="main-nav" id="mainNavCourses" aria-label="Main navigation">
-        <ul>
-          <li><a href="index.html" class="nav-link">Home</a></li>
-          <li><a href="about.html" class="nav-link">About</a></li>
-          <li><a href="courses.html" class="nav-link active">Courses</a></li>
-          <li><a href="assignments.html" class="nav-link">Assignments</a></li>
-          <li><a href="contact.html" class="nav-link">Contact</a></li>
-        </ul>
-      </nav>
-      <button id="navToggleCourses" class="nav-toggle" aria-expanded="false" aria-controls="mainNavCourses" aria-label="Toggle menu"><span class="hamburger"></span></button>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <h1>A magical new way to experience innovation.</h1>
+    <p>Powerful. Elegant. Groundbreaking.</p>
+  </section>
+
+  <!-- SCROLL SECTIONS -->
+  <section class="section-dark">
+    <div>
+      <h2>Groundbreaking design that adapts to your needs.</h2>
+      <p>Experience smooth motion, refined visuals, and next-level learning flow — crafted for every device.</p>
     </div>
-  </header>
+  </section>
 
-  <main class="container content">
-    <h1 class="section-title reveal">14-Day Training Topics</h1>
-    <p class="lead reveal delay-1">Follow the 14-day plan below. Each day has a short lecture + a practical activity or simulation.</p>
-
-    <div class="days-grid reveal delay-2">
-      <!-- Day cards -->
-      <article id="day1" class="day-card reveal">
-        <h3>Day 1</h3>
-        <p><strong>Getting to know you</strong>, Different Roles of a LAVA VA, Admin Tasks</p>
-      </article>
-
-      <article id="day2" class="day-card reveal delay-1">
-        <h3>Day 2</h3>
-        <p><strong>Insurance 101</strong>, Policy Cycle</p>
-      </article>
-
-      <article id="day3" class="day-card reveal delay-2">
-        <h3>Day 3</h3>
-        <p><strong>Insurance Documents</strong></p>
-      </article>
-
-      <article id="day4" class="day-card reveal delay-3">
-        <h3>Day 4</h3>
-        <p><strong>English 101</strong>, Insurance CSR, Mock Calls</p>
-      </article>
-
-      <article id="day5" class="day-card reveal delay-4">
-        <h3>Day 5</h3>
-        <p><strong>Intro to AMS</strong>, Intro to CRM</p>
-      </article>
-
-      <article id="day6" class="day-card reveal">
-        <h3>Day 6</h3>
-        <p><strong>Introduction to Raters</strong>, Carriers</p>
-      </article>
-
-      <article id="day7" class="day-card reveal delay-1">
-        <h3>Day 7</h3>
-        <p><strong>Home Insurance Types</strong>, Coverages in Home Insurance, Home Construction Knowledge, Home Quoting</p>
-      </article>
-
-      <article id="day8" class="day-card reveal delay-2">
-        <h3>Day 8</h3>
-        <p><strong>Intro to Auto Insurance</strong>, Coverages and Endorsements, Auto Quoting</p>
-      </article>
-
-      <article id="day9" class="day-card reveal delay-3">
-        <h3>Day 9</h3>
-        <p><strong>Trailer Overview & Quoting</strong>, Boat & RV Overview and Quoting, Umbrella Insurance</p>
-      </article>
-
-      <article id="day10" class="day-card reveal delay-4">
-        <h3>Day 10</h3>
-        <p><strong>Analyzing a Sample Home Dec Page</strong> Activity, Home Quote Simulation</p>
-      </article>
-
-      <article id="day11" class="day-card reveal">
-        <h3>Day 11</h3>
-        <p><strong>Analyzing a Sample Auto Dec Page</strong> Activity, Auto Quote Simulation</p>
-      </article>
-
-      <article id="day12" class="day-card reveal delay-1">
-        <h3>Day 12</h3>
-        <p><strong>Personal/Commercial Insurance</strong> ACORD Forms</p>
-      </article>
-
-      <article id="day13" class="day-card reveal delay-2">
-        <h3>Day 13</h3>
-        <p><strong>SOP Lecture</strong>, SOP Writing, Insurance Final Exam</p>
-      </article>
-
-      <article id="day14" class="day-card reveal delay-3">
-        <h3>Day 14</h3>
-        <p><strong>Recognition</strong> with TL's and Trainers (Certificate)</p>
-      </article>
+  <section class="section-light">
+    <div>
+      <h2>Performance that goes beyond limits.</h2>
+      <p>Optimized for clarity and speed. Built to inspire creativity and productivity.</p>
     </div>
+  </section>
 
-    <div class="note reveal delay-4">
-      <p class="muted">Trainers: attach sample files, AMS access notes, or recorded walkthroughs to each day in your trainer resources.</p>
-    </div>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p>© 2025 LAVA Classroom</p>
-    </div>
-  </footer>
+  <!-- GSAP + SCROLLTRIGGER -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
   <script>
-    document.getElementById('navToggleCourses').addEventListener('click', function(){
-      const nav = document.getElementById('mainNavCourses');
-      const expanded = this.getAttribute('aria-expanded') === 'true' || false;
-      this.setAttribute('aria-expanded', !expanded);
-      nav.classList.toggle('open');
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Animate hero text
+    gsap.from(".hero h1", {
+      y: 100,
+      opacity: 0,
+      duration: 1.5,
+      ease: "power3.out"
     });
-    function revealOnScroll(){document.querySelectorAll('.reveal').forEach(el=>{const r=el.getBoundingClientRect(); if(r.top<window.innerHeight-80) el.classList.add('visible');});}
-    window.addEventListener('scroll', revealOnScroll); window.addEventListener('load', revealOnScroll);
+
+    gsap.from(".hero p", {
+      y: 60,
+      opacity: 0,
+      duration: 1.2,
+      delay: 0.3,
+      ease: "power3.out"
+    });
+
+    // Animate each section as you scroll
+    gsap.utils.toArray("section").forEach((section) => {
+      gsap.from(section.querySelector("h2"), {
+        scrollTrigger: {
+          trigger: section,
+          start: "top 80%",
+          toggleActions: "play none none reverse"
+        },
+        y: 100,
+        opacity: 0,
+        duration: 1.5,
+        ease: "power3.out"
+      });
+
+      gsap.from(section.querySelector("p"), {
+        scrollTrigger: {
+          trigger: section,
+          start: "top 80%",
+          toggleActions: "play none none reverse"
+        },
+        y: 60,
+        opacity: 0,
+        duration: 1.2,
+        delay: 0.2,
+        ease: "power3.out"
+      });
+    });
   </script>
 </body>
 </html>
