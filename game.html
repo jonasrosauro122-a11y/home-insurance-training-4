@@ -76,10 +76,25 @@
     padding: 10px;
     border-radius: 10px;
   }
+
+  #musicControl {
+    position: fixed;
+    top: 15px;
+    right: 20px;
+    background: #ff5555;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+  }
 </style>
 </head>
 <body>
   <h1>🏆 LAVA Flappy Insurance Quiz 🕹️</h1>
+
+  <button id="musicControl">🔊 Music On</button>
 
   <div id="startBox">
     <input type="text" id="playerName" placeholder="Enter your name" />
@@ -103,6 +118,10 @@
     <ul id="leaderList"></ul>
   </div>
 
+  <audio id="bgMusic" loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/10/09/audio_65e0d2f6cb.mp3?filename=arcade-funk-124689.mp3" type="audio/mpeg">
+  </audio>
+
 <script>
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
@@ -114,6 +133,21 @@ const startGameBtn = document.getElementById("startGameBtn");
 const playerNameInput = document.getElementById("playerName");
 const scoreDisplay = document.getElementById("score");
 const leaderList = document.getElementById("leaderList");
+const bgMusic = document.getElementById("bgMusic");
+const musicControl = document.getElementById("musicControl");
+
+let musicPlaying = false;
+musicControl.addEventListener("click", () => {
+  if (!musicPlaying) {
+    bgMusic.play();
+    musicPlaying = true;
+    musicControl.textContent = "🔈 Music Off";
+  } else {
+    bgMusic.pause();
+    musicPlaying = false;
+    musicControl.textContent = "🔊 Music On";
+  }
+});
 
 let playerName = "";
 let birdY = 150;
