@@ -5,68 +5,70 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LAVA Flappy Insurance Quiz</title>
 <link rel="stylesheet" href="style.css">
+<style>
+  body { background: linear-gradient(120deg,#000,#480000); color:#fff; font-family:'Poppins',sans-serif; overflow-x:hidden; }
+  header, footer { background: rgba(0,0,0,0.7); padding:1rem 2rem; text-align:center; }
+  nav a { color:#fff; margin:0 10px; text-decoration:none; font-weight:600; }
+  nav a:hover { color:#ff4d4d; }
+  h1 { margin-bottom:0.5rem; }
+  #gameCanvas { border-radius:12px; border:3px solid #ff2a2a; background: rgba(255,255,255,0.03); display:block; margin: 20px auto; }
+  #questionBox { display:none; background:#111; padding:16px; border:2px solid #ff5555; border-radius:12px; width:80%; max-width:560px; margin: 10px auto; text-align:center; }
+  #scoreDisplay { margin-top:12px; }
+  #leaderboard { margin-top:18px; background: rgba(255,255,255,0.06); padding:12px; border-radius:10px; max-width:400px; margin-left:auto; margin-right:auto; }
+  .btn { background:#e50914; color:#fff; padding:8px 16px; border:none; border-radius:6px; cursor:pointer; font-weight:bold; }
+  .btn:hover { background:#b0060e; }
+</style>
 </head>
-<body style="background:linear-gradient(120deg,#000,#480000);color:#fff;">
+<body>
 
-<header class="site-header">
-  <div class="header-inner container">
-    <a href="index.html" class="brand">
-      <img src="images/logo.png" alt="LAVA Logo">
-      <span style="color:#fff">LAVA Classroom</span>
-    </a>
-    <nav class="main-nav">
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="courses.html">Courses</a></li>
-        <li><a href="assignments.html">Assignments</a></li>
-        <li><a href="game.html" class="active">Games</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
-  </div>
+<header>
+  <h2>LAVA Classroom | Flappy Insurance Quiz</h2>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">Trainers</a>
+    <a href="courses.html">Courses</a>
+    <a href="assignments.html">LAVA University</a>
+    <a href="game.html" class="active">Games</a>
+    <a href="contact.html">Contact</a>
+  </nav>
 </header>
 
-<main class="container" style="padding:40px 20px; text-align:center;">
-  <h1>🏆 LAVA Flappy Insurance Quiz 🕹️</h1>
-  <p style="color:#ffdcdc; max-width:800px; margin:8px auto 20px;">Test your insurance knowledge while playing this simple quiz-game: answer a question each time you hit an obstacle.</p>
+<main style="text-align:center; padding:40px 20px;">
+  <h1>🏆 Flappy Insurance Quiz 🕹️</h1>
+  <p>Hit obstacles and answer insurance questions to score points!</p>
 
-  <div id="startBox" style="margin-bottom:18px;">
-    <input type="text" id="playerName" placeholder="Enter your name" style="padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.12);width:220px;margin-right:8px;">
-    <button id="startGameBtn" class="btn btn-red">Start Game</button>
+  <div id="startBox">
+    <input type="text" id="playerName" placeholder="Enter your name" style="padding:8px; border-radius:8px; width:220px;">
+    <button id="startGameBtn" class="btn">Start Game</button>
   </div>
 
-  <div id="gameContainer" style="display:inline-block;">
-    <canvas id="gameCanvas" width="480" height="320" style="border-radius:12px;border:3px solid #ff2a2a;background:rgba(255,255,255,0.03);"></canvas>
+  <canvas id="gameCanvas" width="480" height="320"></canvas>
 
-    <div id="questionBox" style="display:none;position:absolute;left:50%;transform:translateX(-50%);background:#111;padding:16px;border:2px solid #ff5555;border-radius:12px;width:80%;max-width:560px;">
-      <h3 id="questionText" style="color:#fff;"></h3>
-      <input id="answerInput" type="text" placeholder="Type your answer..." style="padding:8px;border-radius:6px;border:1px solid #333;width:70%;margin-bottom:8px;">
-      <button id="submitAnswer" class="btn btn-red">Submit</button>
-    </div>
+  <div id="questionBox">
+    <h3 id="questionText"></h3>
+    <input type="text" id="answerInput" placeholder="Type your answer..." style="padding:6px; border-radius:6px; width:70%; margin-bottom:8px;">
+    <button id="submitAnswer" class="btn">Submit</button>
   </div>
 
-  <div id="scoreDisplay" style="margin-top:12px;color:#fff;">Score: <span id="score">0</span></div>
+  <div id="scoreDisplay">Score: <span id="score">0</span></div>
 
-  <div id="leaderboard" style="margin-top:18px;background:rgba(255,255,255,0.06);padding:12px;border-radius:10px;">
-    <h3 style="margin:0 0 8px 0;">🏅 Leaderboard (Top 5)</h3>
-    <ul id="leaderList" style="list-style:none;padding-left:0;margin:0;"></ul>
+  <div id="leaderboard">
+    <h3>🏅 Leaderboard (Top 5)</h3>
+    <ul id="leaderList" style="list-style:none; padding-left:0;"></ul>
   </div>
 
   <audio id="bgMusic" loop>
     <source src="https://cdn.pixabay.com/download/audio/2022/10/09/audio_65e0d2f6cb.mp3?filename=arcade-funk-124689.mp3" type="audio/mpeg">
   </audio>
-  <button id="musicControl" class="btn btn-red" style="position:fixed;top:14px;right:18px;">🔊 Music On</button>
+  <button id="musicControl" class="btn" style="position:fixed; top:14px; right:18px;">🔊 Music On</button>
 </main>
 
-<footer class="site-footer">
-  <div class="footer-inner container">
-    <p style="color:#fff;">© 2025 LAVA Classroom. All Rights Reserved.</p>
-  </div>
+<footer>
+  <p>© 2025 LAVA Classroom. All Rights Reserved.</p>
 </footer>
 
 <script>
-/* Game logic (Flappy + quiz) */
+// Flappy + Quiz Game
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 const questionBox = document.getElementById("questionBox");
@@ -81,27 +83,12 @@ const bgMusic = document.getElementById("bgMusic");
 const musicControl = document.getElementById("musicControl");
 
 let musicPlaying = false;
-musicControl.addEventListener("click", () => {
-  if (!musicPlaying) {
-    bgMusic.play();
-    musicPlaying = true;
-    musicControl.textContent = "🔈 Music Off";
-  } else {
-    bgMusic.pause();
-    musicPlaying = false;
-    musicControl.textContent = "🔊 Music On";
-  }
+musicControl.addEventListener("click",()=>{
+  if(!musicPlaying){ bgMusic.play(); musicPlaying=true; musicControl.textContent="🔈 Music Off"; }
+  else{ bgMusic.pause(); musicPlaying=false; musicControl.textContent="🔊 Music On"; }
 });
 
-let playerName = "";
-let birdY = 150;
-let birdV = 0;
-let gravity = 0.5;
-let flap = -7;
-let pipes = [];
-let gameActive = false;
-let score = 0;
-let questionActive = false;
+let playerName="", birdY=150, birdV=0, gravity=0.5, flap=-7, pipes=[], gameActive=false, score=0, questionActive=false;
 
 const questions = [
 {q:"An organization of insurers through which risks are pooled.", a:"insurance pool"},
@@ -132,48 +119,31 @@ const questions = [
 ];
 
 function drawBird(){
-  ctx.beginPath();
-  ctx.arc(80, birdY, 10, 0, Math.PI * 2);
-  ctx.fillStyle = "#ff5555";
-  ctx.fill();
+  ctx.beginPath(); ctx.arc(80,birdY,10,0,Math.PI*2); ctx.fillStyle="#ff5555"; ctx.fill();
 }
 
 function drawPipes(){
-  ctx.fillStyle = "#ffffff55";
-  pipes.forEach(p => {
-    ctx.fillRect(p.x, 0, 40, p.top);
-    ctx.fillRect(p.x, p.bottom, 40, canvas.height - p.bottom);
-  });
+  ctx.fillStyle="#ffffff55";
+  pipes.forEach(p=>{ ctx.fillRect(p.x,0,40,p.top); ctx.fillRect(p.x,p.bottom,40,canvas.height-p.bottom); });
 }
 
 function updateGame(){
-  if(!gameActive || questionActive) return;
-
+  if(!gameActive||questionActive) return;
   ctx.clearRect(0,0,canvas.width,canvas.height);
   drawBird();
   drawPipes();
+  birdV+=gravity; birdY+=birdV;
 
-  birdV += gravity;
-  birdY += birdV;
+  if(birdY>canvas.height-10) hitObstacle();
 
-  if(birdY > canvas.height-10) hitObstacle();
-
-  pipes.forEach(p => {
-    p.x -= 2;
-    if(p.x + 40 < 0){
-      pipes.shift();
-      score++;
-      scoreDisplay.textContent = score;
-    }
-
-    if(80 > p.x && 80 < p.x + 40 && (birdY < p.top || birdY > p.bottom)){
-      hitObstacle();
-    }
+  pipes.forEach(p=>{
+    p.x-=2;
+    if(p.x+40<0){ pipes.shift(); score++; scoreDisplay.textContent=score; }
+    if(80>p.x && 80<p.x+40 && (birdY<p.top || birdY>p.bottom)) hitObstacle();
   });
 
-  if(pipes.length < 3){
-    let top = Math.random()*150 + 20;
-    let gap = 100;
+  if(pipes.length<3){
+    let top=Math.random()*150+20, gap=100;
     pipes.push({x:canvas.width, top:top, bottom:top+gap});
   }
 
@@ -181,82 +151,54 @@ function updateGame(){
 }
 
 function hitObstacle(){
-  questionActive = true;
-  gameActive = false;
+  questionActive=true; gameActive=false;
   const randomQ = questions[Math.floor(Math.random()*questions.length)];
-  questionBox.style.display = "block";
-  questionText.textContent = randomQ.q;
-  answerInput.value = "";
-  submitAnswer.onclick = () => {
-    const ans = answerInput.value.trim().toLowerCase();
-    if(ans === randomQ.a.toLowerCase()){
-      questionBox.style.display = "none";
-      questionActive = false;
-      gameActive = true;
-      birdV = -5;
-      updateGame();
-    } else {
-      questionBox.innerHTML = `<h3 style="color:#fff;">❌ Wrong Answer! Game Over!</h3><p style="color:#ffdcdc;">Correct: <b>${randomQ.a}</b></p>`;
-      setTimeout(endGame, 2000);
+  questionBox.style.display="block";
+  questionText.textContent=randomQ.q;
+  answerInput.value="";
+  submitAnswer.onclick=()=>{
+    const ans=answerInput.value.trim().toLowerCase();
+    if(ans===randomQ.a.toLowerCase()){
+      questionBox.style.display="none"; questionActive=false; gameActive=true; birdV=-5; updateGame();
+    } else{
+      questionBox.innerHTML=`<h3 style="color:#fff;">❌ Wrong Answer! Game Over!</h3><p style="color:#ffdcdc;">Correct: <b>${randomQ.a}</b></p>`;
+      setTimeout(endGame,2000);
     }
   };
 }
 
 function startGame(){
-  if(!playerNameInput.value.trim()){
-    alert("Please enter your name first!");
-    return;
-  }
-  playerName = playerNameInput.value.trim();
-  document.getElementById("startBox").style.display = "none";
+  if(!playerNameInput.value.trim()){ alert("Enter your name!"); return; }
+  playerName=playerNameInput.value.trim();
+  document.getElementById("startBox").style.display="none";
   resetGame();
 }
 
 function resetGame(){
-  score = 0;
-  scoreDisplay.textContent = score;
-  birdY = 150;
-  birdV = 0;
-  pipes = [];
-  gameActive = true;
-  updateGame();
+  score=0; scoreDisplay.textContent=score; birdY=150; birdV=0; pipes=[]; gameActive=true; updateGame();
 }
 
-function endGame(){
-  gameActive = false;
-  saveScore();
-  loadLeaderboard();
-  document.getElementById("startBox").style.display = "block";
-}
+function endGame(){ gameActive=false; saveScore(); loadLeaderboard(); document.getElementById("startBox").style.display="block"; }
 
 function saveScore(){
-  const leaderboard = JSON.parse(localStorage.getItem("leaderboard") || "[]");
+  const leaderboard=JSON.parse(localStorage.getItem("leaderboard")||"[]");
   leaderboard.push({name:playerName, score:score});
   leaderboard.sort((a,b)=>b.score-a.score);
-  const top5 = leaderboard.slice(0,5);
-  localStorage.setItem("leaderboard", JSON.stringify(top5));
+  const top5=leaderboard.slice(0,5);
+  localStorage.setItem("leaderboard",JSON.stringify(top5));
 }
 
 function loadLeaderboard(){
-  const leaderboard = JSON.parse(localStorage.getItem("leaderboard") || "[]");
-  leaderList.innerHTML = "";
-  leaderboard.forEach((p,i)=>{
-    const li = document.createElement("li");
-    li.textContent = `${i+1}. ${p.name} — ${p.score}`;
-    leaderList.appendChild(li);
-  });
+  const leaderboard=JSON.parse(localStorage.getItem("leaderboard")||"[]");
+  leaderList.innerHTML="";
+  leaderboard.forEach((p,i)=>{ const li=document.createElement("li"); li.textContent=`${i+1}. ${p.name} — ${p.score}`; leaderList.appendChild(li); });
 }
 
-document.addEventListener("keydown", e=>{
-  if(e.code === "Space" && gameActive && !questionActive){
-    birdV = flap;
-  }
-});
-
-canvas.addEventListener("click", ()=>{
-  if(gameActive && !questionActive) birdV = flap;
-});
-
-startGameBtn.onclick = startGame;
+document.addEventListener("keydown",e=>{ if(e.code==="Space" && gameActive && !questionActive) birdV=-7; });
+canvas.addEventListener("click",()=>{ if(gameActive && !questionActive) birdV=-7; });
+startGameBtn.onclick=startGame;
 loadLeaderboard();
 </script>
+
+</body>
+</html>
