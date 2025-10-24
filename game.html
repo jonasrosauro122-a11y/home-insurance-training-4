@@ -3,245 +3,156 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LAVA Flappy Insurance Quiz</title>
-<link rel="stylesheet" href="style.css">
+<title>LAVA Flappy Bird</title>
 <style>
-  /* Inline styles specific to the game */
-  #gameContainer { position: relative; display: inline-block; }
-  #questionBox {
-    display: none;
-    position: absolute;
-    left: 50%;
-    top: 40%;
-    transform: translateX(-50%);
-    background: #111;
-    padding: 16px;
-    border: 2px solid #ff5555;
-    border-radius: 12px;
-    width: 80%;
-    max-width: 560px;
-    z-index: 100;
+  body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(120deg,#000,#480000);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
     color: #fff;
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
   }
-  #questionBox h3, #questionBox p { margin: 8px 0; color: #fff; }
-  #answerInput { padding: 8px; border-radius: 6px; border: 1px solid #333; width: 70%; margin-bottom: 8px; }
-  #submitAnswer { padding: 8px 12px; border-radius: 6px; border: none; background: #e50914; color: #fff; cursor: pointer; }
-  #submitAnswer:hover { background: #b0060e; }
-  canvas { border-radius: 12px; border: 3px solid #ff2a2a; background: rgba(255,255,255,0.03); }
+  canvas {
+    border: 3px solid #ff2a2a;
+    border-radius: 12px;
+    background: #111;
+    display: block;
+  }
+  #score {
+    position: absolute;
+    top: 20px;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  #gameOver {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 36px;
+    text-align: center;
+    display: none;
+  }
+  #restartBtn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 8px;
+    border: none;
+    background: #ff1f1f;
+    color: #fff;
+    cursor: pointer;
+  }
 </style>
 </head>
 <body>
-
-<header class="site-header">
-  <div class="header-inner container">
-    <a href="index.html" class="brand">
-      <img src="images/logo.png" alt="LAVA Logo" style="height:40px;vertical-align:middle;">
-      <span style="color:#fff">LAVA Classroom</span>
-    </a>
-    <nav class="main-nav" id="mainNavGame">
-  <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="courses.html">Courses</a></li>
-    <li><a href="assignments.html">Assignments</a></li>
-    <li><a href="game.html" class="active">Games</a></li>
-    <li><a href="contact.html">Contact</a></li>
-  </ul>
-</nav>
-  </div>
-</header>
-
-<main class="container" style="padding:40px 20px; text-align:center;">
-  <h1>🏆 LAVA Flappy Insurance Quiz 🕹️</h1>
-  <p style="color:#ffdcdc; max-width:800px; margin:8px auto 20px;">
-    Test your insurance knowledge while playing this simple Flappy Bird style quiz game: answer a question every time you hit an obstacle!
-  </p>
-
-  <div id="startBox" style="margin-bottom:18px;">
-    <input type="text" id="playerName" placeholder="Enter your name" style="padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.12);width:220px;margin-right:8px;">
-    <button id="startGameBtn" style="padding:8px 16px; border-radius:8px; border:none; background:#e50914; color:#fff; cursor:pointer;">Start Game</button>
-  </div>
-
-  <div id="gameContainer">
-    <canvas id="gameCanvas" width="480" height="320"></canvas>
-
-    <div id="questionBox">
-      <h3 id="questionText"></h3>
-      <input id="answerInput" type="text" placeholder="Type your answer...">
-      <button id="submitAnswer">Submit</button>
-    </div>
-  </div>
-
-  <div id="scoreDisplay" style="margin-top:12px;">Score: <span id="score">0</span></div>
-
-  <div id="leaderboard" style="margin-top:18px;background:rgba(255,255,255,0.06);padding:12px;border-radius:10px;">
-    <h3 style="margin:0 0 8px 0;">🏅 Leaderboard (Top 5)</h3>
-    <ul id="leaderList" style="list-style:none;padding-left:0;margin:0;"></ul>
-  </div>
-</main>
-
-<footer class="site-footer">
-  <div class="footer-inner container">
-    <p style="color:#fff;">© 2025 LAVA Classroom. All Rights Reserved.</p>
-  </div>
-</footer>
+<div id="score">0</div>
+<div id="gameOver">
+  Game Over!<br>
+  <button id="restartBtn">Restart</button>
+</div>
+<canvas id="gameCanvas" width="400" height="600"></canvas>
 
 <script>
-/* ===================== GAME LOGIC ===================== */
-const canvas = document.getElementById("gameCanvas");
-const ctx = canvas.getContext("2d");
-const questionBox = document.getElementById("questionBox");
-const questionText = document.getElementById("questionText");
-const answerInput = document.getElementById("answerInput");
-const submitAnswer = document.getElementById("submitAnswer");
-const startGameBtn = document.getElementById("startGameBtn");
-const playerNameInput = document.getElementById("playerName");
-const scoreDisplay = document.getElementById("score");
-const leaderList = document.getElementById("leaderList");
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
 
-let playerName = "";
-let birdY = 150, birdV = 0;
-let gravity = 0.5, flap = -7;
+let bird = { x: 80, y: 300, width: 30, height: 30, gravity: 0.6, velocity: 0, jump: -10 };
 let pipes = [];
-let gameActive = false, questionActive = false;
+let frame = 0;
 let score = 0;
+let gameOver = false;
 
-const questions = [
-  {q:"An organization of insurers through which risks are pooled.", a:"insurance pool"},
-  {q:"Anyone can be an agent. True or False.", a:"false"},
-  {q:"A financial agreement to transfer risk for premiums.", a:"insurance"},
-  {q:"Total cost or price of the policy.", a:"premium"},
-  {q:"Professional who evaluates risk.", a:"underwriter"},
-  {q:"Works for ONE insurance company only. They are ____.", a:"captive agent"},
-  {q:"Represents the client, not the insurance company.", a:"broker"},
-  {q:"What is ACV?", a:"actual cash value"},
-  {q:"Covers losses and damages to private properties.", a:"personal insurance"},
-  {q:"Can give insurance advice and bind policies.", a:"insurance agent"}
-];
-
-function drawBird(){
-  ctx.beginPath();
-  ctx.arc(80, birdY, 10, 0, Math.PI*2);
-  ctx.fillStyle="#ff5555";
-  ctx.fill();
+function drawBird() {
+  ctx.fillStyle = '#ff5555';
+  ctx.fillRect(bird.x, bird.y, bird.width, bird.height);
 }
 
-function drawPipes(){
-  ctx.fillStyle = "#ffffff55";
-  pipes.forEach(p=>{
-    ctx.fillRect(p.x,0,40,p.top);
-    ctx.fillRect(p.x,p.bottom,40,canvas.height-p.bottom);
+function drawPipes() {
+  ctx.fillStyle = '#00ff00';
+  pipes.forEach(pipe => {
+    ctx.fillRect(pipe.x, 0, pipe.width, pipe.top);
+    ctx.fillRect(pipe.x, pipe.bottom, pipe.width, canvas.height - pipe.bottom);
   });
 }
 
-function updateGame(){
-  if(!gameActive || questionActive) return;
+function newPipe() {
+  let top = Math.random() * (canvas.height/2) + 50;
+  let gap = 150;
+  pipes.push({ x: canvas.width, width: 50, top: top, bottom: top + gap });
+}
+
+function update() {
+  if(gameOver) return;
+
   ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  // Bird
+  bird.velocity += bird.gravity;
+  bird.y += bird.velocity;
   drawBird();
+
+  // Pipes
+  if(frame % 90 === 0) newPipe();
+  pipes.forEach((pipe,i)=>{
+    pipe.x -= 2;
+    if(pipe.x + pipe.width < 0) {
+      pipes.splice(i,1);
+      score++;
+      document.getElementById('score').textContent = score;
+    }
+    // Collision
+    if(bird.x < pipe.x + pipe.width &&
+       bird.x + bird.width > pipe.x &&
+       (bird.y < pipe.top || bird.y + bird.height > pipe.bottom)) {
+         endGame();
+    }
+  });
   drawPipes();
 
-  birdV += gravity;
-  birdY += birdV;
-
-  if(birdY>canvas.height-10) hitObstacle();
-
-  pipes.forEach(p=>{
-    p.x -= 2;
-    if(p.x+40<0){
-      pipes.shift();
-      score++;
-      scoreDisplay.textContent = score;
-    }
-    if(80>p.x && 80<p.x+40 && (birdY<p.top || birdY>p.bottom)){
-      hitObstacle();
-    }
-  });
-
-  if(pipes.length<3){
-    let top=Math.random()*150+20;
-    let gap=100;
-    pipes.push({x:canvas.width, top:top, bottom:top+gap});
+  // Floor / Ceiling collision
+  if(bird.y + bird.height > canvas.height || bird.y < 0) {
+    endGame();
   }
 
-  requestAnimationFrame(updateGame);
+  frame++;
+  requestAnimationFrame(update);
 }
 
-function hitObstacle(){
-  questionActive=true;
-  gameActive=false;
-  const randomQ=questions[Math.floor(Math.random()*questions.length)];
-  questionBox.style.display="block";
-  questionText.textContent=randomQ.q;
-  answerInput.value="";
-  submitAnswer.onclick = ()=>{
-    const ans = answerInput.value.trim().toLowerCase();
-    if(ans===randomQ.a.toLowerCase()){
-      questionBox.style.display="none";
-      questionActive=false;
-      gameActive=true;
-      birdV=-5;
-      updateGame();
-    } else {
-      questionBox.innerHTML = `<h3 style="color:#fff;">❌ Wrong Answer! Game Over!</h3><p style="color:#ffdcdc;">Correct: <b>${randomQ.a}</b></p>`;
-      setTimeout(endGame,2000);
-    }
-  };
+function flap() {
+  bird.velocity = bird.jump;
 }
 
-function startGame(){
-  if(!playerNameInput.value.trim()){
-    alert("Please enter your name first!");
-    return;
-  }
-  playerName = playerNameInput.value.trim();
-  document.getElementById("startBox").style.display="none";
-  resetGame();
+function endGame() {
+  gameOver = true;
+  document.getElementById('gameOver').style.display = 'block';
 }
 
-function resetGame(){
-  score=0;
-  scoreDisplay.textContent=score;
-  birdY=150;
-  birdV=0;
-  pipes=[];
-  gameActive=true;
-  updateGame();
-}
-
-function endGame(){
-  gameActive=false;
-  saveScore();
-  loadLeaderboard();
-  document.getElementById("startBox").style.display="block";
-}
-
-function saveScore(){
-  const leaderboard = JSON.parse(localStorage.getItem("leaderboard")||"[]");
-  leaderboard.push({name:playerName,score:score});
-  leaderboard.sort((a,b)=>b.score-b.score);
-  const top5 = leaderboard.slice(0,5);
-  localStorage.setItem("leaderboard",JSON.stringify(top5));
-}
-
-function loadLeaderboard(){
-  const leaderboard = JSON.parse(localStorage.getItem("leaderboard")||"[]");
-  leaderList.innerHTML="";
-  leaderboard.forEach((p,i)=>{
-    const li=document.createElement("li");
-    li.textContent=`${i+1}. ${p.name} — ${p.score}`;
-    leaderList.appendChild(li);
-  });
-}
-
-document.addEventListener("keydown",e=>{
-  if(e.code==="Space" && gameActive && !questionActive){
-    birdV=flap;
-  }
+document.addEventListener('keydown', e => {
+  if(e.code === 'Space') flap();
 });
-canvas.addEventListener("click",()=>{ if(gameActive && !questionActive) birdV=flap; });
-startGameBtn.onclick=startGame;
-loadLeaderboard();
-</script>
 
+canvas.addEventListener('click', flap);
+
+document.getElementById('restartBtn').addEventListener('click', ()=>{
+  bird.y = 300;
+  bird.velocity = 0;
+  pipes = [];
+  frame = 0;
+  score = 0;
+  gameOver = false;
+  document.getElementById('score').textContent = score;
+  document.getElementById('gameOver').style.display = 'none';
+  update();
+});
+
+// Start game
+update();
+</script>
 </body>
 </html>
