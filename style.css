@@ -1,133 +1,86 @@
-/* Reset & basic setup */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
-}
-
+/* ===== RESET & GLOBAL ===== */
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
 body {
-  background: linear-gradient(135deg, #8B0000, #000000);
-  color: white;
-  overflow-x: hidden;
+  background: linear-gradient(135deg,#9b1212,#000);
+  background-size:400% 400%;
+  animation: gradientShift 20s ease infinite;
+  color:white;
+  overflow-x:hidden;
 }
+@keyframes gradientShift{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
 
-/* Navigation */
-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 50px;
-  background: rgba(0,0,0,0.7);
-  position: fixed;
-  width: 100%;
-  z-index: 100;
+/* ===== CLOUDS ===== */
+.clouds{
+  position:absolute; top:0; left:0; width:200%; height:200%;
+  background:url('images/clouds.png') repeat;
+  background-size:contain;
+  opacity:0.12;
+  animation: cloudMove 120s linear infinite;
+  pointer-events:none; z-index:0;
 }
+@keyframes cloudMove{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
 
-nav a {
-  color: white;
-  text-decoration: none;
-  margin-left: 30px;
-  font-weight: bold;
-  transition: 0.3s;
+/* ===== HEADER ===== */
+header{
+  position:sticky; top:0; z-index:100;
+  display:flex; justify-content:space-between; align-items:center;
+  padding:1rem 2rem; background:rgba(0,0,0,0.7); backdrop-filter:blur(5px);
 }
-
-nav a:hover {
-  color: #ff4d4d;
+.brand{color:#fff;font-size:1.5rem;font-weight:700;text-decoration:none;}
+nav ul{display:flex;list-style:none;gap:20px;flex-wrap:wrap;}
+nav a{
+  color:#fff;text-decoration:none;font-weight:500;
+  padding:6px 12px;border-radius:5px;transition:all 0.3s ease;
 }
+nav a:hover, nav a.active{background:#ff1f1f; transform:scale(1.05);}
 
-/* Hero Section */
-.hero {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  text-align: center;
-  overflow: hidden;
+/* ===== HERO ===== */
+.hero{
+  text-align:center;padding:5rem 2rem;
+  background:rgba(0,0,0,0.5); position:relative; z-index:5;
 }
-
-/* Moving Clouds using CSS */
-.cloud {
-  position: absolute;
-  background: white;
-  border-radius: 50%;
-  opacity: 0.3;
-  animation: cloudMove linear infinite;
+.hero h1,h2{font-size:2.5rem;color:#fff;animation:fadeInDown 1.5s ease;margin-bottom:1rem;}
+.hero p{font-size:1.1rem;color:#fff;max-width:700px;margin:0 auto 2rem;line-height:1.6;}
+.hero a{
+  background:#e50914;color:#fff;text-decoration:none;padding:0.8rem 1.6rem;
+  border-radius:8px;font-weight:bold;transition:all 0.3s ease;
 }
+.hero a:hover{background:#b0060e; transform:scale(1.05);}
+@keyframes fadeInDown{from{opacity:0;transform:translateY(-20px);}to{opacity:1;transform:translateY(0);}}
 
-.cloud:nth-child(1) { width: 200px; height: 60px; top: 50px; animation-duration: 90s; left: -250px; }
-.cloud:nth-child(2) { width: 250px; height: 70px; top: 120px; animation-duration: 110s; left: -300px; }
-.cloud:nth-child(3) { width: 180px; height: 50px; top: 200px; animation-duration: 100s; left: -200px; }
-
-@keyframes cloudMove {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(2000px); }
+/* ===== COURSES GRID ===== */
+.courses{padding:4rem 2rem;text-align:center;position:relative; z-index:5;}
+.courses h2{font-size:2rem;margin-bottom:2rem;color:#ff1f1f;}
+.course-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:1.8rem; max-width:1200px; margin:0 auto;
 }
-
-/* Waves using CSS */
-.wave-container {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 150px;
-  overflow: hidden;
+.course-card{
+  background: rgba(255,255,255,0.05); border:2px solid rgba(255,255,255,0.2);
+  border-radius:15px;padding:2rem 1rem; backdrop-filter:blur(8px);
+  box-shadow:0 4px 20px rgba(0,0,0,0.3);
+  transition:transform 0.3s ease, box-shadow 0.3s ease; opacity:0; transform:translateY(30px);
+  color:#fff;
 }
+.course-card.visible{opacity:1; transform:translateY(0);}
+.course-card:hover{transform:translateY(-8px); box-shadow:0 8px 25px rgba(229,9,20,0.4);}
+.course-card h3{color:#fff; font-size:1.2rem; margin-bottom:0.5rem;}
 
-.wave {
-  position: absolute;
-  width: 200%;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 100% 50%;
-  animation: waveMove 10s linear infinite;
+/* ===== TRAINERS ===== */
+.trainers{display:flex; flex-wrap:wrap; justify-content:center; gap:40px; padding:50px 20px; position:relative; z-index:5;}
+.trainer-card{
+  background: rgba(255,255,255,0.05); border-radius:20px; padding:20px; text-align:center;
+  width:220px; transition: transform 0.3s;
 }
+.trainer-card img{width:100%; border-radius:50%; border:3px solid #ff1f1f;}
+.trainer-card:hover{transform:scale(1.05);}
+.trainer-card h3{margin-top:15px;color:#ff1f1f;}
+.trainer-card p{margin-top:10px;font-size:14px;color:#fff;}
 
-.wave:nth-child(1) { bottom: 0; animation-duration: 12s; }
-.wave:nth-child(2) { bottom: 20px; animation-duration: 15s; }
+/* ===== FOOTER ===== */
+footer{ text-align:center; padding:40px 20px; background:#111; color:#fff; margin-top:2rem;}
 
-@keyframes waveMove {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-/* Trainers Section */
-.trainers {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 40px;
-  padding: 50px 20px;
-  z-index: 10;
-  position: relative;
-}
-
-.trainer-card {
-  background: rgba(255,255,255,0.1);
-  border-radius: 20px;
-  padding: 20px;
-  text-align: center;
-  width: 220px;
-  transition: transform 0.3s;
-}
-
-.trainer-card img {
-  width: 100%;
-  border-radius: 50%;
-}
-
-.trainer-card:hover {
-  transform: scale(1.05);
-}
-
-.trainer-card h3 {
-  margin-top: 15px;
-  color: #ff4d4d;
-}
-
-.trainer-card p {
-  margin-top: 10px;
-  font-size: 14px;
-  color: #f0f0f0;
-}
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){ .hero h1,.hero h2{font-size:2rem;} .hero p{font-size:1rem;} .trainer-card{width:45%;} }
+@media(max-width:480px){ .trainer-card{width:100%;} .courses h2{font-size:1.6rem;} }
