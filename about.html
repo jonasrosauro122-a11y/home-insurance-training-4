@@ -1,196 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About LAVA Classroom</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
-  <style>
-    /* RESET & BASE */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      font-family: 'Poppins', sans-serif;
-      color: white;
-      overflow-x: hidden;
-      position: relative;
-      min-height: 100vh;
-      /* PureLust Gradient */
-      background: linear-gradient(135deg, #6a1b9a, #d32f2f);
-      background-size: 400% 400%;
-      animation: gradientShift 20s ease infinite;
-    }
-
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    /* CLOUD LAYER */
-    .clouds {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 200%;
-      height: 200%;
-      background: url('images/clouds.png') repeat;
-      background-size: contain;
-      opacity: 0.12;
-      animation: cloudMove 120s linear infinite;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    @keyframes cloudMove {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-
-    /* NAVIGATION */
-    nav {
-      width: 100%;
-      position: absolute;
-      top: 20px;
-      left: 0;
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      z-index: 3;
-    }
-    nav a {
-      text-decoration: none;
-      color: white;
-      font-weight: 500;
-      transition: 0.3s;
-    }
-    nav a:hover {
-      color: #ff4d4d;
-    }
-
-    /* HERO SECTION */
-    .hero {
-      position: relative;
-      text-align: center;
-      padding: 120px 20px;
-      z-index: 3;
-    }
-    .hero h1 {
-      font-size: 3rem;
-      font-weight: 700;
-      animation: fadeDown 1.5s ease-out;
-    }
-    .hero p {
-      font-size: 1.2rem;
-      margin-top: 10px;
-      opacity: 0.9;
-      animation: fadeUp 1.5s ease-out;
-    }
-
-    @keyframes fadeDown {
-      from { opacity: 0; transform: translateY(-30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* SECTION CONTENT */
-    .section {
-      max-width: 900px;
-      margin: 50px auto;
-      padding: 20px;
-      text-align: center;
-      z-index: 3;
-      position: relative;
-    }
-    .section h2 {
-      font-size: 2rem;
-      margin-bottom: 15px;
-    }
-    .section p {
-      font-size: 1.1rem;
-      line-height: 1.8;
-      opacity: 0.95;
-    }
-
-    /* FOOTER */
-    footer {
-      text-align: center;
-      padding: 40px;
-      font-size: 0.9rem;
-      color: rgba(255,255,255,0.7);
-      z-index: 3;
-      position: relative;
-    }
-
-    /* === WAVE ANIMATION === */
-    .wave-container {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      height: 150px;
-      overflow: hidden;
-      line-height: 0;
-      z-index: 2;
-    }
-
-    .wave {
-      position: relative;
-      width: 200%;
-      height: 100%;
-      background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQwMCIgaGVpZ2h0PSIxMDAiIHZpZXdCb3g9IjAgMCAxNDAwIDEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnL3N2ZyI+PHBhdGggZD0iTTAsNTAgQzQwLDM1LDgwLDUwLDEyMCw1MCBDMTYwLDUwLDIwMCw3MCwyNDAsNzAgQzI4MCw3MCwzMjAsNDUsMzYwLDQ1IEM0MDAsNDUsNDQwLDYwLDQ4MCw2MCBDNTIwLDYwLDU2MCwzNSw2MDAsMzUgQzY0MCwzNSw2ODAsNTA3MTY4LDcyMCw1MCBDNzYwLDUwLDgwMCw3MCw4NDAsNzAgQzg4MCw3MCw5MjAsNDUsOTYwLDQ1IEMxMDAwLDQ1LDEwNDAsNjAsMTA4MCw2MCBDMTEyMCw2MCwxMTYwLDM1LDEyMDAsMzUgQzEyNDAsMzUsMTI4MCw1MCwxMzIwLDUwIEMxMzYwLDUwLDE0MDAsNzAsMTQwMCw3MCBMMTQwMCwxMDAgTDAgMTAwIEwwLDUwIFoiIGZpbGw9IndoaXRlIiBmaWxsLW9wYWNpdHk9IjAuMyIvPjwvc3ZnPg==') repeat-x;
-      background-size: 50% 100%;
-      animation: waveAnimation 10s linear infinite;
-    }
-
-    @keyframes waveAnimation {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About - Lava Classroom</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Clouds -->
-  <div class="clouds"></div>
 
-  <!-- Navigation -->
   <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="courses.html">Courses</a>
-    <a href="assignments.html">Assignments</a>
-    <a href="contact.html">Contact</a>
+    <div class="logo"><img src="images/logo.png" alt="Logo" width="120"></div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="index.html#trainers">Courses</a>
+      <a href="index.html#contact">Assignment</a>
+    </div>
   </nav>
 
-  <!-- Hero Section -->
   <section class="hero">
-    <h1>About LAVA Classroom</h1>
-    <p>Learn about our mission, trainers, and unique approach to learning.</p>
+    <div class="cloud"></div>
+    <div class="cloud"></div>
+    <div class="cloud"></div>
+
+    <h1>About Lava Classroom</h1>
+    <p>Our trainers are experts in Virtual Assistant education</p>
+
+    <div class="wave-container">
+      <div class="wave"></div>
+      <div class="wave"></div>
+    </div>
   </section>
 
-  <!-- Main Section -->
-  <section class="section">
-    <h2>Our Mission</h2>
-    <p>At LAVA Classroom, we aim to provide immersive and interactive learning experiences that allow students to learn, apply, and grow in their careers.</p>
-    
-    <h2>Meet the Trainers</h2>
-    <p>Our trainers are experienced professionals in various fields, dedicated to guiding and mentoring students every step of the way.</p>
+  <section class="trainers">
+    <div class="trainer-card">
+      <img src="images/karl.jpg" alt="Karl">
+      <h3>Karl</h3>
+      <p>Specializes in Insurance and Agency Operations.</p>
+    </div>
+    <div class="trainer-card">
+      <img src="images/nash.jpg" alt="Nash">
+      <h3>Nash</h3>
+      <p>Expert in Classroom Presentations and Materials.</p>
+    </div>
+    <div class="trainer-card">
+      <img src="images/au.jpg" alt="Au">
+      <h3>Au</h3>
+      <p>Focuses on Practical VA Applications and SOP Writing.</p>
+    </div>
+    <div class="trainer-card">
+      <img src="images/kyle.jpg" alt="Kyle">
+      <h3>Kyle</h3>
+      <p>Specialist in Insurance Quoting Simulations.</p>
+    </div>
+    <div class="trainer-card">
+      <img src="images/chanie.jpg" alt="Chanie">
+      <h3>Chanie</h3>
+      <p>Leads Certification Recognition and TL Training.</p>
+    </div>
   </section>
 
-  <!-- Wave overlay -->
-  <div class="wave-container">
-    <div class="wave"></div>
-  </div>
-
-  <!-- Footer -->
-  <footer>
-    © 2025 LAVA Classroom. All rights reserved.
-  </footer>
 </body>
 </html>
