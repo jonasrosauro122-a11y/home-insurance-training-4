@@ -1,99 +1,196 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Assignments • LAVA Classroom</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Assignments - LAVA Classroom</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* RESET & BASE */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: white;
+      overflow-x: hidden;
+      position: relative;
+      min-height: 100vh;
+      /* PureLust Gradient */
+      background: linear-gradient(135deg, #6a1b9a, #d32f2f);
+      background-size: 400% 400%;
+      animation: gradientShift 20s ease infinite;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* CLOUD LAYER */
+    .clouds {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 200%;
+      height: 200%;
+      background: url('images/clouds.png') repeat;
+      background-size: contain;
+      opacity: 0.12;
+      animation: cloudMove 120s linear infinite;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @keyframes cloudMove {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* NAVIGATION */
+    nav {
+      width: 100%;
+      position: absolute;
+      top: 20px;
+      left: 0;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      z-index: 3;
+    }
+    nav a {
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+    nav a:hover {
+      color: #ff4d4d;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      position: relative;
+      text-align: center;
+      padding: 120px 20px;
+      z-index: 3;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      animation: fadeDown 1.5s ease-out;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      margin-top: 10px;
+      opacity: 0.9;
+      animation: fadeUp 1.5s ease-out;
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* SECTION CONTENT */
+    .section {
+      max-width: 900px;
+      margin: 50px auto;
+      padding: 20px;
+      text-align: center;
+      z-index: 3;
+      position: relative;
+    }
+    .section h2 {
+      font-size: 2rem;
+      margin-bottom: 15px;
+    }
+    .section p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      opacity: 0.95;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 40px;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.7);
+      z-index: 3;
+      position: relative;
+    }
+
+    /* === WAVE ANIMATION === */
+    .wave-container {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 150px;
+      overflow: hidden;
+      line-height: 0;
+      z-index: 2;
+    }
+
+    .wave {
+      position: relative;
+      width: 200%;
+      height: 100%;
+      background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQwMCIgaGVpZ2h0PSIxMDAiIHZpZXdCb3g9IjAgMCAxNDAwIDEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnL3N2ZyI+PHBhdGggZD0iTTAsNTAgQzQwLDM1LDgwLDUwLDEyMCw1MCBDMTYwLDUwLDIwMCw3MCwyNDAsNzAgQzI4MCw3MCwzMjAsNDUsMzYwLDQ1IEM0MDAsNDUsNDQwLDYwLDQ4MCw2MCBDNTIwLDYwLDU2MCwzNSw2MDAsMzUgQzY0MCwzNSw2ODAsNTA3MTY4LDcyMCw1MCBDNzYwLDUwLDgwMCw3MCw4NDAsNzAgQzg4MCw3MCw5MjIsNDUsOTYwLDQ1IEMxMDAwLDQ1LDEwNDAsNjAsMTA4MCw2MCBDMTEyMCw2MCwxMTYwLDM1LDEyMDAsMzUgQzEyNDAsMzUsMTI4MCw1MCwxMzIwLDUwIEMxMzYwLDUwLDE0MDAsNzAsMTQwMCw3MCBMMTQwMCwxMDAgTDAgMTAwIEwwLDUwIFoiIGZpbGw9IndoaXRlIiBmaWxsLW9wYWNpdHk9IjAuMyIvPjwvc3ZnPg==') repeat-x;
+      background-size: 50% 100%;
+      animation: waveAnimation 10s linear infinite;
+    }
+
+    @keyframes waveAnimation {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+  </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="header-inner container">
-      <a class="brand" href="index.html"><span class="logo-square"></span> LAVA Classroom</a>
-      <nav class="main-nav" id="mainNavAssign">
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="courses.html">Courses</a></li>
-          <li><a href="assignments.html" class="nav-link active">Assignments</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </nav>
-      <button id="navToggleAssign" class="nav-toggle" aria-expanded="false" aria-controls="mainNavAssign"><span class="hamburger"></span></button>
-    </div>
-  </header>
+  <!-- Clouds -->
+  <div class="clouds"></div>
 
-  <main class="container content" style="padding-top:60px;">
-    <h1 class="section-title reveal">Assignments & Activities</h1>
-    <p class="lead reveal delay-1">Each module contains practical tasks — download templates, complete exercises, and upload results to your LMS or trainer inbox.</p>
+  <!-- Navigation -->
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="courses.html">Courses</a>
+    <a href="assignments.html">Assignments</a>
+    <a href="contact.html">Contact</a>
+  </nav>
 
-    <div class="assign-list reveal delay-2">
-      <div class="assign-card">
-        <h4>Day 1 — Coverage Identification</h4>
-        <p>Identify Coverages A–D on a sample declaration. Deliverable: 1-page summary.</p>
-        <div class="actions" style="margin-top:10px;">
-          <a href="#" class="btn btn-black">View</a>
-          <a href="assets/templates/day1-template.docx" class="btn btn-red" download>Download Template</a>
-        </div>
-      </div>
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Assignments</h1>
+    <p>Track and submit your assignments for each course.</p>
+  </section>
 
-      <div class="assign-card">
-        <h4>Day 2 — Policy Cycle Diagram</h4>
-        <p>Create a short policy cycle diagram. Deliverable: image or PDF.</p>
-        <div class="actions" style="margin-top:10px;">
-          <a href="#" class="btn btn-black">View</a>
-          <a href="assets/templates/day2-template.docx" class="btn btn-red" download>Download Template</a>
-        </div>
-      </div>
+  <!-- Main Section -->
+  <section class="section">
+    <h2>Current Assignments</h2>
+    <p>All assignments are organized by course modules. Make sure to submit them on time and follow the instructions provided by your trainers.</p>
 
-      <div class="assign-card">
-        <h4>Day 3 — Document Annotation</h4>
-        <p>Label components of an insurance document. Deliverable: annotated screenshot.</p>
-        <div class="actions" style="margin-top:10px;">
-          <a href="#" class="btn btn-black">View</a>
-          <a href="#" class="btn btn-red">Resources</a>
-        </div>
-      </div>
+    <h2>Submission Guidelines</h2>
+    <p>Assignments should be submitted via the portal or email as instructed. Include your full name, course, and assignment title in the submission.</p>
+  </section>
 
-      <div class="assign-card">
-        <h4>Day 4 — Mock Calls</h4>
-        <p>Record a short CSR-style call. Deliverable: audio or video clip.</p>
-        <div class="actions" style="margin-top:10px;">
-          <a href="#" class="btn btn-black">Guidelines</a>
-          <a href="#" class="btn btn-red">Submit</a>
-        </div>
-      </div>
-    </div>
+  <!-- Wave overlay -->
+  <div class="wave-container">
+    <div class="wave"></div>
+  </div>
 
-    <div style="margin-top:18px;" class="card reveal delay-3">
-      <h4 style="color:var(--accent)">Trainer resources</h4>
-      <p class="lead">Upload sample files to the trainer resources folder and link them here. Trainers can provide feedback and grade submissions.</p>
-    </div>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p>© 2025 LAVA Classroom</p>
-    </div>
+  <!-- Footer -->
+  <footer>
+    © 2025 LAVA Classroom. All rights reserved.
   </footer>
-
-  <script>
-    document.getElementById('navToggleAssign').addEventListener('click', function(){
-      const nav = document.getElementById('mainNavAssign');
-      const expanded = this.getAttribute('aria-expanded') === 'true' || false;
-      this.setAttribute('aria-expanded', !expanded);
-      nav.classList.toggle('open');
-    });
-
-    function revealOnScroll(){
-      document.querySelectorAll('.reveal').forEach(el=>{
-        const r = el.getBoundingClientRect();
-        if(r.top < window.innerHeight - 80) el.classList.add('visible');
-      });
-    }
-    window.addEventListener('load', revealOnScroll);
-    window.addEventListener('scroll', revealOnScroll);
-  </script>
 </body>
 </html>
