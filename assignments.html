@@ -186,4 +186,27 @@
       <div class="course-card"><h3>Insurance 101</h3></div>
       <div class="course-card"><h3>Insurance Documents Activity</h3></div>
       <div class="course-card"><h3>InsuredMine - User Course</h3></div>
-      <div class="course-card"><h3>Mercury Course</
+      <div class="course-card"><h3>Mercury Course</h3></div>
+      <div class="course-card"><h3>Personal Lines</h3></div>
+      <div class="course-card"><h3>PL Rater</h3></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 LAVA Classroom. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+    // Animate course cards on scroll
+    function revealCourses() {
+      document.querySelectorAll('.course-card').forEach(card => {
+        const rect = card.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) card.classList.add('visible');
+      });
+    }
+    window.addEventListener('scroll', revealCourses);
+    window.addEventListener('load', revealCourses);
+  </script>
+</body>
+</html>
