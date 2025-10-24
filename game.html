@@ -27,8 +27,12 @@
   #questionBox input { width:80%; padding:8px; border-radius:6px; border:none; margin-top:8px; }
   #questionBox button { margin-top:8px; padding:8px 14px; border:none; border-radius:8px; background:var(--accent); color:#fff; cursor:pointer; font-weight:700; }
 
-  #overlay { display:none; position:absolute; inset:0; background:rgba(0,0,0,0.8); align-items:center; justify-content:center; flex-direction:column; z-index:30; }
+  #overlay { display:none; position:absolute; inset:0; background:rgba(0,0,0,0.8); align-items:center; justify-content:center; flex-direction:column; z-index:30; text-align:center; }
   #overlay button { margin-top:12px; padding:10px 16px; border:none; border-radius:8px; background:var(--accent); color:#fff; font-weight:700; cursor:pointer; }
+
+  #leaderboard { margin-top:16px; text-align:left; background:#111; padding:12px 20px; border-radius:10px; border:1px solid var(--accent); width:260px; }
+  #leaderboard h3 { text-align:center; margin:0 0 8px; color:var(--accent); }
+  #leaderboard ol { margin:0; padding-left:20px; }
 
   #startBox { position:absolute; top:40%; left:50%; transform:translateX(-50%); text-align:center; }
   #startBox input { padding:8px; border-radius:8px; border:none; margin-bottom:8px; width:200px; }
@@ -72,6 +76,10 @@
   <div id="overlay">
     <h2>Game Over</h2>
     <p id="finalScore">Score: 0</p>
+    <div id="leaderboard">
+      <h3>🏆 Top 5 Players</h3>
+      <ol id="scoreList"></ol>
+    </div>
     <button id="restartBtn">Play Again</button>
   </div>
 </div>
@@ -92,6 +100,7 @@ const overlay = document.getElementById("overlay");
 const restartBtn = document.getElementById("restartBtn");
 const scoreEl = document.getElementById("score");
 const highEl = document.getElementById("high");
+const scoreList = document.getElementById("scoreList");
 
 let playerName = "";
 let bird, pipes, score, highScore = localStorage.getItem("lava_highscore") || 0;
@@ -141,8 +150,8 @@ function update(){
     if(p.x + 52 < bird.x && !p.passed){
       score++;
       scoreEl.textContent = score;
+      if(score > highScore){ highScore = score; localStorage.setItem("lava_highscore",highScore); }
       p.passed = true;
-      if(score > highScore){ highScore = score; localStorage.setItem("lava_highscore",highScore); highEl.textContent = "High: "+highScore; }
     }
   });
 
@@ -197,6 +206,26 @@ function endGame(){
   questionBox.style.display="none";
   overlay.style.display="flex";
   document.getElementById("finalScore").textContent = "Score: " + score;
+  saveScore(playerName, score);
+  updateLeaderboard();
+}
+
+function saveScore(name, score){
+  let scores = JSON.parse(localStorage.getItem("lava_scores") || "[]");
+  scores.push({name, score});
+  scores.sort((a,b)=>b.score-a.score);
+  scores = scores.slice(0,5);
+  localStorage.setItem("lava_scores", JSON.stringify(scores));
+}
+
+function updateLeaderboard(){
+  let scores = JSON.parse(localStorage.getItem("lava_scores") || "[]");
+  scoreList.innerHTML = "";
+  scores.forEach(s=>{
+    const li=document.createElement("li");
+    li.textContent = `${s.name} — ${s.score}`;
+    scoreList.appendChild(li);
+  });
 }
 
 restartBtn.onclick = ()=>{ resetGame(); loop(); };
