@@ -1,64 +1,34 @@
-/* ======================= RESET & BASE ======================= */
+/* Reset & basic setup */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #8B0000, #000000);
   color: white;
   overflow-x: hidden;
-  position: relative;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #6a1b9a, #d32f2f);
-  background-size: 400% 400%;
-  animation: gradientShift 20s ease infinite;
 }
 
-/* ======================= GRADIENT ANIMATION ======================= */
-@keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* ======================= CLOUD LAYER ======================= */
-.clouds {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 200%;
-  height: 200%;
-  background: url('images/clouds.png') repeat;
-  background-size: contain;
-  opacity: 0.12;
-  animation: cloudMove 120s linear infinite;
-  pointer-events: none;
-  z-index: 1;
-}
-
-@keyframes cloudMove {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-/* ======================= NAVIGATION ======================= */
+/* Navigation */
 nav {
-  width: 100%;
-  position: absolute;
-  top: 20px;
-  left: 0;
   display: flex;
-  justify-content: center;
-  gap: 30px;
-  z-index: 3;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 50px;
+  background: rgba(0,0,0,0.7);
+  position: fixed;
+  width: 100%;
+  z-index: 100;
 }
 
 nav a {
-  text-decoration: none;
   color: white;
-  font-weight: 500;
+  text-decoration: none;
+  margin-left: 30px;
+  font-weight: bold;
   transition: 0.3s;
 }
 
@@ -66,149 +36,98 @@ nav a:hover {
   color: #ff4d4d;
 }
 
-/* ======================= HERO SECTION ======================= */
+/* Hero Section */
 .hero {
-  position: relative;
-  text-align: center;
-  padding: 120px 20px;
-  z-index: 3;
-}
-
-.hero h1 {
-  font-size: 3rem;
-  font-weight: 700;
-  animation: fadeDown 1.5s ease-out;
-}
-
-.hero p {
-  font-size: 1.2rem;
-  margin-top: 10px;
-  opacity: 0.9;
-  animation: fadeUp 1.5s ease-out;
-}
-
-@keyframes fadeDown {
-  from { opacity: 0; transform: translateY(-30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* ======================= BUTTONS ======================= */
-.buttons {
-  margin-top: 40px;
+  height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  gap: 20px;
-  z-index: 3;
-  animation: fadeUp 2s ease-out;
-}
-
-.btn {
-  padding: 14px 32px;
-  font-size: 1rem;
-  font-weight: 600;
-  border: none;
-  cursor: pointer;
-  border-radius: 50px;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  color: white;
-}
-
-.btn-red {
-  background: #e50914;
-}
-
-.btn-red:hover {
-  background: #ff1f1f;
-  transform: scale(1.05);
-}
-
-.btn-black {
-  background: #1a1a1a;
-}
-
-.btn-black:hover {
-  background: #333;
-  transform: scale(1.05);
-}
-
-/* ======================= SECTION CONTENT ======================= */
-.section {
-  max-width: 900px;
-  margin: 50px auto;
-  padding: 20px;
-  text-align: center;
-  z-index: 3;
+  align-items: center;
   position: relative;
-}
-
-.section h2 {
-  font-size: 2rem;
-  margin-bottom: 15px;
-}
-
-.section p {
-  font-size: 1.1rem;
-  line-height: 1.8;
-  opacity: 0.95;
-}
-
-/* ======================= FOOTER ======================= */
-footer {
   text-align: center;
-  padding: 40px;
-  font-size: 0.9rem;
-  color: rgba(255,255,255,0.7);
-  z-index: 3;
-  position: relative;
+  overflow: hidden;
 }
 
-/* ======================= WAVE ANIMATION ======================= */
+/* Moving Clouds using CSS */
+.cloud {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.3;
+  animation: cloudMove linear infinite;
+}
+
+.cloud:nth-child(1) { width: 200px; height: 60px; top: 50px; animation-duration: 90s; left: -250px; }
+.cloud:nth-child(2) { width: 250px; height: 70px; top: 120px; animation-duration: 110s; left: -300px; }
+.cloud:nth-child(3) { width: 180px; height: 50px; top: 200px; animation-duration: 100s; left: -200px; }
+
+@keyframes cloudMove {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(2000px); }
+}
+
+/* Waves using CSS */
 .wave-container {
   position: absolute;
   bottom: 0;
   width: 100%;
   height: 150px;
   overflow: hidden;
-  line-height: 0;
-  z-index: 2;
 }
 
 .wave {
-  position: relative;
+  position: absolute;
   width: 200%;
   height: 100%;
-  background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQwMCIgaGVpZ2h0PSIxMDAiIHZpZXdCb3g9IjAgMCAxNDAwIDEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnL3N2ZyI+PHBhdGggZD0iTTAsNTAgQzQwLDM1LDgwLDUwLDEyMCw1MCBDMTYwLDUwLDIwMCw3MCwyNDAsNzAgQzI4MCw3MCwzMjAsNDUsMzYwLDQ1IEM0MDAsNDUsNDQwLDYwLDQ4MCw2MCBDNTIwLDYwLDU2MCwzNSw2MDAsMzUgQzY0MCwzNSw2ODAsNTA3MTY4LDcyMCw1MCBDNzYwLDUwLDgwMCw3MCw4NDAsNzAgQzg4MCw3MCw5MjIsNDUsOTYwLDQ1IEMxMDAwLDQ1LDEwNDAsNjAsMTA4MCw2MCBDMTEyMCw2MCwxMTYwLDM1LDEyMDAsMzUgQzEyNDAsMzUsMTI4MCw1MCwxMzIwLDUwIEMxMzYwLDUwLDE0MDAsNzAsMTQwMCw3MCBMMTQwMCwxMDAgTDAgMTAwIEwwLDUwIFoiIGZpbGw9IndoaXRlIiBmaWxsLW9wYWNpdHk9IjAuMyIvPjwvc3ZnPg==') repeat-x;
-  background-size: 50% 100%;
-  animation: waveAnimation 10s linear infinite;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 100% 50%;
+  animation: waveMove 10s linear infinite;
 }
 
-@keyframes waveAnimation {
+.wave:nth-child(1) { bottom: 0; animation-duration: 12s; }
+.wave:nth-child(2) { bottom: 20px; animation-duration: 15s; }
+
+@keyframes waveMove {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
 
-/* ======================= RESPONSIVE ======================= */
-@media screen and (max-width: 768px) {
-  .hero h1 {
-    font-size: 2.5rem;
-  }
-  .hero p {
-    font-size: 1rem;
-  }
-  .section h2 {
-    font-size: 1.5rem;
-  }
-  .section p {
-    font-size: 1rem;
-  }
-  .buttons {
-    flex-direction: column;
-    gap: 15px;
-  }
+/* Trainers Section */
+.trainers {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  padding: 50px 20px;
+  z-index: 10;
+  position: relative;
+}
+
+.trainer-card {
+  background: rgba(255,255,255,0.1);
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+  width: 220px;
+  transition: transform 0.3s;
+}
+
+.trainer-card img {
+  width: 100%;
+  border-radius: 50%;
+}
+
+.trainer-card:hover {
+  transform: scale(1.05);
+}
+
+.trainer-card h3 {
+  margin-top: 15px;
+  color: #ff4d4d;
+}
+
+.trainer-card p {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #f0f0f0;
 }
