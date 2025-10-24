@@ -1,284 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About • LAVA Classroom</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    /* ========= GENERAL STYLES ========= */
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: "Poppins", sans-serif;
-      color: #fff;
-      background: linear-gradient(135deg, #9b1212, #000000);
-      background-size: 400% 400%;
-      animation: gradientShift 20s ease infinite;
-      position: relative;
-      overflow-x: hidden;
-    }
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    /* ========= CLOUDS ========= */
-    .clouds {
-      position: absolute;
-      top: 0; left: 0;
-      width: 200%; height: 200%;
-      background: url('images/clouds.png') repeat;
-      background-size: contain;
-      opacity: 0.12;
-      animation: cloudMove 120s linear infinite;
-      pointer-events: none;
-      z-index: 0;
-    }
-    @keyframes cloudMove {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-
-    /* ========= HEADER ========= */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      background: rgba(0,0,0,0.7);
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-      backdrop-filter: blur(5px);
-    }
-    .brand {
-      color: #fff;
-      font-size: 1.5rem;
-      font-weight: 700;
-      text-decoration: none;
-    }
-    .logo-square {
-      width: 16px;
-      height: 16px;
-      display: inline-block;
-      background: linear-gradient(135deg, #ff1e1e, #800000);
-      margin-right: 8px;
-      border-radius: 3px;
-      vertical-align: middle;
-    }
-    nav ul {
-      display: flex;
-      list-style: none;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: 500;
-      padding: 6px 10px;
-      border-radius: 5px;
-      transition: all 0.3s ease;
-    }
-    nav a:hover { background: #ff1f1f; transform: scale(1.05); }
-    nav a.active { background: #ff1f1f; }
-
-    /* ========= MAIN CONTAINER ========= */
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 50px 20px;
-      position: relative;
-      z-index: 5;
-    }
-
-    /* ========= TRAINERS ========= */
-    .trainers {
-      text-align: center;
-      margin-top: 40px;
-    }
-    .trainers h2 {
-      color: #ff1f1f;
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-      text-transform: uppercase;
-    }
-    .trainers p {
-      color: #ddd;
-      margin-bottom: 40px;
-      font-size: 1.1rem;
-    }
-    .trainer-gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 2rem;
-    }
-    .trainer-card {
-      background: rgba(255,255,255,0.1);
-      color: #fff;
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-      transform: translateY(60px);
-      opacity: 0;
-      transition: transform 0.6s ease, opacity 0.6s ease;
-    }
-    .trainer-card.visible {
-      transform: translateY(0);
-      opacity: 1;
-    }
-    .trainer-card img {
-      width: 100%;
-      height: 230px;
-      object-fit: cover;
-      transition: transform 0.3s ease;
-    }
-    .trainer-card img:hover {
-      transform: scale(1.05);
-    }
-    .trainer-card h3 {
-      margin: 10px 0 5px;
-      font-size: 1.2rem;
-      color: #ff1f1f;
-    }
-    .trainer-card p {
-      font-weight: 500;
-      font-size: 1rem;
-      margin-bottom: 10px;
-      color: #fff;
-    }
-
-    /* ========= INFO SECTION ========= */
-    .info-section {
-      margin-top: 80px;
-    }
-    .info-section h1 {
-      font-size: 2.5rem;
-      margin-bottom: 15px;
-      color: #fff;
-    }
-    .info-section p.lead {
-      color: #f1f1f1;
-      font-size: 1.1rem;
-      margin-bottom: 20px;
-      line-height: 1.6;
-    }
-    .info-section h3 {
-      color: #ff1f1f;
-      margin-top: 25px;
-      margin-bottom: 10px;
-    }
-    .info-section ul {
-      color: #ddd;
-      list-style: disc inside;
-      margin-left: 15px;
-    }
-    .info-section li {
-      margin-bottom: 8px;
-    }
-
-    /* ========= FOOTER ========= */
-    footer {
-      text-align: center;
-      padding: 40px 20px;
-      background: #111;
-      color: #bbb;
-      margin-top: 60px;
-    }
-
-    /* ========= MEDIA QUERIES ========= */
-    @media(max-width:900px){
-      .info-section h1 { font-size: 2rem; }
-      .trainers h2 { font-size: 2rem; }
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>About • LAVA Classroom</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Poppins',sans-serif;color:#fff;background:linear-gradient(135deg,#9b1212,#000);background-size:400% 400%;animation:gradientShift 20s ease infinite;overflow-x:hidden;}
+  @keyframes gradientShift{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
+  .clouds{position:absolute;top:0;left:0;width:200%;height:200%;background:url('images/clouds.png') repeat;background-size:contain;opacity:0.12;animation:cloudMove 120s linear infinite;pointer-events:none;z-index:0;}
+  @keyframes cloudMove{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+  header{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem;background:rgba(0,0,0,0.7);backdrop-filter:blur(5px);}
+  .brand{color:#fff;font-size:1.5rem;font-weight:700;text-decoration:none;}
+  nav ul{display:flex;list-style:none;gap:20px;flex-wrap:wrap;}
+  nav a{color:#fff;text-decoration:none;font-weight:500;padding:6px 12px;border-radius:5px;transition:all 0.3s ease;}
+  nav a:hover{background:#ff1f1f;transform:scale(1.05);}
+  nav a.active{background:#ff1f1f;}
+  .container{max-width:1150px;margin:0 auto;padding:40px 20px;position:relative;z-index:5;}
+  .trainers{text-align:center;margin-top:40px;}
+  .trainers h2{color:#ff1f1f;font-size:2.4rem;margin-bottom:10px;text-transform:uppercase;}
+  .trainers p{color:#ddd;margin-bottom:40px;}
+  .trainer-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2rem;}
+  .trainer-card{background:#fff;color:#000;border-radius:15px;padding:1rem;box-shadow:0 8px 24px rgba(0,0,0,0.2);transform:translateY(60px);opacity:0;transition:transform 0.5s ease, opacity 0.5s ease;}
+  .trainer-card.visible{transform:translateY(0);opacity:1;}
+  .trainer-card img{width:100%;height:230px;object-fit:cover;border-radius:12px;border:3px solid #ff1f1f;transition:transform 0.3s ease;}
+  .trainer-card img:hover{transform:scale(1.05);}
+  .trainer-card h3{color:#800000;margin:10px 0 5px;font-size:1.2rem;}
+  .trainer-card p{color:#333;font-weight:bold;font-size:1rem;}
+  .info-section{margin-top:80px;}
+  .info-section h1{font-size:2.5rem;margin-bottom:10px;color:#fff;}
+  .info-section p.lead{color:#f1f1f1;font-size:1.1rem;margin-bottom:20px;}
+  .info-section h3{color:#ff1f1f;margin-top:25px;margin-bottom:10px;}
+  .info-section ul{color:#ddd;list-style:disc inside;margin-left:10px;}
+  .info-section li{margin-bottom:8px;}
+  footer{text-align:center;padding:30px 20px;background:#111;color:#bbb;margin-top:60px;}
+  @media(max-width:900px){.info-section h1{font-size:2rem;}.trainers h2{font-size:2rem;}}
+</style>
 </head>
 <body>
-  <div class="clouds"></div>
+<div class="clouds"></div>
 
-  <!-- HEADER -->
-  <header>
-    <a href="index.html" class="brand">
-      <span class="logo-square"></span> LAVA Classroom
-    </a>
-    <nav id="mainNavAbout">
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html" class="active">About</a></li>
-        <li><a href="courses.html">Courses</a></li>
-        <li><a href="assignments.html">Assignments</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
+<header>
+  <a href="index.html" class="brand">LAVA Classroom</a>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html" class="active">Trainers</a></li>
+      <li><a href="courses.html">Courses</a></li>
+      <li><a href="assignments.html">LAVA University</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+</header>
 
-  <main class="container">
-    <!-- TRAINERS AT TOP -->
-    <section class="trainers">
-      <h2>Meet Our Trainers</h2>
-      <p>Our dedicated mentors guide Virtual Assistants through every stage of learning and application.</p>
-      <div class="trainer-gallery">
-        <div class="trainer-card">
-          <img src="images/karl.jpg" alt="Karl Sison">
-          <h3>Karl Sison</h3>
-          <p>Trainer Manager</p>
-        </div>
-        <div class="trainer-card">
-          <img src="images/nash.jpg" alt="Nash">
-          <h3>Nash</h3>
-          <p>Trainer</p>
-        </div>
-        <div class="trainer-card">
-          <img src="images/au.jpg" alt="AU">
-          <h3>AU</h3>
-          <p>Trainer</p>
-        </div>
-        <div class="trainer-card">
-          <img src="images/kyle.jpg" alt="Kyle">
-          <h3>Kyle</h3>
-          <p>Trainer</p>
-        </div>
-        <div class="trainer-card">
-          <img src="images/chanie.jpg" alt="Chanie">
-          <h3>Chanie</h3>
-          <p>Trainer</p>
-        </div>
-      </div>
-    </section>
+<main class="container">
+  <section class="trainers">
+    <h2>Meet Our Trainers</h2>
+    <p>Our dedicated mentors guide Virtual Assistants through every stage of learning and application.</p>
+    <div class="trainer-gallery">
+      <div class="trainer-card"><img src="images/karl.jpg" alt="Karl Sison"><h3>Karl Sison</h3><p>Trainer Manager</p></div>
+      <div class="trainer-card"><img src="images/nash.jpg" alt="Nash"><h3>Nash</h3><p>Trainer</p></div>
+      <div class="trainer-card"><img src="images/au.jpg" alt="AU"><h3>AU</h3><p>Trainer</p></div>
+      <div class="trainer-card"><img src="images/kyle.jpg" alt="Kyle"><h3>Kyle</h3><p>Trainer</p></div>
+      <div class="trainer-card"><img src="images/chanie.jpg" alt="Chanie"><h3>Chanie</h3><p>Trainer</p></div>
+    </div>
+  </section>
 
-    <!-- INFO SECTION UNDERNEATH -->
-    <section class="info-section">
-      <h1>About LAVA Classroom</h1>
-      <p class="lead">LAVA Classroom empowers Virtual Assistants with insurance knowledge and hands-on agency operations training. We focus on practical learning and system mastery.</p>
+  <section class="info-section">
+    <h1>About LAVA Classroom</h1>
+    <p class="lead">LAVA Classroom empowers Virtual Assistants with insurance knowledge and hands-on agency operations training. We focus on practical learning and system mastery.</p>
+    <h3>Who is this for?</h3>
+    <p>New Virtual Assistants, junior agents, and support staff who assist with client policies, renewals, and endorsements.</p>
+    <h3>Learning Outcomes</h3>
+    <ul>
+      <li>Explain key Home Insurance coverages (A–D).</li>
+      <li>Identify common endorsements and ACORD forms.</li>
+      <li>Perform AMS and CRM support tasks accurately.</li>
+    </ul>
+  </section>
+</main>
 
-      <h3>Who is this for?</h3>
-      <p>New Virtual Assistants, junior agents, and support staff who assist with client policies, renewals, and endorsements.</p>
+<footer>
+  <p>© 2025 LAVA Classroom. All Rights Reserved.</p>
+</footer>
 
-      <h3>Learning Outcomes</h3>
-      <ul>
-        <li>Explain key Home Insurance coverages (A–D).</li>
-        <li>Identify common endorsements and ACORD forms.</li>
-        <li>Perform AMS and CRM support tasks accurately.</li>
-      </ul>
-    </section>
-  </main>
-
-  <footer>
-    <p>© 2025 LAVA Classroom. All Rights Reserved.</p>
-  </footer>
-
-  <script>
-    // Animate trainer cards on scroll
-    function revealCards() {
-      document.querySelectorAll('.trainer-card').forEach(card => {
-        const rect = card.getBoundingClientRect();
-        if (rect.top < window.innerHeight - 100) card.classList.add('visible');
-      });
-    }
-    window.addEventListener('scroll', revealCards);
-    window.addEventListener('load', revealCards);
-  </script>
+<script>
+function revealCards(){
+  document.querySelectorAll('.trainer-card').forEach(card=>{
+    const rect=card.getBoundingClientRect();
+    if(rect.top<window.innerHeight-100)card.classList.add('visible');
+  });
+}
+window.addEventListener('scroll',revealCards);
+window.addEventListener('load',revealCards);
+</script>
 </body>
 </html>
