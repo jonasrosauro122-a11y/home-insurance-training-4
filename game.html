@@ -25,12 +25,16 @@
   .btn{padding:10px 16px;border-radius:10px;border:none;background:var(--accent);color:#fff;font-weight:700;cursor:pointer}
   .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.08)}
   #giveUp{position:absolute;top:76px;right:20px;z-index:45}
+  #quizBox{display:none;position:absolute;left:50%;top:22%;transform:translateX(-50%);width:88%;max-width:520px;background:#111;border:2px solid var(--accent);padding:16px;border-radius:12px;z-index:60;text-align:left}
+  #quizBox h3{color:#fff;margin:0 0 10px}
+  .choices{display:flex;flex-direction:column;gap:8px}
+  .choiceBtn{background:#222;color:#fff;border-radius:8px;padding:10px;border:none;cursor:pointer;text-align:left}
   #modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:80;align-items:center;justify-content:center}
   #modal .card{background:#0f0f0f;color:#fff;padding:20px;border-radius:12px;width:92%;max-width:520px;border:1px solid rgba(255,255,255,0.06)}
   #modal h2{color:var(--accent);margin:0 0 8px}
-  ol.leader{padding-left:18px;margin:8px 0 0}
+  ol.leader{padding-left:18px;margin:8px 0 0;max-height:220px;overflow-y:auto}
   ol.leader li{background:#111;padding:8px;border-radius:8px;margin:6px 0}
-  #countText{position:absolute;top:45%;left:50%;transform:translate(-50%,-50%);font-size:100px;font-weight:900;color:var(--accent);pointer-events:none;z-index:60;display:none}
+  #countText{position:absolute;top:45%;left:50%;transform:translate(-50%,-50%);font-size:100px;font-weight:900;color:var(--accent);pointer-events:none;z-index:70;display:none}
 </style>
 </head>
 <body>
@@ -61,12 +65,15 @@
 
   <div id="startPanel">
     <input id="playerName" placeholder="Enter your name" />
-    <div>
-      <button id="startBtn" class="btn">Start</button>
-    </div>
+    <div><button id="startBtn" class="btn">Start</button></div>
   </div>
 
   <button id="giveUp" class="btn ghost">Give Up</button>
+
+  <div id="quizBox">
+    <h3 id="quizQ">Question</h3>
+    <div class="choices" id="choices"></div>
+  </div>
 
   <div id="modal">
     <div class="card">
@@ -92,6 +99,9 @@
   const startPanel=document.getElementById('startPanel');
   const playerNameInput=document.getElementById('playerName');
   const giveUpBtn=document.getElementById('giveUp');
+  const quizBox=document.getElementById('quizBox');
+  const quizQ=document.getElementById('quizQ');
+  const choicesWrap=document.getElementById('choices');
   const modal=document.getElementById('modal');
   const leaderList=document.getElementById('leaderList');
   const finalText=document.getElementById('finalText');
@@ -104,13 +114,29 @@
   const pipeImg=new Image(); pipeImg.src='images/pipe.png';
   const bgImg=new Image(); bgImg.src='images/bg.png';
 
-  let bird,pipes,frame,score,high,running,gameOver,playerName;
+  let bird,pipes,frame,score,high,running,questionActive,gameOver,playerName;
   const gravity=0.45,jump=-8,pipeSpeed=2,pipeGap=160,pipeW=52;
 
-  function loadScores(){try{return JSON.parse(localStorage.getItem('lava_scores')||'[]');}catch(e){return[];}}
-  function saveScores(arr){localStorage.setItem('lava_scores',JSON.stringify(arr.slice(0,5)));}
+  const questions=[
+    {q:"An organization of insurers through which risks are pooled.",a:"insurance pool"},
+    {q:"Anyone can be an agent. True or False.",a:"false"},
+    {q:"A financial agreement to transfer risk for premiums.",a:"insurance"},
+    {q:"Professional who evaluates risk.",a:"underwriter"},
+    {q:"Amount you pay out of pocket before insurance starts.",a:"deductible"},
+    {q:"Person or business protected under a policy.",a:"insured"},
+    {q:"Company that provides insurance coverage.",a:"insurer"},
+    {q:"Change or addition made to existing policy.",a:"endorsement"},
+    {q:"Document outlining terms, coverages, exclusions.",a:"policy"},
+    {q:"Meaning of AMS.",a:"agency management system"}
+  ];
+
+  function loadScores(){
+    try{return JSON.parse(localStorage.getItem('lava_scores')||'[]');}
+    catch(e){return[];}
+  }
+  function saveScores(arr){localStorage.setItem('lava_scores',JSON.stringify(arr));}
   function updateLeaderModal(){
-    const arr=loadScores();
+    const arr=loadScores().sort((a,b)=>b.score-a.score);
     leaderList.innerHTML='';
     arr.forEach((p,i)=>{
       const li=document.createElement('li');
@@ -127,10 +153,7 @@
       ctx.drawImage(pipeImg,-pipeW/2,0,pipeW,H-p.bottom);ctx.restore();
     });
   }
-  function drawBird(){
-    if(birdImg.complete)ctx.drawImage(birdImg,bird.x,bird.y,bird.w,bird.h);
-    else{ctx.fillStyle='red';ctx.fillRect(bird.x,bird.y,bird.w,bird.h);}
-  }
+  function drawBird(){ctx.drawImage(birdImg,bird.x,bird.y,bird.w,bird.h);}
 
   function spawnPipe(){
     const top=Math.random()*(H-pipeGap-140)+40;
@@ -138,28 +161,26 @@
   }
 
   function update(){
-    if(!running)return;
+    if(!running||questionActive)return;
     frame++;
     bird.vel+=gravity;bird.y+=bird.vel;
     pipes.forEach(p=>p.x-=pipeSpeed);
     if(frame%100===0)spawnPipe();
     pipes=pipes.filter(p=>p.x+pipeW>-20);
     pipes.forEach(p=>{
-      if(!p.passed&&p.x+pipeW<bird.x){p.passed=true;score++;scoreLabel.textContent=score;if(score>high){high=score;localStorage.setItem('lava_high',high);highLabel.textContent='High: '+high;}}
+      if(!p.passed&&p.x+pipeW<bird.x){
+        p.passed=true;score++;
+        scoreLabel.textContent=score;
+        if(score>high){high=score;localStorage.setItem('lava_high',high);highLabel.textContent='High: '+high;}
+      }
       const collide=bird.x+bird.w>p.x&&bird.x<p.x+pipeW&&(bird.y<p.top||bird.y+bird.h>p.bottom);
-      if(collide)resetBird();
+      if(collide)openQuiz();
     });
-    if(bird.y<0||bird.y+bird.h>H)resetBird();
+    if(bird.y<0||bird.y+bird.h>H)openQuiz();
   }
 
-  function render(){
-    ctx.clearRect(0,0,W,H);
-    drawBackground();drawPipes();drawBird();
-  }
-
-  function loop(){
-    if(running&&!gameOver){update();render();requestAnimationFrame(loop);}
-  }
+  function render(){ctx.clearRect(0,0,W,H);drawBackground();drawPipes();drawBird();}
+  function loop(){if(running&&!gameOver){update();render();requestAnimationFrame(loop);}}
 
   function startGame(){
     playerName=(playerNameInput.value||'').trim();
@@ -167,40 +188,52 @@
     const scores=loadScores();
     if(!scores.some(s=>s.name===playerName)){scores.push({name:playerName,score:0});saveScores(scores);}
     resetGame();
-    showCountdown(3,()=>{
-      running=true;
-      requestAnimationFrame(loop);
-    });
+    showCountdown(3,()=>{running=true;requestAnimationFrame(loop);});
   }
 
   function resetGame(){
     bird={x:80,y:H/2,w:34,h:24,vel:0};
-    pipes=[];frame=0;score=0;running=false;gameOver=false;
-    scoreLabel.textContent='0';
-    high=parseInt(localStorage.getItem('lava_high')||0);
+    pipes=[];frame=0;score=0;running=false;questionActive=false;gameOver=false;
+    scoreLabel.textContent='0';high=parseInt(localStorage.getItem('lava_high')||0);
     highLabel.textContent='High: '+high;
     startPanel.style.display='none';
-    updateLeaderModal();
-    spawnPipe();
+    updateLeaderModal();spawnPipe();
   }
 
-  function resetBird(){
-    bird.y=H/2;bird.vel=0;
-    running=true;
+  function openQuiz(){
+    running=false;questionActive=true;
+    const q=questions[Math.floor(Math.random()*questions.length)];
+    quizQ.textContent=q.q;
+    const choices=new Set([q.a]);
+    while(choices.size<3)choices.add(questions[Math.floor(Math.random()*questions.length)].a);
+    const arr=[...choices].sort(()=>Math.random()-0.5);
+    choicesWrap.innerHTML='';
+    arr.forEach(txt=>{
+      const btn=document.createElement('button');
+      btn.className='choiceBtn';btn.textContent=txt;
+      btn.onclick=()=>handleAnswer(txt,q.a);
+      choicesWrap.appendChild(btn);
+    });
+    quizBox.style.display='block';
+  }
+
+  function handleAnswer(ans,correct){
+    quizBox.style.display='none';
+    if(ans.toLowerCase()===correct.toLowerCase()){
+      questionActive=false;running=true;bird.vel=jump;
+      requestAnimationFrame(loop);
+    }else{
+      endGame();
+    }
   }
 
   function showCountdown(sec,cb){
-    countText.style.display='block';
-    let count=sec;
-    countText.textContent=count;
+    countText.style.display='block';let c=sec;
+    countText.textContent=c;
     const timer=setInterval(()=>{
-      count--;
-      if(count>0)countText.textContent=count;
-      else{
-        clearInterval(timer);
-        countText.style.display='none';
-        cb();
-      }
+      c--;
+      if(c>0)countText.textContent=c;
+      else{clearInterval(timer);countText.style.display='none';cb();}
     },1000);
   }
 
@@ -210,7 +243,6 @@
     const existing=scores.find(s=>s.name===playerName);
     if(existing)existing.score=Math.max(existing.score,score);
     else scores.push({name:playerName,score});
-    scores.sort((a,b)=>b.score-a.score);
     saveScores(scores);
     finalText.textContent='Final score: '+score;
     updateLeaderModal();
@@ -221,8 +253,8 @@
   modalClose.onclick=()=>{modal.style.display='none';startPanel.style.display='';};
   goDashboard.onclick=()=>window.location.href='game.html';
   document.getElementById('startBtn').onclick=startGame;
-  canvas.onclick=()=>{if(running)bird.vel=jump;};
-  window.onkeydown=e=>{if(e.code==='Space'&&running)bird.vel=jump;};
+  canvas.onclick=()=>{if(running&&!questionActive)bird.vel=jump;};
+  window.onkeydown=e=>{if(e.code==='Space'&&running&&!questionActive)bird.vel=jump;};
 
   highLabel.textContent='High: '+(localStorage.getItem('lava_high')||0);
   updateLeaderModal();
