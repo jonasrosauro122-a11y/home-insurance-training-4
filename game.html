@@ -1,157 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>LAVA Classroom | Flappy Bird Quiz Game</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>LAVA Classroom — Flappy Quiz</title>
+<link rel="stylesheet" href="style.css">
 <style>
-  body {
-    margin: 0;
-    overflow: hidden;
-    background: linear-gradient(to bottom right, #000000, #8B0000);
-    font-family: Arial, sans-serif;
-    color: #fff;
-  }
-
-  header.site-header {
-    position: absolute;
-    width: 100%;
-    z-index: 10;
-    background: rgba(0, 0, 0, 0.5);
-  }
-
-  canvas {
-    display: block;
-    margin: 0 auto;
-    background: url('images/bg.png') center/cover no-repeat;
-  }
-
-  #giveUpBtn {
-    position: absolute;
-    top: 70px;
-    right: 30px;
-    background: #ff4c4c;
-    color: #fff;
-    border: none;
-    font-size: 16px;
-    font-weight: bold;
-    padding: 10px 15px;
-    border-radius: 10px;
-    cursor: pointer;
-    z-index: 10;
-    transition: background 0.3s;
-  }
-
-  #giveUpBtn:hover {
-    background: #ff1c1c;
-  }
-
-  #questionBox {
-    display: none;
-    position: absolute;
-    top: 25%;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #111;
-    border: 2px solid #ff4c4c;
-    padding: 20px;
-    border-radius: 12px;
-    width: 90%;
-    max-width: 400px;
-    text-align: center;
-    z-index: 20;
-  }
-
-  #questionBox input {
-    width: 80%;
-    padding: 8px;
-    border-radius: 6px;
-    border: none;
-    margin-top: 8px;
-  }
-
-  #questionBox button {
-    margin-top: 10px;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 8px;
-    background: #ff4c4c;
-    color: #fff;
-    font-weight: bold;
-    cursor: pointer;
-  }
-
-  /* Leaderboard Modal */
-  .modal {
-    display: none;
-    position: fixed;
-    z-index: 50;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.85);
-  }
-
-  .modal-content {
-    background: #111;
-    color: #fff;
-    margin: 10% auto;
-    padding: 20px;
-    width: 90%;
-    max-width: 500px;
-    border-radius: 15px;
-    text-align: center;
-  }
-
-  .modal h2 {
-    color: #ff4c4c;
-  }
-
-  .leaderboard-list {
-    list-style: none;
-    padding: 0;
-    margin-top: 15px;
-  }
-
-  .leaderboard-list li {
-    background: #222;
-    margin: 8px 0;
-    padding: 10px;
-    border-radius: 8px;
-    font-weight: bold;
-  }
-
-  .closeBtn {
-    background: #ff4c4c;
-    border: none;
-    color: #fff;
-    font-size: 16px;
-    padding: 8px 15px;
-    margin-top: 15px;
-    border-radius: 10px;
-    cursor: pointer;
-  }
-
-  .closeBtn:hover {
-    background: #ff1c1c;
-  }
+  :root{--accent:#ff1f1f;--bg1:#000;--bg2:#480000}
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;font-family:'Poppins',sans-serif;background:linear-gradient(135deg,var(--bg1),var(--bg2));color:#fff;overflow:hidden}
+  .site-header{position:fixed;left:0;right:0;top:0;z-index:50;background:rgba(0,0,0,0.65);backdrop-filter:blur(4px)}
+  .header-inner.container{max-width:1200px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between}
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff;font-weight:700}
+  .brand img{height:36px}
+  .main-nav ul{display:flex;gap:12px;list-style:none;margin:0;padding:0}
+  .main-nav a{color:#fff;text-decoration:none;padding:6px 10px;border-radius:6px}
+  .main-nav a.active,.main-nav a:hover{background:var(--accent)}
+  /* game area */
+  #gameArea{position:fixed;left:0;right:0;top:64px;bottom:0;display:flex;align-items:center;justify-content:center}
+  canvas{border-radius:10px;border:3px solid var(--accent);box-shadow:0 12px 40px rgba(0,0,0,0.6);background:#70c8ff}
+  /* HUD + controls */
+  .hud{position:absolute;top:78px;width:100%;text-align:center;pointer-events:none;z-index:40}
+  .hud .score{font-size:28px;font-weight:800}
+  .hud .high{font-size:12px;color:rgba(255,255,255,0.9)}
+  #startPanel{position:absolute;top:38%;left:50%;transform:translateX(-50%);text-align:center;z-index:45}
+  #startPanel input{padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);width:220px;margin-bottom:8px}
+  .btn{padding:10px 16px;border-radius:10px;border:none;background:var(--accent);color:#fff;font-weight:700;cursor:pointer}
+  .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.08)}
+  #giveUp{position:absolute;top:76px;right:20px;z-index:45}
+  /* quiz popup */
+  #quizBox{display:none;position:absolute;left:50%;top:22%;transform:translateX(-50%);width:88%;max-width:520px;background:#111;border:2px solid var(--accent);padding:16px;border-radius:12px;z-index:60;text-align:left}
+  #quizBox h3{color:#fff;margin:0 0 10px}
+  .choices{display:flex;flex-direction:column;gap:8px}
+  .choiceBtn{background:#222;color:#fff;border-radius:8px;padding:10px;border:none;cursor:pointer;text-align:left}
+  /* leaderboard modal */
+  #modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:80;align-items:center;justify-content:center}
+  #modal .card{background:#0f0f0f;color:#fff;padding:20px;border-radius:12px;width:92%;max-width:520px;border:1px solid rgba(255,255,255,0.06)}
+  #modal h2{color:var(--accent);margin:0 0 8px}
+  ol.leader{padding-left:18px;margin:8px 0 0}
+  ol.leader li{background:#111;padding:8px;border-radius:8px;margin:6px 0}
+  @media(max-width:520px){canvas{width:92vw;height:calc(92vw*1.5)}}
 </style>
 </head>
 <body>
 
 <header class="site-header">
   <div class="header-inner container">
-    <a href="index.html" class="brand">
-      <img src="images/logo.png" alt="LAVA Logo" style="height:40px;vertical-align:middle;">
-      <span style="color:#fff;">LAVA Classroom</span>
-    </a>
-    <nav class="main-nav">
+    <a class="brand" href="index.html"><img src="images/logo.png" alt="LAVA">LAVA Classroom</a>
+    <nav class="main-nav" aria-label="main">
       <ul>
         <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
+        <li><a href="about.html">Trainers</a></li>
         <li><a href="courses.html">Courses</a></li>
-        <li><a href="assignments.html">Assignments</a></li>
+        <li><a href="assignments.html">LAVA University</a></li>
         <li><a href="game.html" class="active">Games</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
@@ -159,178 +60,378 @@
   </div>
 </header>
 
-<canvas id="gameCanvas" width="480" height="640"></canvas>
-<button id="giveUpBtn">Give Up</button>
+<section id="gameArea" aria-hidden="false">
+  <canvas id="canvas" width="420" height="630" role="img" aria-label="Flappy insurance game"></canvas>
 
-<!-- Question Popup -->
-<div id="questionBox">
-  <h3 id="questionText"></h3>
-  <input id="answerInput" type="text" placeholder="Type your answer">
-  <button id="submitBtn">Submit</button>
-</div>
-
-<!-- Leaderboard Modal -->
-<div id="leaderboardModal" class="modal">
-  <div class="modal-content">
-    <h2>🏆 LAVA Leaderboard</h2>
-    <ul id="leaderboardList" class="leaderboard-list"></ul>
-    <button class="closeBtn" onclick="closeLeaderboard()">Close</button>
+  <div class="hud" aria-hidden="false">
+    <div class="score" id="scoreLabel">0</div>
+    <div class="high" id="highLabel">High: 0</div>
   </div>
-</div>
+
+  <div id="startPanel">
+    <input id="playerName" placeholder="Enter your name" />
+    <div>
+      <button id="startBtn" class="btn">Start</button>
+      <button id="muteBtn" class="btn ghost">Mute</button>
+    </div>
+  </div>
+
+  <button id="giveUp" class="btn ghost">Give Up</button>
+
+  <!-- Quiz Box -->
+  <div id="quizBox" role="dialog" aria-modal="true" aria-labelledby="quizQ">
+    <h3 id="quizQ">Question</h3>
+    <div class="choices" id="choices"></div>
+  </div>
+
+  <!-- Leaderboard modal -->
+  <div id="modal" role="dialog" aria-modal="true">
+    <div class="card">
+      <h2>🏆 LAVA Leaderboard</h2>
+      <p id="finalText">Final score: 0</p>
+      <div id="leaderWrap">
+        <ol class="leader" id="leaderList"></ol>
+      </div>
+      <div style="margin-top:12px;text-align:center">
+        <button id="modalClose" class="btn">Close</button>
+        <button id="goDashboard" class="btn ghost">Go to Dashboard</button>
+      </div>
+    </div>
+  </div>
+</section>
 
 <script>
-const canvas = document.getElementById("gameCanvas");
-const ctx = canvas.getContext("2d");
+/* ---------------------------
+  Robust Flappy + Quiz + Leaderboard
+  - Keep images in /images/
+  - localStorage keys: lava_scores (top 5), lava_high
+--------------------------- */
+(() => {
+  // Element refs
+  const canvas = document.getElementById('canvas');
+  const ctx = canvas.getContext('2d');
+  const scoreLabel = document.getElementById('scoreLabel');
+  const highLabel = document.getElementById('highLabel');
+  const startPanel = document.getElementById('startPanel');
+  const startBtn = document.getElementById('startBtn');
+  const muteBtn = document.getElementById('muteBtn');
+  const playerNameInput = document.getElementById('playerName');
+  const giveUpBtn = document.getElementById('giveUp');
+  const quizBox = document.getElementById('quizBox');
+  const quizQ = document.getElementById('quizQ');
+  const choicesWrap = document.getElementById('choices');
+  const modal = document.getElementById('modal');
+  const leaderList = document.getElementById('leaderList');
+  const finalText = document.getElementById('finalText');
+  const modalClose = document.getElementById('modalClose');
+  const goDashboard = document.getElementById('goDashboard');
 
-let birdImg = new Image(), pipeImg = new Image(), bgImg = new Image();
-birdImg.src = "images/bird.png";
-pipeImg.src = "images/pipe.png";
-bgImg.src = "images/bg.png";
+  // Images
+  const birdImg = new Image(); birdImg.src = 'images/bird.png';
+  const pipeImg = new Image(); pipeImg.src = 'images/pipe.png';
+  const bgImg = new Image(); bgImg.src = 'images/bg.png';
 
-let birdX = 50, birdY = 150, birdVelocity = 0;
-let gravity = 0.25, gap = 120, pipeWidth = 52;
-let pipes = [], score = 0, fails = 0, gameOver = false, questionActive = false;
+  // Game state
+  const W = canvas.width, H = canvas.height;
+  let bird = { x: 80, y: H/2, w: 34, h: 24, vel: 0 };
+  const gravity = 0.6, jump = -10;
+  const pipeSpeed = 2.5, pipeGap = 150, pipeW = 52;
+  let pipes = []; // {x, top, bottom, passed}
+  let frame = 0, score = 0, high = parseInt(localStorage.getItem('lava_high') || '0', 10) || 0;
+  let running = false, questionActive = false, gameOver = false;
+  let failCount = 0;
+  const maxFails = 5;
+  let playerName = '';
+  let muted = false;
 
-const questions = [
-  {q:"An organization of insurers through which risks are pooled.", a:"insurance pool"},
-  {q:"Anyone can be an agent. True or False.", a:"false"},
-  {q:"A financial agreement to transfer risk for premiums.", a:"insurance"},
-  {q:"Professional who evaluates risk.", a:"underwriter"},
-  {q:"Amount you pay out of pocket before insurance starts.", a:"deductible"},
-  {q:"Person or business protected under a policy.", a:"insured"},
-  {q:"Company that provides insurance coverage.", a:"insurer"},
-  {q:"Change or addition made to existing policy.", a:"endorsement"},
-  {q:"Document outlining terms, coverages, exclusions.", a:"policy"},
-  {q:"Meaning of AMS.", a:"agency management system"}
-];
+  // Questions (use your full list)
+  const questions = [
+    {q:"An organization of insurers through which risks are pooled.", a:"insurance pool"},
+    {q:"Anyone can be an agent. True or False.", a:"false"},
+    {q:"A financial agreement to transfer risk for premiums.", a:"insurance"},
+    {q:"Total cost or price of the policy.", a:"premium"},
+    {q:"Professional who evaluates risk.", a:"underwriter"},
+    {q:"Works for ONE insurance company only. They are ____.", a:"captive agent"},
+    {q:"Represents the client, not the insurance company.", a:"broker"},
+    {q:"What is ACV?", a:"actual cash value"},
+    {q:"Covers losses and damages to private properties.", a:"personal insurance"},
+    {q:"Can give insurance advice and bind policies.", a:"insurance agent"},
+    {q:"Amount you pay out of pocket before insurance starts.", a:"deductible"},
+    {q:"Regular payment to keep your policy active.", a:"premium"},
+    {q:"Person who investigates your claim.", a:"claims adjuster"},
+    {q:"Maximum amount insurer will pay for covered loss.", a:"policy limit"},
+    {q:"A request you make to cover loss or damage.", a:"claim"},
+    {q:"Protection that pays for damage you cause to others.", a:"liability coverage"},
+    {q:"Coverage for non-collision damages (fire, theft).", a:"comprehensive coverage"},
+    {q:"Process of continuing your insurance policy.", a:"policy renewal"},
+    {q:"Coverage that pays for damage to your own car when you hit another object.", a:"collision coverage"},
+    {q:"Proof of your insurance coverage document.", a:"certificate of insurance"},
+    {q:"Person or business protected under a policy.", a:"insured"},
+    {q:"Company that provides insurance coverage.", a:"insurer"},
+    {q:"Change or addition made to existing policy.", a:"endorsement"},
+    {q:"Document outlining terms, coverages, exclusions.", a:"policy"},
+    {q:"Meaning of AMS.", a:"agency management system"}
+  ];
 
-let currentQ = null;
+  // Leaderboard helpers
+  function loadScores() {
+    try { return JSON.parse(localStorage.getItem('lava_scores')||'[]'); }
+    catch(e){ return []; }
+  }
+  function saveScores(arr) {
+    localStorage.setItem('lava_scores', JSON.stringify(arr.slice(0,5)));
+  }
+  function updateLeaderModal() {
+    const arr = loadScores();
+    leaderList.innerHTML = '';
+    arr.forEach((p,i) => {
+      const li = document.createElement('li');
+      li.textContent = `${i+1}. ${p.name} — ${p.score}`;
+      leaderList.appendChild(li);
+    });
+  }
 
-document.addEventListener("keydown", flap);
-document.addEventListener("click", flap);
+  // spawn pipe pair
+  function spawnPipe(){
+    const top = Math.random()*(H - pipeGap - 140) + 40;
+    pipes.push({ x: W + 20, top: top, bottom: top + pipeGap, passed: false });
+  }
 
-function flap() {
-  if (!gameOver && !questionActive) birdVelocity = -4.5;
-}
-
-function resetGame() {
-  birdY = 150; birdVelocity = 0; pipes = [];
-  score = 0; gameOver = false; fails = 0;
-  loop();
-}
-
-function draw() {
-  ctx.drawImage(bgImg, 0, 0, canvas.width, canvas.height);
-  ctx.drawImage(birdImg, birdX, birdY, 34, 24);
-
-  for (let i = 0; i < pipes.length; i++) {
-    let p = pipes[i];
-    ctx.drawImage(pipeImg, p.x, p.y);
-    ctx.drawImage(pipeImg, p.x, p.y + pipeImg.height + gap);
-    p.x -= 2;
-
-    if (p.x + pipeWidth < 0) {
-      pipes.splice(i, 1); i--; score++;
+  // draw background
+  function drawBackground(){
+    if(bgImg.complete && bgImg.naturalWidth){
+      ctx.drawImage(bgImg, 0, 0, W, H);
+    } else {
+      const g = ctx.createLinearGradient(0,0,0,H);
+      g.addColorStop(0, '#70c8ff'); g.addColorStop(1, '#bfefff');
+      ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
+      ctx.fillStyle = '#7ec850'; ctx.fillRect(0,H-48,W,48);
     }
+  }
 
-    if (
-      birdX + 34 > p.x &&
-      birdX < p.x + pipeWidth &&
-      (birdY < p.y + pipeImg.height || birdY + 24 > p.y + pipeImg.height + gap)
-    ) {
-      askQuestion();
-      return;
+  // draw pipes and bird
+  function drawPipes(){
+    pipes.forEach(p=>{
+      const topH = p.top;
+      const bottomH = H - p.bottom;
+      // top pipe draw flipped
+      ctx.save();
+      ctx.translate(p.x + pipeW/2, 0);
+      ctx.scale(1, -1);
+      if(pipeImg.complete) ctx.drawImage(pipeImg, -pipeW/2, -topH, pipeW, topH);
+      ctx.restore();
+      // bottom
+      if(pipeImg.complete) ctx.drawImage(pipeImg, p.x, p.bottom, pipeW, bottomH);
+    });
+  }
+  function drawBird(){
+    if(birdImg.complete) ctx.drawImage(birdImg, bird.x, bird.y, bird.w, bird.h);
+    else { ctx.fillStyle = '#ff5555'; ctx.beginPath(); ctx.arc(bird.x+10, bird.y+10, 10,0,Math.PI*2); ctx.fill(); }
+  }
+
+  // game update
+  function update(){
+    if(!running || questionActive) return;
+    frame++;
+    // physics
+    bird.vel += gravity; bird.y += bird.vel;
+    // pipes move
+    pipes.forEach(p=> p.x -= pipeSpeed);
+    // spawn
+    if(frame % 90 === 0) spawnPipe();
+    // clean
+    pipes = pipes.filter(p => p.x + pipeW > -20);
+    // scoring & collisions
+    pipes.forEach(p => {
+      if(!p.passed && p.x + pipeW < bird.x) { p.passed = true; score++; scoreLabel.textContent = score; if(score > high){ high = score; localStorage.setItem('lava_high', String(high)); highLabel.textContent = 'High: ' + high; } }
+      const withinX = bird.x + bird.w > p.x && bird.x < p.x + pipeW;
+      if(withinX && (bird.y < p.top || bird.y + bird.h > p.bottom)) {
+        openQuiz();
+      }
+    });
+    // ground/ceiling
+    if(bird.y + bird.h > H - 0 || bird.y < 0) {
+      openQuiz();
     }
   }
 
-  birdVelocity += gravity;
-  birdY += birdVelocity;
-
-  if (birdY + 24 >= canvas.height || birdY < 0) {
-    askQuestion();
+  function render(){
+    ctx.clearRect(0,0,W,H);
+    drawBackground();
+    drawPipes();
+    drawBird();
   }
 
-  ctx.fillStyle = "#fff";
-  ctx.font = "20px Arial";
-  ctx.fillText("Score: " + score, 10, 25);
-}
-
-let pipeSpawnCounter = 0;
-function loop() {
-  if (gameOver) return;
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  draw();
-  pipeSpawnCounter++;
-  if (pipeSpawnCounter % 100 === 0) {
-    let pipeY = Math.floor(Math.random() * (pipeImg.height - 100)) - pipeImg.height;
-    pipes.push({ x: canvas.width, y: pipeY });
+  function gameLoop(){
+    if(running && !gameOver){
+      update();
+      render();
+      requestAnimationFrame(gameLoop);
+    }
   }
-  requestAnimationFrame(loop);
-}
 
-function askQuestion() {
-  questionActive = true;
-  const q = questions[Math.floor(Math.random() * questions.length)];
-  currentQ = q;
-  document.getElementById("questionText").textContent = q.q;
-  document.getElementById("answerInput").value = "";
-  document.getElementById("questionBox").style.display = "block";
-}
-
-document.getElementById("submitBtn").onclick = function() {
-  const answer = document.getElementById("answerInput").value.trim().toLowerCase();
-  if (answer === currentQ.a.toLowerCase()) {
-    questionActive = false;
-    document.getElementById("questionBox").style.display = "none";
-    loop();
-  } else {
-    fails++;
-    questionActive = false;
-    document.getElementById("questionBox").style.display = "none";
-    if (fails >= 5) showLeaderboard();
-    else loop();
+  // input
+  window.addEventListener('keydown', (e) => { if(e.code === 'Space') doFlap(); });
+  canvas.addEventListener('click', doFlap);
+  function doFlap(){
+    if(!running && !gameOver) { startGame(); return; }
+    if(gameOver || questionActive) return;
+    bird.vel = jump;
   }
-};
 
-function endGame() {
-  fails++;
-  if (fails >= 5) showLeaderboard();
-  else resetGame();
-}
-
-// Leaderboard
-const leaderboardModal = document.getElementById("leaderboardModal");
-const leaderboardList = document.getElementById("leaderboardList");
-
-function showLeaderboard() {
-  gameOver = true;
-  let name = prompt("Game Over! Enter your name:");
-  if (name) {
-    let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
-    leaderboard.push({ name, score });
-    leaderboard.sort((a, b) => b.score - a.score);
-    leaderboard = leaderboard.slice(0, 5);
-    localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
+  // start / reset / end
+  function startGame(){
+    playerName = (playerNameInput.value || '').trim();
+    if(!playerName){ alert('Please enter your name before starting'); return; }
+    // reset state
+    pipes = []; frame = 0; score = 0; failCount = 0;
+    bird = { x: 80, y: H/2, w: 34, h: 24, vel: 0 };
+    running = true; gameOver = false; questionActive = false;
+    scoreLabel.textContent = '0'; highLabel.textContent = 'High: ' + (localStorage.getItem('lava_high')||0);
+    startPanel.style.display = 'none';
+    updateLeaderModal();
+    spawnPipe(); spawnPipe();
+    requestAnimationFrame(gameLoop);
   }
-  displayLeaderboard();
-  leaderboardModal.style.display = "block";
-}
 
-function displayLeaderboard() {
-  let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
-  leaderboardList.innerHTML = leaderboard
-    .map((p, i) => `<li>${i + 1}. ${p.name} — ${p.score} pts</li>`)
-    .join("");
-}
+  function endAndShowLeaderboard(){
+    running = false; gameOver = true;
+    // save score
+    const name = playerName || 'Player';
+    const scores = loadScores();
+    scores.push({ name, score: score });
+    scores.sort((a,b)=> b.score - a.score);
+    saveScores(scores);
+    finalText.textContent = 'Final score: ' + score;
+    updateLeaderModal();
+    modal.style.display = 'flex';
+  }
 
-function closeLeaderboard() {
-  leaderboardModal.style.display = "none";
-  window.location.href = "game.html";
-}
+  // Quiz modal behavior (multiple-choice)
+  let currentQuestion = null;
+  function openQuiz(){
+    if(questionActive) return;
+    questionActive = true;
+    running = false;
+    // choose random question
+    const q = questions[Math.floor(Math.random() * questions.length)];
+    currentQuestion = q;
+    quizQ.textContent = q.q;
+    // build 3 choices: correct + 2 random wrong choices (no duplicates)
+    const choices = new Set();
+    choices.add(q.a);
+    while(choices.size < 3){
+      const candidate = questions[Math.floor(Math.random()*questions.length)].a;
+      choices.add(candidate);
+    }
+    // shuffle
+    const arr = Array.from(choices).sort(()=> Math.random() - 0.5);
+    // render buttons
+    choicesWrap.innerHTML = '';
+    arr.forEach(txt => {
+      const btn = document.createElement('button');
+      btn.className = 'choiceBtn';
+      btn.textContent = txt;
+      btn.addEventListener('click', ()=> handleAnswer(txt));
+      choicesWrap.appendChild(btn);
+    });
+    quizBox.style.display = 'block';
+  }
 
-document.getElementById("giveUpBtn").addEventListener("click", showLeaderboard);
+  function handleAnswer(answerText){
+    if(!currentQuestion) return;
+    const ok = answerText.trim().toLowerCase() === currentQuestion.a.trim().toLowerCase();
+    quizBox.style.display = 'none';
+    currentQuestion = null;
+    if(ok){
+      // correct: small boost and resume
+      score++; scoreLabel.textContent = score;
+      bird.vel = -8;
+      questionActive = false;
+      running = true;
+      requestAnimationFrame(gameLoop);
+    } else {
+      // wrong: increment fail count; if reached max, show leaderboard; otherwise resume after short pause
+      failCount++;
+      questionActive = false;
+      if(failCount >= maxFails){
+        endAndShowLeaderboard();
+      } else {
+        // small penalty: restart round
+        bird.y = H/2; bird.vel = 0;
+        running = true;
+        requestAnimationFrame(gameLoop);
+      }
+    }
+  }
 
-loop();
+  // Give Up button: show leaderboard modal and save current score
+  giveUpBtn.addEventListener('click', ()=> {
+    // save current attempt before showing
+    const scores = loadScores();
+    scores.push({name: playerName || 'Player', score});
+    scores.sort((a,b)=> b.score - a.score);
+    saveScores(scores);
+    finalText.textContent = 'You gave up. Score: ' + score;
+    updateLeaderModal();
+    modal.style.display = 'flex';
+  });
+
+  // modal close / dashboard
+  modal.querySelector('#modalClose')?.addEventListener('click', ()=> {
+    modal.style.display = 'none';
+    // stay on game page but show start panel
+    startPanel.style.display = '';
+    running = false; gameOver = false;
+  });
+  goDashboard.addEventListener('click', ()=> {
+    // go to dashboard (game page) — we are already there; will reload to reset
+    window.location.href = 'game.html';
+  });
+
+  // small utilities
+  function loadScores(){ try{ return JSON.parse(localStorage.getItem('lava_scores') || '[]'); } catch(e){ return []; } }
+  function saveScores(arr){ localStorage.setItem('lava_scores', JSON.stringify(arr.slice(0,5))); localStorage.setItem('lava_high', String(Math.max(localStorage.getItem('lava_high')||0, score))); }
+  function updateLeaderModal(){
+    const arr = loadScores();
+    leaderList.innerHTML = '';
+    arr.forEach((it,idx) => {
+      const li = document.createElement('li');
+      li.textContent = `${idx+1}. ${it.name} — ${it.score}`;
+      leaderList.appendChild(li);
+    });
+  }
+
+  // expose finalText and leaderList references used earlier
+  const finalTextEl = finalText; // alias (keeps linter quiet)
+
+  // init labels
+  highLabel.textContent = 'High: ' + (localStorage.getItem('lava_high')||0);
+  scoreLabel.textContent = '0';
+  updateLeaderModal();
+
+  // defensive global error logger to console (useful when debugging deploy)
+  window.addEventListener('error', e => console.error('Game error:', e.message, e.filename, e.lineno));
+
+  // Start button
+  startBtn.addEventListener('click', startGame);
+
+  // Mute button placeholder (no audio currently)
+  muteBtn.addEventListener('click', ()=> {
+    muted = !muted;
+    muteBtn.textContent = muted ? 'Unmute' : 'Mute';
+  });
+
+  // initial draw so users see something
+  function initialDraw(){
+    ctx.clearRect(0,0,W,H);
+    drawBackground();
+    drawPipes();
+    drawBird();
+  }
+  initialDraw();
+
+})(); // end IIFE
 </script>
 </body>
 </html>
