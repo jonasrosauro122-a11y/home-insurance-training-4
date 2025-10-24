@@ -57,5 +57,27 @@
 <footer>
   <p>© 2025 LAVA Classroom. All Rights Reserved.</p>
 </footer>
+
+<script>
+function revealElements(selector){
+  document.querySelectorAll(selector).forEach(el=>{
+    const rect = el.getBoundingClientRect();
+    if(rect.top < window.innerHeight - 100) el.classList.add('visible');
+  });
+}
+
+window.addEventListener('scroll', () => { 
+  revealElements('.course-card'); 
+  revealElements('.trainer-card'); 
+});
+
+window.addEventListener('load', () => { 
+  revealElements('.course-card'); 
+  revealElements('.trainer-card'); 
+});
+</script>
+
 </body>
 </html>
+
+
