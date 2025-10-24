@@ -3,194 +3,187 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Assignments - LAVA Classroom</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <title>LAVA University | LAVA Classroom</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    /* RESET & BASE */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    /* ===== GLOBAL STYLES ===== */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Poppins', sans-serif;
-      color: white;
-      overflow-x: hidden;
-      position: relative;
-      min-height: 100vh;
-      /* PureLust Gradient */
-      background: linear-gradient(135deg, #6a1b9a, #d32f2f);
+      color: #fff;
+      background: linear-gradient(135deg, #9b1212, #000000);
       background-size: 400% 400%;
       animation: gradientShift 20s ease infinite;
+      overflow-x: hidden;
     }
-
     @keyframes gradientShift {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
 
-    /* CLOUD LAYER */
+    /* ===== CLOUDS ===== */
     .clouds {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 200%;
-      height: 200%;
+      top: 0; left: 0;
+      width: 200%; height: 200%;
       background: url('images/clouds.png') repeat;
       background-size: contain;
       opacity: 0.12;
       animation: cloudMove 120s linear infinite;
       pointer-events: none;
-      z-index: 1;
+      z-index: 0;
     }
-
     @keyframes cloudMove {
       0% { transform: translateX(0); }
       100% { transform: translateX(-50%); }
     }
 
-    /* NAVIGATION */
-    nav {
-      width: 100%;
-      position: absolute;
-      top: 20px;
-      left: 0;
+    /* ===== HEADER ===== */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
       display: flex;
-      justify-content: center;
-      gap: 30px;
-      z-index: 3;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(5px);
     }
+    .brand { color: #fff; font-size: 1.5rem; font-weight: 700; text-decoration: none; }
+    nav ul { display: flex; list-style: none; gap: 20px; flex-wrap: wrap; }
     nav a {
-      text-decoration: none;
-      color: white;
-      font-weight: 500;
-      transition: 0.3s;
+      color: #fff; text-decoration: none; font-weight: 500;
+      padding: 6px 12px; border-radius: 5px; transition: all 0.3s ease;
     }
-    nav a:hover {
-      color: #ff4d4d;
-    }
+    nav a:hover { background: #ff1f1f; transform: scale(1.05); }
+    nav a.active { background: #ff1f1f; }
 
-    /* HERO SECTION */
+    /* ===== HERO SECTION ===== */
     .hero {
-      position: relative;
       text-align: center;
-      padding: 120px 20px;
-      z-index: 3;
+      padding: 5rem 2rem;
+      background: rgba(0,0,0,0.5);
+      position: relative;
+      z-index: 5;
     }
-    .hero h1 {
-      font-size: 3rem;
-      font-weight: 700;
-      animation: fadeDown 1.5s ease-out;
+    .hero h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #fff;
+      animation: fadeInDown 1.5s ease;
     }
     .hero p {
-      font-size: 1.2rem;
-      margin-top: 10px;
-      opacity: 0.9;
-      animation: fadeUp 1.5s ease-out;
-    }
-
-    @keyframes fadeDown {
-      from { opacity: 0; transform: translateY(-30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* SECTION CONTENT */
-    .section {
-      max-width: 900px;
-      margin: 50px auto;
-      padding: 20px;
-      text-align: center;
-      z-index: 3;
-      position: relative;
-    }
-    .section h2 {
-      font-size: 2rem;
-      margin-bottom: 15px;
-    }
-    .section p {
       font-size: 1.1rem;
-      line-height: 1.8;
-      opacity: 0.95;
+      color: #ccc;
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      line-height: 1.6;
     }
+    .hero a {
+      background-color: #e50914;
+      color: #fff;
+      text-decoration: none;
+      padding: 0.8rem 1.6rem;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    .hero a:hover { background-color: #b0060e; transform: scale(1.05); }
+    @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* FOOTER */
+    /* ===== COURSES GRID ===== */
+    .courses {
+      padding: 4rem 2rem;
+      text-align: center;
+      position: relative;
+      z-index: 5;
+    }
+    .courses h2 { font-size: 2rem; margin-bottom: 2rem; color: #ff1f1f; }
+    .course-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.8rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .course-card {
+      background: rgba(255,255,255,0.05);
+      border: 2px solid rgba(255,255,255,0.2);
+      border-radius: 15px;
+      padding: 2rem 1rem;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    .course-card.visible { opacity: 1; transform: translateY(0); }
+    .course-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 25px rgba(229,9,20,0.4);
+    }
+    .course-card h3 { color: #fff; font-size: 1.2rem; margin-bottom: 0.5rem; }
+
+    /* ===== FOOTER ===== */
     footer {
       text-align: center;
-      padding: 40px;
-      font-size: 0.9rem;
-      color: rgba(255,255,255,0.7);
-      z-index: 3;
-      position: relative;
+      padding: 40px 20px;
+      background: #111;
+      color: #bbb;
+      margin-top: 2rem;
     }
 
-    /* === WAVE ANIMATION === */
-    .wave-container {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      height: 150px;
-      overflow: hidden;
-      line-height: 0;
-      z-index: 2;
-    }
-
-    .wave {
-      position: relative;
-      width: 200%;
-      height: 100%;
-      background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQwMCIgaGVpZ2h0PSIxMDAiIHZpZXdCb3g9IjAgMCAxNDAwIDEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnL3N2ZyI+PHBhdGggZD0iTTAsNTAgQzQwLDM1LDgwLDUwLDEyMCw1MCBDMTYwLDUwLDIwMCw3MCwyNDAsNzAgQzI4MCw3MCwzMjAsNDUsMzYwLDQ1IEM0MDAsNDUsNDQwLDYwLDQ4MCw2MCBDNTIwLDYwLDU2MCwzNSw2MDAsMzUgQzY0MCwzNSw2ODAsNTA3MTY4LDcyMCw1MCBDNzYwLDUwLDgwMCw3MCw4NDAsNzAgQzg4MCw3MCw5MjIsNDUsOTYwLDQ1IEMxMDAwLDQ1LDEwNDAsNjAsMTA4MCw2MCBDMTEyMCw2MCwxMTYwLDM1LDEyMDAsMzUgQzEyNDAsMzUsMTI4MCw1MCwxMzIwLDUwIEMxMzYwLDUwLDE0MDAsNzAsMTQwMCw3MCBMMTQwMCwxMDAgTDAgMTAwIEwwLDUwIFoiIGZpbGw9IndoaXRlIiBmaWxsLW9wYWNpdHk9IjAuMyIvPjwvc3ZnPg==') repeat-x;
-      background-size: 50% 100%;
-      animation: waveAnimation 10s linear infinite;
-    }
-
-    @keyframes waveAnimation {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+    /* ===== RESPONSIVE ===== */
+    @media(max-width: 768px) {
+      .hero h2 { font-size: 2rem; }
+      .hero p { font-size: 1rem; }
     }
   </style>
 </head>
 <body>
-  <!-- Clouds -->
   <div class="clouds"></div>
 
-  <!-- Navigation -->
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="courses.html">Courses</a>
-    <a href="assignments.html">Assignments</a>
-    <a href="contact.html">Contact</a>
-  </nav>
+  <!-- HEADER -->
+  <header>
+    <a href="index.html" class="brand">LAVA Classroom</a>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">Trainers</a></li>
+        <li><a href="courses.html">Courses</a></li>
+        <li><a href="assignments.html" class="active">LAVA University</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
 
-  <!-- Hero Section -->
+  <!-- HERO SECTION -->
   <section class="hero">
-    <h1>Assignments</h1>
-    <p>Track and submit your assignments for each course.</p>
+    <h2>Welcome to LAVA University</h2>
+    <p>Enhance your insurance and automation skills with expert-designed training programs. Access the full learning experience through our official LAVA University portal.</p>
+    <a href="https://university.lavaautomation.com/" target="_blank">Visit LAVA University</a>
   </section>
 
-  <!-- Main Section -->
-  <section class="section">
-    <h2>Current Assignments</h2>
-    <p>All assignments are organized by course modules. Make sure to submit them on time and follow the instructions provided by your trainers.</p>
-
-    <h2>Submission Guidelines</h2>
-    <p>Assignments should be submitted via the portal or email as instructed. Include your full name, course, and assignment title in the submission.</p>
-  </section>
-
-  <!-- Wave overlay -->
-  <div class="wave-container">
-    <div class="wave"></div>
-  </div>
-
-  <!-- Footer -->
-  <footer>
-    © 2025 LAVA Classroom. All rights reserved.
-  </footer>
-</body>
-</html>
+  <!-- COURSES GRID -->
+  <section class="courses">
+    <h2>Available Courses</h2>
+    <div class="course-grid">
+      <div class="course-card"><h3>AMS 360</h3></div>
+      <div class="course-card"><h3>Applied Epic</h3></div>
+      <div class="course-card"><h3>Auto Owners Commercial Lines Course</h3></div>
+      <div class="course-card"><h3>Auto Owners Personal Lines Course</h3></div>
+      <div class="course-card"><h3>Bamboo</h3></div>
+      <div class="course-card"><h3>California Fair Plan</h3></div>
+      <div class="course-card"><h3>Certificate of Insurance Simulator</h3></div>
+      <div class="course-card"><h3>Erie Course</h3></div>
+      <div class="course-card"><h3>EZLynx</h3></div>
+      <div class="course-card"><h3>Fillable Acord Library</h3></div>
+      <div class="course-card"><h3>Final Exam</h3></div>
+      <div class="course-card"><h3>Hawk Soft</h3></div>
+      <div class="course-card"><h3>Hubspot - User Course</h3></div>
+      <div class="course-card"><h3>Insurance 101</h3></div>
+      <div class="course-card"><h3>Insurance Documents Activity</h3></div>
+      <div class="course-card"><h3>InsuredMine - User Course</h3></div>
+      <div class="course-card"><h3>Mercury Course</
