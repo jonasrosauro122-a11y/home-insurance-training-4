@@ -3,109 +3,193 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>LAVA Flappy Quiz Game</title>
+<title>LAVA Classroom | Flappy Bird Quiz Game</title>
 <style>
-  :root { --accent:#ff1f1f; --bg-dark:#000; --bg-light:#400000; }
-  * { box-sizing:border-box; }
-  html,body { margin:0; height:100%; background:linear-gradient(135deg,var(--bg-dark),var(--bg-light)); color:#fff; font-family:'Poppins',sans-serif; overflow:hidden; }
+  body {
+    margin: 0;
+    overflow: hidden;
+    background: linear-gradient(to bottom right, #000000, #8B0000);
+    font-family: Arial, sans-serif;
+    color: #fff;
+  }
 
-  header { position:fixed; top:0; left:0; right:0; background:rgba(0,0,0,0.65); backdrop-filter:blur(5px); display:flex; align-items:center; justify-content:space-between; padding:12px 24px; z-index:10; }
-  header a { color:#fff; text-decoration:none; font-weight:700; }
-  header img { height:36px; vertical-align:middle; margin-right:8px; }
-  nav ul { display:flex; list-style:none; gap:14px; margin:0; padding:0; }
-  nav a { color:#fff; text-decoration:none; padding:6px 10px; border-radius:6px; }
-  nav a.active, nav a:hover { background:var(--accent); }
+  header.site-header {
+    position: absolute;
+    width: 100%;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.5);
+  }
 
-  #gameContainer { position:absolute; top:64px; left:0; right:0; bottom:0; display:flex; align-items:center; justify-content:center; }
-  canvas { border:3px solid var(--accent); border-radius:12px; box-shadow:0 8px 30px rgba(0,0,0,0.6); }
+  canvas {
+    display: block;
+    margin: 0 auto;
+    background: url('images/bg.png') center/cover no-repeat;
+  }
 
-  #hud { position:absolute; top:80px; width:100%; text-align:center; pointer-events:none; }
-  #score { font-size:32px; font-weight:700; }
-  #high { font-size:14px; color:#ccc; }
+  #giveUpBtn {
+    position: absolute;
+    top: 70px;
+    right: 30px;
+    background: #ff4c4c;
+    color: #fff;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    z-index: 10;
+    transition: background 0.3s;
+  }
 
-  #questionBox { display:none; position:absolute; top:25%; left:50%; transform:translateX(-50%); background:#111; border:2px solid var(--accent); padding:16px; border-radius:12px; width:90%; max-width:420px; text-align:center; z-index:20; }
-  #questionBox input { width:80%; padding:8px; border-radius:6px; border:none; margin-top:8px; }
-  #questionBox button { margin-top:8px; padding:8px 14px; border:none; border-radius:8px; background:var(--accent); color:#fff; cursor:pointer; font-weight:700; }
+  #giveUpBtn:hover {
+    background: #ff1c1c;
+  }
 
-  #overlay { display:none; position:absolute; inset:0; background:rgba(0,0,0,0.8); align-items:center; justify-content:center; flex-direction:column; z-index:30; text-align:center; }
-  #overlay button { margin-top:12px; padding:10px 16px; border:none; border-radius:8px; background:var(--accent); color:#fff; font-weight:700; cursor:pointer; }
+  #questionBox {
+    display: none;
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #111;
+    border: 2px solid #ff4c4c;
+    padding: 20px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    z-index: 20;
+  }
 
-  #leaderboard { margin-top:16px; text-align:left; background:#111; padding:12px 20px; border-radius:10px; border:1px solid var(--accent); width:260px; }
-  #leaderboard h3 { text-align:center; margin:0 0 8px; color:var(--accent); }
-  #leaderboard ol { margin:0; padding-left:20px; }
+  #questionBox input {
+    width: 80%;
+    padding: 8px;
+    border-radius: 6px;
+    border: none;
+    margin-top: 8px;
+  }
 
-  #startBox { position:absolute; top:40%; left:50%; transform:translateX(-50%); text-align:center; }
-  #startBox input { padding:8px; border-radius:8px; border:none; margin-bottom:8px; width:200px; }
-  #startBox button { padding:10px 16px; border:none; border-radius:8px; background:var(--accent); color:#fff; cursor:pointer; font-weight:700; }
+  #questionBox button {
+    margin-top: 10px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    background: #ff4c4c;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  /* Leaderboard Modal */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 50;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+  }
+
+  .modal-content {
+    background: #111;
+    color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 15px;
+    text-align: center;
+  }
+
+  .modal h2 {
+    color: #ff4c4c;
+  }
+
+  .leaderboard-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 15px;
+  }
+
+  .leaderboard-list li {
+    background: #222;
+    margin: 8px 0;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: bold;
+  }
+
+  .closeBtn {
+    background: #ff4c4c;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    padding: 8px 15px;
+    margin-top: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  .closeBtn:hover {
+    background: #ff1c1c;
+  }
 </style>
 </head>
 <body>
 
-<header>
-  <a href="index.html"><img src="images/logo.png" alt="Logo">LAVA Classroom</a>
-  <nav>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">Trainers</a></li>
-      <li><a href="courses.html">Courses</a></li>
-      <li><a href="assignments.html">LAVA University</a></li>
-      <li><a href="game.html" class="active">Games</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-  </nav>
+<header class="site-header">
+  <div class="header-inner container">
+    <a href="index.html" class="brand">
+      <img src="images/logo.png" alt="LAVA Logo" style="height:40px;vertical-align:middle;">
+      <span style="color:#fff;">LAVA Classroom</span>
+    </a>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="courses.html">Courses</a></li>
+        <li><a href="assignments.html">Assignments</a></li>
+        <li><a href="game.html" class="active">Games</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
 </header>
 
-<div id="gameContainer">
-  <canvas id="gameCanvas" width="420" height="630"></canvas>
-  <div id="hud">
-    <div id="score">0</div>
-    <div id="high">High: 0</div>
-  </div>
+<canvas id="gameCanvas" width="480" height="640"></canvas>
+<button id="giveUpBtn">Give Up</button>
 
-  <div id="startBox">
-    <input id="playerName" type="text" placeholder="Enter your name"><br>
-    <button id="startBtn">Start Game</button>
-  </div>
+<!-- Question Popup -->
+<div id="questionBox">
+  <h3 id="questionText"></h3>
+  <input id="answerInput" type="text" placeholder="Type your answer">
+  <button id="submitBtn">Submit</button>
+</div>
 
-  <div id="questionBox">
-    <h3 id="questionText"></h3>
-    <input id="answerInput" type="text" placeholder="Type your answer">
-    <button id="submitBtn">Submit</button>
-  </div>
-
-  <div id="overlay">
-    <h2>Game Over</h2>
-    <p id="finalScore">Score: 0</p>
-    <div id="leaderboard">
-      <h3>🏆 Top 5 Players</h3>
-      <ol id="scoreList"></ol>
-    </div>
-    <button id="restartBtn">Play Again</button>
+<!-- Leaderboard Modal -->
+<div id="leaderboardModal" class="modal">
+  <div class="modal-content">
+    <h2>🏆 LAVA Leaderboard</h2>
+    <ul id="leaderboardList" class="leaderboard-list"></ul>
+    <button class="closeBtn" onclick="closeLeaderboard()">Close</button>
   </div>
 </div>
 
 <script>
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
-const birdImg = new Image(); birdImg.src = "images/bird.png";
-const pipeImg = new Image(); pipeImg.src = "images/pipe.png";
-const bgImg = new Image();   bgImg.src = "images/bg.png";
 
-const startBox = document.getElementById("startBox");
-const questionBox = document.getElementById("questionBox");
-const questionText = document.getElementById("questionText");
-const answerInput = document.getElementById("answerInput");
-const submitBtn = document.getElementById("submitBtn");
-const overlay = document.getElementById("overlay");
-const restartBtn = document.getElementById("restartBtn");
-const scoreEl = document.getElementById("score");
-const highEl = document.getElementById("high");
-const scoreList = document.getElementById("scoreList");
+let birdImg = new Image(), pipeImg = new Image(), bgImg = new Image();
+birdImg.src = "images/bird.png";
+pipeImg.src = "images/pipe.png";
+bgImg.src = "images/bg.png";
 
-let playerName = "";
-let bird, pipes, score, highScore = localStorage.getItem("lava_highscore") || 0;
-let gravity = 0.6, jump = -9, gap = 150, pipeSpeed = 2.5, gameRunning = false, questionActive = false;
-const H = canvas.height, W = canvas.width;
+let birdX = 50, birdY = 150, birdVelocity = 0;
+let gravity = 0.25, gap = 120, pipeWidth = 52;
+let pipes = [], score = 0, fails = 0, gameOver = false, questionActive = false;
 
 const questions = [
   {q:"An organization of insurers through which risks are pooled.", a:"insurance pool"},
@@ -120,127 +204,133 @@ const questions = [
   {q:"Meaning of AMS.", a:"agency management system"}
 ];
 
-function resetGame(){
-  bird = {x:80, y:H/2, w:34, h:24, vel:0};
-  pipes = [];
-  score = 0;
-  scoreEl.textContent = 0;
-  questionActive = false;
-  gameRunning = true;
-  overlay.style.display = "none";
-  questionBox.style.display = "none";
-  startBox.style.display = "none";
+let currentQ = null;
+
+document.addEventListener("keydown", flap);
+document.addEventListener("click", flap);
+
+function flap() {
+  if (!gameOver && !questionActive) birdVelocity = -4.5;
 }
 
-function spawnPipe(){
-  const top = Math.random()*(H-gap-100)+40;
-  pipes.push({x:W, top:top, bottom:top+gap});
+function resetGame() {
+  birdY = 150; birdVelocity = 0; pipes = [];
+  score = 0; gameOver = false; fails = 0;
+  loop();
 }
 
-function update(){
-  if(!gameRunning || questionActive) return;
-  bird.vel += gravity;
-  bird.y += bird.vel;
+function draw() {
+  ctx.drawImage(bgImg, 0, 0, canvas.width, canvas.height);
+  ctx.drawImage(birdImg, birdX, birdY, 34, 24);
 
-  if(++frame % 90===0) spawnPipe();
-  pipes.forEach(p=> p.x -= pipeSpeed);
-  pipes = pipes.filter(p=>p.x>-60);
+  for (let i = 0; i < pipes.length; i++) {
+    let p = pipes[i];
+    ctx.drawImage(pipeImg, p.x, p.y);
+    ctx.drawImage(pipeImg, p.x, p.y + pipeImg.height + gap);
+    p.x -= 2;
 
-  pipes.forEach(p=>{
-    if(p.x + 52 < bird.x && !p.passed){
-      score++;
-      scoreEl.textContent = score;
-      if(score > highScore){ highScore = score; localStorage.setItem("lava_highscore",highScore); }
-      p.passed = true;
+    if (p.x + pipeWidth < 0) {
+      pipes.splice(i, 1); i--; score++;
     }
-  });
 
-  for(let p of pipes){
-    if(bird.x + bird.w > p.x && bird.x < p.x+52 && (bird.y < p.top || bird.y+bird.h > p.bottom)){
+    if (
+      birdX + 34 > p.x &&
+      birdX < p.x + pipeWidth &&
+      (birdY < p.y + pipeImg.height || birdY + 24 > p.y + pipeImg.height + gap)
+    ) {
       askQuestion();
       return;
     }
   }
 
-  if(bird.y + bird.h > H || bird.y < 0) askQuestion();
+  birdVelocity += gravity;
+  birdY += birdVelocity;
+
+  if (birdY + 24 >= canvas.height || birdY < 0) {
+    askQuestion();
+  }
+
+  ctx.fillStyle = "#fff";
+  ctx.font = "20px Arial";
+  ctx.fillText("Score: " + score, 10, 25);
 }
 
-function draw(){
-  if(bgImg.complete) ctx.drawImage(bgImg,0,0,W,H);
-  else { ctx.fillStyle="#70c8ff"; ctx.fillRect(0,0,W,H); }
-  pipes.forEach(p=>{
-    ctx.drawImage(pipeImg,p.x,p.bottom,52,H-p.bottom);
-    ctx.save(); ctx.translate(p.x+26,p.top); ctx.scale(1,-1); ctx.drawImage(pipeImg,-26,0,52,H-p.bottom); ctx.restore();
-  });
-  if(birdImg.complete) ctx.drawImage(birdImg,bird.x,bird.y,bird.w,bird.h);
-  else { ctx.fillStyle="red"; ctx.fillRect(bird.x,bird.y,bird.w,bird.h); }
+let pipeSpawnCounter = 0;
+function loop() {
+  if (gameOver) return;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  draw();
+  pipeSpawnCounter++;
+  if (pipeSpawnCounter % 100 === 0) {
+    let pipeY = Math.floor(Math.random() * (pipeImg.height - 100)) - pipeImg.height;
+    pipes.push({ x: canvas.width, y: pipeY });
+  }
+  requestAnimationFrame(loop);
 }
 
-function loop(){
-  if(gameRunning){ update(); ctx.clearRect(0,0,W,H); draw(); requestAnimationFrame(loop); }
-}
-
-function askQuestion(){
+function askQuestion() {
   questionActive = true;
-  gameRunning = false;
-  const q = questions[Math.floor(Math.random()*questions.length)];
+  const q = questions[Math.floor(Math.random() * questions.length)];
   currentQ = q;
-  questionText.textContent = q.q;
-  answerInput.value = "";
-  questionBox.style.display="block";
-  answerInput.focus();
+  document.getElementById("questionText").textContent = q.q;
+  document.getElementById("answerInput").value = "";
+  document.getElementById("questionBox").style.display = "block";
 }
 
-submitBtn.onclick = ()=>{
-  if(answerInput.value.trim().toLowerCase() === currentQ.a.toLowerCase()){
-    questionBox.style.display="none";
+document.getElementById("submitBtn").onclick = function() {
+  const answer = document.getElementById("answerInput").value.trim().toLowerCase();
+  if (answer === currentQ.a.toLowerCase()) {
     questionActive = false;
-    gameRunning = true;
-    bird.vel = jump;
+    document.getElementById("questionBox").style.display = "none";
     loop();
-  } else endGame();
+  } else {
+    fails++;
+    questionActive = false;
+    document.getElementById("questionBox").style.display = "none";
+    if (fails >= 5) showLeaderboard();
+    else loop();
+  }
 };
 
-function endGame(){
-  gameRunning = false;
-  questionBox.style.display="none";
-  overlay.style.display="flex";
-  document.getElementById("finalScore").textContent = "Score: " + score;
-  saveScore(playerName, score);
-  updateLeaderboard();
+function endGame() {
+  fails++;
+  if (fails >= 5) showLeaderboard();
+  else resetGame();
 }
 
-function saveScore(name, score){
-  let scores = JSON.parse(localStorage.getItem("lava_scores") || "[]");
-  scores.push({name, score});
-  scores.sort((a,b)=>b.score-a.score);
-  scores = scores.slice(0,5);
-  localStorage.setItem("lava_scores", JSON.stringify(scores));
+// Leaderboard
+const leaderboardModal = document.getElementById("leaderboardModal");
+const leaderboardList = document.getElementById("leaderboardList");
+
+function showLeaderboard() {
+  gameOver = true;
+  let name = prompt("Game Over! Enter your name:");
+  if (name) {
+    let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
+    leaderboard.push({ name, score });
+    leaderboard.sort((a, b) => b.score - a.score);
+    leaderboard = leaderboard.slice(0, 5);
+    localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
+  }
+  displayLeaderboard();
+  leaderboardModal.style.display = "block";
 }
 
-function updateLeaderboard(){
-  let scores = JSON.parse(localStorage.getItem("lava_scores") || "[]");
-  scoreList.innerHTML = "";
-  scores.forEach(s=>{
-    const li=document.createElement("li");
-    li.textContent = `${s.name} — ${s.score}`;
-    scoreList.appendChild(li);
-  });
+function displayLeaderboard() {
+  let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
+  leaderboardList.innerHTML = leaderboard
+    .map((p, i) => `<li>${i + 1}. ${p.name} — ${p.score} pts</li>`)
+    .join("");
 }
 
-restartBtn.onclick = ()=>{ resetGame(); loop(); };
+function closeLeaderboard() {
+  leaderboardModal.style.display = "none";
+  window.location.href = "game.html";
+}
 
-document.addEventListener("keydown",e=>{ if(e.code==="Space"){ bird.vel=jump; if(!gameRunning){ resetGame(); loop(); } }});
-canvas.addEventListener("click",()=>{ bird.vel=jump; if(!gameRunning){ resetGame(); loop(); }});
+document.getElementById("giveUpBtn").addEventListener("click", showLeaderboard);
 
-document.getElementById("startBtn").onclick=()=>{
-  playerName=document.getElementById("playerName").value.trim();
-  if(!playerName){alert("Please enter your name!");return;}
-  resetGame(); loop();
-};
-
-let frame=0;
-highEl.textContent="High: "+highScore;
+loop();
 </script>
 </body>
 </html>
