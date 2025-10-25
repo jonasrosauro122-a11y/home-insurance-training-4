@@ -7,7 +7,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   *{margin:0;padding:0;box-sizing:border-box;}
-  body{font-family:'Poppins',sans-serif;color:#fff;background:linear-gradient(135deg,#9b1212,#000);background-size:400% 400%;animation:gradientShift 20s ease infinite;overflow-x:hidden;}
+  body{
+    font-family:'Poppins',sans-serif;
+    color:#fff;
+    background:linear-gradient(135deg,#9b1212,#000);
+    background-size:400% 400%;
+    animation:gradientShift 20s ease infinite;
+    overflow-x:hidden;
+  }
   @keyframes gradientShift{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
   .clouds{position:absolute;top:0;left:0;width:200%;height:200%;background:url('images/clouds.png') repeat;background-size:contain;opacity:0.12;animation:cloudMove 120s linear infinite;pointer-events:none;z-index:0;}
   @keyframes cloudMove{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
@@ -22,10 +29,21 @@
   .trainers h2{color:#ff1f1f;font-size:2.4rem;margin-bottom:10px;text-transform:uppercase;}
   .trainers p{color:#ddd;margin-bottom:40px;}
   .trainer-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2rem;}
-  .trainer-card{background:#fff;color:#000;border-radius:15px;padding:1rem;box-shadow:0 8px 24px rgba(0,0,0,0.2);transform:translateY(60px);opacity:0;transition:transform 0.5s ease, opacity 0.5s ease;}
+  .trainer-card{
+    background:#fff;
+    color:#000;
+    border-radius:15px;
+    padding:1rem;
+    box-shadow:0 8px 24px rgba(0,0,0,0.2);
+    transform:translateY(60px);
+    opacity:0;
+    transition:transform 0.5s ease, opacity 0.5s ease;
+    cursor:pointer;
+    position:relative;
+  }
   .trainer-card.visible{transform:translateY(0);opacity:1;}
   .trainer-card img{width:100%;height:230px;object-fit:cover;border-radius:12px;border:3px solid #ff1f1f;transition:transform 0.3s ease;}
-  .trainer-card img:hover{transform:scale(1.05);}
+  .trainer-card:hover img{transform:scale(1.05);}
   .trainer-card h3{color:#800000;margin:10px 0 5px;font-size:1.2rem;}
   .trainer-card p{color:#333;font-weight:bold;font-size:1rem;}
   .info-section{margin-top:80px;}
@@ -36,6 +54,37 @@
   .info-section li{margin-bottom:8px;}
   footer{text-align:center;padding:30px 20px;background:#111;color:#bbb;margin-top:60px;}
   @media(max-width:900px){.info-section h1{font-size:2rem;}.trainers h2{font-size:2rem;}}
+
+  /* Modal Popup Styles */
+  .modal-overlay{
+    position:fixed;
+    top:0;left:0;width:100%;height:100%;
+    background:rgba(0,0,0,0.8);
+    display:flex;justify-content:center;align-items:center;
+    z-index:100;
+    opacity:0;pointer-events:none;
+    transition:opacity 0.3s ease;
+  }
+  .modal-overlay.active{opacity:1;pointer-events:auto;}
+  .modal{
+    background:#fff;
+    color:#111;
+    border-radius:20px;
+    max-width:600px;
+    padding:30px;
+    box-shadow:0 8px 30px rgba(0,0,0,0.4);
+    text-align:left;
+    animation:popIn 0.4s ease;
+    position:relative;
+  }
+  @keyframes popIn{from{transform:scale(0.8);opacity:0;}to{transform:scale(1);opacity:1;}}
+  .modal h2{color:#b30000;margin-bottom:10px;}
+  .modal p{color:#333;line-height:1.6;margin-bottom:10px;}
+  .close-btn{
+    position:absolute;top:10px;right:15px;
+    font-size:1.5rem;color:#b30000;
+    cursor:pointer;font-weight:bold;
+  }
 </style>
 </head>
 <body>
@@ -58,13 +107,13 @@
 <main class="container">
   <section class="trainers">
     <h2>Meet Our Trainers</h2>
-    <p>Our dedicated mentors guide Virtual Assistants through every stage of learning and application.</p>
+    <p>Tap or click on a trainer to learn more about their experience and story.</p>
     <div class="trainer-gallery">
-      <div class="trainer-card"><img src="images/karl.jpg" alt="Karl Sison"><h3>Karl Sison</h3><p>Trainer Manager</p></div>
-      <div class="trainer-card"><img src="images/nash.jpg" alt="Nash"><h3>Nash</h3><p>Trainer</p></div>
-      <div class="trainer-card"><img src="images/au.jpg" alt="AU"><h3>AU</h3><p>Trainer</p></div>
-      <div class="trainer-card"><img src="images/kyle.jpg" alt="Kyle"><h3>Kyle</h3><p>Trainer</p></div>
-      <div class="trainer-card"><img src="images/chanie.jpg" alt="Chanie"><h3>Chanie</h3><p>Trainer</p></div>
+      <div class="trainer-card" data-trainer="karl"><img src="images/karl.jpg" alt="Karl Sison"><h3>Karl Sison</h3><p>Training Manager</p></div>
+      <div class="trainer-card" data-trainer="nash"><img src="images/nash.jpg" alt="Nash"><h3>Nash</h3><p>Trainer</p></div>
+      <div class="trainer-card" data-trainer="au"><img src="images/au.jpg" alt="Au"><h3>Au</h3><p>Trainer</p></div>
+      <div class="trainer-card" data-trainer="kyle"><img src="images/kyle.jpg" alt="Kyle"><h3>Kyle</h3><p>Trainer</p></div>
+      <div class="trainer-card" data-trainer="chanie"><img src="images/chanie.jpg" alt="Chanie"><h3>Chanie</h3><p>Trainer</p></div>
     </div>
   </section>
 
@@ -82,11 +131,59 @@
   </section>
 </main>
 
+<!-- Modal -->
+<div class="modal-overlay" id="trainerModal">
+  <div class="modal">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
 <footer>
   <p>© 2025 LAVA Classroom. All Rights Reserved.</p>
 </footer>
 
 <script>
+const bios = {
+  karl: `
+  <h2>🧑‍🏫 Karl – Training Manager & Insurance Agency Specialist</h2>
+  <p>Karl is LAVA’s dedicated Training Manager and a true expert in insurance operations. With years of experience managing agency processes and guiding virtual assistants, Karl leads with patience, clarity, and a deep passion for learning.</p>
+  <p>Known for being approachable and supportive, he always makes sure his trainees feel confident and empowered in every session. His leadership keeps the LAVA Classroom running smoothly and full of positive energy.</p>
+  `,
+  nash: `
+  <h2>🖥️ Nash – Senior Virtual Assistant Trainer</h2>
+  <p>With over 8 years of experience in the BPO industry and 2 years as a seasoned Virtual Assistant, Nash brings a wealth of technical know-how and real-world insights to the LAVA Classroom.</p>
+  <p>He specializes in teaching new VAs about insurance workflows and client handling. Known for his tech-savvy style and friendly approach, Nash creates an engaging and relatable training environment. And yes — when he’s not teaching, he’s probably talking about his favorite birds 🐦.</p>
+  `,
+  au: `
+  <h2>🌟 Au – Insurance Process Trainer</h2>
+  <p>With 10 years of experience in the BPO industry and a strong background as a professional trainer, Au is a bright and inspiring presence at LAVA. Affectionately known as “BINI Au” for her cheerful personality and colorful spirit, she brings energy and fun into every training session.</p>
+  <p>Au is passionate about helping new VAs discover their strengths, build confidence, and reach their full potential. Her jolly and approachable nature makes her one of the most beloved trainers in the team.</p>
+  `,
+  kyle: `
+  <h2>🎓 Kyle – Internal Trainer & Former College Professor</h2>
+  <p>Before joining LAVA, Trainer Kyle spent 8 years teaching in college, shaping young minds with patience and passion. Now, as an internal trainer at LAVA, he combines his academic experience with hands-on VA expertise to deliver lessons that are both insightful and inspiring.</p>
+  <p>A former LAVA VA himself, Kyle understands the journey from trainee to expert. His students affectionately call him “Sir Kyle”, a title that perfectly captures his caring, mentor-like presence.</p>
+  `,
+  chanie: `
+  <h2>🌸 Chanie – Internal Trainer & Former Educator</h2>
+  <p>Chanie is known for her calm, kind, and nurturing personality. Once a dedicated teacher, she transitioned into the VA world and quickly proved her excellence, eventually becoming one of LAVA’s internal trainers.</p>
+  <p>She’s admired for her gentle teaching style, her quiet confidence, and her deep care for her trainees. Beyond the classroom, Chanie is a loving mom who inspires others through her balance of grace, warmth, and professionalism.</p>
+  `
+};
+
+document.querySelectorAll('.trainer-card').forEach(card=>{
+  card.addEventListener('click',()=>{
+    const trainer = card.getAttribute('data-trainer');
+    document.getElementById('modalContent').innerHTML = bios[trainer];
+    document.getElementById('trainerModal').classList.add('active');
+  });
+});
+
+function closeModal(){
+  document.getElementById('trainerModal').classList.remove('active');
+}
+
 function revealCards(){
   document.querySelectorAll('.trainer-card').forEach(card=>{
     const rect=card.getBoundingClientRect();
@@ -98,4 +195,3 @@ window.addEventListener('load',revealCards);
 </script>
 </body>
 </html>
-
