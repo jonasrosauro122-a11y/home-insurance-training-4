@@ -161,7 +161,8 @@
   const pipeImg=new Image(); pipeImg.src='images/pipe.png';
   const bgImg=new Image(); bgImg.src='images/bg.png';
 
-  let bird,pipes,frame,score,high,running,questionActive,gameOver,playerName,questionIndex=0;
+  let bird,pipes,frame,score,high,running,questionActive,gameOver,playerName;
+  let safeTimer = 0; // 👈 short invincibility period after correct answer
   const gravity=0.45,jump=-8,pipeSpeed=2,pipeGap=160,pipeW=52;
 
   const questions=[
@@ -197,7 +198,6 @@
       li.textContent=`${i+1}. ${p.name} — ${p.score}`;
       leaderList.appendChild(li);
     });
-    // 👇 Also update side list
     sideList.innerHTML='';
     arr.forEach(p=>{
       const li=document.createElement('li');
@@ -216,6 +216,7 @@
     if(!running||questionActive)return;
     frame++;bird.vel+=gravity;bird.y+=bird.vel;pipes.forEach(p=>p.x-=pipeSpeed);
     if(frame%100===0)spawnPipe();pipes=pipes.filter(p=>p.x+pipeW>-20);
+    if(safeTimer>0) safeTimer--; // 👈 count down invincibility frames
     pipes.forEach(p=>{
       if(!p.passed&&p.x+pipeW<bird.x){
         p.passed=true;score++;
@@ -224,13 +225,13 @@
         checkFireworks(score);
       }
       const collide=bird.x+bird.w>p.x&&bird.x<p.x+pipeW&&(bird.y<p.top||bird.y+bird.h>p.bottom);
-      if(collide)openQuiz();
+      if(collide && safeTimer<=0) openQuiz();
     });
-    if(bird.y<0||bird.y+bird.h>H)openQuiz();
+    if(bird.y<0||bird.y+bird.h>H) openQuiz();
   }
 
   function render(){ctx.clearRect(0,0,W,H);drawBackground();drawPipes();drawBird();}
-  function loop(){if(running&&!gameOver){update();render();requestAnimationFrame(loop);}if(questionIndex>=questions.length){endGame();}}
+  function loop(){if(running&&!gameOver){update();render();requestAnimationFrame(loop);}}
 
   function startGame(){
     playerName=(playerNameInput.value||'').trim();
@@ -243,35 +244,44 @@
 
   function resetGame(){
     bird={x:80,y:H/2,w:34,h:24,vel:0};
-    pipes=[];frame=0;score=0;questionIndex=0;running=false;questionActive=false;gameOver=false;
+    pipes=[];frame=0;score=0;running=false;questionActive=false;gameOver=false;
     scoreLabel.textContent='0';high=parseInt(localStorage.getItem('lava_high')||0);
     highLabel.textContent='High: '+high;
     startPanel.style.display='none';updateLeaderModal();spawnPipe();
   }
 
+  // ✅ RANDOMIZED QUESTION PICKER
   function openQuiz(){
     running=false;questionActive=true;
-    if(questionIndex>=questions.length){endGame();return;}
-    const q=questions[questionIndex++];
-    quizQ.textContent=q.q;
-    const choices=new Set([q.a]);
+    const randomQ = questions[Math.floor(Math.random()*questions.length)];
+    quizQ.textContent=randomQ.q;
+    const choices=new Set([randomQ.a]);
     while(choices.size<3)choices.add(questions[Math.floor(Math.random()*questions.length)].a);
     const arr=[...choices].sort(()=>Math.random()-0.5);
     choicesWrap.innerHTML='';
     arr.forEach(txt=>{
       const btn=document.createElement('button');
       btn.className='choiceBtn';btn.textContent=txt;
-      btn.onclick=()=>handleAnswer(txt,q.a);
+      btn.onclick=()=>handleAnswer(txt,randomQ.a);
       choicesWrap.appendChild(btn);
     });
     quizBox.style.display='block';
   }
 
+  // ✅ Pause → Answer → Resume OR End Game
   function handleAnswer(ans,correct){
     quizBox.style.display='none';
     if(ans.toLowerCase()===correct.toLowerCase()){
-      questionActive=false;running=true;bird.vel=jump;requestAnimationFrame(loop);
-    }else{endGame();}
+      // correct
+      questionActive=false;
+      running=true;
+      bird.vel=jump;
+      safeTimer = 60; // 👈 ~1 second of safe time to fly away from pipe
+      requestAnimationFrame(loop);
+    } else {
+      // wrong answer
+      endGame();
+    }
   }
 
   function showCountdown(sec,cb){
