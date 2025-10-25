@@ -237,14 +237,19 @@
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
-let bird = new Image();
-let bg = new Image();
-let pipeImg = new Image();
-
-bird.src = 'images/bird.png';
+const birdSprite = new Image();
+birdSprite.src = 'images/bird.png'; // Use a 3-frame bird sprite sheet (wider)
+const bg = new Image();
 bg.src = 'images/bg.png';
+const pipeImg = new Image();
 pipeImg.src = 'images/pipe.png';
 
+let frame = 0;
+let flapSpeed = 6;
+let spriteWidth = 34;
+let spriteHeight = 24;
+let birdWidth = 38;
+let birdHeight = 26;
 let gap = 120;
 let constant;
 let bX = 10;
@@ -253,9 +258,7 @@ let gravity = 1.5;
 let score = 0;
 let quizScore = 0;
 let failCount = 0;
-
-let pipe = [];
-pipe[0] = {x: canvas.width, y: 0};
+let pipe = [{ x: canvas.width, y: 0 }];
 
 document.addEventListener("keydown", moveUp);
 function moveUp(){ bY -= 25; }
@@ -274,9 +277,9 @@ function draw() {
     }
 
     if (
-      (bX + bird.width >= pipe[i].x && bX <= pipe[i].x + 60 &&
-      (bY <= pipe[i].y + 200 || bY + bird.height >= pipe[i].y + constant)) ||
-      bY + bird.height >= canvas.height
+      (bX + birdWidth >= pipe[i].x && bX <= pipe[i].x + 60 &&
+      (bY <= pipe[i].y + 200 || bY + birdHeight >= pipe[i].y + constant)) ||
+      bY + birdHeight >= canvas.height
     ) {
       failCount++;
       if (failCount >= 5) showGameOver();
@@ -292,9 +295,16 @@ function draw() {
     }
   }
 
-  ctx.drawImage(bird, bX, bY, 38, 26);
-  bY += gravity;
+  // Bird flapping animation
+  frame++;
+  let birdFrame = Math.floor(frame / flapSpeed) % 3; // 3 frames
+  ctx.drawImage(
+    birdSprite,
+    birdFrame * spriteWidth, 0, spriteWidth, spriteHeight,
+    bX, bY, birdWidth, birdHeight
+  );
 
+  bY += gravity;
   ctx.fillStyle = "#fff";
   ctx.font = "18px Verdana";
   ctx.fillText("Score: " + score, 10, canvas.height - 20);
@@ -302,15 +312,12 @@ function draw() {
   requestAnimationFrame(draw);
 }
 
+// Quiz, leaderboard, fireworks, same logic as before
 function showQuiz() {
   document.getElementById('quizContainer').style.display = 'block';
   loadQuestion();
 }
-
-function hideQuiz() {
-  document.getElementById('quizContainer').style.display = 'none';
-}
-
+function hideQuiz() { document.getElementById('quizContainer').style.display = 'none'; }
 const questions = [
   {q:"What does liability insurance cover?", a:["Damage you cause to others","Your own injuries","Only theft","Natural disasters"], correct:0},
   {q:"What is deductible?", a:["Amount insurer pays","Amount you pay before insurance","Tax credit","Commission"], correct:1},
@@ -333,9 +340,7 @@ const questions = [
   {q:"Comprehensive Auto covers?", a:["Non-collision damages","Collisions","Liability","Parking fees"], correct:0},
   {q:"Collision coverage covers?", a:["Your car hitting objects","Natural disasters","Theft","Vandalism"], correct:0}
 ];
-
 let currentQuestion = 0;
-
 function loadQuestion() {
   let q = questions[currentQuestion % questions.length];
   document.getElementById('question').innerText = q.q;
@@ -348,44 +353,35 @@ function loadQuestion() {
     answersDiv.appendChild(btn);
   });
 }
-
 function checkAnswer(selected, correct) {
   if (selected === correct) {
     quizScore++;
     alert("✅ Correct!");
-  } else {
-    alert("❌ Wrong!");
-  }
+  } else alert("❌ Wrong!");
   updateLeaderboards();
   currentQuestion++;
   hideQuiz();
 }
-
 function updateLeaderboards() {
   localStorage.setItem('pipeScore', score);
   localStorage.setItem('quizScore', quizScore);
   renderLeaderboard();
 }
-
 function renderLeaderboard() {
   document.getElementById('pipeScores').innerHTML = `<li class="top">You: ${score}</li>`;
   document.getElementById('quizScores').innerHTML = `<li class="top">You: ${quizScore}</li>`;
 }
-
 function showGameOver() {
   document.getElementById('gameOverModal').style.display = 'flex';
 }
-
 function returnToDashboard() {
   window.location.href = "game.html";
 }
-
 function showFireworks(message) {
   const fwContainer = document.getElementById('fireworks');
   fwContainer.innerHTML = '';
   fwContainer.style.display = 'block';
   document.getElementById('gameOverText').innerText = message;
-
   for (let i = 0; i < 40; i++) {
     const spark = document.createElement('div');
     spark.classList.add('spark');
@@ -396,15 +392,12 @@ function showFireworks(message) {
     spark.style.animationDelay = `${Math.random()}s`;
     fwContainer.appendChild(spark);
   }
-
   setTimeout(() => {
     fwContainer.style.display = 'none';
     fwContainer.innerHTML = '';
   }, 3000);
 }
-
 document.getElementById('giveUpBtn').onclick = showGameOver;
-
 renderLeaderboard();
 draw();
 </script>
