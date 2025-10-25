@@ -18,19 +18,14 @@
     background: url('images/lava-bg.png') no-repeat center center fixed;
     background-size: cover;
     overflow-x: hidden;
-    animation: fadeInBackground 2s ease-in-out, moveBackground 60s linear infinite;
+    transition: background-position 0.3s ease;
+    animation: fadeInBackground 2s ease-in-out;
   }
 
-  /* Background fade + movement */
+  /* Background fade animation */
   @keyframes fadeInBackground {
     from { opacity: 0; }
     to { opacity: 1; }
-  }
-
-  @keyframes moveBackground {
-    0% { background-position: center center; }
-    50% { background-position: center 60%; }
-    100% { background-position: center center; }
   }
 
   /* optional overlay for readability */
@@ -206,6 +201,7 @@
 </footer>
 
 <script>
+/* Reveal animations (unchanged) */
 function revealElements(selector) {
   document.querySelectorAll(selector).forEach(el => {
     const rect = el.getBoundingClientRect();
@@ -222,6 +218,13 @@ window.addEventListener('scroll', () => {
 window.addEventListener('load', () => {
   revealElements('.course-card');
   revealElements('.trainer-card');
+});
+
+/* === Parallax background effect === */
+document.addEventListener('mousemove', e => {
+  const x = (e.clientX / window.innerWidth - 0.5) * 10;  // horizontal range
+  const y = (e.clientY / window.innerHeight - 0.5) * 10; // vertical range
+  document.body.style.backgroundPosition = `calc(50% + ${x}px) calc(50% + ${y}px)`;
 });
 </script>
 
