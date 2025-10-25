@@ -28,8 +28,8 @@
   .trainers{text-align:center;margin-top:40px;}
   .trainers h2{color:#ff1f1f;font-size:2.4rem;margin-bottom:10px;text-transform:uppercase;}
   .trainers p{color:#ddd;margin-bottom:40px;}
-  .trainer-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2rem;}
-  .trainer-card{
+  .trainer-gallery, .student-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2rem;}
+  .trainer-card, .student-card{
     background:#fff;
     color:#000;
     border-radius:15px;
@@ -41,11 +41,11 @@
     cursor:pointer;
     position:relative;
   }
-  .trainer-card.visible{transform:translateY(0);opacity:1;}
-  .trainer-card img{width:100%;height:230px;object-fit:cover;border-radius:12px;border:3px solid #ff1f1f;transition:transform 0.3s ease;}
-  .trainer-card:hover img{transform:scale(1.05);}
-  .trainer-card h3{color:#800000;margin:10px 0 5px;font-size:1.2rem;}
-  .trainer-card p{color:#333;font-weight:bold;font-size:1rem;}
+  .trainer-card.visible, .student-card.visible{transform:translateY(0);opacity:1;}
+  .trainer-card img, .student-card img{width:100%;height:230px;object-fit:cover;border-radius:12px;border:3px solid #ff1f1f;transition:transform 0.3s ease;}
+  .trainer-card:hover img, .student-card:hover img{transform:scale(1.05);}
+  .trainer-card h3, .student-card h3{color:#800000;margin:10px 0 5px;font-size:1.2rem;}
+  .trainer-card p, .student-card p{color:#333;font-weight:bold;font-size:1rem;}
   .info-section{margin-top:80px;}
   .info-section h1{font-size:2.5rem;margin-bottom:10px;color:#fff;}
   .info-section p.lead{color:#f1f1f1;font-size:1.1rem;margin-bottom:20px;}
@@ -85,6 +85,31 @@
     font-size:1.5rem;color:#b30000;
     cursor:pointer;font-weight:bold;
   }
+
+  /* 🖼️ Lightbox (Student Image Enlarger) */
+  .lightbox{
+    position:fixed;
+    top:0;left:0;width:100%;height:100%;
+    background:rgba(0,0,0,0.9);
+    display:flex;justify-content:center;align-items:center;
+    z-index:150;
+    opacity:0;pointer-events:none;
+    transition:opacity 0.3s ease;
+  }
+  .lightbox.active{opacity:1;pointer-events:auto;}
+  .lightbox img{
+    max-width:90%;
+    max-height:85%;
+    border-radius:15px;
+    box-shadow:0 0 30px rgba(255,255,255,0.2);
+    animation:zoomIn 0.3s ease;
+  }
+  @keyframes zoomIn{from{transform:scale(0.8);opacity:0;}to{transform:scale(1);opacity:1;}}
+  .lightbox .close-lightbox{
+    position:absolute;top:20px;right:30px;
+    color:#fff;font-size:2rem;cursor:pointer;
+    font-weight:bold;
+  }
 </style>
 </head>
 <body>
@@ -109,7 +134,7 @@
     <h2>Meet Our Trainers</h2>
     <p>Tap or click on a trainer to learn more about their experience and story.</p>
     <div class="trainer-gallery">
-      <div class="trainer-card" data-trainer="karl"><img src="images/karl.jpg" alt="Karl Sison"><h3>Karl Sison</h3><p>Training Manager</p></div>
+      <div class="trainer-card" data-trainer="karl"><img src="images/karl.jpg" alt="Karl"><h3>Karl</h3><p>Training Manager</p></div>
       <div class="trainer-card" data-trainer="nash"><img src="images/nash.jpg" alt="Nash"><h3>Nash</h3><p>Trainer</p></div>
       <div class="trainer-card" data-trainer="au"><img src="images/au.jpg" alt="Au"><h3>Au</h3><p>Trainer</p></div>
       <div class="trainer-card" data-trainer="kyle"><img src="images/kyle.jpg" alt="Kyle"><h3>Kyle</h3><p>Trainer</p></div>
@@ -119,7 +144,7 @@
 
   <section class="info-section">
     <h1>About LAVA Classroom</h1>
-    <p class="lead">LAVA Classroom empowers Virtual Assistants with insurance knowledge and hands-on agency operations training. We focus on practical learning and system mastery.</p>
+    <p class="lead">LAVA Classroom empowers Virtual Assistants with insurance knowledge and hands-on agency operations training.</p>
     <h3>Who is this for?</h3>
     <p>New Virtual Assistants, junior agents, and support staff who assist with client policies, renewals, and endorsements.</p>
     <h3>Learning Outcomes</h3>
@@ -129,14 +154,38 @@
       <li>Perform AMS and CRM support tasks accurately.</li>
     </ul>
   </section>
+
+  <!-- 🧑‍🎓 Student Gallery Section -->
+  <section class="trainers">
+    <h2>Our Amazing Students</h2>
+    <p>Click to view our top LAVA students in action!</p>
+    <div class="student-gallery">
+      <div class="student-card"><img src="images/student1.jpg" alt="Student 1"><h3>Student 1</h3><p>LAVA VA</p></div>
+      <div class="student-card"><img src="images/student2.jpg" alt="Student 2"><h3>Student 2</h3><p>LAVA VA</p></div>
+      <div class="student-card"><img src="images/student3.jpg" alt="Student 3"><h3>Student 3</h3><p>LAVA VA</p></div>
+      <div class="student-card"><img src="images/student4.jpg" alt="Student 4"><h3>Student 4</h3><p>LAVA VA</p></div>
+      <div class="student-card"><img src="images/student5.jpg" alt="Student 5"><h3>Student 5</h3><p>LAVA VA</p></div>
+      <div class="student-card"><img src="images/student6.jpg" alt="Student 6"><h3>Student 6</h3><p>LAVA VA</p></div>
+      <div class="student-card"><img src="images/student7.jpg" alt="Student 7"><h3>Student 7</h3><p>LAVA VA</p></div>
+      <div class="student-card"><img src="images/student8.jpg" alt="Student 8"><h3>Student 8</h3><p>LAVA VA</p></div>
+      <div class="student-card"><img src="images/student9.jpg" alt="Student 9"><h3>Student 9</h3><p>LAVA VA</p></div>
+      <div class="student-card"><img src="images/student10.jpg" alt="Student 10"><h3>Student 10</h3><p>LAVA VA</p></div>
+    </div>
+  </section>
 </main>
 
-<!-- Modal -->
+<!-- Trainer Bio Modal -->
 <div class="modal-overlay" id="trainerModal">
   <div class="modal">
     <span class="close-btn" onclick="closeModal()">&times;</span>
     <div id="modalContent"></div>
   </div>
+</div>
+
+<!-- Lightbox Modal -->
+<div class="lightbox" id="lightbox">
+  <span class="close-lightbox" onclick="closeLightbox()">&times;</span>
+  <img src="" alt="Enlarged Student Photo" id="lightboxImg">
 </div>
 
 <footer>
@@ -145,53 +194,46 @@
 
 <script>
 const bios = {
-  karl: `
-  <h2>🧑‍🏫 Karl – Training Manager & Insurance Agency Specialist</h2>
-  <p>Karl is LAVA’s dedicated Training Manager and a true expert in insurance operations. With years of experience managing agency processes and guiding virtual assistants, Karl leads with patience, clarity, and a deep passion for learning.</p>
-  <p>Known for being approachable and supportive, he always makes sure his trainees feel confident and empowered in every session. His leadership keeps the LAVA Classroom running smoothly and full of positive energy.</p>
-  `,
-  nash: `
-  <h2>🖥️ Nash – Senior Virtual Assistant Trainer</h2>
-  <p>With over 8 years of experience in the BPO industry and 2 years as a seasoned Virtual Assistant, Nash brings a wealth of technical know-how and real-world insights to the LAVA Classroom.</p>
-  <p>He specializes in teaching new VAs about insurance workflows and client handling. Known for his tech-savvy style and friendly approach, Nash creates an engaging and relatable training environment. And yes — when he’s not teaching, he’s probably talking about his favorite birds 🐦.</p>
-  `,
-  au: `
-  <h2>🌟 Au – Insurance Process Trainer</h2>
-  <p>With 10 years of experience in the BPO industry and a strong background as a professional trainer, Au is a bright and inspiring presence at LAVA. Affectionately known as “BINI Au” for her cheerful personality and colorful spirit, she brings energy and fun into every training session.</p>
-  <p>Au is passionate about helping new VAs discover their strengths, build confidence, and reach their full potential. Her jolly and approachable nature makes her one of the most beloved trainers in the team.</p>
-  `,
-  kyle: `
-  <h2>🎓 Kyle – Internal Trainer & Former College Professor</h2>
-  <p>Before joining LAVA, Trainer Kyle spent 8 years teaching in college, shaping young minds with patience and passion. Now, as an internal trainer at LAVA, he combines his academic experience with hands-on VA expertise to deliver lessons that are both insightful and inspiring.</p>
-  <p>A former LAVA VA himself, Kyle understands the journey from trainee to expert. His students affectionately call him “Sir Kyle”, a title that perfectly captures his caring, mentor-like presence.</p>
-  `,
-  chanie: `
-  <h2>🌸 Chanie – Internal Trainer & Former Educator</h2>
-  <p>Chanie is known for her calm, kind, and nurturing personality. Once a dedicated teacher, she transitioned into the VA world and quickly proved her excellence, eventually becoming one of LAVA’s internal trainers.</p>
-  <p>She’s admired for her gentle teaching style, her quiet confidence, and her deep care for her trainees. Beyond the classroom, Chanie is a loving mom who inspires others through her balance of grace, warmth, and professionalism.</p>
-  `
+  karl:`<h2>🧑‍🏫 Karl – Training Manager & Insurance Agency Specialist</h2><p>Karl is LAVA’s dedicated Training Manager and a true expert in insurance operations.</p>`,
+  nash:`<h2>🖥️ Nash – Senior Virtual Assistant Trainer</h2><p>With over 8 years in the BPO industry and 2 years as a VA...</p>`,
+  au:`<h2>🌟 Au – Insurance Process Trainer</h2><p>With 10 years in BPO and experience as a Trainer...</p>`,
+  kyle:`<h2>🎓 Kyle – Internal Trainer & Former College Professor</h2><p>Before joining LAVA, Kyle taught for 8 years...</p>`,
+  chanie:`<h2>🌸 Chanie – Internal Trainer & Former Educator</h2><p>Chanie is known for her calm and nurturing personality...</p>`
 };
 
 document.querySelectorAll('.trainer-card').forEach(card=>{
   card.addEventListener('click',()=>{
-    const trainer = card.getAttribute('data-trainer');
-    document.getElementById('modalContent').innerHTML = bios[trainer];
+    const trainer=card.getAttribute('data-trainer');
+    document.getElementById('modalContent').innerHTML=bios[trainer];
     document.getElementById('trainerModal').classList.add('active');
   });
 });
 
-function closeModal(){
-  document.getElementById('trainerModal').classList.remove('active');
-}
+function closeModal(){document.getElementById('trainerModal').classList.remove('active');}
 
 function revealCards(){
-  document.querySelectorAll('.trainer-card').forEach(card=>{
+  document.querySelectorAll('.trainer-card, .student-card').forEach(card=>{
     const rect=card.getBoundingClientRect();
     if(rect.top<window.innerHeight-100)card.classList.add('visible');
   });
 }
 window.addEventListener('scroll',revealCards);
 window.addEventListener('load',revealCards);
+
+// 🖼️ Lightbox logic
+const lightbox=document.getElementById('lightbox');
+const lightboxImg=document.getElementById('lightboxImg');
+
+document.querySelectorAll('.student-card img').forEach(img=>{
+  img.addEventListener('click',()=>{
+    lightboxImg.src=img.src;
+    lightbox.classList.add('active');
+  });
+});
+function closeLightbox(){lightbox.classList.remove('active');}
+lightbox.addEventListener('click',e=>{
+  if(e.target===lightbox)closeLightbox();
+});
 </script>
 </body>
 </html>
