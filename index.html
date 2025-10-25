@@ -15,9 +15,22 @@
   body {
     font-family: 'Poppins', sans-serif;
     color: #fff;
-    background: url('images/3064b00d-160c-434a-989f-98e76bae327e.png') no-repeat center center fixed;
+    background: url('images/lava-bg.png') no-repeat center center fixed;
     background-size: cover;
     overflow-x: hidden;
+    animation: fadeInBackground 2s ease-in-out, moveBackground 60s linear infinite;
+  }
+
+  /* Background fade + movement */
+  @keyframes fadeInBackground {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes moveBackground {
+    0% { background-position: center center; }
+    50% { background-position: center 60%; }
+    100% { background-position: center center; }
   }
 
   /* optional overlay for readability */
