@@ -213,23 +213,51 @@
 
   function spawnPipe(){const top=Math.random()*(H-pipeGap-140)+40;pipes.push({x:W,top:top,bottom:top+pipeGap,passed:false});}
 
-  function update(){
-    if(!running||questionActive)return;
-    frame++;bird.vel+=gravity;bird.y+=bird.vel;pipes.forEach(p=>p.x-=pipeSpeed);
-    if(frame%100===0)spawnPipe();pipes=pipes.filter(p=>p.x+pipeW>-20);
-    if(safeTimer>0) safeTimer--; // 👈 count down invincibility frames
-    pipes.forEach(p=>{
-      if(!p.passed&&p.x+pipeW<bird.x){
-        p.passed=true;score++;
-        scoreLabel.textContent=score;
-        if(score>high){high=score;localStorage.setItem('lava_high',high);highLabel.textContent='High: '+high;}
-        checkFireworks(score);
+function update(){
+  if(!running || questionActive) return;
+
+  frame++;
+  bird.vel += gravity;
+  bird.y += bird.vel;
+  pipes.forEach(p => p.x -= pipeSpeed);
+
+  if(frame % 100 === 0) spawnPipe();
+  pipes = pipes.filter(p => p.x + pipeW > -20);
+  if(safeTimer > 0) safeTimer--;
+
+  let hitPipe = false;
+
+  pipes.forEach(p => {
+    // 🟢 Add to score when passing pipe
+    if(!p.passed && p.x + pipeW < bird.x){
+      p.passed = true;
+      score++;
+      scoreLabel.textContent = score;
+      if(score > high){
+        high = score;
+        localStorage.setItem('lava_high', high);
+        highLabel.textContent = 'High: ' + high;
       }
-      const collide=bird.x+bird.w>p.x&&bird.x<p.x+pipeW&&(bird.y<p.top||bird.y+bird.h>p.bottom);
-      if(collide && safeTimer<=0) openQuiz();
-    });
-    if(bird.y<0||bird.y+bird.h>H) openQuiz();
+      checkFireworks(score); // 🎆 still okay
+    }
+
+    // 💥 Collision check
+    const collide = (
+      bird.x + bird.w > p.x &&
+      bird.x < p.x + pipeW &&
+      (bird.y < p.top || bird.y + bird.h > p.bottom)
+    );
+    if(collide && safeTimer <= 0) hitPipe = true;
+  });
+
+  // 💥 Ground/ceiling collision
+  if((bird.y < 0 || bird.y + bird.h > H) && safeTimer <= 0) hitPipe = true;
+
+  // 🎯 Only trigger quiz if a collision actually happened
+  if(hitPipe){
+    openQuiz();
   }
+}
 
   function render(){ctx.clearRect(0,0,W,H);drawBackground();drawPipes();drawBird();}
   function loop(){if(running&&!gameOver){update();render();requestAnimationFrame(loop);}}
