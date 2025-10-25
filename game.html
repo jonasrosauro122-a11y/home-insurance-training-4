@@ -1,319 +1,295 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>LAVA Classroom — Flappy Quiz</title>
-<style>
-  :root{--accent:#ff1f1f;--bg1:#000;--bg2:#480000}
-  *{box-sizing:border-box}
-  html,body{height:100%;margin:0;font-family:'Poppins',sans-serif;background:linear-gradient(135deg,var(--bg1),var(--bg2));color:#fff;overflow:hidden}
-  .site-header{position:fixed;left:0;right:0;top:0;z-index:50;background:rgba(0,0,0,0.65);backdrop-filter:blur(4px)}
-  .header-inner.container{max-width:1200px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between}
-  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff;font-weight:700}
-  .brand img{height:36px}
-  .main-nav ul{display:flex;gap:12px;list-style:none;margin:0;padding:0}
-  .main-nav a{color:#fff;text-decoration:none;padding:6px 10px;border-radius:6px}
-  .main-nav a.active,.main-nav a:hover{background:var(--accent)}
-  #gameArea{position:fixed;left:0;right:0;top:64px;bottom:0;display:flex;align-items:center;justify-content:center}
-  canvas{border-radius:10px;border:3px solid var(--accent);box-shadow:0 12px 40px rgba(0,0,0,0.6);background:#70c8ff}
-  .hud{position:absolute;top:78px;width:100%;text-align:center;pointer-events:none;z-index:40}
-  .hud .score{font-size:28px;font-weight:800}
-  .hud .high{font-size:12px;color:rgba(255,255,255,0.9)}
-  #startPanel{position:absolute;top:38%;left:50%;transform:translateX(-50%);text-align:center;z-index:45}
-  #startPanel input{padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);width:220px;margin-bottom:8px}
-  .btn{padding:10px 16px;border-radius:10px;border:none;background:var(--accent);color:#fff;font-weight:700;cursor:pointer}
-  .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.08)}
-  #giveUp{position:absolute;top:76px;right:20px;z-index:45}
-  #quizBox{display:none;position:absolute;left:50%;top:22%;transform:translateX(-50%);width:88%;max-width:520px;background:#111;border:2px solid var(--accent);padding:16px;border-radius:12px;z-index:60;text-align:left}
-  #quizBox h3{color:#fff;margin:0 0 10px}
-  .choices{display:flex;flex-direction:column;gap:8px}
-  .choiceBtn{background:#222;color:#fff;border-radius:8px;padding:10px;border:none;cursor:pointer;text-align:left}
-  #modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:80;align-items:center;justify-content:center}
-  #modal .card{background:#0f0f0f;color:#fff;padding:20px;border-radius:12px;width:92%;max-width:520px;border:1px solid rgba(255,255,255,0.06)}
-  #modal h2{color:var(--accent);margin:0 0 8px}
-  ol.leader{padding-left:18px;margin:8px 0 0;max-height:220px;overflow-y:auto}
-  ol.leader li{background:#111;padding:8px;border-radius:8px;margin:6px 0}
-  #countText{position:absolute;top:45%;left:50%;transform:translate(-50%,-50%);font-size:100px;font-weight:900;color:var(--accent);pointer-events:none;z-index:70;display:none}
-  
-  /* 👇 New Sidebar for Player List */
-  #playerSidebar{
-    position:absolute;
-    left:20px;
-    top:100px;
-    background:rgba(0,0,0,0.55);
-    border:1px solid var(--accent);
-    padding:12px;
-    border-radius:10px;
-    z-index:50;
-    width:180px;
-    max-height:400px;
-    overflow-y:auto;
-  }
-  #playerSidebar h4{margin:0 0 8px;font-size:14px;text-align:center;color:var(--accent)}
-  #playerSidebar ul{list-style:none;padding:0;margin:0}
-  #playerSidebar li{padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.1)}
-  
-  /* 🎆 Fireworks & Message */
-  #fireworksMsg{
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    font-size:48px;
-    font-weight:900;
-    color:#ffdb4d;
-    text-shadow:0 0 20px #ff0000,0 0 40px #ff0000;
-    display:none;
-    animation:popText 2s ease-out forwards;
-    z-index:90;
-  }
-  @keyframes popText{
-    0%{transform:translate(-50%,-50%) scale(0);opacity:0;}
-    40%{transform:translate(-50%,-50%) scale(1.3);opacity:1;}
-    100%{transform:translate(-50%,-50%) scale(1);opacity:0;}
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flappy Bird Insurance Quiz Game</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: #000;
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    header, footer {
+      display: none;
+    }
+
+    .game-container {
+      display: flex;
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+    }
+
+    canvas {
+      flex: 1;
+      background: url('images/bg.png') center/cover no-repeat;
+      display: block;
+    }
+
+    .leaderboard, .quizboard {
+      width: 250px;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 15px;
+      overflow-y: auto;
+      border: 2px solid crimson;
+    }
+
+    .leaderboard h2, .quizboard h2 {
+      text-align: center;
+      color: gold;
+      margin-bottom: 10px;
+    }
+
+    .score-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 4px 0;
+      border-bottom: 1px solid #333;
+    }
+
+    .fireworks {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      display: none;
+      z-index: 10;
+    }
+
+    .message {
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 48px;
+      color: gold;
+      text-shadow: 0 0 10px red;
+      display: none;
+      z-index: 11;
+    }
+
+    #quiz {
+      position: absolute;
+      bottom: 30px;
+      right: 300px;
+      background: rgba(0,0,0,0.8);
+      padding: 15px;
+      border: 2px solid crimson;
+      display: none;
+      z-index: 5;
+    }
+
+    #giveUpBtn {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      background: crimson;
+      color: white;
+      padding: 8px 14px;
+      border: none;
+      cursor: pointer;
+      border-radius: 6px;
+      z-index: 12;
+    }
+  </style>
 </head>
 <body>
+  <div class="game-container">
+    <div class="leaderboard">
+      <h2>Pipe Leaderboard</h2>
+      <div id="pipeScores"></div>
+    </div>
 
-<header class="site-header">
-  <div class="header-inner container">
-    <a class="brand" href="index.html"><img src="images/logo.png" alt="LAVA">LAVA Classroom</a>
-    <nav class="main-nav" aria-label="main">
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">Trainers</a></li>
-        <li><a href="courses.html">Courses</a></li>
-        <li><a href="assignments.html">LAVA University</a></li>
-        <li><a href="game.html" class="active">Games</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
+    <canvas id="gameCanvas" width="480" height="640"></canvas>
 
-<section id="gameArea">
-  <canvas id="canvas" width="420" height="630"></canvas>
-
-  <div id="playerSidebar">
-    <h4>Insurance VA Players</h4>
-    <ul id="sideList"></ul>
-  </div>
-
-  <div id="fireworksMsg">Awesome!</div>
-
-  <div class="hud">
-    <div class="score" id="scoreLabel">0</div>
-    <div class="high" id="highLabel">High: 0</div>
-  </div>
-
-  <div id="startPanel">
-    <input id="playerName" placeholder="Enter your name" />
-    <div><button id="startBtn" class="btn">Start</button></div>
-  </div>
-
-  <button id="giveUp" class="btn ghost">Give Up</button>
-
-  <div id="quizBox">
-    <h3 id="quizQ">Question</h3>
-    <div class="choices" id="choices"></div>
-  </div>
-
-  <div id="modal">
-    <div class="card">
-      <h2>🏆 LAVA Leaderboard</h2>
-      <p id="finalText">Final score: 0</p>
-      <ol class="leader" id="leaderList"></ol>
-      <div style="margin-top:12px;text-align:center">
-        <button id="modalClose" class="btn">Close</button>
-        <button id="goDashboard" class="btn ghost">Go to Dashboard</button>
-      </div>
+    <div class="quizboard">
+      <h2>Quiz Leaderboard</h2>
+      <div id="quizScores"></div>
     </div>
   </div>
 
-  <div id="countText">3</div>
-</section>
+  <div id="quiz">
+    <p id="question"></p>
+    <div id="answers"></div>
+  </div>
 
-<script>
-(() => {
-  const canvas=document.getElementById('canvas');
-  const ctx=canvas.getContext('2d');
-  const scoreLabel=document.getElementById('scoreLabel');
-  const highLabel=document.getElementById('highLabel');
-  const startPanel=document.getElementById('startPanel');
-  const playerNameInput=document.getElementById('playerName');
-  const giveUpBtn=document.getElementById('giveUp');
-  const quizBox=document.getElementById('quizBox');
-  const quizQ=document.getElementById('quizQ');
-  const choicesWrap=document.getElementById('choices');
-  const modal=document.getElementById('modal');
-  const leaderList=document.getElementById('leaderList');
-  const finalText=document.getElementById('finalText');
-  const modalClose=document.getElementById('modalClose');
-  const goDashboard=document.getElementById('goDashboard');
-  const countText=document.getElementById('countText');
-  const sideList=document.getElementById('sideList');
-  const fireworksMsg=document.getElementById('fireworksMsg');
+  <button id="giveUpBtn">Give Up</button>
 
-  const W=canvas.width,H=canvas.height;
-  const birdImg=new Image(); birdImg.src='images/bird.png';
-  const pipeImg=new Image(); pipeImg.src='images/pipe.png';
-  const bgImg=new Image(); bgImg.src='images/bg.png';
+  <div class="fireworks" id="fireworks"></div>
+  <div class="message" id="message"></div>
 
-  let bird,pipes,frame,score,high,running,questionActive,gameOver,playerName,questionIndex=0;
-  const gravity=0.45,jump=-8,pipeSpeed=2,pipeGap=160,pipeW=52;
+  <script>
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
 
-  const questions=[
-    {q:"An organization of insurers through which risks are pooled.",a:"insurance pool"},
-    {q:"Anyone can be an agent. True or False.",a:"false"},
-    {q:"A financial agreement to transfer risk for premiums.",a:"insurance"},
-    {q:"Professional who evaluates risk.",a:"underwriter"},
-    {q:"Amount you pay out of pocket before insurance starts.",a:"deductible"},
-    {q:"Person or business protected under a policy.",a:"insured"},
-    {q:"Company that provides insurance coverage.",a:"insurer"},
-    {q:"Change or addition made to existing policy.",a:"endorsement"},
-    {q:"Document outlining terms, coverages, exclusions.",a:"policy"},
-    {q:"Meaning of AMS.",a:"agency management system"},
-    {q:"Form used to request coverage from carriers.",a:"acord form"},
-    {q:"Type of insurance that covers business property.",a:"commercial property"},
-    {q:"Insurance protecting against data breaches.",a:"cyber liability"},
-    {q:"Covers legal liability for injuries or damages.",a:"general liability"},
-    {q:"A car used for business purposes needs what insurance?",a:"commercial auto"},
-    {q:"Extra coverage that extends policy limits.",a:"umbrella"},
-    {q:"Part of homeowners policy covering dwelling.",a:"coverage a"},
-    {q:"Part of homeowners policy covering personal property.",a:"coverage c"},
-    {q:"Who represents the insured in placing coverage?",a:"agent"}
-  ];
+    let bird = new Image();
+    bird.src = 'images/bird.png';
+    let bg = new Image();
+    bg.src = 'images/bg.png';
+    let pipe = new Image();
+    pipe.src = 'images/pipe.png';
 
-  function loadScores(){try{return JSON.parse(localStorage.getItem('lava_scores')||'[]');}catch(e){return[];}}
-  function saveScores(arr){localStorage.setItem('lava_scores',JSON.stringify(arr));}
-  
-  function updateLeaderModal(){
-    const arr=loadScores().sort((a,b)=>b.score-a.score);
-    leaderList.innerHTML='';
-    arr.forEach((p,i)=>{
-      const li=document.createElement('li');
-      li.textContent=`${i+1}. ${p.name} — ${p.score}`;
-      leaderList.appendChild(li);
-    });
-    // 👇 Also update side list
-    sideList.innerHTML='';
-    arr.forEach(p=>{
-      const li=document.createElement('li');
-      li.textContent=`${p.name}: ${p.score}`;
-      sideList.appendChild(li);
-    });
-  }
+    let gap = 130;
+    let constant;
+    let bX = 50;
+    let bY = 150;
+    let gravity = 1.5;
+    let score = 0;
+    let failCount = 0;
+    let playerName = localStorage.getItem('playerName') || prompt("Enter your name:");
+    localStorage.setItem('playerName', playerName);
 
-  function drawBackground(){ctx.drawImage(bgImg,0,0,W,H);}
-  function drawPipes(){pipes.forEach(p=>{ctx.drawImage(pipeImg,p.x,p.bottom,pipeW,H-p.bottom);ctx.save();ctx.translate(p.x+pipeW/2,p.top);ctx.scale(1,-1);ctx.drawImage(pipeImg,-pipeW/2,0,pipeW,H-p.bottom);ctx.restore();});}
-  function drawBird(){ctx.drawImage(birdImg,bird.x,bird.y,bird.w,bird.h);}
+    let pipeArray = [];
+    pipeArray[0] = { x: canvas.width, y: 0 };
 
-  function spawnPipe(){const top=Math.random()*(H-pipeGap-140)+40;pipes.push({x:W,top:top,bottom:top+pipeGap,passed:false});}
+    document.addEventListener("keydown", moveUp);
+    function moveUp() { bY -= 25; }
 
-  function update(){
-    if(!running||questionActive)return;
-    frame++;bird.vel+=gravity;bird.y+=bird.vel;pipes.forEach(p=>p.x-=pipeSpeed);
-    if(frame%100===0)spawnPipe();pipes=pipes.filter(p=>p.x+pipeW>-20);
-    pipes.forEach(p=>{
-      if(!p.passed&&p.x+pipeW<bird.x){
-        p.passed=true;score++;
-        scoreLabel.textContent=score;
-        if(score>high){high=score;localStorage.setItem('lava_high',high);highLabel.textContent='High: '+high;}
-        checkFireworks(score);
+    function draw() {
+      ctx.drawImage(bg, 0, 0);
+
+      for (let i = 0; i < pipeArray.length; i++) {
+        constant = pipe.height + gap;
+        ctx.drawImage(pipe, pipeArray[i].x, pipeArray[i].y);
+        ctx.drawImage(pipe, pipeArray[i].x, pipeArray[i].y + constant);
+
+        pipeArray[i].x--;
+
+        if (pipeArray[i].x == 125) {
+          pipeArray.push({ x: canvas.width, y: Math.floor(Math.random() * pipe.height) - pipe.height });
+        }
+
+        if (bX + bird.width >= pipeArray[i].x && bX <= pipeArray[i].x + pipe.width &&
+            (bY <= pipeArray[i].y + pipe.height || bY + bird.height >= pipeArray[i].y + constant) ||
+            bY + bird.height >= canvas.height) {
+          failCount++;
+          if (failCount >= 5) endGame();
+          resetGame();
+        }
+
+        if (pipeArray[i].x == 5) {
+          score++;
+          updateLeaderboards();
+          if (score == 10) showFireworks("Awesome!");
+          if (score == 15) showFireworks("You are Insurance VA Expert!");
+          if (score % 5 == 0) showQuiz();
+        }
       }
-      const collide=bird.x+bird.w>p.x&&bird.x<p.x+pipeW&&(bird.y<p.top||bird.y+bird.h>p.bottom);
-      if(collide)openQuiz();
-    });
-    if(bird.y<0||bird.y+bird.h>H)openQuiz();
-  }
 
-  function render(){ctx.clearRect(0,0,W,H);drawBackground();drawPipes();drawBird();}
-  function loop(){if(running&&!gameOver){update();render();requestAnimationFrame(loop);}if(questionIndex>=questions.length){endGame();}}
+      ctx.drawImage(bird, bX, bY);
+      bY += gravity;
+      requestAnimationFrame(draw);
+    }
+    draw();
 
-  function startGame(){
-    playerName=(playerNameInput.value||'').trim();
-    if(!playerName){alert('Please enter your name');return;}
-    const scores=loadScores();
-    if(!scores.some(s=>s.name===playerName)){scores.push({name:playerName,score:0});saveScores(scores);}
-    resetGame();
-    showCountdown(3,()=>{running=true;requestAnimationFrame(loop);});
-  }
+    function resetGame() {
+      bX = 50;
+      bY = 150;
+      pipeArray = [{ x: canvas.width, y: 0 }];
+      score = 0;
+    }
 
-  function resetGame(){
-    bird={x:80,y:H/2,w:34,h:24,vel:0};
-    pipes=[];frame=0;score=0;questionIndex=0;running=false;questionActive=false;gameOver=false;
-    scoreLabel.textContent='0';high=parseInt(localStorage.getItem('lava_high')||0);
-    highLabel.textContent='High: '+high;
-    startPanel.style.display='none';updateLeaderModal();spawnPipe();
-  }
+    function showFireworks(text) {
+      const fireworks = document.getElementById('fireworks');
+      const message = document.getElementById('message');
+      fireworks.style.display = 'block';
+      message.style.display = 'block';
+      message.textContent = text;
+      setTimeout(() => {
+        fireworks.style.display = 'none';
+        message.style.display = 'none';
+      }, 3000);
+    }
 
-  function openQuiz(){
-    running=false;questionActive=true;
-    if(questionIndex>=questions.length){endGame();return;}
-    const q=questions[questionIndex++];
-    quizQ.textContent=q.q;
-    const choices=new Set([q.a]);
-    while(choices.size<3)choices.add(questions[Math.floor(Math.random()*questions.length)].a);
-    const arr=[...choices].sort(()=>Math.random()-0.5);
-    choicesWrap.innerHTML='';
-    arr.forEach(txt=>{
-      const btn=document.createElement('button');
-      btn.className='choiceBtn';btn.textContent=txt;
-      btn.onclick=()=>handleAnswer(txt,q.a);
-      choicesWrap.appendChild(btn);
-    });
-    quizBox.style.display='block';
-  }
+     const quizData = [
+      { q: "What does liability insurance primarily cover?", a: ["Legal responsibility", "Car damages", "Medical bills"], c: 0 },
+      { q: "Coverage A in Homeowners covers what?", a: ["Dwelling", "Other Structures", "Personal Property"], c: 0 },
+      { q: "Which insurance helps in cyber attacks?", a: ["Cyber Liability", "General Liability", "Auto"], c: 0 },
+      { q: "ACORD forms are used for?", a: ["Insurance documentation", "Customer emails", "Payment receipts"], c: 0 },
+      { q: "What is a deductible?", a: ["Amount you pay before insurance", "Premium", "Total policy limit"], c: 0 },
+      { q: "What is a BOP in commercial insurance?", a: ["Business Owner’s Policy", "Basic Office Plan", "Broker Option Policy"], c: 0 },
+      { q: "What coverage pays for someone injured at your home?", a: ["Medical Payments", "Dwelling", "Loss of Use"], c: 0 },
+      { q: "Which auto coverage pays for your car repairs?", a: ["Collision", "Liability", "Comprehensive"], c: 0 },
+      { q: "What does ‘premium’ mean?", a: ["Amount paid for insurance", "Discount", "Claim check"], c: 0 },
+      { q: "Which coverage helps replace belongings?", a: ["Personal Property", "Dwelling", "Liability"], c: 0 },
+      { q: "What is Coverage B in Home Insurance?", a: ["Other Structures", "Dwelling", "Loss of Use"], c: 0 },
+      { q: "Umbrella insurance provides?", a: ["Extra liability protection", "Car coverage", "Health coverage"], c: 0 },
+      { q: "Flood damage is covered by?", a: ["Flood Policy", "Homeowners", "Auto"], c: 0 },
+      { q: "What is E&O insurance for?", a: ["Professional mistakes", "Home damage", "Medical bills"], c: 0 },
+      { q: "Workers’ Compensation covers?", a: ["Employee injury at work", "Client injury", "Property loss"], c: 0 },
+      { q: "Cyber Liability helps with?", a: ["Data breaches", "Car theft", "House fires"], c: 0 },
+      { q: "Commercial Property Insurance covers?", a: ["Business buildings & equipment", "Employee injury", "Car accident"], c: 0 },
+      { q: "Auto Liability covers?", a: ["Other people’s injuries/damages", "Your car only", "Flood loss"], c: 0 },
+      { q: "Loss of Use coverage helps when?", a: ["You can’t live in your home", "Car is stolen", "Policy expires"], c: 0 },
+      { q: "Why do agencies use ACORD 25?", a: ["Certificate of Insurance", "Billing form", "Claim form"], c: 0 }
+    ];
 
-  function handleAnswer(ans,correct){
-    quizBox.style.display='none';
-    if(ans.toLowerCase()===correct.toLowerCase()){
-      questionActive=false;running=true;bird.vel=jump;requestAnimationFrame(loop);
-    }else{endGame();}
-  }
+    let quizScore = 0;
+    const quizBox = document.getElementById("quiz");
+    const qText = document.getElementById("question");
+    const answersDiv = document.getElementById("answers");
 
-  function showCountdown(sec,cb){
-    countText.style.display='block';let c=sec;
-    countText.textContent=c;
-    const timer=setInterval(()=>{c--;if(c>0)countText.textContent=c;else{clearInterval(timer);countText.style.display='none';cb();}},1000);
-  }
+    function showQuiz() {
+      let q = quizData[Math.floor(Math.random() * quizData.length)];
+      quizBox.style.display = "block";
+      qText.textContent = q.q;
+      answersDiv.innerHTML = '';
+      q.a.forEach((ans, i) => {
+        const btn = document.createElement('button');
+        btn.textContent = ans;
+        btn.onclick = () => {
+          if (i === q.c) quizScore++;
+          else failCount++;
+          updateLeaderboards();
+          quizBox.style.display = "none";
+          if (failCount >= 5) endGame();
+        };
+        answersDiv.appendChild(btn);
+      });
+    }
 
-  // 🎆 Fireworks Pop Message
-  function checkFireworks(s){
-    if(s===10){showFireworks("Awesome!");}
-    if(s===15){showFireworks("You are Insurance VA Expert!");}
-  }
+    function updateLeaderboards() {
+      let data = JSON.parse(localStorage.getItem('lavaLeaderboard') || '{}');
+      data[playerName] = { pipes: score, quiz: quizScore };
+      localStorage.setItem('lavaLeaderboard', JSON.stringify(data));
+      renderLeaderboards();
+    }
 
-  function showFireworks(msg){
-    fireworksMsg.textContent=msg;
-    fireworksMsg.style.display='block';
-    setTimeout(()=>{fireworksMsg.style.display='none';},3000);
-  }
+    function renderLeaderboards() {
+      const data = JSON.parse(localStorage.getItem('lavaLeaderboard') || '{}');
+      const pipeDiv = document.getElementById('pipeScores');
+      const quizDiv = document.getElementById('quizScores');
+      pipeDiv.innerHTML = '';
+      quizDiv.innerHTML = '';
 
-  function endGame(){
-    gameOver=true;running=false;
-    const scores=loadScores();
-    const existing=scores.find(s=>s.name===playerName);
-    if(existing)existing.score=Math.max(existing.score,score);
-    else scores.push({name:playerName,score});
-    saveScores(scores);
-    finalText.textContent='Final score: '+score;
-    updateLeaderModal();
-    modal.style.display='flex';
-  }
+      Object.entries(data).forEach(([name, scores]) => {
+        let p = document.createElement('div');
+        p.className = 'score-item';
+        p.innerHTML = `<span>${name}</span><span>${scores.pipes}</span>`;
+        pipeDiv.appendChild(p);
 
-  giveUpBtn.onclick=()=>endGame();
-  modalClose.onclick=()=>{modal.style.display='none';startPanel.style.display='';};
-  goDashboard.onclick=()=>window.location.href='game.html';
-  document.getElementById('startBtn').onclick=startGame;
-  canvas.onclick=()=>{if(running&&!questionActive)bird.vel=jump;};
-  window.onkeydown=e=>{if(e.code==='Space'&&running&&!questionActive)bird.vel=jump;};
+        let q = document.createElement('div');
+        q.className = 'score-item';
+        q.innerHTML = `<span>${name}</span><span>${scores.quiz}</span>`;
+        quizDiv.appendChild(q);
+      });
+    }
 
-  highLabel.textContent='High: '+(localStorage.getItem('lava_high')||0);
-  updateLeaderModal();
-})();
-</script>
+    renderLeaderboards();
+
+    function endGame() {
+      alert(`Game Over, ${playerName}! Returning to Dashboard.`);
+      window.location.href = "game.html";
+    }
+
+    document.getElementById("giveUpBtn").onclick = endGame;
+  </script>
 </body>
 </html>
