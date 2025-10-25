@@ -1,256 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LAVA Classroom Game</title>
-  <style>
-    body {
-      margin: 0;
-      overflow: hidden;
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #000, #7a0000);
-      color: #fff;
-    }
-
-    header.site-header {
-      background: #000;
-      color: white;
-      padding: 10px 0;
-      text-align: center;
-      font-weight: bold;
-      font-size: 1.3rem;
-      border-bottom: 3px solid red;
-    }
-
-    #gameContainer {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 15px;
-      height: 500px;
-      margin: 40px auto;
-      overflow: hidden;
-      max-width: 1200px;
-    }
-
-    canvas {
-      background: url('images/bg.png') repeat-x;
-      background-size: cover;
-      display: block;
-      margin: 0 auto;
-      width: 480px;
-      height: 400px;
-      border-radius: 10px;
-      box-shadow: 0 0 15px red;
-    }
-
-    .leaderboard, .quizboard {
-      width: 220px;
-      background: rgba(0,0,0,0.85);
-      padding: 15px;
-      box-shadow: 0 0 20px red;
-      border-radius: 10px;
-      height: 90%;
-      overflow-y: auto;
-    }
-
-    .leaderboard h2, .quizboard h2 {
-      color: #ff2b2b;
-      text-align: center;
-      border-bottom: 2px solid red;
-      padding-bottom: 5px;
-      font-size: 1.1em;
-    }
-
-    .leaderboard ul, .quizboard ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .leaderboard li, .quizboard li {
-      padding: 5px 10px;
-      margin: 5px 0;
-      background: #111;
-      border-radius: 5px;
-      font-size: 0.9em;
-    }
-
-    .leaderboard li.top {
-      background: #ff2b2b;
-      color: #fff;
-      font-weight: bold;
-      box-shadow: 0 0 10px #ff2b2b;
-    }
-
-    #giveUpBtn {
-      position: absolute;
-      top: 90px;
-      right: 30px;
-      background: red;
-      border: none;
-      color: #fff;
-      padding: 10px 20px;
-      font-size: 16px;
-      cursor: pointer;
-      border-radius: 6px;
-      box-shadow: 0 0 10px #ff0000;
-    }
-
-    #giveUpBtn:hover {
-      background: #a10000;
-    }
-
-    #quizContainer {
-      position: absolute;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(0,0,0,0.9);
-      padding: 20px;
-      border-radius: 10px;
-      text-align: center;
-      color: white;
-      display: none;
-      box-shadow: 0 0 20px red;
-      width: 350px;
-      z-index: 900; /* Added z-index */
-    }
-
-    #quizContainer button {
-      background: red;
-      color: #fff;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 5px;
-      cursor: pointer;
-      margin: 5px;
-    }
-
-    #quizContainer button:hover {
-      background: #b30000;
-    }
-
-    #gameOverModal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.9);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      color: #fff;
-      z-index: 1000;
-    }
-
-    #gameOverModal button {
-      margin-top: 20px;
-      background: red;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 8px;
-      font-size: 18px;
-      cursor: pointer;
-      box-shadow: 0 0 10px #ff0000;
-    }
-
-    /* New styles for the countdown */
-    #countdownOverlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.7);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 8em;
-      color: #ff2b2b;
-      font-weight: bold;
-      z-index: 500;
-    }
-
-
-    .fireworks {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      pointer-events: none;
-      display: none;
-      z-index: 2000;
-    }
-
-    .spark {
-      position: absolute;
-      width: 5px;
-      height: 5px;
-      background: radial-gradient(circle, #ff0000, #ff6600, transparent);
-      border-radius: 50%;
-      animation: explode 1s ease-out forwards;
-    }
-
-    @keyframes explode {
-      from { transform: scale(0) translateY(0); opacity: 1; }
-      to { transform: scale(2) translateY(-200px); opacity: 0; }
-    }
-
-    @media (max-width: 768px) {
-      #gameContainer {
-        flex-direction: column;
-        height: auto;
-      }
-      canvas {
-        width: 90%;
-        height: auto;
-      }
-      .leaderboard, .quizboard {
-        width: 90%;
-        height: auto;
-      }
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LAVA Classroom Game</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #000, #7a0000);
+      color: #fff;
+    }
+    header.site-header {
+      background: #000;
+      color: white;
+      padding: 10px 0;
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.3rem;
+      border-bottom: 3px solid red;
+    }
+    #gameContainer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      height: 500px;
+      margin: 40px auto;
+      overflow: hidden;
+      max-width: 1200px;
+    }
+    canvas {
+      background: url('images/bg.png') repeat-x;
+      background-size: cover;
+      display: block;
+      margin: 0 auto;
+      width: 480px;
+      height: 400px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px red;
+    }
+    .leaderboard, .quizboard {
+      width: 220px;
+      background: rgba(0,0,0,0.85);
+      padding: 15px;
+      box-shadow: 0 0 20px red;
+      border-radius: 10px;
+      height: 90%;
+      overflow-y: auto;
+    }
+    .leaderboard h2, .quizboard h2 {
+      color: #ff2b2b;
+      text-align: center;
+      border-bottom: 2px solid red;
+      padding-bottom: 5px;
+      font-size: 1.1em;
+    }
+    .leaderboard ul, .quizboard ul { list-style: none; padding: 0; margin: 0; }
+    .leaderboard li, .quizboard li { padding: 5px 10px; margin: 5px 0; background: #111; border-radius: 5px; font-size: 0.9em; }
+    .leaderboard li.top { background: #ff2b2b; color: #fff; font-weight: bold; box-shadow: 0 0 10px #ff2b2b; }
+    #giveUpBtn {
+      position: absolute;
+      top: 90px;
+      right: 30px;
+      background: red;
+      border: none;
+      color: #fff;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 6px;
+      box-shadow: 0 0 10px #ff0000;
+    }
+    #giveUpBtn:hover { background: #a10000; }
+    #quizContainer {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.9);
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      color: white;
+      display: none;
+      box-shadow: 0 0 20px red;
+      width: 350px;
+      z-index: 900;
+    }
+    #quizContainer button {
+      background: red;
+      color: #fff;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 5px;
+    }
+    #quizContainer button:hover { background: #b30000; }
+    #gameOverModal {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.9);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: #fff;
+      z-index: 1000;
+    }
+    #gameOverModal button {
+      margin-top: 20px;
+      background: red;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #ff0000;
+    }
+    #countdownOverlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 8em;
+      color: #ff2b2b;
+      font-weight: bold;
+      z-index: 500;
+    }
+    .fireworks {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0; left: 0;
+      pointer-events: none;
+      display: none;
+      z-index: 2000;
+    }
+    .spark {
+      position: absolute;
+      width: 5px; height: 5px;
+      background: radial-gradient(circle, #ff0000, #ff6600, transparent);
+      border-radius: 50%;
+      animation: explode 1s ease-out forwards;
+    }
+    @keyframes explode { from { transform: scale(0) translateY(0); opacity:1; } to { transform: scale(2) translateY(-200px); opacity:0; } }
+    @media (max-width: 768px){
+      #gameContainer { flex-direction: column; height:auto; }
+      canvas { width: 90%; height:auto; }
+      .leaderboard, .quizboard { width: 90%; height:auto; }
+    }
+  </style>
 </head>
-
 <body>
-<header class="site-header">
-  🎮 LAVA Classroom Insurance Game
-</header>
+<header class="site-header">🎮 LAVA Classroom Insurance Game</header>
 
 <div id="gameContainer">
-  <div class="leaderboard">
-    <h2>🏆 Pipe Scores</h2>
-    <ul id="pipeScores"></ul>
-  </div>
-
-  <div style="position: relative;">
-    <canvas id="gameCanvas" width="480" height="400"></canvas>
-    <div id="countdownOverlay">3</div>
-  </div>
-
-  <div class="quizboard">
-    <h2>🧠 Quiz Scores</h2>
-    <ul id="quizScores"></ul>
-  </div>
+  <div class="leaderboard"><h2>🏆 Pipe Scores</h2><ul id="pipeScores"></ul></div>
+  <div style="position: relative;">
+    <canvas id="gameCanvas" width="480" height="400"></canvas>
+    <div id="countdownOverlay">3</div>
+  </div>
+  <div class="quizboard"><h2>🧠 Quiz Scores</h2><ul id="quizScores"></ul></div>
 </div>
 
 <button id="giveUpBtn">Give Up</button>
 
-<div id="quizContainer">
-  <h3 id="question"></h3>
-  <div id="answers"></div>
-</div>
+<div id="quizContainer"><h3 id="question"></h3><div id="answers"></div></div>
 
 <div id="gameOverModal">
-  <h1 id="gameOverText">Game Over</h1>
-  <button onclick="returnToDashboard()">Return to Dashboard</button>
+  <h1 id="gameOverText">Game Over</h1>
+  <button onclick="returnToDashboard()">Return to Dashboard</button>
 </div>
 
 <div class="fireworks" id="fireworks"></div>
@@ -259,235 +186,71 @@
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 const countdownOverlay = document.getElementById('countdownOverlay');
+const birdSprite = new Image(); birdSprite.src='images/bird.png';
+const bg = new Image(); bg.src='images/bg.png';
+const pipeImg = new Image(); pipeImg.src='images/pipe.png';
 
-const birdSprite = new Image();
-birdSprite.src = 'images/bird.png'; // Use a 3-frame bird sprite sheet (wider)
-const bg = new Image();
-bg.src = 'images/bg.png';
-const pipeImg = new Image();
-pipeImg.src = 'images/pipe.png';
+let frame=0, flapSpeed=6, spriteWidth=34, spriteHeight=24, birdWidth=38, birdHeight=26;
+let bX=10, bY=150, gravity=1.5, gap=120, score=0, quizScore=0, failCount=0;
+let pipes=[{x:canvas.width, y:0}];
+let gameState='ready', currentQuestion=0;
 
-let frame = 0;
-let flapSpeed = 6;
-let spriteWidth = 34; // Width of a single bird frame
-let spriteHeight = 24; // Height of a single bird frame
-let birdWidth = 38;
-let birdHeight = 26;
-let gap = 120;
-let constant;
-let bX = 10;
-let bY = 150;
-let gravity = 1.5;
-let score = 0;
-let quizScore = 0;
-let failCount = 0;
-let pipe = [{ x: canvas.width, y: 0 }];
+document.addEventListener('keydown', ()=>{if(gameState==='playing') bY-=25;});
 
-// --- New Game State Variable ---
-let gameState = 'ready'; // Possible states: 'ready', 'playing', 'gameover'
-// -------------------------------
+Promise.all([new Promise(res=>birdSprite.onload=res), new Promise(res=>bg.onload=res), new Promise(res=>pipeImg.onload=res)]).then(startCountdown);
 
-// Wait for all images to load before starting the game
-Promise.all([
-  new Promise(resolve => birdSprite.onload = resolve),
-  new Promise(resolve => bg.onload = resolve),
-  new Promise(resolve => pipeImg.onload = resolve)
-]).then(() => {
-  // Start the countdown after images load
-  startCountdown();
-});
-
-document.addEventListener("keydown", moveUp);
-
-function moveUp() {
-  // Only allow moving up when the game is playing
-  if (gameState === 'playing') {
-    bY -= 25;
-  } else if (gameState === 'ready') {
-    // Optional: Start game immediately on first key press if not using countdown
-    // startGame(); 
-  }
+function startCountdown(){
+  let count=3; countdownOverlay.style.display='flex'; countdownOverlay.innerText=count;
+  const interval = setInterval(()=>{
+    count--; 
+    if(count>0) countdownOverlay.innerText=count; 
+    else if(count===0) countdownOverlay.innerText='GO!';
+    else{ clearInterval(interval); countdownOverlay.style.display='none'; startGame(); }
+  },1000);
+  draw();
 }
 
-function draw() {
-  ctx.drawImage(bg, 0, 0, canvas.width, canvas.height);
+function startGame(){ gameState='playing'; }
 
-  if (gameState === 'playing') {
-    for (let i = 0; i < pipe.length; i++) {
-      constant = pipeImg.height + gap;
-      ctx.drawImage(pipeImg, pipe[i].x, pipe[i].y, 60, 200);
-      ctx.drawImage(pipeImg, pipe[i].x, pipe[i].y + constant, 60, 200);
-      pipe[i].x--; // Move pipe
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.drawImage(bg,0,0,canvas.width,canvas.height);
 
-      if (pipe[i].x === 125) {
-        pipe.push({x: canvas.width, y: Math.floor(Math.random() * pipeImg.height) - pipeImg.height});
-      }
+  if(gameState==='playing'){
+    for(let i=0;i<pipes.length;i++){
+      const p=pipes[i], topH=200, bottomY=p.y+topH+gap;
+      ctx.drawImage(pipeImg,p.x,p.y,60,topH);
+      ctx.drawImage(pipeImg,p.x,bottomY,60,topH);
+      p.x-=2;
+      if(p.x+60<0)pipes.splice(i,1);
+      if(p.x===200)pipes.push({x:canvas.width, y:Math.floor(Math.random()*(canvas.height-gap-topH))});
+      if((bX+birdWidth>=p.x && bX<=p.x+60 && (bY<=p.y+topH || bY+birdHeight>=bottomY)) || bY+birdHeight>=canvas.height){
+        failCount++; if(failCount>=5) showGameOver();
+      }
+      if(p.x===5){ score++; if(score===10||score===15) showFireworks(); updateLeaderboards(); if(score%3===0) showQuiz(); }
+    }
+    bY+=gravity;
+  }
 
-      // Collision Detection
-      if (
-        (bX + birdWidth >= pipe[i].x && bX <= pipe[i].x + 60 &&
-        (bY <= pipe[i].y + 200 || bY + birdHeight >= pipe[i].y + constant)) ||
-        bY + birdHeight >= canvas.height
-      ) {
-        failCount++;
-        if (failCount >= 5) {
-          showGameOver();
-          return; // Stop the draw loop
-        }
-      }
-
-      if (pipe[i].x === 5) {
-        score++;
-        if (score === 10) showFireworks('Awesome!');
-        if (score === 15) showFireworks('You are Insurance VA Expert!');
-        updateLeaderboards();
-        if (score % 3 === 0) showQuiz();
-      }
-    }
-
-    bY += gravity; // Apply gravity only when playing
-  }
-  
-  // --- Bird Flapping Animation (happens regardless of game state) ---
-  frame++;
-  let birdFrame = Math.floor(frame / flapSpeed) % 3; // Cycle through 3 frames
-  ctx.drawImage(
-    birdSprite,
-    birdFrame * spriteWidth, 0, spriteWidth, spriteHeight,
-    bX, bY, birdWidth, birdHeight
-  );
-  // -----------------------------------------------------------------
-
-  ctx.fillStyle = "#fff";
-  ctx.font = "18px Verdana";
-  ctx.fillText("Score: " + score, 10, canvas.height - 20);
-
-  requestAnimationFrame(draw);
+  frame++; const birdFrame=Math.floor(frame/flapSpeed)%3;
+  ctx.drawImage(birdSprite,birdFrame*spriteWidth,0,spriteWidth,spriteHeight,bX,bY,birdWidth,birdHeight);
+  ctx.fillStyle="#fff"; ctx.font="18px Verdana"; ctx.fillText("Score: "+score,10,canvas.height-20);
+  requestAnimationFrame(draw);
 }
 
-// --- New Countdown Logic ---
-function startCountdown() {
-  let count = 3;
-  countdownOverlay.style.display = 'flex';
-  countdownOverlay.innerText = count;
+// Quiz Logic
+const questions=[{q:"What does liability insurance cover?",a:["Damage you cause to others","Your own injuries","Only theft","Natural disasters"],correct:0},{q:"What is deductible?",a:["Amount insurer pays","Amount you pay before insurance","Tax credit","Commission"],correct:1},{q:"What does 'premium' mean?",a:["The payment for coverage","The limit of coverage","Discount","Policy expiration"],correct:0},{q:"What is ACORD Form used for?",a:["Policy cancellation","Certificate of insurance","Filing taxes","License renewal"],correct:1},{q:"Home Insurance Coverage A is for?",a:["Dwelling","Personal property","Liability","Loss of use"],correct:0}];
 
-  const interval = setInterval(() => {
-    count--;
-    if (count > 0) {
-      countdownOverlay.innerText = count;
-    } else if (count === 0) {
-      countdownOverlay.innerText = 'GO!';
-    } else {
-      clearInterval(interval);
-      countdownOverlay.style.display = 'none';
-      startGame();
-    }
-  }, 1000);
-
-  // We call draw() once here to start the animation loop which will show the bird and background
-  draw();
-}
-
-function startGame() {
-  gameState = 'playing';
-}
-// ---------------------------
-
-// Quiz, leaderboard, fireworks, same logic as before
-function showQuiz() {
-  document.getElementById('quizContainer').style.display = 'block';
-  gameState = 'paused'; // Pause game while quiz is open
-  loadQuestion();
-}
-function hideQuiz() { 
-  document.getElementById('quizContainer').style.display = 'none'; 
-  gameState = 'playing'; // Resume game
-}
-const questions = [
-  {q:"What does liability insurance cover?", a:["Damage you cause to others","Your own injuries","Only theft","Natural disasters"], correct:0},
-  {q:"What is deductible?", a:["Amount insurer pays","Amount you pay before insurance","Tax credit","Commission"], correct:1},
-  {q:"What does 'premium' mean?", a:["The payment for coverage","The limit of coverage","Discount","Policy expiration"], correct:0},
-  {q:"What is ACORD Form used for?", a:["Policy cancellation","Certificate of insurance","Filing taxes","License renewal"], correct:1},
-  {q:"What is 'endorsement'?", a:["Policy change","Claim payment","Underwriting report","Billing issue"], correct:0},
-  {q:"Home Insurance Coverage A is for?", a:["Dwelling","Personal property","Liability","Loss of use"], correct:0},
-  {q:"Coverage B refers to?", a:["Other structures","Dwelling","Medical payments","Water damage"], correct:0},
-  {q:"Umbrella insurance provides?", a:["Extra liability limit","Flood coverage","Car repair","Mortgage"], correct:0},
-  {q:"Cyber Liability protects against?", a:["Data breaches","Storm damage","Fire","Theft"], correct:0},
-  {q:"Flood insurance is provided by?", a:["NFIP","FEMA only","Private agents only","Auto carriers"], correct:0},
-  {q:"What is peril?", a:["Cause of loss","Policy type","Payment mode","Agent type"], correct:0},
-  {q:"Declarations page shows?", a:["Policy details","Claim status","Invoices","Personal notes"], correct:0},
-  {q:"Named peril policy covers?", a:["Listed causes only","All losses","Exclusions","Uninsured"], correct:0},
-  {q:"Inland marine covers?", a:["Movable property","Houses","Boats","Buildings"], correct:0},
-  {q:"Business Owners Policy (BOP) combines?", a:["Property & Liability","Auto & Health","Workers Comp","Life & Disability"], correct:0},
-  {q:"Auto Liability splits 100/300/50 mean?", a:["Per person/accident/property","Rates","Mileage","Deductible"], correct:0},
-  {q:"Workers Comp covers?", a:["Employee injuries","Property damage","Auto theft","Fire"], correct:0},
-  {q:"Medical payments cover?", a:["Immediate medical costs","Long-term loss","Business loans","Disability"], correct:0},
-  {q:"Comprehensive Auto covers?", a:["Non-collision damages","Collisions","Liability","Parking fees"], correct:0},
-  {q:"Collision coverage covers?", a:["Your car hitting objects","Natural disasters","Theft","Vandalism"], correct:0}
-];
-let currentQuestion = 0;
-function loadQuestion() {
-  let q = questions[currentQuestion % questions.length];
-  document.getElementById('question').innerText = q.q;
-  let answersDiv = document.getElementById('answers');
-  answersDiv.innerHTML = "";
-  q.a.forEach((ans, i)=>{
-    let btn = document.createElement('button');
-    btn.innerText = ans;
-    btn.onclick = ()=>checkAnswer(i, q.correct);
-    answersDiv.appendChild(btn);
-  });
-}
-function checkAnswer(selected, correct) {
-  if (selected === correct) {
-    quizScore++;
-    alert("✅ Correct!");
-  } else alert("❌ Wrong!");
-  updateLeaderboards();
-  currentQuestion++;
-  hideQuiz();
-}
-function updateLeaderboards() {
-  localStorage.setItem('pipeScore', score);
-  localStorage.setItem('quizScore', quizScore);
-  renderLeaderboard();
-}
-function renderLeaderboard() {
-  document.getElementById('pipeScores').innerHTML = `<li class="top">You: ${score}</li>`;
-  document.getElementById('quizScores').innerHTML = `<li class="top">You: ${quizScore}</li>`;
-}
-function showGameOver() {
-  gameState = 'gameover'; // Set game state to stop movement/pipes
-  document.getElementById('gameOverModal').style.display = 'flex';
-}
-function returnToDashboard() {
-  // Note: Your original code used 'game.html' here, which will just refresh the page.
-  // If you have a separate dashboard, use that URL instead.
-  window.location.href = "game.html"; 
-}
-function showFireworks(message) {
-  const fwContainer = document.getElementById('fireworks');
-  fwContainer.innerHTML = '';
-  fwContainer.style.display = 'block';
-  // No change to text here, as this is used for awesome scores, not game over
-  // document.getElementById('gameOverText').innerText = message; 
-  for (let i = 0; i < 40; i++) {
-    const spark = document.createElement('div');
-    spark.classList.add('spark');
-    const x = Math.random() * window.innerWidth;
-    const y = Math.random() * window.innerHeight;
-    spark.style.left = `${x}px`;
-    spark.style.top = `${y}px`;
-    spark.style.animationDelay = `${Math.random()}s`;
-    fwContainer.appendChild(spark);
-  }
-  setTimeout(() => {
-    fwContainer.style.display = 'none';
-    fwContainer.innerHTML = '';
-  }, 3000);
-}
-
-document.getElementById('giveUpBtn').onclick = showGameOver;
+function showQuiz(){document.getElementById('quizContainer').style.display='block'; gameState='paused'; loadQuestion();}
+function hideQuiz(){document.getElementById('quizContainer').style.display='none'; gameState='playing';}
+function loadQuestion(){const q=questions[currentQuestion%questions.length]; document.getElementById('question').innerText=q.q; const ansDiv=document.getElementById('answers'); ansDiv.innerHTML=''; q.a.forEach((ans,i)=>{const btn=document.createElement('button'); btn.innerText=ans; btn.onclick=()=>checkAnswer(i,q.correct); ansDiv.appendChild(btn);});}
+function checkAnswer(selected,correct){if(selected===correct) quizScore++; currentQuestion++; hideQuiz(); updateLeaderboards();}
+function updateLeaderboards(){renderLeaderboard();}
+function renderLeaderboard(){document.getElementById('pipeScores').innerHTML=`<li class="top">You: ${score}</li>`; document.getElementById('quizScores').innerHTML=`<li class="top">You: ${quizScore}</li>`;}
+function showGameOver(){gameState='gameover'; document.getElementById('gameOverModal').style.display='flex';}
+function returnToDashboard(){window.location.href="game.html";}
+function showFireworks(){const fw=document.getElementById('fireworks'); fw.innerHTML=''; fw.style.display='block'; for(let i=0;i<40;i++){const s=document.createElement('div'); s.classList.add('spark'); s.style.left=Math.random()*window.innerWidth+'px'; s.style.top=Math.random()*window.innerHeight+'px'; s.style.animationDelay=Math.random()+'s'; fw.appendChild(s);} setTimeout(()=>{fw.style.display='none'; fw.innerHTML='';},3000);}
+document.getElementById('giveUpBtn').onclick=showGameOver;
 renderLeaderboard();
 </script>
 </body>
