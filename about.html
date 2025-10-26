@@ -159,7 +159,7 @@ body {
     <div class="trainer-gallery">
       <div class="trainer-card" data-trainer="karl"><img src="images/karl.jpg" alt="Karl"><h3>Karl</h3><p>Training Manager</p></div>
       <div class="trainer-card" data-trainer="nash"><img src="images/nash.jpg" alt="Nash"><h3>Nash</h3><p>Trainer</p></div>
-      <div class="trainer-card" data-trainer="au"><img src="images/au.jpg" alt="Au"><h3>Au</h3><p>Trainer</p></div>
+      <div class="trainer-card" data-trainer="au"><img src="images/Au.jpg" alt="Au"><h3>Au</h3><p>Trainer</p></div>
       <div class="trainer-card" data-trainer="kyle"><img src="images/kyle.jpg" alt="Kyle"><h3>Kyle</h3><p>Trainer</p></div>
       <div class="trainer-card" data-trainer="chanie"><img src="images/chanie.jpg" alt="Chanie"><h3>Chanie</h3><p>Trainer</p></div>
     </div>
@@ -217,11 +217,25 @@ body {
 
 <script>
 const bios = {
-  karl:`<h2>🧑‍🏫 Karl – Training Manager & Insurance Agency Specialist</h2><p>Karl is LAVA’s dedicated Training Manager and a true expert in insurance operations.</p>`,
-  nash:`<h2>🖥️ Nash – Senior Virtual Assistant Trainer</h2><p>With over 8 years in the BPO industry and 2 years as a VA...</p>`,
-  au:`<h2>🌟 Au – Insurance Process Trainer</h2><p>With 10 years in BPO and experience as a Trainer...</p>`,
-  kyle:`<h2>🎓 Kyle – Internal Trainer & Former College Professor</h2><p>Before joining LAVA, Kyle taught for 8 years...</p>`,
-  chanie:`<h2>🌸 Chanie – Internal Trainer & Former Educator</h2><p>Chanie is known for her calm and nurturing personality...</p>`
+  karl: `<h2>🧑‍🏫 Karl – Training Manager & Insurance Agency Specialist</h2>
+  <p>Karl is LAVA’s dedicated Training Manager and a true expert in insurance operations. With extensive experience in the insurance industry, he oversees the full training cycle—from curriculum design to VA certification. Known for his structured teaching and technical mastery, Karl helps Virtual Assistants understand the "why" behind every task, not just the "how."</p>
+  <p>He ensures that every LAVA trainee develops strong attention to detail, efficiency in ACORD handling, and clear communication with clients. Karl’s leadership philosophy focuses on consistency, accountability, and professional growth for every team member.</p>`,
+
+  nash: `<h2>🖥️ Nash – Senior Virtual Assistant Trainer</h2>
+  <p>Nash has over 8 years of BPO experience and 2 years as a Virtual Assistant specializing in insurance back-office operations. She is known for her dynamic, high-energy training sessions that help VAs grasp complex processes quickly. Her real-world examples bring the lessons to life and empower trainees to apply their learning immediately in live agency environments.</p>
+  <p>Nash focuses on claim processing, renewal management, and CRM optimization. She believes that learning should be both engaging and practical—equipping each VA with the tools to thrive in a fast-paced agency setup.</p>`,
+
+  au: `<h2>🌟 Au – Insurance Process Trainer</h2>
+  <p>With a decade of experience in the BPO industry, Au transitioned into the insurance virtual assistance field to bridge the gap between corporate communication and insurance operations. Her patient teaching style and strong process orientation make her a favorite among new trainees.</p>
+  <p>She designs modules that simplify even the most technical workflows—making it easy for VAs to perform endorsements, manage client updates, and support agents with confidence. Au’s motto: “Train with empathy, perform with excellence.”</p>`,
+
+  kyle: `<h2>🎓 Kyle – Internal Trainer & Former College Professor</h2>
+  <p>Kyle combines academic depth with real-world practicality. Before joining LAVA, he spent 8 years teaching business and management courses at a college level. His background allows him to explain complex insurance and administrative concepts clearly and logically.</p>
+  <p>At LAVA Classroom, he focuses on critical thinking, situational problem-solving, and accuracy in client handling. Kyle’s classroom approach encourages curiosity, responsibility, and a continuous drive for improvement.</p>`,
+
+  chanie: `<h2>🌸 Chanie – Internal Trainer & Former Educator</h2>
+  <p>Chanie brings warmth and professionalism to every class. With years of experience in education and VA work, she knows how to blend patience with precision. Her calm demeanor and supportive teaching make her classes approachable yet deeply insightful.</p>
+  <p>She helps new Virtual Assistants master the fundamentals of client service, insurance documentation, and task organization—turning beginners into capable professionals ready to assist agencies with confidence and reliability.</p>`
 };
 
 document.querySelectorAll('.trainer-card').forEach(card=>{
@@ -257,4 +271,3 @@ lightbox.addEventListener('click',e=>{
 </script>
 </body>
 </html>
-
