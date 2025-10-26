@@ -163,17 +163,6 @@
   }
 
   /* === ROBOT === */
-  .robot {
-    width: 180px;
-    position: fixed;
-    top: 60%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 10;
-    pointer-events: none;
-    transition: transform 4s ease-in-out;
-  }
-
   .robot-container {
     position: fixed;
     top: 60%;
@@ -188,27 +177,40 @@
   .robot-body {
     width: 100%;
     display: block;
+    position: relative;
+    z-index: 10;
   }
 
   .robot-hand {
     position: absolute;
-    width: 60px;
-    right: -10px;  /* Adjust this for alignment */
-    top: 40px;     /* Adjust vertical alignment */
-    transform-origin: top center; /* pivot point for waving */
+    width: 55px;
+    top: 38px;           /* Adjust this for perfect alignment */
+    right: -8px;         /* Adjust this for shoulder position */
+    transform-origin: top right;
+    z-index: 11;
   }
 
   @keyframes wave {
     0% { transform: rotate(0deg); }
-    20% { transform: rotate(20deg); }
+    20% { transform: rotate(25deg); }
     40% { transform: rotate(-15deg); }
-    60% { transform: rotate(20deg); }
-    80% { transform: rotate(-15deg); }
+    60% { transform: rotate(25deg); }
+    80% { transform: rotate(-10deg); }
     100% { transform: rotate(0deg); }
   }
 
   .wave {
-    animation: wave 2s ease-in-out;
+    animation: wave 2s ease-in-out infinite;
+  }
+
+  /* Optional: subtle body bounce for realism */
+  @keyframes bodyBounce {
+    0%, 100% { transform: translate(-50%, -50%) translateY(0); }
+    50% { transform: translate(-50%, -50%) translateY(-4px); }
+  }
+
+  .bouncing {
+    animation: bodyBounce 2s ease-in-out infinite;
   }
 </style>
 </head>
@@ -244,7 +246,7 @@
 
 <!-- Robot Container -->
 <div class="robot-container" id="robotContainer">
-  <img src="images/lava-robot-body.png" alt="Lava Robot Body" class="robot-body">
+  <img src="images/lava-robot-body.png" alt="Lava Robot Body" class="robot-body" id="robotBody">
   <img src="images/lava-robot-hand.png" alt="Lava Robot Hand" class="robot-hand" id="robotHand">
 </div>
 
@@ -255,16 +257,19 @@
 <script>
 const robotContainer = document.getElementById('robotContainer');
 const robotHand = document.getElementById('robotHand');
+const robotBody = document.getElementById('robotBody');
 
-// Wave first
 window.onload = () => {
+  // Start waving animation
   robotHand.classList.add('wave');
+  robotBody.classList.add('bouncing');
 
-  // Stop waving after a few seconds, then move robot
+  // Stop waving after 4s, then start moving
   setTimeout(() => {
     robotHand.classList.remove('wave');
+    robotBody.classList.remove('bouncing');
     startMovingRobot();
-  }, 3000);
+  }, 4000);
 };
 
 function moveRobot() {
