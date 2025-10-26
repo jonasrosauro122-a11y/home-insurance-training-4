@@ -16,10 +16,10 @@
   body {
     font-family: 'Poppins', sans-serif;
     color: #fff;
-    background: url('images/lava-bg.png') no-repeat center center fixed;
+    background: url('/images/lava-bg.png') no-repeat center center fixed;
     background-size: cover;
-    position: relative;
-    min-height: 100vh;
+    overflow-x: hidden;
+    transition: background-position 0.3s ease;
     animation: fadeInBackground 2s ease-in-out;
   }
 
@@ -44,7 +44,7 @@
     left: 0;
     width: 200%;
     height: 200%;
-    background: url('images/clouds.png') repeat;
+    background: url('/images/clouds.png') repeat;
     background-size: contain;
     opacity: 0.12;
     animation: cloudMove 120s linear infinite;
@@ -80,6 +80,7 @@
     display: flex;
     list-style: none;
     gap: 20px;
+    flex-wrap: wrap;
   }
 
   nav a {
@@ -110,6 +111,7 @@
   .hero h1 {
     font-size: 3rem;
     margin-bottom: 1rem;
+    color: #fff;
     animation: fadeInDown 1.5s ease;
   }
 
@@ -159,54 +161,31 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* === ROBOT === */
+  /* === ROBOT SECTION === */
   .robot-container {
-    position: fixed;
-    top: 60%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 180px;
-    height: auto;
-    z-index: 10;
-    pointer-events: none;
-  }
-
-  .robot-body {
-    width: 100%;
-    display: block;
     position: relative;
-    z-index: 10;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
   }
 
-  .robot-hand {
-    position: absolute;
-    width: 50px;
-    top: 36px;       /* Adjust until it sits perfectly on the shoulder */
-    right: -5px;     /* Adjust horizontal offset */
-    transform-origin: top right;
-    z-index: 11;
-  }
+.robot {
+  width: 180px;
+  animation: floatRobot 10s ease-in-out infinite, blinkEyes 6s infinite;
+}
 
-  @keyframes wave {
-    0% { transform: rotate(0deg); }
-    20% { transform: rotate(25deg); }
-    40% { transform: rotate(-15deg); }
-    60% { transform: rotate(25deg); }
-    80% { transform: rotate(-10deg); }
-    100% { transform: rotate(0deg); }
-  }
+@keyframes floatRobot {
+  0%   { transform: translate(0, 0); }
+  25%  { transform: translate(20px, -15px); }
+  50%  { transform: translate(0, -30px); }
+  75%  { transform: translate(-20px, -15px); }
+  100% { transform: translate(0, 0); }
+}
 
-  .wave {
-    animation: wave 2s ease-in-out infinite;
-  }
-
-  @keyframes bodyBounce {
-    0%, 100% { transform: translate(-50%, -50%) translateY(0); }
-    50% { transform: translate(-50%, -50%) translateY(-4px); }
-  }
-
-  .bouncing {
-    animation: bodyBounce 2s ease-in-out infinite;
+  @keyframes blinkEyes {
+    0%, 90%, 100% { filter: brightness(1); }
+    95% { filter: brightness(0.3); }
   }
 </style>
 </head>
@@ -234,52 +213,29 @@
   <h1>Welcome to LAVA Classroom</h1>
   <p>Learn. Apply. Grow. Become a skilled Virtual Assistant in insurance agency operations.</p>
 
+  <div class="robot-container">
+    <img src="/images/lava-robot.png" alt="Lava Robot" class="robot">
+  </div>
+
   <div class="buttons">
     <a href="courses.html" class="btn btn-red">Start Learning</a>
     <a href="about.html" class="btn btn-black">Meet the Trainers</a>
   </div>
 </section>
 
-<!-- Robot -->
-<div class="robot-container" id="robotContainer">
-  <img src="images/lava-robot-body.png" alt="Lava Robot Body" class="robot-body" id="robotBody">
-  <img src="images/lava-robot-hand.png" alt="Lava Robot Hand" class="robot-hand" id="robotHand">
-</div>
-
 <footer>
   <p>© 2025 LAVA Classroom. All Rights Reserved.</p>
 </footer>
 
 <script>
-const robotContainer = document.getElementById('robotContainer');
-const robotHand = document.getElementById('robotHand');
-const robotBody = document.getElementById('robotBody');
-
-window.onload = () => {
-  // Start waving animation
-  robotHand.classList.add('wave');
-  robotBody.classList.add('bouncing');
-
-  // Stop waving after 4s, then start moving
-  setTimeout(() => {
-    robotHand.classList.remove('wave');
-    robotBody.classList.remove('bouncing');
-    startMovingRobot();
-  }, 4000);
-};
-
-function moveRobot() {
-  const maxX = window.innerWidth * 0.8;
-  const maxY = window.innerHeight * 0.8;
-  const x = Math.random() * maxX + window.innerWidth * 0.1;
-  const y = Math.random() * maxY + window.innerHeight * 0.1;
-  robotContainer.style.transform = `translate(-50%, -50%) translate(${x - window.innerWidth / 2}px, ${y - window.innerHeight / 2}px)`;
+const robot = document.querySelector('.robot');
+function randomMove() {
+  const x = (Math.random() - 0.5) * 100; // random left-right range
+  const y = (Math.random() - 0.5) * 60;  // random up-down range
+  robot.style.transition = 'transform 3s ease-in-out';
+  robot.style.transform = `translate(${x}px, ${y}px)`;
 }
-
-function startMovingRobot() {
-  moveRobot();
-  setInterval(moveRobot, 4000);
-}
+setInterval(randomMove, 3000);
 </script>
 
 </body>
