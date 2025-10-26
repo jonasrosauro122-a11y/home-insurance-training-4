@@ -18,10 +18,10 @@
     color: #fff;
     background: url('images/lava-bg.png') no-repeat center center fixed;
     background-size: cover;
-    overflow: hidden;
-    height: 100vh;
-    position: relative;
+    transition: background-position 0.3s ease;
     animation: fadeInBackground 2s ease-in-out;
+    position: relative;
+    min-height: 100vh;
   }
 
   @keyframes fadeInBackground {
@@ -165,18 +165,27 @@
   /* === ROBOT === */
   .robot {
     width: 180px;
-    position: absolute;
-    top: 50%;
+    position: fixed;
+    top: 60%;
     left: 50%;
-    z-index: 10;
     transform: translate(-50%, -50%);
+    z-index: 10;
     pointer-events: none;
-    animation: blinkEyes 6s infinite;
+    transition: transform 4s ease-in-out;
   }
 
-  @keyframes blinkEyes {
-    0%, 90%, 100% { filter: brightness(1); }
-    95% { filter: brightness(0.3); }
+  /* Waving hand animation (simulate waving by rotation) */
+  @keyframes waveHand {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    20% { transform: translate(-50%, -50%) rotate(10deg); }
+    40% { transform: translate(-50%, -50%) rotate(-8deg); }
+    60% { transform: translate(-50%, -50%) rotate(10deg); }
+    80% { transform: translate(-50%, -50%) rotate(-8deg); }
+    100% { transform: translate(-50%, -50%) rotate(0deg); }
+  }
+
+  .wave {
+    animation: waveHand 2.5s ease-in-out;
   }
 </style>
 </head>
@@ -220,23 +229,29 @@
 <script>
 const robot = document.getElementById('lavaRobot');
 
+// Make robot wave first
+window.onload = () => {
+  robot.classList.add('wave');
+
+  // After waving, start moving
+  setTimeout(() => {
+    robot.classList.remove('wave');
+    startMovingRobot();
+  }, 2500); // 2.5s = waving duration
+};
+
 function moveRobot() {
-  const maxX = window.innerWidth - 200;  // leave margin
-  const maxY = window.innerHeight - 200;
-
-  const x = Math.random() * maxX;
-  const y = Math.random() * maxY;
-
-  robot.style.transition = 'transform 4s ease-in-out';
-  robot.style.transform = `translate(${x}px, ${y}px)`;
+  const maxX = window.innerWidth * 0.8;
+  const maxY = window.innerHeight * 0.8;
+  const x = Math.random() * maxX + window.innerWidth * 0.1;
+  const y = Math.random() * maxY + window.innerHeight * 0.1;
+  robot.style.transform = `translate(${x - window.innerWidth / 2}px, ${y - window.innerHeight / 2}px)`;
 }
 
-// Move immediately and then every 4 seconds
-moveRobot();
-setInterval(moveRobot, 4000);
-
-// Recalculate on window resize
-window.addEventListener('resize', moveRobot);
+function startMovingRobot() {
+  moveRobot();
+  setInterval(moveRobot, 4000);
+}
 </script>
 
 </body>
