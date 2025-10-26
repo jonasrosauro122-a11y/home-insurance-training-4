@@ -18,7 +18,7 @@
     color: #fff;
     background: url('/images/lava-bg.png') no-repeat center center fixed;
     background-size: cover;
-    overflow-y: scroll; /* ✅ scrollable homepage */
+    overflow-y: auto; /* ✅ Scrollable homepage */
     animation: fadeInBackground 2s ease-in-out;
   }
 
@@ -105,7 +105,6 @@
     padding: 8rem 2rem 10rem;
     position: relative;
     z-index: 5;
-    min-height: 100vh;
   }
 
   .hero h1 {
@@ -165,17 +164,16 @@
   .robot-container {
     position: relative;
     width: 100%;
+    height: 400px;
     display: flex;
     justify-content: center;
     margin-top: 2rem;
-    height: 400px;
   }
 
   .robot {
     width: 180px;
-    position: absolute;
+    position: relative;
     animation: blinkEyes 6s infinite;
-    transition: transform 1.5s ease-in-out;
   }
 
   @keyframes blinkEyes {
@@ -183,11 +181,11 @@
     95% { filter: brightness(0.3); }
   }
 
-  /* ✅ Speech bubble positioned near right head */
+  /* ✅ Speech bubble - close to robot’s head (0.5 inch / ~12px) */
   .speech {
     position: absolute;
-    top: -20px;
-    left: 160px;
+    top: -65px; /* above the robot */
+    left: 120px; /* near the right head area */
     background: white;
     color: black;
     padding: 8px 14px;
@@ -232,7 +230,7 @@
   <h1>Welcome to LAVA Classroom</h1>
   <p>Learn. Apply. Grow. Become a skilled Virtual Assistant in insurance agency operations.</p>
 
-  <div class="robot-container">
+  <div class="robot-container" id="robotContainer">
     <img src="/images/lava-robot.png" alt="Lava Robot" class="robot" id="robot">
     <div class="speech" id="speech">Hi! I’m your LAVA Bot 🤖</div>
   </div>
@@ -250,36 +248,39 @@
 <script>
 const robot = document.getElementById("robot");
 const speech = document.getElementById("speech");
+const container = document.getElementById("robotContainer");
 
 window.onload = () => {
-  // Step 1: Show the speech bubble
+  // Step 1: Show speech bubble
   setTimeout(() => {
     speech.classList.add("show");
   }, 500);
 
-  // Step 2: Hide speech bubble and start movement
+  // Step 2: Hide after a few seconds
   setTimeout(() => {
     speech.classList.remove("show");
-    startSmoothMovement();
-  }, 3500);
+  }, 4000);
+
+  // Step 3: Start movement
+  startSmoothMovement();
 };
 
 function startSmoothMovement() {
-  const area = document.querySelector(".robot-container");
-  const areaWidth = area.clientWidth - 180;
-  const areaHeight = area.clientHeight - 180;
   let posX = 0;
   let posY = 0;
+  let angle = 0;
 
-  function moveRobot() {
-    const newX = Math.random() * areaWidth;
-    const newY = Math.random() * areaHeight;
+  function animate() {
+    angle += 0.008;
+    posX = Math.sin(angle) * 100;
+    posY = Math.cos(angle * 1.5) * 50;
 
-    robot.style.transform = `translate(${newX}px, ${newY}px)`;
-    setTimeout(moveRobot, 3000 + Math.random() * 2000); // Move every few seconds
+    robot.style.transform = `translate(${posX}px, ${posY}px)`;
+    speech.style.transform = `translate(${posX}px, ${posY}px)`; // keep speech attached positionally
+    requestAnimationFrame(animate);
   }
 
-  moveRobot();
+  animate();
 }
 </script>
 
