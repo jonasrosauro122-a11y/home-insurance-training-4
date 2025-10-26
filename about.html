@@ -72,6 +72,20 @@ nav a.active{background:#ff1f1f;}
 
 footer{text-align:center;padding:30px 20px;background:#111;color:#bbb;margin-top:60px;}
 
+.brand-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lava-logo {
+  width: 80px;
+  height: auto;
+  margin-top: 5px;
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
+  opacity: 0.9;
+}
+
 @media(max-width:900px){
   .info-section h1{font-size:2rem;}
   .trainers h2{font-size:2rem;}
@@ -157,7 +171,10 @@ footer{text-align:center;padding:30px 20px;background:#111;color:#bbb;margin-top
 <div class="logo-background"></div>
 
 <header>
-  <a href="index.html" class="brand">LAVA Classroom</a>
+  <div class="brand-container">
+    <a href="index.html" class="brand">LAVA Classroom</a>
+    <img src="images/lava-logo.png" alt="LAVA Logo" class="lava-logo">
+  </div>
   <nav>
     <ul>
       <li><a href="index.html">Home</a></li>
@@ -275,3 +292,4 @@ lightbox.addEventListener('click',e=>{if(e.target===lightbox)closeLightbox();});
 </script>
 </body>
 </html>
+
