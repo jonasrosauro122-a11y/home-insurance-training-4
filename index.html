@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>LAVA Classroom</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-
 <style>
   * {
     margin: 0;
@@ -16,7 +15,7 @@
   body {
     font-family: 'Poppins', sans-serif;
     color: #fff;
-    background: url('images/lava-bg.png') no-repeat center center fixed;
+    background: url('/images/lava-bg.png') no-repeat center center fixed;
     background-size: cover;
     overflow-x: hidden;
     transition: background-position 0.3s ease;
@@ -44,7 +43,7 @@
     left: 0;
     width: 200%;
     height: 200%;
-    background: url('images/clouds.png') repeat;
+    background: url('/images/clouds.png') repeat;
     background-size: contain;
     opacity: 0.12;
     animation: cloudMove 120s linear infinite;
@@ -147,51 +146,6 @@
   .btn-black { background: #1a1a1a; }
   .btn-black:hover { background: #333; transform: scale(1.05); }
 
-  section {
-    position: relative;
-    z-index: 5;
-  }
-
-  /* === Classroom Gallery Section === */
-  .classroom-gallery {
-    text-align: center;
-    padding: 5rem 2rem;
-    background: rgba(0, 0, 0, 0.6);
-    margin-top: 4rem;
-  }
-
-  .classroom-gallery h2 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    color: #fff;
-  }
-
-  .classroom-gallery p {
-    color: #ccc;
-    font-size: 1.1rem;
-    margin-bottom: 3rem;
-  }
-
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    justify-items: center;
-  }
-
-  .gallery-img {
-    width: 100%;
-    max-width: 350px;
-    border-radius: 15px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-  }
-
-  .gallery-img:hover {
-    transform: scale(1.05);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.7);
-  }
-
   footer {
     text-align: center;
     padding: 40px 20px;
@@ -235,47 +189,11 @@
   </div>
 </section>
 
-<!-- 🎓 Classroom Gallery Section -->
-<section class="classroom-gallery">
-  <h2>Classroom Gallery</h2>
-  <p>Take a peek inside our engaging and inspiring LAVA training environment.</p>
-  <div class="gallery-grid">
-    <img src="images/class1.jpg" alt="Classroom 1" class="gallery-img">
-    <img src="images/class2.jpg" alt="Classroom 2" class="gallery-img">
-    <img src="images/class3.jpg" alt="Classroom 3" class="gallery-img">
-    <img src="images/class4.jpg" alt="Classroom 4" class="gallery-img">
-    <img src="images/class5.jpg" alt="Classroom 5" class="gallery-img">
-    <img src="images/class6.jpg" alt="Classroom 6" class="gallery-img">
-    <img src="images/class7.jpg" alt="Classroom 7" class="gallery-img">
-    <img src="images/class8.jpg" alt="Classroom 8" class="gallery-img">
-    <img src="images/class9.jpg" alt="Classroom 9" class="gallery-img">
-    <img src="images/class10.jpg" alt="Classroom 10" class="gallery-img">
-  </div>
-</section>
-
 <footer>
   <p>© 2025 LAVA Classroom. All Rights Reserved.</p>
 </footer>
 
 <script>
-function revealElements(selector) {
-  document.querySelectorAll(selector).forEach(el => {
-    const rect = el.getBoundingClientRect();
-    if (rect.top < window.innerHeight - 100)
-      el.classList.add('visible');
-  });
-}
-
-window.addEventListener('scroll', () => {
-  revealElements('.course-card');
-  revealElements('.trainer-card');
-});
-
-window.addEventListener('load', () => {
-  revealElements('.course-card');
-  revealElements('.trainer-card');
-});
-
 document.addEventListener('mousemove', e => {
   const x = (e.clientX / window.innerWidth - 0.5) * 10;
   const y = (e.clientY / window.innerHeight - 0.5) * 10;
