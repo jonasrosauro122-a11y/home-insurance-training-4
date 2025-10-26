@@ -1,272 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>LAVA Classroom</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LAVA Classroom</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(to bottom right, #000, #a30000);
+      color: #fff;
+      overflow-y: auto; /* ✅ makes homepage scrollable */
+    }
 
-<style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+    header {
+      background: #000;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
 
-  body {
-    font-family: 'Poppins', sans-serif;
-    color: #fff;
-    background: url('/images/lava-bg.png') no-repeat center center fixed;
-    background-size: cover;
-    overflow: hidden;
-    animation: fadeInBackground 2s ease-in-out;
-  }
+    header h1 {
+      color: #e50914;
+      font-size: 1.5rem;
+      margin: 0;
+    }
 
-  @keyframes fadeInBackground {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
+    nav a {
+      color: #fff;
+      margin-left: 1rem;
+      text-decoration: none;
+      font-weight: 500;
+    }
 
-  .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 1;
-  }
+    nav a:hover {
+      color: #e50914;
+    }
 
-  .clouds {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 200%;
-    height: 200%;
-    background: url('/images/clouds.png') repeat;
-    background-size: contain;
-    opacity: 0.12;
-    animation: cloudMove 120s linear infinite;
-    pointer-events: none;
-    z-index: 2;
-  }
+    .hero {
+      position: relative;
+      text-align: center;
+      padding: 6rem 2rem 12rem;
+    }
 
-  @keyframes cloudMove {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
+    .hero h2 {
+      font-size: 2.5rem;
+      color: #fff;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
 
-  header {
-    position: sticky;
-    top: 0;
-    z-index: 5;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    background: rgba(0,0,0,0.7);
-    backdrop-filter: blur(5px);
-  }
+    .robot {
+      position: fixed;
+      width: 120px;
+      height: 120px;
+      bottom: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 100;
+      animation: float 6s ease-in-out infinite;
+    }
 
-  .brand {
-    color: #fff;
-    font-size: 1.5rem;
-    font-weight: 700;
-    text-decoration: none;
-  }
+    @keyframes float {
+      0% { transform: translate(-50%, 0px); }
+      50% { transform: translate(-50%, -20px); }
+      100% { transform: translate(-50%, 0px); }
+    }
 
-  nav ul {
-    display: flex;
-    list-style: none;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
+    .robot img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
 
-  nav a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: 500;
-    padding: 6px 12px;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-  }
+    /* ✅ Text bubble above robot’s head */
+    .robot-text {
+      position: absolute;
+      bottom: 130px; /* position above robot */
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.9);
+      color: #000;
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 6px 10px;
+      border-radius: 10px;
+      white-space: nowrap;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      animation: fadeInOut 5s ease-in-out infinite;
+    }
 
-  nav a:hover {
-    background: #ff1f1f;
-    transform: scale(1.05);
-  }
+    @keyframes fadeInOut {
+      0%, 100% { opacity: 0; transform: translate(-50%, -10px); }
+      20%, 80% { opacity: 1; transform: translate(-50%, 0); }
+    }
 
-  nav a.active {
-    background: #ff1f1f;
-  }
+    section {
+      padding: 4rem 2rem;
+      text-align: center;
+    }
 
-  .hero {
-    text-align: center;
-    padding: 8rem 2rem 10rem;
-    position: relative;
-    z-index: 5;
-  }
-
-  .hero h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    color: #fff;
-    animation: fadeInDown 1.5s ease;
-  }
-
-  .hero p {
-    font-size: 1.2rem;
-    color: #ccc;
-    max-width: 700px;
-    margin: 0 auto 2rem;
-    line-height: 1.6;
-  }
-
-  .hero .buttons {
-    margin-top: 30px;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-  }
-
-  .btn {
-    padding: 12px 32px;
-    font-weight: 600;
-    border: none;
-    border-radius: 50px;
-    text-decoration: none;
-    color: #fff;
-    transition: all 0.3s ease;
-    cursor: pointer;
-  }
-
-  .btn-red { background: #e50914; }
-  .btn-red:hover { background: #ff1f1f; transform: scale(1.05); }
-
-  .btn-black { background: #1a1a1a; }
-  .btn-black:hover { background: #333; transform: scale(1.05); }
-
-  footer {
-    text-align: center;
-    padding: 40px 20px;
-    background: #111;
-    color: #bbb;
-    margin-top: 60px;
-    z-index: 5;
-  }
-
-  @keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* === ROBOT SECTION === */
-  .robot-container {
-    position: relative;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-top: 2rem;
-  }
-
-  .robot {
-    width: 180px;
-    position: relative;
-    animation: blinkEyes 6s infinite;
-  }
-
-  @keyframes blinkEyes {
-    0%, 90%, 100% { filter: brightness(1); }
-    95% { filter: brightness(0.3); }
-  }
-
-  .speech {
-    position: absolute;
-    top: -40px;
-    left: 150px;
-    background: white;
-    color: black;
-    padding: 8px 14px;
-    border-radius: 20px;
-    font-weight: 600;
-    font-size: 16px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-    opacity: 0;
-    transition: opacity 0.6s;
-    z-index: 10;
-  }
-</style>
+    footer {
+      background: #000;
+      padding: 1rem;
+      text-align: center;
+      color: #fff;
+    }
+  </style>
 </head>
-
 <body>
+  <header>
+    <h1>LAVA Classroom</h1>
+    <nav>
+      <a href="index.html" class="active">Home</a>
+      <a href="about.html">Trainers</a>
+      <a href="courses.html">Courses</a>
+      <a href="assignments.html">Assignments</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
 
-<div class="overlay"></div>
-<div class="clouds"></div>
+  <section class="hero">
+    <h2>Welcome to LAVA Classroom</h2>
+    <p>Learn, Grow, and Achieve with our amazing trainers.</p>
+  </section>
 
-<header>
-  <a href="index.html" class="brand">LAVA Classroom</a>
-  <nav>
-    <ul>
-      <li><a href="index.html" class="active">Home</a></li>
-      <li><a href="about.html">Trainers</a></li>
-      <li><a href="courses.html">Courses</a></li>
-      <li><a href="assignments.html">LAVA University</a></li>
-      <li><a href="game.html">Games</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-  </nav>
-</header>
-
-<section class="hero">
-  <h1>Welcome to LAVA Classroom</h1>
-  <p>Learn. Apply. Grow. Become a skilled Virtual Assistant in insurance agency operations.</p>
-
-  <div class="robot-container">
-    <img src="/images/lava-robot.png" alt="Lava Robot" class="robot" id="robot">
-    <div class="speech" id="speech">Hi VA!</div>
+  <!-- ✅ Floating Robot with Text -->
+  <div class="robot" id="robot">
+    <div class="robot-text" id="robotText">Hi! I’m your LAVA Bot 🤖</div>
+    <img src="robot.png" alt="LAVA Robot" />
   </div>
 
-  <div class="buttons">
-    <a href="courses.html" class="btn btn-red">Start Learning</a>
-    <a href="about.html" class="btn btn-black">Meet the Trainers</a>
-  </div>
-</section>
+  <section>
+    <h3>Our Mission</h3>
+    <p>Empowering Virtual Assistants through professional learning and insurance education.</p>
+  </section>
 
-<footer>
-  <p>© 2025 LAVA Classroom. All Rights Reserved.</p>
-</footer>
+  <section>
+    <h3>Our Courses</h3>
+    <p>Explore modules designed to build your expertise in commercial and personal insurance.</p>
+  </section>
 
-<script>
-const robot = document.getElementById("robot");
-const speech = document.getElementById("speech");
+  <footer>
+    <p>© 2025 LAVA Classroom. All Rights Reserved.</p>
+  </footer>
 
-window.onload = () => {
-  // Step 1: Show "Hi VA!"
-  speech.style.opacity = 1;
+  <script>
+    const robot = document.getElementById('robot');
+    const robotText = document.getElementById('robotText');
 
-  // Step 2: After 2s, hide text and start floating animation
-  setTimeout(() => {
-    speech.style.opacity = 0;
-    startFloating();
-  }, 2000);
-};
+    // Smooth floating movement using random but gradual transitions
+    let targetX = window.innerWidth / 2;
+    let targetY = window.innerHeight / 2;
 
-function startFloating() {
-  let x = 0;
-  let y = 0;
-  let angle = 0;
+    function randomizePosition() {
+      targetX = Math.random() * (window.innerWidth - 120);
+      targetY = Math.random() * (window.innerHeight - 250);
+    }
 
-  function animate() {
-    angle += 0.01; // controls speed
-    x = Math.sin(angle) * 40; // horizontal range
-    y = Math.cos(angle * 1.5) * 25; // vertical range
-    robot.style.transform = `translate(${x}px, ${y}px)`;
-    requestAnimationFrame(animate);
-  }
+    function smoothMove() {
+      const currentX = parseFloat(robot.style.left || targetX);
+      const currentY = parseFloat(robot.style.top || targetY);
 
-  animate();
-}
-</script>
+      const newX = currentX + (targetX - currentX) * 0.02;
+      const newY = currentY + (targetY - currentY) * 0.02;
 
+      robot.style.left = `${newX}px`;
+      robot.style.top = `${newY}px`;
+
+      requestAnimationFrame(smoothMove);
+    }
+
+    setInterval(randomizePosition, 4000); // move every 4s
+    smoothMove();
+  </script>
 </body>
 </html>
