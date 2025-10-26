@@ -1,83 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Meet the Trainers | LAVA Classroom</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>About • LAVA Classroom</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
   <header class="site-header">
-    <div class="header-inner container">
-      <a href="index.html" class="brand">
-        <img src="images/logo.png" alt="LAVA Logo">
-        <span>LAVA Classroom</span>
-      </a>
-      <nav class="main-nav">
+    <div class="container header-inner">
+      <a class="brand" href="index.html"><span class="logo-square"></span> LAVA Classroom</a>
+      <nav class="main-nav" id="mainNavAbout" aria-label="Main navigation">
         <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html" class="active">About</a></li>
-          <li><a href="courses.html">Courses</a></li>
-          <li><a href="assignments.html">Assignments</a></li>
-          <li><a href="game.html">Games</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="about.html" class="nav-link active">About</a></li>
+          <li><a href="courses.html" class="nav-link">Courses</a></li>
+          <li><a href="assignments.html" class="nav-link">Assignments</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
         </ul>
       </nav>
+      <button id="navToggleAbout" class="nav-toggle" aria-expanded="false" aria-controls="mainNavAbout" aria-label="Toggle menu"><span class="hamburger"></span></button>
     </div>
   </header>
 
-  <main class="container">
-    <h2 style="margin-top:28px;">Meet Our Trainers</h2>
+  <main class="container content">
+    <h1 class="section-title reveal">About LAVA Classroom</h1>
+    <p class="lead reveal delay-1">LAVA Classroom was created to upskill Virtual Assistants and support teams in practical Home Insurance tasks — from policy understanding to AMS support.</p>
 
-    <div class="trainer-grid">
-      <div class="trainer-card">
-        <img src="images/karl.jpg" alt="Karl Sison">
-        <h3>Karl Sison</h3>
-        <p>Trainer Manager</p>
+    <div class="grid-2 reveal delay-2">
+      <div>
+        <h3>Who is this for?</h3>
+        <p>New VAs, junior agents, and support staff who handle policy documents, endorsements, and client communications.</p>
+
+        <h4>Learning outcomes</h4>
+        <ul>
+          <li>Explain Coverages A–D</li>
+          <li>Identify common endorsements and ACORD forms</li>
+          <li>Complete key AMS tasks and support renewals</li>
+        </ul>
       </div>
 
-      <div class="trainer-card">
-        <img src="images/nash.jpg" alt="Nash">
-        <h3>Nash</h3>
-        <p>Trainer</p>
-      </div>
-
-      <div class="trainer-card">
-        <img src="images/au.jpg" alt="AU">
-        <h3>AU</h3>
-        <p>Trainer</p>
-      </div>
-
-      <div class="trainer-card">
-        <img src="images/kyle.jpg" alt="Kyle">
-        <h3>Kyle</h3>
-        <p>Trainer</p>
-      </div>
-
-      <div class="trainer-card">
-        <img src="images/chanie.jpg" alt="Chanie">
-        <h3>Chanie</h3>
-        <p>Trainer</p>
-      </div>
+      <aside class="card-muted">
+        <h4>Trainer notes</h4>
+        <ul>
+          <li>Use sample policies for hands-on practice</li>
+          <li>Record AMS navigation for trainee review</li>
+          <li>Provide short quizzes after modules</li>
+        </ul>
+      </aside>
     </div>
+
+    <!-- Trainers gallery -->
+    <section class="trainers reveal delay-3">
+      <h2>Meet the Trainers</h2>
+      <p class="muted">Our dedicated mentors help Virtual Assistants master practical insurance tasks.</p>
+
+      <div class="trainer-gallery">
+        <div class="trainer-card">
+          <img src="images/trainer1.jpg" alt="Karl Sison">
+          <h3>Karl Sison</h3>
+          <p>Trainer Manager</p>
+        </div>
+        <div class="trainer-card">
+          <img src="images/trainer2.jpg" alt="Nash">
+          <h3>Nash</h3>
+          <p>Trainer</p>
+        </div>
+        <div class="trainer-card">
+          <img src="images/trainer3.jpg" alt="AU">
+          <h3>AU</h3>
+          <p>Trainer</p>
+        </div>
+        <div class="trainer-card">
+          <img src="images/trainer4.jpg" alt="Kyle">
+          <h3>Kyle</h3>
+          <p>Trainer</p>
+        </div>
+        <div class="trainer-card">
+          <img src="images/trainer5.jpg" alt="Chanie">
+          <h3>Chanie</h3>
+          <p>Trainer</p>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <footer class="site-footer">
-    <div class="footer-inner container">
-      <p>© 2025 LAVA Classroom. All Rights Reserved.</p>
+    <div class="container footer-inner">
+      <p>© 2025 LAVA Classroom</p>
     </div>
   </footer>
 
   <script>
-    function revealOnScroll() {
-      document.querySelectorAll('.trainer-card').forEach(el => {
-        const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight - 100) el.classList.add('visible');
-      });
-    }
-    window.addEventListener('scroll', revealOnScroll);
-    window.addEventListener('load', revealOnScroll);
+    document.getElementById('navToggleAbout').addEventListener('click', function(){
+      const nav = document.getElementById('mainNavAbout');
+      const expanded = this.getAttribute('aria-expanded') === 'true' || false;
+      this.setAttribute('aria-expanded', !expanded);
+      nav.classList.toggle('open');
+    });
+    function revealOnScroll(){document.querySelectorAll('.reveal').forEach(el=>{const r=el.getBoundingClientRect(); if(r.top<window.innerHeight-80) el.classList.add('visible');});}
+    window.addEventListener('scroll', revealOnScroll); window.addEventListener('load', revealOnScroll);
   </script>
 </body>
 </html>
