@@ -7,11 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
     font-family: 'Poppins', sans-serif;
@@ -20,117 +16,43 @@
     background-size: cover;
     overflow-x: hidden;
     position: relative;
-    min-height: 200vh; /* allows scrolling */
+    min-height: 200vh;
   }
 
-  .overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 1;
-  }
+  .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 1; }
 
   header {
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    position: sticky; top: 0; z-index: 10;
+    display: flex; justify-content: space-between; align-items: center;
     padding: 1rem 2rem;
     background: rgba(0,0,0,0.7);
     backdrop-filter: blur(5px);
   }
 
-  .brand {
-    color: #fff;
-    font-size: 1.5rem;
-    font-weight: 700;
-    text-decoration: none;
-  }
-
-  nav ul {
-    display: flex;
-    list-style: none;
-    gap: 20px;
-  }
-
+  .brand { color: #fff; font-size: 1.5rem; font-weight: 700; text-decoration: none; }
+  nav ul { display: flex; list-style: none; gap: 20px; }
   nav a {
-    color: #fff;
-    text-decoration: none;
-    padding: 6px 12px;
-    border-radius: 5px;
+    color: #fff; text-decoration: none; padding: 6px 12px; border-radius: 5px;
     transition: all 0.3s ease;
   }
+  nav a:hover { background: #ff1f1f; transform: scale(1.05); }
+  nav a.active { background: #ff1f1f; }
 
-  nav a:hover {
-    background: #ff1f1f;
-    transform: scale(1.05);
-  }
-
-  nav a.active {
-    background: #ff1f1f;
-  }
-
-  .hero {
-    text-align: center;
-    padding: 8rem 2rem 10rem;
-    position: relative;
-    z-index: 5;
-  }
-
-  .hero h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    color: #fff;
-    animation: fadeInDown 1.5s ease;
-  }
-
-  .hero p {
-    font-size: 1.2rem;
-    color: #ccc;
-    max-width: 700px;
-    margin: 0 auto 2rem;
-    line-height: 1.6;
-  }
-
-  .hero .buttons {
-    margin-top: 30px;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-  }
-
-  .btn {
-    padding: 12px 32px;
-    font-weight: 600;
-    border: none;
-    border-radius: 50px;
-    text-decoration: none;
-    color: #fff;
-    transition: all 0.3s ease;
-    cursor: pointer;
-  }
-
+  .hero { text-align: center; padding: 8rem 2rem 10rem; position: relative; z-index: 5; }
+  .hero h1 { font-size: 3rem; margin-bottom: 1rem; color: #fff; animation: fadeInDown 1.5s ease; }
+  .hero p { font-size: 1.2rem; color: #ccc; max-width: 700px; margin: 0 auto 2rem; line-height: 1.6; }
+  .hero .buttons { margin-top: 30px; display: flex; justify-content: center; gap: 20px; }
+  .btn { padding: 12px 32px; font-weight: 600; border: none; border-radius: 50px; text-decoration: none; color: #fff; transition: all 0.3s ease; cursor: pointer; }
   .btn-red { background: #e50914; }
   .btn-red:hover { background: #ff1f1f; transform: scale(1.05); }
-
   .btn-black { background: #1a1a1a; }
   .btn-black:hover { background: #333; transform: scale(1.05); }
 
-  footer {
-    text-align: center;
-    padding: 40px 20px;
-    background: #111;
-    color: #bbb;
-    margin-top: 60px;
-    z-index: 5;
-  }
+  footer { text-align: center; padding: 40px 20px; background: #111; color: #bbb; margin-top: 60px; z-index: 5; }
 
-  @keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+  @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; visibility: hidden; } }
 
   /* === ROBOT === */
   .robot {
@@ -142,7 +64,7 @@
     transform: translate(-50%, -50%);
     border-radius: 15px;
     box-shadow: 0 0 30px rgba(255, 0, 0, 0.6);
-    transition: transform 4s ease-in-out;
+    transition: transform 2s ease-in-out;
     pointer-events: none;
   }
 
@@ -162,16 +84,6 @@
     width: 300px;
     border-radius: 20px;
     box-shadow: 0 0 40px rgba(255, 0, 0, 0.8);
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  @keyframes fadeOut {
-    from { opacity: 1; }
-    to { opacity: 0; visibility: hidden; }
   }
 </style>
 </head>
@@ -204,13 +116,13 @@
 
 <!-- Floating Robot -->
 <video autoplay loop muted playsinline class="robot" id="lavaRobot">
-  <source src="robot-wave.mp4" type="video/mp4">
+  <source src="videos/robot-wave.mp4" type="video/mp4">
 </video>
 
 <!-- Robot Intro Popup -->
 <div class="robot-popup" id="robotPopup">
   <video autoplay muted playsinline id="introVideo">
-    <source src="robot-wave.mp4" type="video/mp4">
+    <source src="videos/robot-wave.mp4" type="video/mp4">
   </video>
 </div>
 
@@ -221,9 +133,8 @@
 <script>
 const robot = document.getElementById('lavaRobot');
 const popup = document.getElementById('robotPopup');
-const introVideo = document.getElementById('introVideo');
 
-// Fade out popup after 5 seconds
+// Fade out popup after 5 seconds and start robot movement
 setTimeout(() => {
   popup.style.animation = 'fadeOut 1s ease forwards';
   setTimeout(() => popup.remove(), 1000);
@@ -231,8 +142,10 @@ setTimeout(() => {
 }, 5000);
 
 function moveRobot() {
-  const maxX = window.innerWidth - 200; // 200 = robot width
-  const maxY = window.innerHeight - 200;
+  const robotWidth = 200;
+  const robotHeight = 200;
+  const maxX = window.innerWidth - robotWidth;
+  const maxY = window.innerHeight - robotHeight;
   const x = Math.random() * maxX;
   const y = Math.random() * maxY;
   robot.style.transform = `translate(${x}px, ${y}px)`;
@@ -245,4 +158,3 @@ function startMovingRobot() {
 </script>
 </body>
 </html>
-
