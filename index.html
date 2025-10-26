@@ -18,11 +18,10 @@
     color: #fff;
     background: url('images/lava-bg.png') no-repeat center center fixed;
     background-size: cover;
-    overflow-x: hidden;
-    transition: background-position 0.3s ease;
-    animation: fadeInBackground 2s ease-in-out;
-    position: relative;
+    overflow: hidden;
     height: 100vh;
+    position: relative;
+    animation: fadeInBackground 2s ease-in-out;
   }
 
   @keyframes fadeInBackground {
@@ -169,20 +168,15 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
-    animation: blinkEyes 6s infinite, floatRobot 4s ease-in-out infinite;
     z-index: 10;
+    transform: translate(-50%, -50%);
     pointer-events: none;
+    animation: blinkEyes 6s infinite;
   }
 
   @keyframes blinkEyes {
     0%, 90%, 100% { filter: brightness(1); }
     95% { filter: brightness(0.3); }
-  }
-
-  @keyframes floatRobot {
-    0%, 100% { transform: translate(-50%, -50%) translateY(0); }
-    50% { transform: translate(-50%, -50%) translateY(-15px); }
   }
 </style>
 </head>
@@ -227,21 +221,22 @@
 const robot = document.getElementById('lavaRobot');
 
 function moveRobot() {
-  // Get random positions within the viewport (10% padding from edges)
-  const maxX = window.innerWidth * 0.8;
-  const maxY = window.innerHeight * 0.8;
-  const x = Math.random() * maxX + window.innerWidth * 0.1;
-  const y = Math.random() * maxY + window.innerHeight * 0.1;
+  const maxX = window.innerWidth - 200;  // leave margin
+  const maxY = window.innerHeight - 200;
+
+  const x = Math.random() * maxX;
+  const y = Math.random() * maxY;
 
   robot.style.transition = 'transform 4s ease-in-out';
-  robot.style.transform = `translate(${x - window.innerWidth / 2}px, ${y - window.innerHeight / 2}px)`;
+  robot.style.transform = `translate(${x}px, ${y}px)`;
 }
 
-// Move every 4 seconds
+// Move immediately and then every 4 seconds
+moveRobot();
 setInterval(moveRobot, 4000);
 
-// Initial move on load
-window.onload = moveRobot;
+// Recalculate on window resize
+window.addEventListener('resize', moveRobot);
 </script>
 
 </body>
