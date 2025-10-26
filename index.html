@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>LAVA Classroom</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
 <style>
   * {
     margin: 0;
@@ -102,7 +103,7 @@
 
   .hero {
     text-align: center;
-    padding: 8rem 2rem;
+    padding: 8rem 2rem 10rem;
     position: relative;
     z-index: 5;
   }
@@ -159,8 +160,34 @@
     from { opacity: 0; transform: translateY(-30px); }
     to { opacity: 1; transform: translateY(0); }
   }
+
+  /* === ROBOT SECTION === */
+  .robot-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+
+  .robot {
+    width: 180px;
+    animation: floatRobot 4s ease-in-out infinite, blinkEyes 6s infinite;
+    z-index: 6;
+  }
+
+  @keyframes floatRobot {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }
+
+  @keyframes blinkEyes {
+    0%, 90%, 100% { filter: brightness(1); }
+    95% { filter: brightness(0.3); }
+  }
 </style>
 </head>
+
 <body>
 
 <div class="overlay"></div>
@@ -183,6 +210,11 @@
 <section class="hero">
   <h1>Welcome to LAVA Classroom</h1>
   <p>Learn. Apply. Grow. Become a skilled Virtual Assistant in insurance agency operations.</p>
+
+  <div class="robot-container">
+    <img src="/images/lava-robot.png" alt="Lava Robot" class="robot">
+  </div>
+
   <div class="buttons">
     <a href="courses.html" class="btn btn-red">Start Learning</a>
     <a href="about.html" class="btn btn-black">Meet the Trainers</a>
