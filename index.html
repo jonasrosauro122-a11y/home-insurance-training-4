@@ -18,7 +18,7 @@
     color: #fff;
     background: url('/images/lava-bg.png') no-repeat center center fixed;
     background-size: cover;
-    overflow-y: auto; /* ✅ scrollable homepage */
+    overflow-y: scroll; /* ✅ scrollable homepage */
     animation: fadeInBackground 2s ease-in-out;
   }
 
@@ -105,6 +105,7 @@
     padding: 8rem 2rem 10rem;
     position: relative;
     z-index: 5;
+    min-height: 100vh;
   }
 
   .hero h1 {
@@ -167,12 +168,14 @@
     display: flex;
     justify-content: center;
     margin-top: 2rem;
+    height: 400px;
   }
 
   .robot {
     width: 180px;
-    position: relative;
+    position: absolute;
     animation: blinkEyes 6s infinite;
+    transition: transform 1.5s ease-in-out;
   }
 
   @keyframes blinkEyes {
@@ -180,11 +183,11 @@
     95% { filter: brightness(0.3); }
   }
 
-  /* ✅ Speech bubble: now positioned upper-right of robot’s head */
+  /* ✅ Speech bubble positioned near right head */
   .speech {
     position: absolute;
-    top: -70px;
-    left: 140px;
+    top: -20px;
+    left: 160px;
     background: white;
     color: black;
     padding: 8px 14px;
@@ -249,34 +252,34 @@ const robot = document.getElementById("robot");
 const speech = document.getElementById("speech");
 
 window.onload = () => {
-  // Step 1: Show the speech bubble smoothly
+  // Step 1: Show the speech bubble
   setTimeout(() => {
     speech.classList.add("show");
   }, 500);
 
-  // Step 2: Keep it visible for a while, then fade out
+  // Step 2: Hide speech bubble and start movement
   setTimeout(() => {
     speech.classList.remove("show");
-  }, 4000);
-
-  // Step 3: Start the smooth floating animation
-  startFloating();
+    startSmoothMovement();
+  }, 3500);
 };
 
-function startFloating() {
-  let x = 0;
-  let y = 0;
-  let angle = 0;
+function startSmoothMovement() {
+  const area = document.querySelector(".robot-container");
+  const areaWidth = area.clientWidth - 180;
+  const areaHeight = area.clientHeight - 180;
+  let posX = 0;
+  let posY = 0;
 
-  function animate() {
-    angle += 0.01; // controls speed
-    x = Math.sin(angle) * 40; // horizontal sway
-    y = Math.cos(angle * 1.5) * 25; // vertical sway
-    robot.style.transform = `translate(${x}px, ${y}px)`;
-    requestAnimationFrame(animate);
+  function moveRobot() {
+    const newX = Math.random() * areaWidth;
+    const newY = Math.random() * areaHeight;
+
+    robot.style.transform = `translate(${newX}px, ${newY}px)`;
+    setTimeout(moveRobot, 3000 + Math.random() * 2000); // Move every few seconds
   }
 
-  animate();
+  moveRobot();
 }
 </script>
 
