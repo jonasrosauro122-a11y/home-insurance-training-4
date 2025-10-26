@@ -18,50 +18,22 @@
     color: #fff;
     background: url('images/lava-bg.png') no-repeat center center fixed;
     background-size: cover;
-    transition: background-position 0.3s ease;
-    animation: fadeInBackground 2s ease-in-out;
+    overflow-x: hidden;
     position: relative;
-    min-height: 100vh;
-  }
-
-  @keyframes fadeInBackground {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    min-height: 200vh; /* allows scrolling */
   }
 
   .overlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     background: rgba(0, 0, 0, 0.6);
     z-index: 1;
-  }
-
-  .clouds {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 200%;
-    height: 200%;
-    background: url('images/clouds.png') repeat;
-    background-size: contain;
-    opacity: 0.12;
-    animation: cloudMove 120s linear infinite;
-    pointer-events: none;
-    z-index: 2;
-  }
-
-  @keyframes cloudMove {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
   }
 
   header {
     position: sticky;
     top: 0;
-    z-index: 5;
+    z-index: 10;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -81,13 +53,11 @@
     display: flex;
     list-style: none;
     gap: 20px;
-    flex-wrap: wrap;
   }
 
   nav a {
     color: #fff;
     text-decoration: none;
-    font-weight: 500;
     padding: 6px 12px;
     border-radius: 5px;
     transition: all 0.3s ease;
@@ -164,36 +134,50 @@
 
   /* === ROBOT === */
   .robot {
-    width: 180px;
     position: fixed;
-    top: 60%;
+    width: 200px;
+    z-index: 20;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 10;
-    pointer-events: none;
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(255, 0, 0, 0.6);
     transition: transform 4s ease-in-out;
+    pointer-events: none;
   }
 
-  /* Waving hand animation (simulate waving by rotation) */
-  @keyframes waveHand {
-    0% { transform: translate(-50%, -50%) rotate(0deg); }
-    20% { transform: translate(-50%, -50%) rotate(10deg); }
-    40% { transform: translate(-50%, -50%) rotate(-8deg); }
-    60% { transform: translate(-50%, -50%) rotate(10deg); }
-    80% { transform: translate(-50%, -50%) rotate(-8deg); }
-    100% { transform: translate(-50%, -50%) rotate(0deg); }
+  /* === ROBOT POPUP === */
+  .robot-popup {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 50;
+    animation: fadeIn 0.5s ease forwards;
   }
 
-  .wave {
-    animation: waveHand 2.5s ease-in-out;
+  .robot-popup video {
+    width: 300px;
+    border-radius: 20px;
+    box-shadow: 0 0 40px rgba(255, 0, 0, 0.8);
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; visibility: hidden; }
   }
 </style>
 </head>
 
 <body>
-
 <div class="overlay"></div>
-<div class="clouds"></div>
 
 <header>
   <a href="index.html" class="brand">LAVA Classroom</a>
@@ -212,15 +196,23 @@
 <section class="hero">
   <h1>Welcome to LAVA Classroom</h1>
   <p>Learn. Apply. Grow. Become a skilled Virtual Assistant in insurance agency operations.</p>
-
   <div class="buttons">
     <a href="courses.html" class="btn btn-red">Start Learning</a>
     <a href="about.html" class="btn btn-black">Meet the Trainers</a>
   </div>
 </section>
 
-<!-- Robot -->
-<img src="images/lava-robot.png" alt="Lava Robot" class="robot" id="lavaRobot">
+<!-- Floating Robot -->
+<video autoplay loop muted playsinline class="robot" id="lavaRobot">
+  <source src="images/lava-robot.mp4" type="video/mp4">
+</video>
+
+<!-- Robot Intro Popup -->
+<div class="robot-popup" id="robotPopup">
+  <video autoplay muted playsinline id="introVideo">
+    <source src="images/lava-robot.mp4" type="video/mp4">
+  </video>
+</div>
 
 <footer>
   <p>© 2025 LAVA Classroom. All Rights Reserved.</p>
@@ -228,24 +220,22 @@
 
 <script>
 const robot = document.getElementById('lavaRobot');
+const popup = document.getElementById('robotPopup');
+const introVideo = document.getElementById('introVideo');
 
-// Make robot wave first
-window.onload = () => {
-  robot.classList.add('wave');
-
-  // After waving, start moving
-  setTimeout(() => {
-    robot.classList.remove('wave');
-    startMovingRobot();
-  }, 2500); // 2.5s = waving duration
-};
+// Fade out popup after 5 seconds
+setTimeout(() => {
+  popup.style.animation = 'fadeOut 1s ease forwards';
+  setTimeout(() => popup.remove(), 1000);
+  startMovingRobot();
+}, 5000);
 
 function moveRobot() {
-  const maxX = window.innerWidth * 0.8;
-  const maxY = window.innerHeight * 0.8;
-  const x = Math.random() * maxX + window.innerWidth * 0.1;
-  const y = Math.random() * maxY + window.innerHeight * 0.1;
-  robot.style.transform = `translate(${x - window.innerWidth / 2}px, ${y - window.innerHeight / 2}px)`;
+  const maxX = window.innerWidth - 200; // 200 = robot width
+  const maxY = window.innerHeight - 200;
+  const x = Math.random() * maxX;
+  const y = Math.random() * maxY;
+  robot.style.transform = `translate(${x}px, ${y}px)`;
 }
 
 function startMovingRobot() {
@@ -253,6 +243,5 @@ function startMovingRobot() {
   setInterval(moveRobot, 4000);
 }
 </script>
-
 </body>
 </html>
