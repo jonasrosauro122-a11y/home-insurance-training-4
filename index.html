@@ -18,10 +18,9 @@
     color: #fff;
     background: url('images/lava-bg.png') no-repeat center center fixed;
     background-size: cover;
-    transition: background-position 0.3s ease;
-    animation: fadeInBackground 2s ease-in-out;
     position: relative;
     min-height: 100vh;
+    animation: fadeInBackground 2s ease-in-out;
   }
 
   @keyframes fadeInBackground {
@@ -81,7 +80,6 @@
     display: flex;
     list-style: none;
     gap: 20px;
-    flex-wrap: wrap;
   }
 
   nav a {
@@ -112,7 +110,6 @@
   .hero h1 {
     font-size: 3rem;
     margin-bottom: 1rem;
-    color: #fff;
     animation: fadeInDown 1.5s ease;
   }
 
@@ -183,9 +180,9 @@
 
   .robot-hand {
     position: absolute;
-    width: 55px;
-    top: 38px;           /* Adjust this for perfect alignment */
-    right: -8px;         /* Adjust this for shoulder position */
+    width: 50px;
+    top: 36px;       /* Adjust until it sits perfectly on the shoulder */
+    right: -5px;     /* Adjust horizontal offset */
     transform-origin: top right;
     z-index: 11;
   }
@@ -203,7 +200,6 @@
     animation: wave 2s ease-in-out infinite;
   }
 
-  /* Optional: subtle body bounce for realism */
   @keyframes bodyBounce {
     0%, 100% { transform: translate(-50%, -50%) translateY(0); }
     50% { transform: translate(-50%, -50%) translateY(-4px); }
@@ -244,7 +240,7 @@
   </div>
 </section>
 
-<!-- Robot Container -->
+<!-- Robot -->
 <div class="robot-container" id="robotContainer">
   <img src="images/lava-robot-body.png" alt="Lava Robot Body" class="robot-body" id="robotBody">
   <img src="images/lava-robot-hand.png" alt="Lava Robot Hand" class="robot-hand" id="robotHand">
@@ -277,7 +273,7 @@ function moveRobot() {
   const maxY = window.innerHeight * 0.8;
   const x = Math.random() * maxX + window.innerWidth * 0.1;
   const y = Math.random() * maxY + window.innerHeight * 0.1;
-  robotContainer.style.transform = `translate(${x - window.innerWidth / 2}px, ${y - window.innerHeight / 2}px)`;
+  robotContainer.style.transform = `translate(-50%, -50%) translate(${x - window.innerWidth / 2}px, ${y - window.innerHeight / 2}px)`;
 }
 
 function startMovingRobot() {
