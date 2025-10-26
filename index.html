@@ -3,170 +3,214 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>About • LAVA Classroom</title>
+<title>LAVA Classroom</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
 <style>
-  *{margin:0;padding:0;box-sizing:border-box;}
-body {
-  font-family: 'Poppins', sans-serif;
-  color: #fff;
-  background:
-    linear-gradient(rgba(155, 18, 18, 0.6), rgba(0, 0, 0, 0.9)),
-    url('images/classroom-bg.jpg') center/cover no-repeat fixed,
-    url('images/red-gradient-bg.jpg') center/cover no-repeat fixed;
-  background-blend-mode: overlay, multiply;
-  background-attachment: fixed;
-  background-size: cover;
-  background-position: center;
-  overflow-x: hidden;
-}
-  @keyframes gradientShift{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
-  .clouds{position:absolute;top:0;left:0;width:200%;height:200%;background:url('images/clouds.png') repeat;background-size:contain;opacity:0.12;animation:cloudMove 120s linear infinite;pointer-events:none;z-index:0;}
-  @keyframes cloudMove{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
-
-/* ====== HEADER WITH LOGO ====== */
-header{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem;background:rgba(0,0,0,0.7);backdrop-filter:blur(5px);}
-.brand{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  text-decoration:none;
-  color:#fff;
-  font-weight:700;
-}
-.brand span{
-  font-size:1.5rem;
-  color:#ff1f1f;
-}
-.brand img{
-  width:90px;
-  height:auto;
-  margin-top:5px;
-}
-
-  nav ul{display:flex;list-style:none;gap:20px;flex-wrap:wrap;}
-  nav a{color:#fff;text-decoration:none;font-weight:500;padding:6px 12px;border-radius:5px;transition:all 0.3s ease;}
-  nav a:hover{background:#ff1f1f;transform:scale(1.05);}
-  nav a.active{background:#ff1f1f;}
-
-  .container{max-width:1150px;margin:0 auto;padding:40px 20px;position:relative;z-index:5;}
-  .trainers{text-align:center;margin-top:40px;}
-  .trainers h2{color:#ff1f1f;font-size:2.4rem;margin-bottom:10px;text-transform:uppercase;}
-  .trainers p{color:#ddd;margin-bottom:40px;}
-  .trainer-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2rem;}
-  .trainer-card{
-    background:#fff;
-    color:#000;
-    border-radius:15px;
-    padding:1rem;
-    box-shadow:0 8px 24px rgba(0,0,0,0.2);
-    transform:translateY(60px);
-    opacity:0;
-    transition:transform 0.5s ease, opacity 0.5s ease;
-    cursor:pointer;
-    position:relative;
-  }
-  .trainer-card.visible{transform:translateY(0);opacity:1;}
-  .trainer-card img{width:100%;height:230px;object-fit:cover;border-radius:12px;border:3px solid #ff1f1f;transition:transform 0.3s ease;}
-  .trainer-card:hover img{transform:scale(1.05);}
-  .trainer-card h3{color:#800000;margin:10px 0 5px;font-size:1.2rem;}
-  .trainer-card p{color:#333;font-weight:bold;font-size:1rem;}
-  .info-section{margin-top:80px;}
-  .info-section h1{font-size:2.5rem;margin-bottom:10px;color:#fff;}
-  .info-section p.lead{color:#f1f1f1;font-size:1.1rem;margin-bottom:20px;}
-  .info-section h3{color:#ff1f1f;margin-top:25px;margin-bottom:10px;}
-  .info-section ul{color:#ddd;list-style:disc inside;margin-left:10px;}
-  .info-section li{margin-bottom:8px;}
-  footer{text-align:center;padding:30px 20px;background:#111;color:#bbb;margin-top:60px;}
-  @media(max-width:900px){.info-section h1{font-size:2rem;}.trainers h2{font-size:2rem;}}
-
-  /* Modal Popup */
-  .modal-overlay{
-    position:fixed;
-    top:0;left:0;width:100%;height:100%;
-    background:rgba(0,0,0,0.8);
-    display:flex;justify-content:center;align-items:center;
-    z-index:100;
-    opacity:0;pointer-events:none;
-    transition:opacity 0.3s ease;
-  }
-  .modal-overlay.active{opacity:1;pointer-events:auto;}
-  .modal{
-    background:#fff;
-    color:#111;
-    border-radius:20px;
-    max-width:600px;
-    padding:30px;
-    box-shadow:0 8px 30px rgba(0,0,0,0.4);
-    text-align:left;
-    animation:popIn 0.4s ease;
-    position:relative;
-  }
-  @keyframes popIn{from{transform:scale(0.8);opacity:0;}to{transform:scale(1);opacity:1;}}
-  .modal h2{color:#b30000;margin-bottom:10px;}
-  .modal p{color:#333;line-height:1.6;margin-bottom:10px;}
-  .close-btn{
-    position:absolute;top:10px;right:15px;
-    font-size:1.5rem;color:#b30000;
-    cursor:pointer;font-weight:bold;
+  * {margin: 0; padding: 0; box-sizing: border-box;}
+  body {
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    background: url('/images/lava-bg.png') no-repeat center center fixed;
+    background-size: cover;
+    overflow-y: auto;
+    animation: fadeInBackground 2s ease-in-out;
   }
 
-  /* Classroom Gallery + Lightbox */
-  .classroom-gallery{text-align:center;margin-top:80px;}
-  .classroom-gallery h2{color:#ff1f1f;font-size:2.2rem;margin-bottom:10px;}
-  .classroom-gallery p{color:#ddd;margin-bottom:30px;}
-  .gallery-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:1.5rem;
+  @keyframes fadeInBackground {
+    from {opacity: 0;}
+    to {opacity: 1;}
   }
-  .gallery-img{
-    width:100%;
-    height:220px;
-    object-fit:cover;
-    border-radius:15px;
-    border:3px solid #ff1f1f;
-    cursor:pointer;
-    transition:transform 0.3s ease;
+
+  .overlay {
+    position: fixed; top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: 1;
   }
-  .gallery-img:hover{transform:scale(1.05);}
-  .lightbox{
-    position:fixed;
-    top:0;left:0;width:100%;height:100%;
-    background:rgba(0,0,0,0.9);
-    display:flex;justify-content:center;align-items:center;
-    z-index:150;
-    opacity:0;pointer-events:none;
-    transition:opacity 0.3s ease;
+
+  .clouds {
+    position: absolute;
+    top: 0; left: 0;
+    width: 200%; height: 200%;
+    background: url('/images/clouds.png') repeat;
+    background-size: contain;
+    opacity: 0.12;
+    animation: cloudMove 120s linear infinite;
+    pointer-events: none;
+    z-index: 2;
   }
-  .lightbox.active{opacity:1;pointer-events:auto;}
-  .lightbox img{
-    max-width:90%;
-    max-height:85%;
-    border-radius:15px;
-    box-shadow:0 0 30px rgba(255,255,255,0.2);
-    animation:zoomIn 0.3s ease;
+
+  @keyframes cloudMove {
+    0% {transform: translateX(0);}
+    100% {transform: translateX(-50%);}
   }
-  @keyframes zoomIn{from{transform:scale(0.8);opacity:0;}to{transform:scale(1);opacity:1;}}
-  .lightbox .close-lightbox{
-    position:absolute;top:20px;right:30px;
-    color:#fff;font-size:2rem;cursor:pointer;
-    font-weight:bold;
+
+  header {
+    position: sticky; top: 0;
+    z-index: 5;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem 2rem;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(5px);
+  }
+
+  .brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #fff;
+    font-weight: 700;
+  }
+
+  .brand span {
+    font-size: 1.6rem;
+  }
+
+  .brand img {
+    width: 70px;
+    height: auto;
+    margin-top: 5px;
+  }
+
+  nav ul {
+    display: flex; list-style: none; gap: 20px; flex-wrap: wrap;
+  }
+
+  nav a {
+    color: #fff; text-decoration: none;
+    font-weight: 500; padding: 6px 12px;
+    border-radius: 5px; transition: all 0.3s ease;
+  }
+
+  nav a:hover {background: #ff1f1f; transform: scale(1.05);}
+  nav a.active {background: #ff1f1f;}
+
+  .hero {
+    text-align: center;
+    padding: 8rem 2rem 10rem;
+    position: relative;
+    z-index: 5;
+    min-height: 100vh;
+  }
+
+  .hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #fff;
+    animation: fadeInDown 1.5s ease;
+  }
+
+  .hero p {
+    font-size: 1.2rem;
+    color: #ccc;
+    max-width: 700px;
+    margin: 0 auto 2rem;
+    line-height: 1.6;
+  }
+
+  /* === ROBOT CONTAINER CENTERED === */
+  .robot-container {
+    position: relative;
+    width: 100%;
+    height: 380px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 3rem 0;
+  }
+
+  .robot {
+    width: 180px;
+    position: relative;
+    animation: blinkEyes 6s infinite;
+    transition: transform 1.5s ease-in-out;
+    z-index: 3;
+  }
+
+  @keyframes blinkEyes {
+    0%, 90%, 100% {filter: brightness(1);}
+    95% {filter: brightness(0.3);}
+  }
+
+  /* ✅ Speech bubble 0.5 inch near robot head */
+  .speech {
+    position: absolute;
+    top: calc(50% - 180px); /* approx above robot head */
+    left: 50%;
+    transform: translate(-50%, -48px);
+    background: white;
+    color: black;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 16px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    opacity: 0;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    z-index: 10;
+    white-space: nowrap;
+  }
+
+  .speech.show {
+    opacity: 1;
+    transform: translate(-50%, -58px);
+  }
+
+  .hero .buttons {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .btn {
+    padding: 12px 32px;
+    font-weight: 600;
+    border: none;
+    border-radius: 50px;
+    text-decoration: none;
+    color: #fff;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .btn-red {background: #e50914;}
+  .btn-red:hover {background: #ff1f1f; transform: scale(1.05);}
+  .btn-black {background: #1a1a1a;}
+  .btn-black:hover {background: #333; transform: scale(1.05);}
+
+  footer {
+    text-align: center;
+    padding: 40px 20px;
+    background: #111;
+    color: #bbb;
+    margin-top: 60px;
+    z-index: 5;
+  }
+
+  @keyframes fadeInDown {
+    from {opacity: 0; transform: translateY(-30px);}
+    to {opacity: 1; transform: translateY(0);}
   }
 </style>
 </head>
+
 <body>
+<div class="overlay"></div>
 <div class="clouds"></div>
 
 <header>
   <a href="index.html" class="brand">
     <span>LAVA Classroom</span>
-    <img src="images/lava-logo.png" alt="LAVA Logo">
+    <img src="/images/lava-logo.png" alt="LAVA Logo">
   </a>
+
   <nav>
     <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html" class="active">Trainers</a></li>
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="about.html">Trainers</a></li>
       <li><a href="courses.html">Courses</a></li>
       <li><a href="assignments.html">LAVA University</a></li>
       <li><a href="game.html">Games</a></li>
@@ -174,3 +218,57 @@ header{position:sticky;top:0;z-index:50;display:flex;justify-content:space-betwe
     </ul>
   </nav>
 </header>
+
+<section class="hero">
+  <h1>Welcome to LAVA Classroom</h1>
+  <p>Learn. Apply. Grow. Become a skilled Virtual Assistant in insurance agency operations.</p>
+
+  <div class="robot-container">
+    <img src="/images/lava-robot.png" alt="Lava Robot" class="robot" id="robot">
+    <div class="speech" id="speech">Hi VA 👋</div>
+  </div>
+
+  <div class="buttons">
+    <a href="courses.html" class="btn btn-red">Start Learning</a>
+    <a href="about.html" class="btn btn-black">Meet the Trainers</a>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 LAVA Classroom. All Rights Reserved.</p>
+</footer>
+
+<script>
+const robot = document.getElementById("robot");
+const speech = document.getElementById("speech");
+
+window.onload = () => {
+  // Show bubble first
+  setTimeout(() => {
+    speech.classList.add("show");
+  }, 500);
+
+  // Then hide bubble and move robot
+  setTimeout(() => {
+    speech.classList.remove("show");
+    startSmoothMovement();
+  }, 3500);
+};
+
+function startSmoothMovement() {
+  const area = document.querySelector(".robot-container");
+  const areaWidth = area.clientWidth - 180;
+  const areaHeight = area.clientHeight - 180;
+
+  function moveRobot() {
+    const newX = Math.random() * areaWidth;
+    const newY = Math.random() * areaHeight;
+    robot.style.transform = `translate(${newX}px, ${newY}px)`;
+    setTimeout(moveRobot, 3000 + Math.random() * 2000);
+  }
+
+  moveRobot();
+}
+</script>
+</body>
+</html>
