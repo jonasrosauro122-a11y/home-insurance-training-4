@@ -7,42 +7,32 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
+  * {margin: 0; padding: 0; box-sizing: border-box;}
   body {
     font-family: 'Poppins', sans-serif;
     color: #fff;
     background: url('/images/lava-bg.png') no-repeat center center fixed;
     background-size: cover;
-    overflow-y: auto; /* ✅ Scrollable homepage */
+    overflow-y: scroll;
     animation: fadeInBackground 2s ease-in-out;
   }
 
   @keyframes fadeInBackground {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {opacity: 0;}
+    to {opacity: 1;}
   }
 
   .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
+    position: fixed; top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
     z-index: 1;
   }
 
   .clouds {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 200%;
-    height: 200%;
+    top: 0; left: 0;
+    width: 200%; height: 200%;
     background: url('/images/clouds.png') repeat;
     background-size: contain;
     opacity: 0.12;
@@ -52,59 +42,53 @@
   }
 
   @keyframes cloudMove {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+    0% {transform: translateX(0);}
+    100% {transform: translateX(-50%);}
   }
 
   header {
-    position: sticky;
-    top: 0;
+    position: sticky; top: 0;
     z-index: 5;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: flex; justify-content: space-between; align-items: center;
     padding: 1rem 2rem;
     background: rgba(0,0,0,0.7);
     backdrop-filter: blur(5px);
   }
 
   .brand {
-    color: #fff;
-    font-size: 1.5rem;
-    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
     text-decoration: none;
+    color: #fff;
+    font-size: 1.6rem;
+    font-weight: 700;
+  }
+
+  .brand img {
+    width: 60px;
+    height: auto;
   }
 
   nav ul {
-    display: flex;
-    list-style: none;
-    gap: 20px;
-    flex-wrap: wrap;
+    display: flex; list-style: none; gap: 20px; flex-wrap: wrap;
   }
 
   nav a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: 500;
-    padding: 6px 12px;
-    border-radius: 5px;
-    transition: all 0.3s ease;
+    color: #fff; text-decoration: none;
+    font-weight: 500; padding: 6px 12px;
+    border-radius: 5px; transition: all 0.3s ease;
   }
 
-  nav a:hover {
-    background: #ff1f1f;
-    transform: scale(1.05);
-  }
-
-  nav a.active {
-    background: #ff1f1f;
-  }
+  nav a:hover {background: #ff1f1f; transform: scale(1.05);}
+  nav a.active {background: #ff1f1f;}
 
   .hero {
     text-align: center;
     padding: 8rem 2rem 10rem;
     position: relative;
     z-index: 5;
+    min-height: 100vh;
   }
 
   .hero h1 {
@@ -140,11 +124,10 @@
     cursor: pointer;
   }
 
-  .btn-red { background: #e50914; }
-  .btn-red:hover { background: #ff1f1f; transform: scale(1.05); }
-
-  .btn-black { background: #1a1a1a; }
-  .btn-black:hover { background: #333; transform: scale(1.05); }
+  .btn-red {background: #e50914;}
+  .btn-red:hover {background: #ff1f1f; transform: scale(1.05);}
+  .btn-black {background: #1a1a1a;}
+  .btn-black:hover {background: #333; transform: scale(1.05);}
 
   footer {
     text-align: center;
@@ -156,36 +139,37 @@
   }
 
   @keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-30px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {opacity: 0; transform: translateY(-30px);}
+    to {opacity: 1; transform: translateY(0);}
   }
 
   /* === ROBOT SECTION === */
   .robot-container {
     position: relative;
     width: 100%;
-    height: 400px;
     display: flex;
     justify-content: center;
     margin-top: 2rem;
+    height: 400px;
   }
 
   .robot {
     width: 180px;
-    position: relative;
+    position: absolute;
     animation: blinkEyes 6s infinite;
+    transition: transform 1.5s ease-in-out;
   }
 
   @keyframes blinkEyes {
-    0%, 90%, 100% { filter: brightness(1); }
-    95% { filter: brightness(0.3); }
+    0%, 90%, 100% {filter: brightness(1);}
+    95% {filter: brightness(0.3);}
   }
 
-  /* ✅ Speech bubble - close to robot’s head (0.5 inch / ~12px) */
+  /* ✅ Speech bubble 0.5 inch near robot head */
   .speech {
     position: absolute;
-    top: -65px; /* above the robot */
-    left: 120px; /* near the right head area */
+    top: -50px; /* 0.5 inch ≈ 48px */
+    left: 100px;
     background: white;
     color: black;
     padding: 8px 14px;
@@ -208,12 +192,14 @@
 </head>
 
 <body>
-
 <div class="overlay"></div>
 <div class="clouds"></div>
 
 <header>
-  <a href="index.html" class="brand">LAVA Classroom</a>
+  <a href="index.html" class="brand">
+    <img src="/images/lava-logo.png" alt="LAVA Logo">
+    LAVA Classroom
+  </a>
   <nav>
     <ul>
       <li><a href="index.html" class="active">Home</a></li>
@@ -230,9 +216,9 @@
   <h1>Welcome to LAVA Classroom</h1>
   <p>Learn. Apply. Grow. Become a skilled Virtual Assistant in insurance agency operations.</p>
 
-  <div class="robot-container" id="robotContainer">
+  <div class="robot-container">
     <img src="/images/lava-robot.png" alt="Lava Robot" class="robot" id="robot">
-    <div class="speech" id="speech">Hi! I’m your LAVA Bot 🤖</div>
+    <div class="speech" id="speech">Hi VA 👋</div>
   </div>
 
   <div class="buttons">
@@ -248,41 +234,36 @@
 <script>
 const robot = document.getElementById("robot");
 const speech = document.getElementById("speech");
-const container = document.getElementById("robotContainer");
 
 window.onload = () => {
-  // Step 1: Show speech bubble
+  // Step 1: Show the speech bubble
   setTimeout(() => {
     speech.classList.add("show");
   }, 500);
 
-  // Step 2: Hide after a few seconds
+  // Step 2: Hide speech bubble and start movement
   setTimeout(() => {
     speech.classList.remove("show");
-  }, 4000);
-
-  // Step 3: Start movement
-  startSmoothMovement();
+    startSmoothMovement();
+  }, 3500);
 };
 
 function startSmoothMovement() {
+  const area = document.querySelector(".robot-container");
+  const areaWidth = area.clientWidth - 180;
+  const areaHeight = area.clientHeight - 180;
   let posX = 0;
   let posY = 0;
-  let angle = 0;
 
-  function animate() {
-    angle += 0.008;
-    posX = Math.sin(angle) * 100;
-    posY = Math.cos(angle * 1.5) * 50;
-
-    robot.style.transform = `translate(${posX}px, ${posY}px)`;
-    speech.style.transform = `translate(${posX}px, ${posY}px)`; // keep speech attached positionally
-    requestAnimationFrame(animate);
+  function moveRobot() {
+    const newX = Math.random() * areaWidth;
+    const newY = Math.random() * areaHeight;
+    robot.style.transform = `translate(${newX}px, ${newY}px)`;
+    setTimeout(moveRobot, 3000 + Math.random() * 2000);
   }
 
-  animate();
+  moveRobot();
 }
 </script>
-
 </body>
 </html>
