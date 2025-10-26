@@ -18,8 +18,7 @@
     color: #fff;
     background: url('/images/lava-bg.png') no-repeat center center fixed;
     background-size: cover;
-    overflow-x: hidden;
-    transition: background-position 0.3s ease;
+    overflow: hidden;
     animation: fadeInBackground 2s ease-in-out;
   }
 
@@ -170,22 +169,31 @@
     margin-top: 2rem;
   }
 
-.robot {
-  width: 180px;
-  animation: floatRobot 10s ease-in-out infinite, blinkEyes 6s infinite;
-}
-
-@keyframes floatRobot {
-  0%   { transform: translate(0, 0); }
-  25%  { transform: translate(20px, -15px); }
-  50%  { transform: translate(0, -30px); }
-  75%  { transform: translate(-20px, -15px); }
-  100% { transform: translate(0, 0); }
-}
+  .robot {
+    width: 180px;
+    position: relative;
+    animation: blinkEyes 6s infinite;
+  }
 
   @keyframes blinkEyes {
     0%, 90%, 100% { filter: brightness(1); }
     95% { filter: brightness(0.3); }
+  }
+
+  .speech {
+    position: absolute;
+    top: -40px;
+    left: 150px;
+    background: white;
+    color: black;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 16px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    opacity: 0;
+    transition: opacity 0.6s;
+    z-index: 10;
   }
 </style>
 </head>
@@ -214,7 +222,8 @@
   <p>Learn. Apply. Grow. Become a skilled Virtual Assistant in insurance agency operations.</p>
 
   <div class="robot-container">
-    <img src="/images/lava-robot.png" alt="Lava Robot" class="robot">
+    <img src="/images/lava-robot.png" alt="Lava Robot" class="robot" id="robot">
+    <div class="speech" id="speech">Hi VA!</div>
   </div>
 
   <div class="buttons">
@@ -228,14 +237,35 @@
 </footer>
 
 <script>
-const robot = document.querySelector('.robot');
-function randomMove() {
-  const x = (Math.random() - 0.5) * 100; // random left-right range
-  const y = (Math.random() - 0.5) * 60;  // random up-down range
-  robot.style.transition = 'transform 3s ease-in-out';
-  robot.style.transform = `translate(${x}px, ${y}px)`;
+const robot = document.getElementById("robot");
+const speech = document.getElementById("speech");
+
+window.onload = () => {
+  // Step 1: Show "Hi VA!"
+  speech.style.opacity = 1;
+
+  // Step 2: After 2s, hide text and start floating animation
+  setTimeout(() => {
+    speech.style.opacity = 0;
+    startFloating();
+  }, 2000);
+};
+
+function startFloating() {
+  let x = 0;
+  let y = 0;
+  let angle = 0;
+
+  function animate() {
+    angle += 0.01; // controls speed
+    x = Math.sin(angle) * 40; // horizontal range
+    y = Math.cos(angle * 1.5) * 25; // vertical range
+    robot.style.transform = `translate(${x}px, ${y}px)`;
+    requestAnimationFrame(animate);
+  }
+
+  animate();
 }
-setInterval(randomMove, 3000);
 </script>
 
 </body>
