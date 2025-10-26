@@ -170,16 +170,18 @@
     margin-top: 2rem;
   }
 
-  .robot {
-    width: 180px;
-    animation: floatRobot 4s ease-in-out infinite, blinkEyes 6s infinite;
-    z-index: 6;
-  }
+.robot {
+  width: 180px;
+  animation: floatRobot 10s ease-in-out infinite, blinkEyes 6s infinite;
+}
 
-  @keyframes floatRobot {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-20px); }
-  }
+@keyframes floatRobot {
+  0%   { transform: translate(0, 0); }
+  25%  { transform: translate(20px, -15px); }
+  50%  { transform: translate(0, -30px); }
+  75%  { transform: translate(-20px, -15px); }
+  100% { transform: translate(0, 0); }
+}
 
   @keyframes blinkEyes {
     0%, 90%, 100% { filter: brightness(1); }
@@ -226,12 +228,16 @@
 </footer>
 
 <script>
-document.addEventListener('mousemove', e => {
-  const x = (e.clientX / window.innerWidth - 0.5) * 10;
-  const y = (e.clientY / window.innerHeight - 0.5) * 10;
-  document.body.style.backgroundPosition = `calc(50% + ${x}px) calc(50% + ${y}px)`;
-});
+const robot = document.querySelector('.robot');
+function randomMove() {
+  const x = (Math.random() - 0.5) * 100; // random left-right range
+  const y = (Math.random() - 0.5) * 60;  // random up-down range
+  robot.style.transition = 'transform 3s ease-in-out';
+  robot.style.transform = `translate(${x}px, ${y}px)`;
+}
+setInterval(randomMove, 3000);
 </script>
 
 </body>
 </html>
+
