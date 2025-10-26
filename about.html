@@ -1,275 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>About • LAVA Classroom</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-<style>
-  *{margin:0;padding:0;box-sizing:border-box;}
-body {
-  font-family: 'Poppins', sans-serif;
-  color: #fff;
-  background:
-    linear-gradient(rgba(155, 18, 18, 0.6), rgba(0, 0, 0, 0.9)),
-    url('images/classroom-bg.jpg') center/cover no-repeat fixed,
-    url('images/red-gradient-bg.jpg') center/cover no-repeat fixed;
-  background-blend-mode: overlay, multiply;
-  background-attachment: fixed;
-  background-size: cover;
-  background-position: center;
-  overflow-x: hidden;
-}
-  @keyframes gradientShift{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
-  .clouds{position:absolute;top:0;left:0;width:200%;height:200%;background:url('images/clouds.png') repeat;background-size:contain;opacity:0.12;animation:cloudMove 120s linear infinite;pointer-events:none;z-index:0;}
-  @keyframes cloudMove{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
-  header{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem;background:rgba(0,0,0,0.7);backdrop-filter:blur(5px);}
-  .brand{color:#fff;font-size:1.5rem;font-weight:700;text-decoration:none;}
-  nav ul{display:flex;list-style:none;gap:20px;flex-wrap:wrap;}
-  nav a{color:#fff;text-decoration:none;font-weight:500;padding:6px 12px;border-radius:5px;transition:all 0.3s ease;}
-  nav a:hover{background:#ff1f1f;transform:scale(1.05);}
-  nav a.active{background:#ff1f1f;}
-  .container{max-width:1150px;margin:0 auto;padding:40px 20px;position:relative;z-index:5;}
-  .trainers{text-align:center;margin-top:40px;}
-  .trainers h2{color:#ff1f1f;font-size:2.4rem;margin-bottom:10px;text-transform:uppercase;}
-  .trainers p{color:#ddd;margin-bottom:40px;}
-  .trainer-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2rem;}
-  .trainer-card{
-    background:#fff;
-    color:#000;
-    border-radius:15px;
-    padding:1rem;
-    box-shadow:0 8px 24px rgba(0,0,0,0.2);
-    transform:translateY(60px);
-    opacity:0;
-    transition:transform 0.5s ease, opacity 0.5s ease;
-    cursor:pointer;
-    position:relative;
-  }
-  .trainer-card.visible{transform:translateY(0);opacity:1;}
-  .trainer-card img{width:100%;height:230px;object-fit:cover;border-radius:12px;border:3px solid #ff1f1f;transition:transform 0.3s ease;}
-  .trainer-card:hover img{transform:scale(1.05);}
-  .trainer-card h3{color:#800000;margin:10px 0 5px;font-size:1.2rem;}
-  .trainer-card p{color:#333;font-weight:bold;font-size:1rem;}
-  .info-section{margin-top:80px;}
-  .info-section h1{font-size:2.5rem;margin-bottom:10px;color:#fff;}
-  .info-section p.lead{color:#f1f1f1;font-size:1.1rem;margin-bottom:20px;}
-  .info-section h3{color:#ff1f1f;margin-top:25px;margin-bottom:10px;}
-  .info-section ul{color:#ddd;list-style:disc inside;margin-left:10px;}
-  .info-section li{margin-bottom:8px;}
-  footer{text-align:center;padding:30px 20px;background:#111;color:#bbb;margin-top:60px;}
-  @media(max-width:900px){.info-section h1{font-size:2rem;}.trainers h2{font-size:2rem;}}
-
-  /* Modal Popup */
-  .modal-overlay{
-    position:fixed;
-    top:0;left:0;width:100%;height:100%;
-    background:rgba(0,0,0,0.8);
-    display:flex;justify-content:center;align-items:center;
-    z-index:100;
-    opacity:0;pointer-events:none;
-    transition:opacity 0.3s ease;
-  }
-  .modal-overlay.active{opacity:1;pointer-events:auto;}
-  .modal{
-    background:#fff;
-    color:#111;
-    border-radius:20px;
-    max-width:600px;
-    padding:30px;
-    box-shadow:0 8px 30px rgba(0,0,0,0.4);
-    text-align:left;
-    animation:popIn 0.4s ease;
-    position:relative;
-  }
-  @keyframes popIn{from{transform:scale(0.8);opacity:0;}to{transform:scale(1);opacity:1;}}
-  .modal h2{color:#b30000;margin-bottom:10px;}
-  .modal p{color:#333;line-height:1.6;margin-bottom:10px;}
-  .close-btn{
-    position:absolute;top:10px;right:15px;
-    font-size:1.5rem;color:#b30000;
-    cursor:pointer;font-weight:bold;
-  }
-
-  /* 🖼️ Classroom Gallery + Lightbox */
-  .classroom-gallery{text-align:center;margin-top:80px;}
-  .classroom-gallery h2{color:#ff1f1f;font-size:2.2rem;margin-bottom:10px;}
-  .classroom-gallery p{color:#ddd;margin-bottom:30px;}
-  .gallery-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:1.5rem;
-  }
-  .gallery-img{
-    width:100%;
-    height:220px;
-    object-fit:cover;
-    border-radius:15px;
-    border:3px solid #ff1f1f;
-    cursor:pointer;
-    transition:transform 0.3s ease;
-  }
-  .gallery-img:hover{transform:scale(1.05);}
-  .lightbox{
-    position:fixed;
-    top:0;left:0;width:100%;height:100%;
-    background:rgba(0,0,0,0.9);
-    display:flex;justify-content:center;align-items:center;
-    z-index:150;
-    opacity:0;pointer-events:none;
-    transition:opacity 0.3s ease;
-  }
-  .lightbox.active{opacity:1;pointer-events:auto;}
-  .lightbox img{
-    max-width:90%;
-    max-height:85%;
-    border-radius:15px;
-    box-shadow:0 0 30px rgba(255,255,255,0.2);
-    animation:zoomIn 0.3s ease;
-  }
-  @keyframes zoomIn{from{transform:scale(0.8);opacity:0;}to{transform:scale(1);opacity:1;}}
-  .lightbox .close-lightbox{
-    position:absolute;top:20px;right:30px;
-    color:#fff;font-size:2rem;cursor:pointer;
-    font-weight:bold;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meet the Trainers | LAVA Classroom</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<div class="clouds"></div>
 
-<header>
-  <a href="index.html" class="brand">LAVA Classroom</a>
-  <nav>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html" class="active">Trainers</a></li>
-      <li><a href="courses.html">Courses</a></li>
-      <li><a href="assignments.html">LAVA University</a></li>
-      <li><a href="game.html">Games</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
-  </nav>
-</header>
-
-<main class="container">
-  <section class="trainers">
-    <h2>Meet Our Trainers</h2>
-    <p>Tap or click on a trainer to learn more about their experience and story.</p>
-    <div class="trainer-gallery">
-      <div class="trainer-card" data-trainer="karl"><img src="images/karl.jpg" alt="Karl"><h3>Karl</h3><p>Training Manager</p></div>
-      <div class="trainer-card" data-trainer="nash"><img src="images/nash.jpg" alt="Nash"><h3>Nash</h3><p>Trainer</p></div>
-      <div class="trainer-card" data-trainer="au"><img src="images/Au.jpg" alt="Au"><h3>Au</h3><p>Trainer</p></div>
-      <div class="trainer-card" data-trainer="kyle"><img src="images/kyle.jpg" alt="Kyle"><h3>Kyle</h3><p>Trainer</p></div>
-      <div class="trainer-card" data-trainer="chanie"><img src="images/chanie.jpg" alt="Chanie"><h3>Chanie</h3><p>Trainer</p></div>
+  <header class="site-header">
+    <div class="header-inner container">
+      <a href="index.html" class="brand">
+        <img src="images/logo.png" alt="LAVA Logo">
+        <span>LAVA Classroom</span>
+      </a>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html" class="active">About</a></li>
+          <li><a href="courses.html">Courses</a></li>
+          <li><a href="assignments.html">Assignments</a></li>
+          <li><a href="game.html">Games</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
     </div>
-  </section>
+  </header>
 
-  <section class="info-section">
-    <h1>About LAVA Classroom</h1>
-    <p class="lead">LAVA Classroom empowers Virtual Assistants with insurance knowledge and hands-on agency operations training.</p>
-    <h3>Who is this for?</h3>
-    <p>New Virtual Assistants, junior agents, and support staff who assist with client policies, renewals, and endorsements.</p>
-    <h3>Learning Outcomes</h3>
-    <ul>
-      <li>Explain key Home Insurance coverages (A–D).</li>
-      <li>Identify common endorsements and ACORD forms.</li>
-      <li>Perform AMS and CRM support tasks accurately.</li>
-    </ul>
-  </section>
+  <main class="container">
+    <h2 style="margin-top:28px;">Meet Our Trainers</h2>
 
-  <!-- 🎓 Classroom Gallery Section -->
-  <section class="classroom-gallery">
-    <h2>Classroom Gallery</h2>
-    <p>Take a peek inside our engaging and inspiring LAVA training environment.</p>
-    <div class="gallery-grid">
-      <img src="images/class1.jpg" alt="Classroom 1" class="gallery-img">
-      <img src="images/class2.jpg" alt="Classroom 2" class="gallery-img">
-      <img src="images/class3.jpg" alt="Classroom 3" class="gallery-img">
-      <img src="images/class4.jpg" alt="Classroom 4" class="gallery-img">
-      <img src="images/class5.jpg" alt="Classroom 5" class="gallery-img">
-      <img src="images/class6.jpg" alt="Classroom 6" class="gallery-img">
-      <img src="images/class7.jpg" alt="Classroom 7" class="gallery-img">
-      <img src="images/class8.jpg" alt="Classroom 8" class="gallery-img">
-      <img src="images/class9.jpg" alt="Classroom 9" class="gallery-img">
-      <img src="images/class10.jpg" alt="Classroom 10" class="gallery-img">
+    <div class="trainer-grid">
+      <div class="trainer-card">
+        <img src="images/karl.jpg" alt="Karl Sison">
+        <h3>Karl Sison</h3>
+        <p>Trainer Manager</p>
+      </div>
+
+      <div class="trainer-card">
+        <img src="images/nash.jpg" alt="Nash">
+        <h3>Nash</h3>
+        <p>Trainer</p>
+      </div>
+
+      <div class="trainer-card">
+        <img src="images/au.jpg" alt="AU">
+        <h3>AU</h3>
+        <p>Trainer</p>
+      </div>
+
+      <div class="trainer-card">
+        <img src="images/kyle.jpg" alt="Kyle">
+        <h3>Kyle</h3>
+        <p>Trainer</p>
+      </div>
+
+      <div class="trainer-card">
+        <img src="images/chanie.jpg" alt="Chanie">
+        <h3>Chanie</h3>
+        <p>Trainer</p>
+      </div>
     </div>
-  </section>
-</main>
+  </main>
 
-<!-- Trainer Bio Modal -->
-<div class="modal-overlay" id="trainerModal">
-  <div class="modal">
-    <span class="close-btn" onclick="closeModal()">&times;</span>
-    <div id="modalContent"></div>
-  </div>
-</div>
+  <footer class="site-footer">
+    <div class="footer-inner container">
+      <p>© 2025 LAVA Classroom. All Rights Reserved.</p>
+    </div>
+  </footer>
 
-<!-- ✅ Single Lightbox -->
-<div class="lightbox" id="lightbox">
-  <span class="close-lightbox" onclick="closeLightbox()">&times;</span>
-  <img src="" alt="Expanded view" id="lightboxImg">
-</div>
-
-<footer>
-  <p>© 2025 LAVA Classroom. All Rights Reserved.</p>
-</footer>
-
-<script>
-const bios = {
-  karl: `<h2>🧑‍🏫 Karl – Training Manager & Insurance Agency Specialist</h2>
-  <p>Karl is LAVA’s dedicated Training Manager and a true expert in insurance operations. With extensive experience in the insurance industry, he oversees the full training cycle—from curriculum design to VA certification. Known for his structured teaching and technical mastery, Karl helps Virtual Assistants understand the "why" behind every task, not just the "how."</p>
-  <p>He ensures that every LAVA trainee develops strong attention to detail, efficiency in ACORD handling, and clear communication with clients. Karl’s leadership philosophy focuses on consistency, accountability, and professional growth for every team member.</p>`,
-
-  nash: `<h2>🖥️ Nash – Senior Virtual Assistant Trainer</h2>
-  <p>Nash has over 8 years of BPO experience and 2 years as a Virtual Assistant specializing in insurance back-office operations. She is known for her dynamic, high-energy training sessions that help VAs grasp complex processes quickly. Her real-world examples bring the lessons to life and empower trainees to apply their learning immediately in live agency environments.</p>
-  <p>Nash focuses on claim processing, renewal management, and CRM optimization. She believes that learning should be both engaging and practical—equipping each VA with the tools to thrive in a fast-paced agency setup.</p>`,
-
-  au: `<h2>🌟 Au – Insurance Process Trainer</h2>
-  <p>With a decade of experience in the BPO industry, Au transitioned into the insurance virtual assistance field to bridge the gap between corporate communication and insurance operations. Her patient teaching style and strong process orientation make her a favorite among new trainees.</p>
-  <p>She designs modules that simplify even the most technical workflows—making it easy for VAs to perform endorsements, manage client updates, and support agents with confidence. Au’s motto: “Train with empathy, perform with excellence.”</p>`,
-
-  kyle: `<h2>🎓 Kyle – Internal Trainer & Former College Professor</h2>
-  <p>Kyle combines academic depth with real-world practicality. Before joining LAVA, he spent 8 years teaching business and management courses at a college level. His background allows him to explain complex insurance and administrative concepts clearly and logically.</p>
-  <p>At LAVA Classroom, he focuses on critical thinking, situational problem-solving, and accuracy in client handling. Kyle’s classroom approach encourages curiosity, responsibility, and a continuous drive for improvement.</p>`,
-
-  chanie: `<h2>🌸 Chanie – Internal Trainer & Former Educator</h2>
-  <p>Chanie brings warmth and professionalism to every class. With years of experience in education and VA work, she knows how to blend patience with precision. Her calm demeanor and supportive teaching make her classes approachable yet deeply insightful.</p>
-  <p>She helps new Virtual Assistants master the fundamentals of client service, insurance documentation, and task organization—turning beginners into capable professionals ready to assist agencies with confidence and reliability.</p>`
-};
-
-document.querySelectorAll('.trainer-card').forEach(card=>{
-  card.addEventListener('click',()=>{
-    const trainer=card.getAttribute('data-trainer');
-    document.getElementById('modalContent').innerHTML=bios[trainer];
-    document.getElementById('trainerModal').classList.add('active');
-  });
-});
-function closeModal(){document.getElementById('trainerModal').classList.remove('active');}
-
-function revealCards(){
-  document.querySelectorAll('.trainer-card').forEach(card=>{
-    const rect=card.getBoundingClientRect();
-    if(rect.top<window.innerHeight-100)card.classList.add('visible');
-  });
-}
-window.addEventListener('scroll',revealCards);
-window.addEventListener('load',revealCards);
-
-const lightbox=document.getElementById('lightbox');
-const lightboxImg=document.getElementById('lightboxImg');
-document.querySelectorAll('.gallery-img').forEach(img=>{
-  img.addEventListener('click',()=>{
-    lightboxImg.src=img.src;
-    lightbox.classList.add('active');
-  });
-});
-function closeLightbox(){lightbox.classList.remove('active');}
-lightbox.addEventListener('click',e=>{
-  if(e.target===lightbox)closeLightbox();
-});
-</script>
+  <script>
+    function revealOnScroll() {
+      document.querySelectorAll('.trainer-card').forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) el.classList.add('visible');
+      });
+    }
+    window.addEventListener('scroll', revealOnScroll);
+    window.addEventListener('load', revealOnScroll);
+  </script>
 </body>
 </html>
-
-
