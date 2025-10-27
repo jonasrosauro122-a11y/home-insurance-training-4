@@ -6,230 +6,193 @@
   <title>Courses • LAVA Classroom</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --primary: #8B0000; /* Dark Red */
-      --secondary: #000000; /* Black */
-      --accent: #FF0000;
-      --bg-gradient: linear-gradient(135deg, #8B0000, #000000);
-    }
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Poppins', sans-serif;
-    }
     body {
-      background: var(--bg-gradient);
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #8B0000, #000);
       color: #fff;
-      line-height: 1.6;
     }
-    a {
+
+    /* HEADER */
+    header {
+      background-color: #000;
       color: #fff;
-      text-decoration: none;
-    }
-    .container {
-      width: 90%;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    header.site-header {
-      background: rgba(0,0,0,0.8);
-      padding: 15px 0;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-    .header-inner {
+      padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
-    .brand {
-      font-size: 1.5rem;
-      font-weight: 700;
+
+    .brand-container {
       display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .brand .logo-square {
-      width: 25px;
-      height: 25px;
-      background: var(--accent);
-    }
-    .main-nav ul {
-      list-style: none;
-      display: flex;
-      gap: 20px;
-    }
-    .main-nav ul li a {
-      padding: 5px 10px;
-      transition: 0.3s;
-    }
-    .main-nav ul li a:hover,
-    .main-nav ul li a.active {
-      background: var(--accent);
-      border-radius: 5px;
-    }
-    .nav-toggle {
-      display: none;
       flex-direction: column;
-      cursor: pointer;
-      gap: 5px;
+      align-items: center;
     }
-    .nav-toggle .hamburger {
-      width: 25px;
-      height: 3px;
-      background: #fff;
-      display: block;
+
+    header h1 {
+      color: #e50914;
+      font-size: 1.5rem;
+      margin: 0;
     }
-    main.content {
-      padding: 80px 0 50px;
-    }
-    .section-title {
-      font-size: 2rem;
-      text-align: center;
-      margin-bottom: 10px;
-    }
-    .lead {
-      text-align: center;
-      font-size: 1.1rem;
-      margin-bottom: 40px;
+
+    .lava-logo {
+      width: 80px;
+      height: auto;
+      margin-top: 5px;
+      filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
       opacity: 0.9;
     }
+
+    nav a {
+      color: white;
+      margin-left: 1rem;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: #e50914;
+    }
+
+    /* MAIN CONTENT */
+    main {
+      padding: 3rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1.section-title {
+      color: #e50914;
+      text-align: center;
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+    }
+
+    p.lead {
+      text-align: center;
+      font-size: 1.1rem;
+      margin-bottom: 3rem;
+      color: #f1f1f1;
+    }
+
     .days-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 20px;
     }
+
     .day-card {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255,255,255,0.2);
-      padding: 20px;
-      border-radius: 10px;
-      transition: transform 0.3s, background 0.3s;
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 2px solid #e50914;
+      border-radius: 15px;
+      padding: 1.2rem;
+      text-align: left;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
+
     .day-card:hover {
       transform: translateY(-5px);
-      background: rgba(255, 0, 0, 0.2);
+      box-shadow: 0 8px 20px rgba(229, 9, 20, 0.3);
     }
+
     .day-card h3 {
-      margin-bottom: 10px;
+      color: #e50914;
       font-size: 1.2rem;
-      color: var(--accent);
+      margin-bottom: 0.5rem;
     }
+
+    .day-card p {
+      color: #fff;
+      margin: 0;
+      font-size: 1rem;
+      opacity: 0.9;
+    }
+
     .card {
       background: rgba(255, 255, 255, 0.05);
       padding: 20px;
       border-radius: 10px;
-      margin-top: 30px;
-    }
-    footer.site-footer {
-      background: rgba(0,0,0,0.8);
-      padding: 15px 0;
+      margin-top: 40px;
       text-align: center;
-      margin-top: 50px;
-      font-size: 0.9rem;
-      opacity: 0.8;
+      border: 1px solid rgba(255,255,255,0.2);
     }
-    /* reveal animations */
-    .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: 0.6s ease-out;
+
+    .card h4 {
+      color: #e50914;
+      font-size: 1.3rem;
+      margin-bottom: 10px;
     }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      background-color: #000;
+      color: #fff;
+      margin-top: 3rem;
     }
-    @media(max-width:768px){
-      .main-nav ul {
-        flex-direction: column;
-        gap: 10px;
-        display: none;
+
+    @media (max-width: 768px) {
+      nav a {
+        margin-left: 0.5rem;
       }
-      .main-nav.open ul {
-        display: flex;
-      }
-      .nav-toggle {
-        display: flex;
+
+      .lava-logo {
+        width: 60px;
       }
     }
   </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="header-inner container">
-      <a class="brand" href="index.html"><span class="logo-square"></span> LAVA Classroom</a>
-      <nav class="main-nav" id="mainNavCourses">
-  <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="courses.html" class="active">Courses</a></li>
-    <li><a href="assignments.html">Assignments</a></li>
-    <li><a href="game.html">Games</a></li>
-    <li><a href="contact.html">Contact</a></li>
-  </ul>
-</nav>
-      <button id="navToggleCourses" class="nav-toggle" aria-expanded="false" aria-controls="mainNavCourses">
-        <span class="hamburger"></span>
-        <span class="hamburger"></span>
-        <span class="hamburger"></span>
-      </button>
+  <header>
+    <div class="brand-container">
+      <h1>LAVA Classroom</h1>
+      <img src="images/lava-logo.png" alt="LAVA Logo" class="lava-logo">
     </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">Trainers</a>
+      <a href="courses.html" class="active">Courses</a>
+      <a href="assignments.html">Assignments</a>
+      <a href="game.html">Games</a>
+      <a href="contact.html">Contact</a>
+    </nav>
   </header>
 
-  <main class="container content">
-    <h1 class="section-title reveal">14-Day Training Plan</h1>
-    <p class="lead reveal delay-1">Each day includes a short lecture and a practical activity. Follow the sequence for full coverage.</p>
+  <main>
+    <h1 class="section-title">14-Day Training Plan</h1>
+    <p class="lead">Each day includes a short lecture and a practical activity. Follow the sequence for full coverage.</p>
+
     <div class="days-grid">
-      <!-- Days -->
-      <article class="day-card reveal"> <h3>Day 1 — Getting to know you</h3> <p>Different Roles of a LAVA VA, Admin Tasks</p> </article>
-      <article class="day-card reveal"> <h3>Day 2 — Insurance 101</h3> <p>Policy Cycle</p> </article>
-      <article class="day-card reveal"> <h3>Day 3 — Insurance Documents</h3> <p>Forms, declarations, and document types</p> </article>
-      <article class="day-card reveal"> <h3>Day 4 — English 101 & Mock Calls</h3> <p>CSR basics and simulated calls</p> </article>
-      <article class="day-card reveal"> <h3>Day 5 — Intro to AMS & CRM</h3> <p>Basic navigation and data entry</p> </article>
-      <article class="day-card reveal"> <h3>Day 6 — Raters & Carriers</h3> <p>Overview of rating systems and common carriers</p> </article>
-      <article class="day-card reveal"> <h3>Day 7 — Home Insurance Types</h3> <p>Coverages, construction knowledge & quoting</p> </article>
-      <article class="day-card reveal"> <h3>Day 8 — Auto Insurance Intro</h3> <p>Coverages, endorsements & quoting basics</p> </article>
-      <article class="day-card reveal"> <h3>Day 9 — Trailer / Boat / RV / Umbrella</h3> <p>Overview and quoting specifics</p> </article>
-      <article class="day-card reveal"> <h3>Day 10 — Home Dec Page Activity</h3> <p>Analyze sample home declaration & quote simulation</p> </article>
-      <article class="day-card reveal"> <h3>Day 11 — Auto Dec Page Activity</h3> <p>Analyze sample auto declaration & quote simulation</p> </article>
-      <article class="day-card reveal"> <h3>Day 12 — ACORD Forms</h3> <p>Personal and commercial ACORD files and key fields</p> </article>
-      <article class="day-card reveal"> <h3>Day 13 — SOP & Exam</h3> <p>SOP lecture, writing practice, and final exam</p> </article>
-      <article class="day-card reveal"> <h3>Day 14 — Recognition & Certificates</h3> <p>Presentation of certificates and feedback</p> </article>
+      <div class="day-card"><h3>Day 1 — Getting to know you</h3><p>Different Roles of a LAVA VA, Admin Tasks</p></div>
+      <div class="day-card"><h3>Day 2 — Insurance 101</h3><p>Policy Cycle</p></div>
+      <div class="day-card"><h3>Day 3 — Insurance Documents</h3><p>Forms, declarations, and document types</p></div>
+      <div class="day-card"><h3>Day 4 — English 101 & Mock Calls</h3><p>CSR basics and simulated calls</p></div>
+      <div class="day-card"><h3>Day 5 — Intro to AMS & CRM</h3><p>Basic navigation and data entry</p></div>
+      <div class="day-card"><h3>Day 6 — Raters & Carriers</h3><p>Overview of rating systems and common carriers</p></div>
+      <div class="day-card"><h3>Day 7 — Home Insurance Types</h3><p>Coverages, construction knowledge & quoting</p></div>
+      <div class="day-card"><h3>Day 8 — Auto Insurance Intro</h3><p>Coverages, endorsements & quoting basics</p></div>
+      <div class="day-card"><h3>Day 9 — Trailer / Boat / RV / Umbrella</h3><p>Overview and quoting specifics</p></div>
+      <div class="day-card"><h3>Day 10 — Home Dec Page Activity</h3><p>Analyze sample home declaration & quote simulation</p></div>
+      <div class="day-card"><h3>Day 11 — Auto Dec Page Activity</h3><p>Analyze sample auto declaration & quote simulation</p></div>
+      <div class="day-card"><h3>Day 12 — ACORD Forms</h3><p>Personal and commercial ACORD files and key fields</p></div>
+      <div class="day-card"><h3>Day 13 — SOP & Exam</h3><p>SOP lecture, writing practice, and final exam</p></div>
+      <div class="day-card"><h3>Day 14 — Recognition & Certificates</h3><p>Presentation of certificates and feedback</p></div>
     </div>
 
-    <div class="card reveal delay-2">
-      <h4 style="color:var(--accent)">Trainer resources</h4>
-      <p class="lead">Trainers: attach sample policies, AMS screenshots or recorded walkthroughs to each day using your trainer resources folder.</p>
+    <div class="card">
+      <h4>Trainer Resources</h4>
+      <p>Trainers: attach sample policies, AMS screenshots or recorded walkthroughs to each day using your trainer resources folder.</p>
     </div>
   </main>
 
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p>© 2025 LAVA Classroom</p>
-    </div>
+  <footer>
+    <p>© 2025 LAVA Classroom. All Rights Reserved.</p>
   </footer>
-
-  <script>
-    // Responsive nav toggle
-    document.getElementById('navToggleCourses').addEventListener('click', function(){
-      const nav = document.getElementById('mainNavCourses');
-      const expanded = this.getAttribute('aria-expanded') === 'true' || false;
-      this.setAttribute('aria-expanded', !expanded);
-      nav.classList.toggle('open');
-    });
-
-    // Reveal on scroll
-    function revealOnScroll(){
-      document.querySelectorAll('.reveal').forEach(el=>{
-        const r = el.getBoundingClientRect();
-        if(r.top < window.innerHeight - 80) el.classList.add('visible');
-      });
-    }
-    window.addEventListener('load', revealOnScroll);
-    window.addEventListener('scroll', revealOnScroll);
-  </script>
 </body>
 </html>
-
