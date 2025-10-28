@@ -237,67 +237,89 @@ const questions = [
   function updateLeaderModal(){
     const arr=loadScores().sort((a,b)=>b.score-a.score);
     leaderList.innerHTML='';
-    arr.forEach((p,i)=>{
-      const li=document.createElement('li');
-      li.textContent=`${i+1}. ${p.name} — ${p.score}`;
-      leaderList.appendChild(li);
-    });
-    sideList.innerHTML='';
-    arr.forEach(p=>{
-      const li=document.createElement('li');
-      li.textContent=`${p.name}: ${p.score}`;
-      sideList.appendChild(li);
-    });
-  }
+arr.forEach(p => {
+  const li = document.createElement('li');
+  li.textContent = `${p.name}: ${p.score}`;
+  sideList.appendChild(li);
+});
 
-  function drawBackground(){ctx.drawImage(bgImg,0,0,W,H);}
-function drawPipes(){pipes.forEach(p=>{ctx.drawImage(pipeImg,p.x,p.bottom,pipeW,H-p.bottom);ctx.save();ctx.translate(p.x+pipeW/2,p.top);ctx.scale(1,-1);ctx.drawImage(pipeImg,-pipeW/2,0,pipeW,H-p.bottom);ctx.restore();});}
-  function drawBird(){ctx.drawImage(birdImg,bird.x,bird.y,bird.w,bird.h);}
+function drawBackground() {
+  ctx.drawImage(bgImg, 0, 0, W, H);
+}
 
-  function spawnPipe(){const top=Math.random()*(H-pipeGap-140)+40;pipes.push({x:W,top:top,bottom:top+pipeGap,passed:false});}
+function drawPipes() {
+  pipes.forEach(p => {
+    // Draw bottom pipe (repeat vertically)
+    const bottomHeight = H - p.bottom;
+    for (let y = 0; y < bottomHeight; y += pipeImg.height) {
+      ctx.drawImage(pipeImg, p.x, p.bottom + y, pipeW, pipeImg.height);
+    }
 
-function update(){
-  if(!running || questionActive) return;
+    // Draw top pipe (flipped)
+    ctx.save();
+    ctx.translate(p.x + pipeW / 2, p.top);
+    ctx.scale(1, -1);
+    const topHeight = p.top;
+    for (let y = 0; y < topHeight; y += pipeImg.height) {
+      ctx.drawImage(pipeImg, -pipeW / 2, y, pipeW, pipeImg.height);
+    }
+    ctx.restore();
+  });
+}
+
+function drawBird() {
+  ctx.drawImage(birdImg, bird.x, bird.y, bird.w, bird.h);
+}
+
+function spawnPipe() {
+  const top = Math.random() * (H - pipeGap - 140) + 40;
+  pipes.push({ x: W, top: top, bottom: top + pipeGap, passed: false });
+}
+
+function update() {
+  if (!running || questionActive) return;
 
   frame++;
   bird.vel += gravity;
   bird.y += bird.vel;
   pipes.forEach(p => p.x -= pipeSpeed);
 
-  if(frame % 100 === 0) spawnPipe();
+  if (frame % 100 === 0) spawnPipe();
   pipes = pipes.filter(p => p.x + pipeW > -20);
-  if(safeTimer > 0) safeTimer--;
+  if (safeTimer > 0) safeTimer--;
 
   let hitPipe = false;
 
   pipes.forEach(p => {
-    // 🟢 Add to score when passing pipe
-    if(!p.passed && p.x + pipeW < bird.x){
+    // 🟢 Add to score when passing a pipe
+    if (!p.passed && p.x + pipeW < bird.x) {
       p.passed = true;
       score++;
       scoreLabel.textContent = score;
-      if(score > high){
+      if (score > high) {
         high = score;
         localStorage.setItem('lava_high', high);
         highLabel.textContent = 'High: ' + high;
       }
-      checkFireworks(score); // 🎆 still okay
+      checkFireworks(score);
     }
 
-    // 💥 Collision check
-    const collide = (
-      bird.x + bird.w > p.x &&
-      bird.x < p.x + pipeW &&
-      (bird.y < p.top || bird.y + bird.h > p.bottom)
-    );
-    if(collide && safeTimer <= 0) hitPipe = true;
+    // 💥 Collision check (accurate hitbox)
+    const inPipeX = bird.x + bird.w > p.x && bird.x < p.x + pipeW;
+    const hitTopPipe = bird.y < p.top;
+    const hitBottomPipe = bird.y + bird.h > p.bottom;
+    if (inPipeX && (hitTopPipe || hitBottomPipe) && safeTimer <= 0) {
+      hitPipe = true;
+    }
   });
 
-  // 💥 Ground/ceiling collision
-  if((bird.y < 0 || bird.y + bird.h > H) && safeTimer <= 0) hitPipe = true;
+  // 💥 Ground or ceiling collision
+  if ((bird.y < 0 || bird.y + bird.h > H) && safeTimer <= 0) {
+    hitPipe = true;
+  }
 
-  // 🎯 Only trigger quiz if a collision actually happened
-  if(hitPipe){
+  // 🎯 Trigger quiz only on collision
+  if (hitPipe) {
     openQuiz();
   }
 }
