@@ -11,8 +11,9 @@ body {
   color: #fff;
   background:
     linear-gradient(rgba(155, 18, 18, 0.6), rgba(0, 0, 0, 0.9)),
-    url('images/classroom-bg.jpg') center/cover no-repeat fixed;
-  background-blend-mode: overlay;
+    url('images/classroom-bg.jpg') center/cover no-repeat fixed,
+    url('images/red-gradient-bg.jpg') center/cover no-repeat fixed;
+  background-blend-mode: overlay, multiply;
   background-attachment: fixed;
   background-size: cover;
   background-position: center;
@@ -42,6 +43,7 @@ header h1 {
 }
 .lava-logo {
   width: 80px;
+  height: auto;
   margin-top: 5px;
   filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
   opacity: 0.9;
@@ -78,63 +80,81 @@ p.lead {
   color: #f1f1f1;
 }
 
+/* GRID */
 .days-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
+  perspective: 1000px;
 }
 
-/* DAY CARD STYLING */
+/* CARD */
 .day-card {
-  background-color: rgba(255, 255, 255, 0.08);
-  border: 2px solid #e50914;
-  border-radius: 15px;
-  padding: 1.2rem;
+  background-color: transparent;
+  width: 100%;
+  height: 260px;
+  perspective: 1000px;
   cursor: pointer;
-  transition: all 0.3s ease;
+}
+.day-card-inner {
   position: relative;
-  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
 }
-.day-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(229, 9, 20, 0.3);
+.day-card.flipped .day-card-inner {
+  transform: rotateY(180deg);
 }
-.day-card h3 {
+.day-card-front, .day-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 15px;
+  border: 2px solid #e50914;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 1.2rem;
+  box-sizing: border-box;
+}
+.day-card-front h3 {
   color: #e50914;
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
 }
-.day-card p {
+.day-card-front p {
   color: #fff;
-  font-size: 1rem;
   opacity: 0.9;
+  font-size: 1rem;
+}
+.day-card-back {
+  background-color: rgba(0, 0, 0, 0.85);
+  transform: rotateY(180deg);
+  overflow-y: auto;
+}
+.day-card-back h4 {
+  color: #e50914;
+  margin-bottom: 0.5rem;
+}
+.day-card-back p, .day-card-back ul {
+  font-size: 0.9rem;
+  color: #fff;
+  margin-bottom: 0.5rem;
 }
 
-/* EXPANDED CONTENT */
-.day-details {
-  max-height: 0;
-  overflow: hidden;
-  opacity: 0;
-  transform: translateY(-10px);
-  transition: all 0.5s ease-in-out;
-  margin-top: 10px;
+/* Trainer Card */
+.card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 40px;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.2);
 }
-.day-card.active .day-details {
-  max-height: 1000px;
-  opacity: 1;
-  transform: translateY(0);
-}
-.day-details h4 {
+.card h4 {
   color: #e50914;
-  margin-top: 0.8rem;
-  font-size: 1.05rem;
-}
-.day-details ul {
-  margin-left: 1.2rem;
-  line-height: 1.5;
-}
-.day-details li {
-  margin-bottom: 6px;
+  font-size: 1.3rem;
+  margin-bottom: 10px;
 }
 
 /* FOOTER */
@@ -145,10 +165,8 @@ footer {
   color: #fff;
   margin-top: 3rem;
 }
-
 @media (max-width: 768px) {
   .lava-logo { width: 60px; }
-  nav a { margin-left: 0.5rem; }
 }
   </style>
 </head>
@@ -170,250 +188,257 @@ footer {
 
   <main>
     <h1 class="section-title">14-Day Training Plan</h1>
-    <p class="lead">Tap or click a day to see the full lesson breakdown.</p>
+    <p class="lead">Each day includes a short lecture and a practical activity. Click each card to flip and explore more details.</p>
 
     <div class="days-grid">
-      <!-- Day 1 -->
-      <div class="day-card">
-        <h3>Day 1 — Getting to Know You & Roles of a LAVA VA</h3>
-        <div class="day-details">
-          <h4>What to Expect:</h4>
-          <ul>
-            <li>Welcome and introductions with team and trainer</li>
-            <li>Overview of training goals and LAVA culture</li>
-            <li>Understanding different roles of a LAVA Virtual Assistant</li>
-            <li>Overview of administrative tasks</li>
-          </ul>
-          <h4>What You'll Learn:</h4>
-          <ul>
-            <li>Expectations as a VA</li>
-            <li>Daily workflow and collaboration process</li>
-            <li>Basic communication and documentation practices</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="day-card">
-        <h3>Day 2 — Insurance 101 & Policy Cycle</h3>
-        <div class="day-details">
-          <h4>What to Expect:</h4>
-          <ul>
-            <li>Introduction to the world of insurance</li>
-            <li>Walkthrough of the policy life cycle</li>
-            <li>Learn basic terms: underwriting, binding, renewal, and cancellation</li>
-          </ul>
-          <h4>What You'll Learn:</h4>
-          <ul>
-            <li>Insurance process from start to finish</li>
-            <li>Client and agency interactions</li>
-            <li>Core concepts of policy management</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="day-card">
-        <h3>Day 3 — Insurance Documents</h3>
-        <div class="day-details">
-          <h4>What to Expect:</h4>
-          <ul>
-            <li>Explore common insurance forms and declarations</li>
-            <li>Understand the structure and types of documents</li>
-          </ul>
-          <h4>What You'll Learn:</h4>
-          <ul>
-            <li>Identifying policy documents correctly</li>
-            <li>Key details on certificates, forms, and endorsements</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="day-card">
-        <h3>Day 4 — English 101 & Mock Calls</h3>
-        <div class="day-details">
-          <h4>What to Expect:</h4>
-          <ul>
-            <li>Interactive English communication sessions</li>
-            <li>Basic CSR mock calls</li>
-          </ul>
-          <h4>What You'll Learn:</h4>
-          <ul>
-            <li>Enhance listening and speaking skills</li>
-            <li>Build confidence in handling real client calls</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="day-card">
-        <h3>Day 5 — Introduction to AMS & CRM</h3>
-        <div class="day-details">
-          <h4>What to Expect:</h4>
-          <ul>
-            <li>Explore agency management systems (AMS)</li>
-            <li>Learn CRM basics and data entry</li>
-          </ul>
-          <h4>What You'll Learn:</h4>
-          <ul>
-            <li>Navigation and data organization</li>
-            <li>Client information management</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="day-card">
-        <h3>Day 6 — Raters & Carriers</h3>
-        <div class="day-details">
-          <h4>What to Expect:</h4>
-          <ul>
-            <li>Overview of insurance raters and carrier systems</li>
-            <li>Understand how quoting platforms work</li>
-          </ul>
-          <h4>What You'll Learn:</h4>
-          <ul>
-            <li>Common carriers and rating tools</li>
-            <li>Quote submission and retrieval process</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="day-card">
-        <h3>Day 7 — Home Insurance Types</h3>
-        <div class="day-details">
-          <h4>What to Expect:</h4>
-          <ul>
-            <li>Learn different types of home insurance policies</li>
-            <li>Understand coverages and construction details</li>
-          </ul>
-          <h4>What You'll Learn:</h4>
-          <ul>
-            <li>Coverage forms (HO3, HO5, etc.)</li>
-            <li>Quoting workflow and inspection factors</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="day-card">
-        <h3>Day 8 — Auto Insurance Introduction</h3>
-        <div class="day-details">
-          <h4>What to Expect:</h4>
-          <ul>
-            <li>Auto coverage overview and key endorsements</li>
-            <li>Hands-on quoting practice</li>
-          </ul>
-          <h4>What You'll Learn:</h4>
-          <ul>
-            <li>Coverage breakdown and limits</li>
-            <li>Quoting process using carrier platforms</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="day-card">
-        <h3>Day 9 — Trailer, Boat, RV & Umbrella</h3>
-        <div class="day-details">
-          <h4>What to Expect:</h4>
-          <ul>
-            <li>Introduction to specialty lines</li>
-            <li>Understanding quoting requirements for each</li>
-          </ul>
-          <h4>What You'll Learn:</h4>
-          <ul>
-            <li>Coverages for recreational vehicles and watercraft</li>
-            <li>How umbrella policies work</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="day-card">
-        <h3>Day 10 — Home Declaration Page Activity</h3>
-        <div class="day-details">
-          <h4>What to Expect:</h4>
-          <ul>
-            <li>Hands-on analysis of home declarations</li>
-            <li>Simulated quoting session</li>
-          </ul>
-          <h4>What You'll Learn:</h4>
-          <ul>
-            <li>How to interpret policy data</li>
-            <li>How to generate and compare quotes</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="day-card">
-        <h3>Day 11 — Auto Declaration Page Activity</h3>
-        <div class="day-details">
-          <h4>What to Expect:</h4>
-          <ul>
-            <li>Hands-on analysis of auto declarations</li>
-            <li>Simulated quoting and verification</li>
-          </ul>
-          <h4>What You'll Learn:</h4>
-          <ul>
-            <li>Decoding auto policy details</li>
-            <li>Adjusting coverages based on client needs</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="day-card">
-        <h3>Day 12 — ACORD Forms Overview</h3>
-        <div class="day-details">
-          <h4>What to Expect:</h4>
-          <ul>
-            <li>Understand ACORD forms for personal and commercial use</li>
-            <li>Highlight key data fields and accuracy tips</li>
-          </ul>
-          <h4>What You'll Learn:</h4>
-          <ul>
-            <li>How to complete ACORD forms</li>
-            <li>Identifying crucial information for submission</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="day-card">
-        <h3>Day 13 — SOP Lecture & Final Exam</h3>
-        <div class="day-details">
-          <h4>What to Expect:</h4>
-          <ul>
-            <li>Review of Standard Operating Procedures (SOP)</li>
-            <li>Writing practice and preparation for exam</li>
-          </ul>
-          <h4>What You'll Learn:</h4>
-          <ul>
-            <li>Documentation and process consistency</li>
-            <li>Assessment of all topics covered</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="day-card">
-        <h3>Day 14 — Recognition & Certificates</h3>
-        <div class="day-details">
-          <h4>What to Expect:</h4>
-          <ul>
-            <li>Feedback and reflection session</li>
-            <li>Presentation of certificates</li>
-          </ul>
-          <h4>What You'll Learn:</h4>
-          <ul>
-            <li>Celebrating completion and next steps</li>
-            <li>Review of learning journey and performance</li>
-          </ul>
-        </div>
-      </div>
-
+      <!-- DYNAMICALLY INSERTED DAYS -->
     </div>
 
-    <footer>
-      <p>© 2025 LAVA Training Program. All Rights Reserved.</p>
-    </footer>
-
-    <script>
-      document.querySelectorAll('.day-card').forEach(card => {
-        card.addEventListener('click', () => card.classList.toggle('active'));
-      });
-    </script>
+    <div class="card">
+      <h4>Trainer Resources</h4>
+      <p>Trainers: attach sample policies, AMS screenshots or recorded walkthroughs to each day using your trainer resources folder.</p>
+    </div>
   </main>
+
+  <footer>
+    <p>© 2025 LAVA Classroom. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+const courseDays = [
+  {
+    day: "Day 1 — Getting to Know You & LAVA VA Roles",
+    short: "Different Roles of a LAVA VA, Admin Tasks",
+    topics: "Team introductions, company culture, overview of VA responsibilities, admin tasks",
+    expect: [
+      "Icebreaker activities and introductions to build team connection",
+      "Presentation about LAVA’s mission, values, and how VAs support insurance operations",
+      "Walkthrough of daily VA tasks — emails, data entry, scheduling, and client communication"
+    ],
+    learn: [
+      "The different VA roles (Admin, CSR, Data Entry, Rater Support, etc.)",
+      "Professional expectations: punctuality, communication, accountability",
+      "Overview of tools used (Google Workspace, Slack, CRM systems, etc.)"
+    ],
+    goal: "Build familiarity with LAVA’s work culture and the foundation of VA responsibilities."
+  },
+  {
+    day: "Day 2 — Insurance 101: Policy Cycle",
+    short: "Policy lifecycle and key insurance concepts",
+    topics: "Basic insurance concepts, policy lifecycle, key terminology",
+    expect: [
+      "Interactive presentation on how insurance policies are created, issued, renewed, and cancelled",
+      "Real-world examples of client interactions during each policy stage"
+    ],
+    learn: [
+      "The flow from Quote → Bind → Issue → Endorsement → Renewal → Cancellation",
+      "Understanding common insurance terms (premium, deductible, coverage, limits, etc.)"
+    ],
+    goal: "Gain a strong foundation in how insurance functions from start to finish."
+  },
+  {
+    day: "Day 3 — Insurance Documents",
+    short: "Forms, Declarations, and Document Types",
+    topics: "Forms, declarations, and document types",
+    expect: [
+      "Guided breakdown of the most common insurance documents",
+      "Practice identifying information in sample policies"
+    ],
+    learn: [
+      "What a Declaration Page includes and how to read it",
+      "Common forms like ID cards, binders, COIs, and invoices",
+      "How to properly organize and label insurance files"
+    ],
+    goal: "Build document literacy and confidence handling client files."
+  },
+  {
+    day: "Day 4 — English 101 & Mock Calls",
+    short: "CSR basics and simulated calls",
+    topics: "Communication etiquette, CSR call handling, simulated calls",
+    expect: [
+      "Review of call and email etiquette for insurance clients",
+      "Mock call simulations to practice listening, empathy, and response clarity"
+    ],
+    learn: [
+      "Polite and professional English expressions for customer service",
+      "Handling difficult conversations and managing call flow",
+      "Pronunciation and tone exercises for clarity and confidence"
+    ],
+    goal: "Improve communication skills for real client interactions."
+  },
+  {
+    day: "Day 5 — Intro to AMS & CRM",
+    short: "System navigation and data entry",
+    topics: "System navigation, data entry, client record management",
+    expect: [
+      "Hands-on practice logging into AMS (Agency Management System) and CRM platforms",
+      "Step-by-step guidance entering and updating client information"
+    ],
+    learn: [
+      "Key AMS modules (Clients, Policies, Certificates, Reports)",
+      "Basic CRM navigation — creating leads, updating status, managing notes",
+      "Importance of data accuracy and confidentiality"
+    ],
+    goal: "Become comfortable navigating insurance systems and entering data properly."
+  },
+  {
+    day: "Day 6 — Raters & Carriers",
+    short: "Overview of rating systems and carriers",
+    topics: "Introduction to rating systems, major insurance carriers",
+    expect: [
+      "Overview of how rating platforms calculate premiums",
+      "Demo of popular raters and explanation of carrier differences"
+    ],
+    learn: [
+      "The relationship between agencies, raters, and carriers",
+      "Common carrier portals (Safeco, Progressive, Travelers, etc.)",
+      "Basic troubleshooting tips for rating errors"
+    ],
+    goal: "Understand how raters and carriers work together in quoting."
+  },
+  {
+    day: "Day 7 — Home Insurance Types",
+    short: "Homeowners coverages and quoting",
+    topics: "Homeowners coverages, construction details, and quoting",
+    expect: [
+      "Discussion on HO3, HO4, HO6, and DP3 policy types",
+      "Real examples of home coverage breakdowns"
+    ],
+    learn: [
+      "Home insurance coverage parts (Dwelling, Liability, Personal Property, etc.)",
+      "How construction type and location affect premium",
+      "Basics of generating a home quote in a rater system"
+    ],
+    goal: "Build foundational knowledge in property insurance."
+  },
+  {
+    day: "Day 8 — Auto Insurance Intro",
+    short: "Auto coverages and quoting basics",
+    topics: "Auto coverages, endorsements, quoting basics",
+    expect: [
+      "Guided walkthrough of auto policy components",
+      "Practice exercises quoting different vehicle types"
+    ],
+    learn: [
+      "Coverages: Liability, Collision, Comprehensive, UM/UIM, etc.",
+      "Common auto endorsements and add-ons",
+      "Factors affecting premiums: driver history, vehicle, and location"
+    ],
+    goal: "Develop quoting familiarity for auto insurance policies."
+  },
+  {
+    day: "Day 9 — Trailer / Boat / RV / Umbrella",
+    short: "Specialty insurance and quoting",
+    topics: "Specialty insurance types and quoting differences",
+    expect: [
+      "Overview of coverage needs for non-standard vehicles and assets",
+      "Sample quotes using real carrier guidelines"
+    ],
+    learn: [
+      "How Trailer, Boat, RV, and Umbrella policies differ from auto/home",
+      "When to recommend or bundle these policies",
+      "Identifying cross-selling opportunities for clients"
+    ],
+    goal: "Learn to assist in quoting and managing specialty insurance lines."
+  },
+  {
+    day: "Day 10 — Home Declaration Page Activity",
+    short: "Analyze sample home declaration & quote simulation",
+    topics: "Home Dec page analysis and quote simulation",
+    expect: [
+      "Group activity analyzing sample declaration pages",
+      "Simulated quoting task using provided client details"
+    ],
+    learn: [
+      "How to interpret coverage limits, deductibles, and effective dates",
+      "How to verify accuracy when entering information in AMS or CRM"
+    ],
+    goal: "Apply knowledge to real-world document and quoting tasks."
+  },
+  {
+    day: "Day 11 — Auto Declaration Page Activity",
+    short: "Auto Dec page analysis & quote simulation",
+    topics: "Auto Dec page analysis and quote simulation",
+    expect: [
+      "Group discussion identifying differences in multi-vehicle policies",
+      "Practice replicating quotes based on dec page details"
+    ],
+    learn: [
+      "Reading policy details such as VIN, coverage levels, and drivers",
+      "How to cross-check for missing or mismatched data"
+    ],
+    goal: "Strengthen data entry accuracy and analytical skills."
+  },
+  {
+    day: "Day 12 — ACORD Forms",
+    short: "Personal and commercial ACORD files",
+    topics: "Personal and commercial ACORD forms, key fields, usage",
+    expect: [
+      "Deep dive into ACORD 25, 28, 80, and other common forms",
+      "Hands-on filling of ACORD samples"
+    ],
+    learn: [
+      "The purpose of each ACORD form",
+      "Required fields and how to avoid common errors",
+      "How to properly generate and send ACORDs through AMS"
+    ],
+    goal: "Build confidence handling standard insurance documentation."
+  },
+  {
+    day: "Day 13 — SOP & Exam",
+    short: "SOP lecture, writing practice & final exam",
+    topics: "Standard Operating Procedures (SOPs), review, and final assessment",
+    expect: [
+      "Review of all topics covered across training days",
+      "Writing activity: creating your own mini-SOP",
+      "Final exam (theory + practical exercises)"
+    ],
+    learn: [
+      "SOP structure and importance in consistency and compliance",
+      "How to document steps clearly for team reference",
+      "Self-assessment on readiness for production tasks"
+    ],
+    goal: "Evaluate readiness and reinforce learned processes."
+  },
+  {
+    day: "Day 14 — Recognition & Certificates",
+    short: "Presentation of certificates and feedback",
+    topics: "Graduation, feedback, and recognition ceremony",
+    expect: [
+      "Review session and open discussion for feedback and reflections",
+      "Recognition of top performers and certificate distribution"
+    ],
+    learn: [
+      "Reflection on progress and confidence in handling VA tasks",
+      "Insights from peers and trainers",
+      "Motivation for continued learning and improvement"
+    ],
+    goal: "Celebrate completion and transition from training to actual workflow."
+  }
+];
+
+const grid = document.querySelector(".days-grid");
+
+courseDays.forEach((d) => {
+  const card = document.createElement("div");
+  card.className = "day-card";
+  card.innerHTML = `
+    <div class="day-card-inner">
+      <div class="day-card-front">
+        <h3>${d.day}</h3>
+        <p>${d.short}</p>
+      </div>
+      <div class="day-card-back">
+        <h4>Topics:</h4><p>${d.topics}</p>
+        <h4>What to Expect:</h4><ul>${d.expect.map(e=>`<li>${e}</li>`).join("")}</ul>
+        <h4>What You’ll Learn:</h4><ul>${d.learn.map(l=>`<li>${l}</li>`).join("")}</ul>
+        <h4>Goal:</h4><p>${d.goal}</p>
+      </div>
+    </div>
+  `;
+  card.addEventListener("click", () => card.classList.toggle("flipped"));
+  grid.appendChild(card);
+});
+  </script>
 </body>
 </html>
