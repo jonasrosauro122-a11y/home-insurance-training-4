@@ -374,17 +374,52 @@ function update(){
     setTimeout(()=>{fireworksMsg.style.display='none';},3000);
   }
 
-  function endGame(){
-    gameOver=true;running=false;
-    const scores=loadScores();
-    const existing=scores.find(s=>s.name===playerName);
-    if(existing)existing.score=Math.max(existing.score,score);
-    else scores.push({name:playerName,score});
-    saveScores(scores);
-    finalText.textContent='Final score: '+score;
-    updateLeaderModal();
-    modal.style.display='flex';
+// 🏁 End Game
+async function endGame() {
+  gameOver = true;
+  running = false;
+
+  const scores = loadScores();
+  const existing = scores.find(s => s.name === playerName);
+  if (existing) existing.score = Math.max(existing.score, score);
+  else scores.push({ name: playerName, score });
+  saveScores(scores);
+
+  // 🧩 Save to Supabase leaderboard
+  try {
+    const SUPABASE_URL = "https://YOUR-PROJECT.supabase.co"; // 🔁 replace with your real project URL
+    const SUPABASE_KEY = "YOUR-ANON-PUBLIC-KEY"; // 🔁 replace with your anon key
+    const { createClient } = await import("https://esm.sh/@supabase/supabase-js@2");
+    const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    // Check if player already exists in Supabase
+    const { data: existingRows } = await supabase
+      .from("scores")
+      .select("*")
+      .eq("name", playerName)
+      .single();
+
+    if (existingRows) {
+      // Update if higher score
+      if (score > existingRows.score) {
+        await supabase
+          .from("scores")
+          .update({ score })
+          .eq("name", playerName);
+      }
+    } else {
+      // Insert new player
+      await supabase.from("scores").insert([{ name: playerName, score }]);
+    }
+
+  } catch (err) {
+    console.error("Error saving score to Supabase:", err);
   }
+
+  finalText.textContent = "Final score: " + score;
+  updateLeaderModal();
+  modal.style.display = "flex";
+}
 
   giveUpBtn.onclick=()=>endGame();
   modalClose.onclick=()=>{modal.style.display='none';startPanel.style.display='';};
