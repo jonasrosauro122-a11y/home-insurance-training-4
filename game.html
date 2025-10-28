@@ -251,7 +251,7 @@ const questions = [
   }
 
   function drawBackground(){ctx.drawImage(bgImg,0,0,W,H);}
-  function drawPipes(){pipes.forEach(p=>{ctx.drawImage(pipeImg,p.x,p.bottom,pipeW,H-p.bottom);ctx.save();ctx.translate(p.x+pipeW/2,p.top);ctx.scale(1,-1);ctx.drawImage(pipeImg,-pipeW/2,0,pipeW,H-p.bottom);ctx.restore();});}
+function drawPipes(){pipes.forEach(p=>{ctx.drawImage(pipeImg,p.x,p.bottom,pipeW,H-p.bottom);ctx.save();ctx.translate(p.x+pipeW/2,p.top);ctx.scale(1,-1);ctx.drawImage(pipeImg,-pipeW/2,0,pipeW,H-p.bottom);ctx.restore();});}
   function drawBird(){ctx.drawImage(birdImg,bird.x,bird.y,bird.w,bird.h);}
 
   function spawnPipe(){const top=Math.random()*(H-pipeGap-140)+40;pipes.push({x:W,top:top,bottom:top+pipeGap,passed:false});}
