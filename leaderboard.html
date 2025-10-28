@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Leaderboard | Insurance Game</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #000, #480000);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      height: 100vh;
+      margin: 0;
+      padding-top: 60px;
+    }
+
+    h1 {
+      color: #ff1f1f;
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 90%;
+      max-width: 500px;
+      border-collapse: collapse;
+      background: rgba(0,0,0,0.6);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: center;
+    }
+
+    th {
+      background: #ff1f1f;
+      color: #fff;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    tr:nth-child(even) td {
+      background: rgba(255,255,255,0.08);
+    }
+
+    tr:nth-child(odd) td {
+      background: rgba(255,255,255,0.04);
+    }
+
+    td {
+      color: #fff;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <h1>🏆 Insurance Game Leaderboard</h1>
+  <table id="leaderboard">
+    <thead>
+      <tr><th>Rank</th><th>Name</th><th>Score</th></tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script type="module">
+    import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+    // ⚙️ Replace these with your actual Supabase project values
+    const SUPABASE_URL = "https://YOUR-PROJECT.supabase.co";
+    const SUPABASE_KEY = "YOUR-ANON-PUBLIC-KEY";
+    const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    async function loadLeaderboard() {
+      const { data, error } = await supabase
+        .from("scores")
+        .select("name, score")
+        .order("score", { ascending: false })
+        .limit(5); // ✅ Only show top 5
+
+      if (error) {
+        console.error("Error loading leaderboard:", error);
+        return;
+      }
+
+      const tbody = document.querySelector("#leaderboard tbody");
+      tbody.innerHTML = "";
+
+      data.forEach((row, index) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${index + 1}</td>
+          <td>${row.name}</td>
+          <td>${row.score}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    loadLeaderboard();
+  </script>
+</body>
+</html>
