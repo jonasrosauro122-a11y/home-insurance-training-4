@@ -164,72 +164,29 @@
 
   let bird,pipes,frame,score,high,running,questionActive,gameOver,playerName;
   let safeTimer = 0; // 👈 short invincibility period after correct answer
-  const gravity=0.35,jump=-6,pipeSpeed=1.2,pipeGap=160,pipeW=80;
+  const gravity=0.45,jump=-8,pipeSpeed=2,pipeGap=160,pipeW=52;
 
-const questions = [
-  { q: "What is insurance?", a: "It’s protection against financial loss." },
-  { q: "What is a premium?", a: "The amount you pay for insurance coverage." },
-  { q: "What is a deductible?", a: "The amount you pay before insurance covers a claim." },
-  { q: "What is a claim?", a: "A request to your insurance company for payment." },
-  { q: "What does auto insurance cover?", a: "Damage, theft, and liability from car accidents." },
-  { q: "What is liability coverage?", a: "It pays for damage or injury you cause to others." },
-  { q: "What is collision coverage?", a: "It covers damage to your car from a crash." },
-  { q: "What is comprehensive coverage?", a: "It covers damage from non-collision events like theft or fire." },
-  { q: "What is uninsured motorist coverage?", a: "It protects you if the other driver has no insurance." },
-  { q: "What is health insurance?", a: "It helps pay medical and hospital expenses." },
-  { q: "What is life insurance?", a: "It pays money to your family when you die." },
-  { q: "What is term life insurance?", a: "Coverage for a specific period of time." },
-  { q: "What is whole life insurance?", a: "Lifetime coverage with a savings feature." },
-  { q: "What is renters insurance?", a: "It protects personal belongings in a rental home." },
-  { q: "What is homeowners insurance?", a: "It covers your house and belongings from damage or loss." },
-  { q: "What is personal property coverage?", a: "It protects your belongings inside your home." },
-  { q: "What is personal liability insurance?", a: "It covers injuries or damages you cause to others." },
-  { q: "What is travel insurance?", a: "It covers trip cancellations, medical, or lost baggage." },
-  { q: "What is disability insurance?", a: "It replaces income if you can’t work due to illness or injury." },
-  { q: "What is flood insurance?", a: "It covers water damage from floods." },
-  { q: "What is earthquake insurance?", a: "It covers damage caused by earthquakes." },
-  { q: "What is medical payments coverage?", a: "It pays medical bills after an auto accident." },
-  { q: "What is a beneficiary?", a: "The person who receives insurance benefits." },
-  { q: "What is a policy limit?", a: "The maximum amount the insurer will pay." },
-  { q: "What is an exclusion?", a: "Something your insurance does not cover." },
-  { q: "What is a policyholder?", a: "The person who owns the insurance policy." },
-  { q: "What is a lapse?", a: "When your policy ends due to non-payment." },
-  { q: "What is a grace period?", a: "Extra time to pay your premium before cancellation." },
-  { q: "What is a rider?", a: "An add-on that changes your coverage." },
-  { q: "What is replacement cost?", a: "The cost to replace an item with a new one." },
-  { q: "What is actual cash value?", a: "The value of an item after depreciation." },
-  { q: "What is term in insurance?", a: "The length of time your policy lasts." },
-  { q: "What is proof of loss?", a: "A document showing details of a claim." },
-  { q: "What is a quote?", a: "An estimate of your insurance cost." },
-  { q: "What is a co-pay?", a: "A set amount you pay for a health service." },
-  { q: "What is coinsurance?", a: "You pay a percentage of medical costs." },
-  { q: "What is an insurance adjuster?", a: "A person who investigates claims." },
-  { q: "What is risk?", a: "The chance of loss or damage." },
-  { q: "What is underwriting?", a: "The process of evaluating risk before giving insurance." },
-  { q: "What is an insurance policy?", a: "The contract between you and the insurer." },
-
-  // 🏢 COMMERCIAL INSURANCE
-  { q: "What is commercial insurance?", a: "Insurance that protects businesses." },
-  { q: "What is a Business Owners Policy (BOP)?", a: "A package of property and liability insurance for small businesses." },
-  { q: "What is general liability insurance?", a: "It covers injury or property damage caused by your business." },
-  { q: "What is commercial property insurance?", a: "It covers buildings, equipment, and inventory." },
-  { q: "What is workers’ compensation insurance?", a: "It covers employee injuries on the job." },
-  { q: "What is professional liability insurance?", a: "It protects against mistakes in professional services." },
-  { q: "What is commercial auto insurance?", a: "It covers vehicles used for business." },
-  { q: "What is product liability insurance?", a: "It covers harm caused by products you sell or make." },
-  { q: "What is cyber liability insurance?", a: "It protects against data breaches and cyberattacks." },
-  { q: "What is business interruption insurance?", a: "It covers lost income if your business shuts down temporarily." },
-  { q: "What is commercial umbrella insurance?", a: "Extra liability coverage beyond your main policy." },
-  { q: "What is directors and officers (D&O) insurance?", a: "It protects company leaders from lawsuits." },
-  { q: "What is employment practices liability insurance (EPLI)?", a: "It covers claims of harassment or discrimination." },
-  { q: "What is equipment breakdown insurance?", a: "It covers repair or replacement of broken machinery." },
-  { q: "What is builders risk insurance?", a: "It covers buildings under construction." },
-  { q: "What is inland marine insurance?", a: "It covers property while being transported." },
-  { q: "What is cargo insurance?", a: "It covers goods shipped by land, air, or sea." },
-  { q: "What is key person insurance?", a: "It covers loss if a vital employee dies or is disabled." },
-  { q: "What is fidelity insurance?", a: "It covers losses from employee theft or fraud." },
-  { q: "What is surety bond insurance?", a: "It guarantees that a contract or obligation will be completed." }
-];
+  const questions=[
+    {q:"An organization of insurers through which risks are pooled.",a:"insurance pool"},
+    {q:"Anyone can be an agent. True or False.",a:"false"},
+    {q:"A financial agreement to transfer risk for premiums.",a:"insurance"},
+    {q:"Professional who evaluates risk.",a:"underwriter"},
+    {q:"Amount you pay out of pocket before insurance starts.",a:"deductible"},
+    {q:"Person or business protected under a policy.",a:"insured"},
+    {q:"Company that provides insurance coverage.",a:"insurer"},
+    {q:"Change or addition made to existing policy.",a:"endorsement"},
+    {q:"Document outlining terms, coverages, exclusions.",a:"policy"},
+    {q:"Meaning of AMS.",a:"agency management system"},
+    {q:"Form used to request coverage from carriers.",a:"acord form"},
+    {q:"Type of insurance that covers business property.",a:"commercial property"},
+    {q:"Insurance protecting against data breaches.",a:"cyber liability"},
+    {q:"Covers legal liability for injuries or damages.",a:"general liability"},
+    {q:"A car used for business purposes needs what insurance?",a:"commercial auto"},
+    {q:"Extra coverage that extends policy limits.",a:"umbrella"},
+    {q:"Part of homeowners policy covering dwelling.",a:"coverage a"},
+    {q:"Part of homeowners policy covering personal property.",a:"coverage c"},
+    {q:"Who represents the insured in placing coverage?",a:"agent"}
+  ];
 
   function loadScores(){try{return JSON.parse(localStorage.getItem('lava_scores')||'[]');}catch(e){return[];}}
   function saveScores(arr){localStorage.setItem('lava_scores',JSON.stringify(arr));}
@@ -237,89 +194,67 @@ const questions = [
   function updateLeaderModal(){
     const arr=loadScores().sort((a,b)=>b.score-a.score);
     leaderList.innerHTML='';
-arr.forEach(p => {
-  const li = document.createElement('li');
-  li.textContent = `${p.name}: ${p.score}`;
-  sideList.appendChild(li);
-});
+    arr.forEach((p,i)=>{
+      const li=document.createElement('li');
+      li.textContent=`${i+1}. ${p.name} — ${p.score}`;
+      leaderList.appendChild(li);
+    });
+    sideList.innerHTML='';
+    arr.forEach(p=>{
+      const li=document.createElement('li');
+      li.textContent=`${p.name}: ${p.score}`;
+      sideList.appendChild(li);
+    });
+  }
 
-function drawBackground() {
-  ctx.drawImage(bgImg, 0, 0, W, H);
-}
+  function drawBackground(){ctx.drawImage(bgImg,0,0,W,H);}
+  function drawPipes(){pipes.forEach(p=>{ctx.drawImage(pipeImg,p.x,p.bottom,pipeW,H-p.bottom);ctx.save();ctx.translate(p.x+pipeW/2,p.top);ctx.scale(1,-1);ctx.drawImage(pipeImg,-pipeW/2,0,pipeW,H-p.bottom);ctx.restore();});}
+  function drawBird(){ctx.drawImage(birdImg,bird.x,bird.y,bird.w,bird.h);}
 
-function drawPipes() {
-  pipes.forEach(p => {
-    // Draw bottom pipe (repeat vertically)
-    const bottomHeight = H - p.bottom;
-    for (let y = 0; y < bottomHeight; y += pipeImg.height) {
-      ctx.drawImage(pipeImg, p.x, p.bottom + y, pipeW, pipeImg.height);
-    }
+  function spawnPipe(){const top=Math.random()*(H-pipeGap-140)+40;pipes.push({x:W,top:top,bottom:top+pipeGap,passed:false});}
 
-    // Draw top pipe (flipped)
-    ctx.save();
-    ctx.translate(p.x + pipeW / 2, p.top);
-    ctx.scale(1, -1);
-    const topHeight = p.top;
-    for (let y = 0; y < topHeight; y += pipeImg.height) {
-      ctx.drawImage(pipeImg, -pipeW / 2, y, pipeW, pipeImg.height);
-    }
-    ctx.restore();
-  });
-}
-
-function drawBird() {
-  ctx.drawImage(birdImg, bird.x, bird.y, bird.w, bird.h);
-}
-
-function spawnPipe() {
-  const top = Math.random() * (H - pipeGap - 140) + 40;
-  pipes.push({ x: W, top: top, bottom: top + pipeGap, passed: false });
-}
-
-function update() {
-  if (!running || questionActive) return;
+function update(){
+  if(!running || questionActive) return;
 
   frame++;
   bird.vel += gravity;
   bird.y += bird.vel;
   pipes.forEach(p => p.x -= pipeSpeed);
 
-  if (frame % 100 === 0) spawnPipe();
+  if(frame % 100 === 0) spawnPipe();
   pipes = pipes.filter(p => p.x + pipeW > -20);
-  if (safeTimer > 0) safeTimer--;
+  if(safeTimer > 0) safeTimer--;
 
   let hitPipe = false;
 
   pipes.forEach(p => {
-    // 🟢 Add to score when passing a pipe
-    if (!p.passed && p.x + pipeW < bird.x) {
+    // 🟢 Add to score when passing pipe
+    if(!p.passed && p.x + pipeW < bird.x){
       p.passed = true;
       score++;
       scoreLabel.textContent = score;
-      if (score > high) {
+      if(score > high){
         high = score;
         localStorage.setItem('lava_high', high);
         highLabel.textContent = 'High: ' + high;
       }
-      checkFireworks(score);
+      checkFireworks(score); // 🎆 still okay
     }
 
-    // 💥 Collision check (accurate hitbox)
-    const inPipeX = bird.x + bird.w > p.x && bird.x < p.x + pipeW;
-    const hitTopPipe = bird.y < p.top;
-    const hitBottomPipe = bird.y + bird.h > p.bottom;
-    if (inPipeX && (hitTopPipe || hitBottomPipe) && safeTimer <= 0) {
-      hitPipe = true;
-    }
+    // 💥 Collision check
+    const collide = (
+      bird.x + bird.w > p.x &&
+      bird.x < p.x + pipeW &&
+      (bird.y < p.top || bird.y + bird.h > p.bottom)
+    );
+    if(collide && safeTimer <= 0) hitPipe = true;
   });
 
-  // 💥 Ground or ceiling collision
-  if ((bird.y < 0 || bird.y + bird.h > H) && safeTimer <= 0) {
-    hitPipe = true;
-  }
+  // 💥 Ground/ceiling collision
+  if((bird.y < 0 || bird.y + bird.h > H) && safeTimer <= 0) hitPipe = true;
 
-  // 🎯 Trigger quiz only on collision
-  if (hitPipe) {
+  // 🎯 Only trigger quiz if a collision actually happened
+  if(hitPipe){
     openQuiz();
   }
 }
@@ -396,52 +331,17 @@ function update() {
     setTimeout(()=>{fireworksMsg.style.display='none';},3000);
   }
 
-// 🏁 End Game
-async function endGame() {
-  gameOver = true;
-  running = false;
-
-  const scores = loadScores();
-  const existing = scores.find(s => s.name === playerName);
-  if (existing) existing.score = Math.max(existing.score, score);
-  else scores.push({ name: playerName, score });
-  saveScores(scores);
-
-  // 🧩 Save to Supabase leaderboard
-  try {
-    const SUPABASE_URL = "https://YOUR-PROJECT.supabase.co"; // 🔁 replace with your real project URL
-    const SUPABASE_KEY = "YOUR-ANON-PUBLIC-KEY"; // 🔁 replace with your anon key
-    const { createClient } = await import("https://esm.sh/@supabase/supabase-js@2");
-    const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
-
-    // Check if player already exists in Supabase
-    const { data: existingRows } = await supabase
-      .from("scores")
-      .select("*")
-      .eq("name", playerName)
-      .single();
-
-    if (existingRows) {
-      // Update if higher score
-      if (score > existingRows.score) {
-        await supabase
-          .from("scores")
-          .update({ score })
-          .eq("name", playerName);
-      }
-    } else {
-      // Insert new player
-      await supabase.from("scores").insert([{ name: playerName, score }]);
-    }
-
-  } catch (err) {
-    console.error("Error saving score to Supabase:", err);
+  function endGame(){
+    gameOver=true;running=false;
+    const scores=loadScores();
+    const existing=scores.find(s=>s.name===playerName);
+    if(existing)existing.score=Math.max(existing.score,score);
+    else scores.push({name:playerName,score});
+    saveScores(scores);
+    finalText.textContent='Final score: '+score;
+    updateLeaderModal();
+    modal.style.display='flex';
   }
-
-  finalText.textContent = "Final score: " + score;
-  updateLeaderModal();
-  modal.style.display = "flex";
-}
 
   giveUpBtn.onclick=()=>endGame();
   modalClose.onclick=()=>{modal.style.display='none';startPanel.style.display='';};
