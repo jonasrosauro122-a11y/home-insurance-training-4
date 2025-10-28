@@ -5,75 +5,42 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>LAVA Classroom — Flappy Quiz</title>
 <style>
-  :root{--accent:#ff1f1f;--bg1:#000;--bg2:#480000}
-  *{box-sizing:border-box}
-  html,body{height:100%;margin:0;font-family:'Poppins',sans-serif;background:linear-gradient(135deg,var(--bg1),var(--bg2));color:#fff;overflow:hidden}
-  .site-header{position:fixed;left:0;right:0;top:0;z-index:50;background:rgba(0,0,0,0.65);backdrop-filter:blur(4px)}
-  .header-inner.container{max-width:1200px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between}
-  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff;font-weight:700}
-  .brand img{height:36px}
-  .main-nav ul{display:flex;gap:12px;list-style:none;margin:0;padding:0}
-  .main-nav a{color:#fff;text-decoration:none;padding:6px 10px;border-radius:6px}
-  .main-nav a.active,.main-nav a:hover{background:var(--accent)}
-  #gameArea{position:fixed;left:0;right:0;top:64px;bottom:0;display:flex;align-items:center;justify-content:center}
-  canvas{border-radius:10px;border:3px solid var(--accent);box-shadow:0 12px 40px rgba(0,0,0,0.6);background:#70c8ff}
-  .hud{position:absolute;top:78px;width:100%;text-align:center;pointer-events:none;z-index:40}
-  .hud .score{font-size:28px;font-weight:800}
-  .hud .high{font-size:12px;color:rgba(255,255,255,0.9)}
-  #startPanel{position:absolute;top:38%;left:50%;transform:translateX(-50%);text-align:center;z-index:45}
-  #startPanel input{padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);width:220px;margin-bottom:8px}
-  .btn{padding:10px 16px;border-radius:10px;border:none;background:var(--accent);color:#fff;font-weight:700;cursor:pointer}
-  .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.08)}
-  #giveUp{position:absolute;top:76px;right:20px;z-index:45}
-  #quizBox{display:none;position:absolute;left:50%;top:22%;transform:translateX(-50%);width:88%;max-width:520px;background:#111;border:2px solid var(--accent);padding:16px;border-radius:12px;z-index:60;text-align:left}
-  #quizBox h3{color:#fff;margin:0 0 10px}
-  .choices{display:flex;flex-direction:column;gap:8px}
-  .choiceBtn{background:#222;color:#fff;border-radius:8px;padding:10px;border:none;cursor:pointer;text-align:left}
-  #modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:80;align-items:center;justify-content:center}
-  #modal .card{background:#0f0f0f;color:#fff;padding:20px;border-radius:12px;width:92%;max-width:520px;border:1px solid rgba(255,255,255,0.06)}
-  #modal h2{color:var(--accent);margin:0 0 8px}
-  ol.leader{padding-left:18px;margin:8px 0 0;max-height:220px;overflow-y:auto}
-  ol.leader li{background:#111;padding:8px;border-radius:8px;margin:6px 0}
-  #countText{position:absolute;top:45%;left:50%;transform:translate(-50%,-50%);font-size:100px;font-weight:900;color:var(--accent);pointer-events:none;z-index:70;display:none}
-  
-  /* 👇 New Sidebar for Player List */
-  #playerSidebar{
-    position:absolute;
-    left:20px;
-    top:100px;
-    background:rgba(0,0,0,0.55);
-    border:1px solid var(--accent);
-    padding:12px;
-    border-radius:10px;
-    z-index:50;
-    width:180px;
-    max-height:400px;
-    overflow-y:auto;
-  }
-  #playerSidebar h4{margin:0 0 8px;font-size:14px;text-align:center;color:var(--accent)}
-  #playerSidebar ul{list-style:none;padding:0;margin:0}
-  #playerSidebar li{padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.1)}
-  
-  /* 🎆 Fireworks & Message */
-#fireworksMsg{
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    font-size:48px;
-    font-weight:900;
-    color:#ffdb4d;
-    text-shadow:0 0 20px #ff0000,0 0 40px #ff0000;
-    display:none;
-    animation:popText 2s ease-out forwards;
-    z-index:90;
-    pointer-events:none; /* ✅ allows the game to continue while text is visible */
-}
-  @keyframes popText{
-    0%{transform:translate(-50%,-50%) scale(0);opacity:0;}
-    40%{transform:translate(-50%,-50%) scale(1.3);opacity:1;}
-    100%{transform:translate(-50%,-50%) scale(1);opacity:0;}
-  }
+:root{--accent:#ff1f1f;--bg1:#000;--bg2:#480000}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:'Poppins',sans-serif;background:linear-gradient(135deg,var(--bg1),var(--bg2));color:#fff;overflow:hidden}
+.site-header{position:fixed;left:0;right:0;top:0;z-index:50;background:rgba(0,0,0,0.65);backdrop-filter:blur(4px)}
+.header-inner.container{max-width:1200px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff;font-weight:700}
+.brand img{height:36px}
+.main-nav ul{display:flex;gap:12px;list-style:none;margin:0;padding:0}
+.main-nav a{color:#fff;text-decoration:none;padding:6px 10px;border-radius:6px}
+.main-nav a.active,.main-nav a:hover{background:var(--accent)}
+#gameArea{position:fixed;left:0;right:0;top:64px;bottom:0;display:flex;align-items:center;justify-content:center}
+canvas{border-radius:10px;border:3px solid var(--accent);box-shadow:0 12px 40px rgba(0,0,0,0.6);background:#70c8ff}
+.hud{position:absolute;top:78px;width:100%;text-align:center;pointer-events:none;z-index:40}
+.hud .score{font-size:28px;font-weight:800}
+.hud .high{font-size:12px;color:rgba(255,255,255,0.9)}
+#startPanel{position:absolute;top:38%;left:50%;transform:translateX(-50%);text-align:center;z-index:45}
+#startPanel input{padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);width:220px;margin-bottom:8px}
+.btn{padding:10px 16px;border-radius:10px;border:none;background:var(--accent);color:#fff;font-weight:700;cursor:pointer}
+.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.08)}
+#giveUp{position:absolute;top:76px;right:20px;z-index:45}
+#quizBox{display:none;position:absolute;left:50%;top:22%;transform:translateX(-50%);width:88%;max-width:520px;background:#111;border:2px solid var(--accent);padding:16px;border-radius:12px;z-index:60;text-align:left}
+#quizBox h3{color:#fff;margin:0 0 10px}
+.choices{display:flex;flex-direction:column;gap:8px}
+.choiceBtn{background:#222;color:#fff;border-radius:8px;padding:10px;border:none;cursor:pointer;text-align:left}
+#modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:80;align-items:center;justify-content:center}
+#modal .card{background:#0f0f0f;color:#fff;padding:20px;border-radius:12px;width:92%;max-width:520px;border:1px solid rgba(255,255,255,0.06)}
+#modal h2{color:var(--accent);margin:0 0 8px}
+ol.leader{padding-left:18px;margin:8px 0 0;max-height:220px;overflow-y:auto}
+ol.leader li{background:#111;padding:8px;border-radius:8px;margin:6px 0}
+#countText{position:absolute;top:45%;left:50%;transform:translate(-50%,-50%);font-size:100px;font-weight:900;color:var(--accent);pointer-events:none;z-index:70;display:none}
+#playerSidebar{position:absolute;left:20px;top:100px;background:rgba(0,0,0,0.55);border:1px solid var(--accent);padding:12px;border-radius:10px;z-index:50;width:180px;max-height:400px;overflow-y:auto}
+#playerSidebar h4{margin:0 0 8px;font-size:14px;text-align:center;color:var(--accent)}
+#playerSidebar ul{list-style:none;padding:0;margin:0}
+#playerSidebar li{padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.1)}
+#fireworksMsg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:48px;font-weight:900;color:#ffdb4d;text-shadow:0 0 20px #ff0000,0 0 40px #ff0000;display:none;animation:popText 2s ease-out forwards;z-index:90;pointer-events:none;}
+@keyframes popText{0%{transform:translate(-50%,-50%) scale(0);opacity:0;}40%{transform:translate(-50%,-50%) scale(1.3);opacity:1;}100%{transform:translate(-50%,-50%) scale(1);opacity:0;}}
 </style>
 </head>
 <body>
@@ -163,8 +130,8 @@
   const bgImg=new Image(); bgImg.src='images/bg.png';
 
   let bird,pipes,frame,score,high,running,questionActive,gameOver,playerName;
-  let safeTimer = 0; // 👈 short invincibility period after correct answer
-  const gravity=0.35,jump=-6,pipeSpeed=2,pipeGap=160,pipeW=100;
+  let safeTimer = 0; 
+  const gravity=0.35,jump=-6,pipeSpeed=2,pipeGap=160,pipeW=90;
 
 const questions = [
   { q: "What is insurance?", a: "It’s protection against financial loss." },
@@ -207,8 +174,6 @@ const questions = [
   { q: "What is risk?", a: "The chance of loss or damage." },
   { q: "What is underwriting?", a: "The process of evaluating risk before giving insurance." },
   { q: "What is an insurance policy?", a: "The contract between you and the insurer." },
-
-  // 🏢 COMMERCIAL INSURANCE
   { q: "What is commercial insurance?", a: "Insurance that protects businesses." },
   { q: "What is a Business Owners Policy (BOP)?", a: "A package of property and liability insurance for small businesses." },
   { q: "What is general liability insurance?", a: "It covers injury or property damage caused by your business." },
@@ -236,153 +201,116 @@ const questions = [
   
   function updateLeaderModal(){
     const arr=loadScores().sort((a,b)=>b.score-a.score);
-    leaderList.innerHTML='';
-    arr.forEach((p,i)=>{
-      const li=document.createElement('li');
-      li.textContent=`${i+1}. ${p.name} — ${p.score}`;
-      leaderList.appendChild(li);
-    });
-    sideList.innerHTML='';
-    arr.forEach(p=>{
-      const li=document.createElement('li');
-      li.textContent=`${p.name}: ${p.score}`;
-      sideList.appendChild(li);
-    });
+    leaderList.innerHTML=''; sideList.innerHTML='';
+    arr.forEach((p,i)=>{const li=document.createElement('li');li.textContent=`${i+1}. ${p.name} — ${p.score}`;leaderList.appendChild(li);});
+    arr.forEach(p=>{const li=document.createElement('li');li.textContent=`${p.name}: ${p.score}`;sideList.appendChild(li);});
   }
 
   function drawBackground(){ctx.drawImage(bgImg,0,0,W,H);}
-  function drawPipes(){pipes.forEach(p=>{ctx.drawImage(pipeImg,p.x,p.bottom,pipeW,H-p.bottom);ctx.save();ctx.translate(p.x+pipeW/2,p.top);ctx.scale(1,-1);ctx.drawImage(pipeImg,-pipeW/2,0,pipeW,H-p.bottom);ctx.restore();});}
+
+  // -------------------- FIXED PIPE FUNCTIONS --------------------
+  function spawnPipe(){
+    const minTop = 40;
+    const maxTop = H - pipeGap - 40;
+    const top = Math.floor(minTop + Math.random() * Math.max(0, maxTop - minTop));
+    pipes.push({ x: W, top: top, bottom: top + pipeGap, passed: false });
+  }
+
+  function drawPipes(){
+    pipes.forEach(p => {
+      const bottomHeight = H - p.bottom;
+      ctx.drawImage(pipeImg, p.x, p.bottom, pipeW, bottomHeight);
+      ctx.save();
+      ctx.translate(p.x + pipeW/2, p.top);
+      ctx.scale(1,-1);
+      ctx.drawImage(pipeImg, -pipeW/2, 0, pipeW, p.top);
+      ctx.restore();
+    });
+  }
+
   function drawBird(){ctx.drawImage(birdImg,bird.x,bird.y,bird.w,bird.h);}
 
-  function spawnPipe(){const top=Math.random()*(H-pipeGap-140)+40;pipes.push({x:W,top:top,bottom:top+pipeGap,passed:false});}
+  function update(){
+    if(!running || questionActive) return;
+    frame++;
+    bird.vel += gravity; bird.y += bird.vel;
+    pipes.forEach(p => p.x -= pipeSpeed);
+    if(frame % 100 === 0) spawnPipe();
+    pipes = pipes.filter(p => p.x + pipeW > -20);
+    if(safeTimer > 0) safeTimer--;
 
-function update(){
-  if(!running || questionActive) return;
+    let hitPipe = false;
+    const hitPad = 6;
+    const bx = bird.x + hitPad, by = bird.y + hitPad;
+    const bw = Math.max(0, bird.w - hitPad*2), bh = Math.max(0, bird.h - hitPad*2);
 
-  frame++;
-  bird.vel += gravity;
-  bird.y += bird.vel;
-  pipes.forEach(p => p.x -= pipeSpeed);
-
-  if(frame % 100 === 0) spawnPipe();
-  pipes = pipes.filter(p => p.x + pipeW > -20);
-  if(safeTimer > 0) safeTimer--;
-
-  let hitPipe = false;
-
-  pipes.forEach(p => {
-    // 🟢 Add to score when passing pipe
-    if(!p.passed && p.x + pipeW < bird.x){
-      p.passed = true;
-      score++;
-      scoreLabel.textContent = score;
-      if(score > high){
-        high = score;
-        localStorage.setItem('lava_high', high);
-        highLabel.textContent = 'High: ' + high;
+    pipes.forEach(p => {
+      if(!p.passed && p.x + pipeW < bird.x){
+        p.passed=true; score++; scoreLabel.textContent=score;
+        if(score>high){high=score; localStorage.setItem('lava_high',high); highLabel.textContent='High: '+high;}
       }
-      checkFireworks(score); // 🎆 still okay
-    }
+      const horizOverlap = (bx+bw>p.x)&&(bx<p.x+pipeW);
+      const vertOverlap = (by<p.top)||(by+bh>p.bottom);
+      if(horizOverlap && vertOverlap && safeTimer<=0) hitPipe=true;
+    });
 
-    // 💥 Collision check
-    const collide = (
-      bird.x + bird.w > p.x &&
-      bird.x < p.x + pipeW &&
-      (bird.y < p.top || bird.y + bird.h > p.bottom)
-    );
-    if(collide && safeTimer <= 0) hitPipe = true;
-  });
-
-  // 💥 Ground/ceiling collision
-  if((bird.y < 0 || bird.y + bird.h > H) && safeTimer <= 0) hitPipe = true;
-
-  // 🎯 Only trigger quiz if a collision actually happened
-  if(hitPipe){
-    openQuiz();
+    if((by<0||by+bh>H)&&safeTimer<=0) hitPipe=true;
+    if(hitPipe) openQuiz();
   }
-}
 
   function render(){ctx.clearRect(0,0,W,H);drawBackground();drawPipes();drawBird();}
   function loop(){if(running&&!gameOver){update();render();requestAnimationFrame(loop);}}
 
   function startGame(){
     playerName=(playerNameInput.value||'').trim();
-    if(!playerName){alert('Please enter your name');return;}
+    if(!playerName){alert('Please enter your name'); return;}
     const scores=loadScores();
     if(!scores.some(s=>s.name===playerName)){scores.push({name:playerName,score:0});saveScores(scores);}
-    resetGame();
-    showCountdown(3,()=>{running=true;requestAnimationFrame(loop);});
+    resetGame(); showCountdown(3,()=>{running=true;requestAnimationFrame(loop);});
   }
 
   function resetGame(){
     bird={x:80,y:H/2,w:34,h:24,vel:0};
-    pipes=[];frame=0;score=0;running=false;questionActive=false;gameOver=false;
-    scoreLabel.textContent='0';high=parseInt(localStorage.getItem('lava_high')||0);
-    highLabel.textContent='High: '+high;
-    startPanel.style.display='none';updateLeaderModal();spawnPipe();
+    pipes=[]; frame=0; score=0; running=false; questionActive=false; gameOver=false;
+    scoreLabel.textContent='0'; high=parseInt(localStorage.getItem('lava_high')||0);
+    highLabel.textContent='High: '+high; startPanel.style.display='none';
+    updateLeaderModal(); spawnPipe();
   }
 
-  // ✅ RANDOMIZED QUESTION PICKER
   function openQuiz(){
-    running=false;questionActive=true;
+    running=false; questionActive=true;
     const randomQ = questions[Math.floor(Math.random()*questions.length)];
     quizQ.textContent=randomQ.q;
     const choices=new Set([randomQ.a]);
-    while(choices.size<3)choices.add(questions[Math.floor(Math.random()*questions.length)].a);
+    while(choices.size<3) choices.add(questions[Math.floor(Math.random()*questions.length)].a);
     const arr=[...choices].sort(()=>Math.random()-0.5);
     choicesWrap.innerHTML='';
     arr.forEach(txt=>{
       const btn=document.createElement('button');
-      btn.className='choiceBtn';btn.textContent=txt;
+      btn.className='choiceBtn'; btn.textContent=txt;
       btn.onclick=()=>handleAnswer(txt,randomQ.a);
       choicesWrap.appendChild(btn);
     });
     quizBox.style.display='block';
   }
 
-  // ✅ Pause → Answer → Resume OR End Game
   function handleAnswer(ans,correct){
     quizBox.style.display='none';
     if(ans.toLowerCase()===correct.toLowerCase()){
-      // correct
-      questionActive=false;
-      running=true;
-      bird.vel=jump;
-      safeTimer = 60; // 👈 ~1 second of safe time to fly away from pipe
-      requestAnimationFrame(loop);
-    } else {
-      // wrong answer
-      endGame();
-    }
+      questionActive=false; running=true; bird.vel=jump; safeTimer=60; requestAnimationFrame(loop);
+    } else { endGame(); }
   }
 
   function showCountdown(sec,cb){
-    countText.style.display='block';let c=sec;
-    countText.textContent=c;
-    const timer=setInterval(()=>{c--;if(c>0)countText.textContent=c;else{clearInterval(timer);countText.style.display='none';cb();}},1000);
-  }
-
-  // 🎆 Fireworks Pop Message
-  function checkFireworks(s){
-    if(s===10){showFireworks("Awesome!");}
-    if(s===15){showFireworks("You are Insurance VA Expert!");}
-  }
-
-  function showFireworks(msg){
-    fireworksMsg.textContent=msg;
-    fireworksMsg.style.display='block';
-    setTimeout(()=>{fireworksMsg.style.display='none';},3000);
+    countText.style.display='block'; let c=sec; countText.textContent=c;
+    const timer=setInterval(()=>{c--; if(c>0) countText.textContent=c; else{clearInterval(timer);countText.style.display='none'; cb();}},1000);
   }
 
   function endGame(){
-    gameOver=true;running=false;
-    const scores=loadScores();
-    const existing=scores.find(s=>s.name===playerName);
-    if(existing)existing.score=Math.max(existing.score,score);
-    else scores.push({name:playerName,score});
-    saveScores(scores);
-    finalText.textContent='Final score: '+score;
-    updateLeaderModal();
+    gameOver=true; running=false;
+    const scores=loadScores(); const existing=scores.find(s=>s.name===playerName);
+    if(existing) existing.score=Math.max(existing.score,score); else scores.push({name:playerName,score});
+    saveScores(scores); finalText.textContent='Final score: '+score; updateLeaderModal();
     modal.style.display='flex';
   }
 
