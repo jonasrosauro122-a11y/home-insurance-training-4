@@ -110,7 +110,48 @@
     line-height: 1.6;
   }
 
-  /* === ROBOT CONTAINER CENTERED === */
+  /* === VA CAROUSEL ==== */
+  .va-carousel {
+    position: absolute;
+    top: 150px;
+    right: 20px;
+    width: 180px;
+    text-align: center;
+    z-index: 20;
+  }
+
+  .va-carousel img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 3px solid #ff4444;
+    box-shadow: 0 0 12px rgba(255, 0, 0, 0.5);
+  }
+
+  .va-controls {
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .va-controls button {
+    background: #e50914;
+    border: none;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.3s;
+  }
+
+  .va-controls button:hover {
+    background: #ff1f1f;
+    transform: scale(1.05);
+  }
+
+  /* === ROBOT === */
   .robot-container {
     position: relative;
     width: 100%;
@@ -134,10 +175,9 @@
     95% {filter: brightness(0.3);}
   }
 
-  /* ✅ Speech bubble 0.5 inch near robot head */
   .speech {
     position: absolute;
-    top: calc(50% - 180px); /* approx above robot head */
+    top: calc(50% - 180px);
     left: 50%;
     transform: translate(-50%, -48px);
     background: white;
@@ -223,6 +263,15 @@
   <h1>Welcome to LAVA Classroom</h1>
   <p>Learn. Apply. Grow. Become a skilled Virtual Assistant in insurance agency operations.</p>
 
+  <!-- ⭐ VA PHOTO SLIDER -->
+  <div class="va-carousel">
+    <img id="va-photo" src="images/vas/photo1.jpg" alt="VA Photo">
+    <div class="va-controls">
+      <button onclick="prevPhoto()">⬅️</button>
+      <button onclick="nextPhoto()">➡️</button>
+    </div>
+  </div>
+
   <div class="robot-container">
     <img src="/images/lava-robot.png" alt="Lava Robot" class="robot" id="robot">
     <div class="speech" id="speech">Hi VA 👋</div>
@@ -243,12 +292,7 @@ const robot = document.getElementById("robot");
 const speech = document.getElementById("speech");
 
 window.onload = () => {
-  // Show bubble first
-  setTimeout(() => {
-    speech.classList.add("show");
-  }, 500);
-
-  // Then hide bubble and move robot
+  setTimeout(() => { speech.classList.add("show"); }, 500);
   setTimeout(() => {
     speech.classList.remove("show");
     startSmoothMovement();
@@ -269,6 +313,29 @@ function startSmoothMovement() {
 
   moveRobot();
 }
+
+/* ⭐ VA CAROUSEL LOGIC */
+const vaPhotos = [
+  "images/vas/photo1.jpg",
+  "images/vas/photo2.jpg"
+];
+
+let vaIndex = 0;
+
+function showVA() {
+  document.getElementById("va-photo").src = vaPhotos[vaIndex];
+}
+
+function nextPhoto() {
+  vaIndex = (vaIndex + 1) % vaPhotos.length;
+  showVA();
+}
+
+function prevPhoto() {
+  vaIndex = (vaIndex - 1 + vaPhotos.length) % vaPhotos.length;
+  showVA();
+}
 </script>
+
 </body>
 </html>
