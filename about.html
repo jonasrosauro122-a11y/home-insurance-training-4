@@ -64,6 +64,7 @@ nav a:hover,nav a.active{
   padding:60px 20px;
   position:relative;
   z-index:5;
+  text-align:center;
 }
 
 .section-title{
@@ -78,11 +79,38 @@ nav a:hover,nav a.active{
 
 .section-title p{color:#ddd;}
 
-/* CUSTOMER SUCCESS TEAM */
-.team-gallery{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:30px;
+/* TEAM HIERARCHY */
+.team-hierarchy{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:60px;
+  position:relative;
+}
+
+/* LINES */
+.line{
+  position:absolute;
+  width:4px;
+  background:#ff1f1f;
+  z-index:1;
+  left:50%;
+  transform:translateX(-50%);
+}
+
+.line-horizontal{
+  width:120px;
+  height:4px;
+  background:#ff1f1f;
+  position:absolute;
+}
+
+/* CARDS */
+.team-row{
+  display:flex;
+  justify-content:center;
+  gap:80px;
+  flex-wrap:wrap;
 }
 
 .team-card{
@@ -91,19 +119,21 @@ nav a:hover,nav a.active{
   border-radius:15px;
   padding:20px;
   text-align:center;
+  width:220px;
   box-shadow:0 8px 24px rgba(0,0,0,0.3);
-  transform:translateY(60px);
+  transform:translateY(60px) scale(0.8);
   opacity:0;
   transition:all 0.6s ease;
+  cursor:pointer;
 }
 
 .team-card.visible{
-  transform:translateY(0);
+  transform:translateY(0) scale(1);
   opacity:1;
 }
 
 .team-card:hover{
-  transform:translateY(-10px) scale(1.03);
+  transform:translateY(-10px) scale(1.05);
 }
 
 .team-card img{
@@ -124,12 +154,61 @@ nav a:hover,nav a.active{
   color:#333;
 }
 
-footer{
-  text-align:center;
+/* MODAL */
+.modal{
+  position:fixed;
+  top:0;left:0;
+  width:100%;height:100%;
+  background:rgba(0,0,0,0.7);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  opacity:0;
+  pointer-events:none;
+  transition:0.3s;
+  z-index:100;
+}
+
+.modal.active{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.modal-content{
+  background:#fff;
+  color:#000;
   padding:30px;
-  background:#111;
-  color:#bbb;
-  margin-top:60px;
+  border-radius:15px;
+  max-width:500px;
+  width:90%;
+  text-align:left;
+  position:relative;
+  animation:popIn 0.4s ease forwards;
+}
+
+.modal-content h3{
+  margin-bottom:15px;
+  color:#800000;
+}
+
+.modal-content p{
+  margin-bottom:10px;
+  color:#333;
+}
+
+.close-btn{
+  position:absolute;
+  top:15px;
+  right:15px;
+  font-size:1.5rem;
+  cursor:pointer;
+  color:#800000;
+}
+
+/* POP ANIMATION */
+@keyframes popIn{
+  0%{transform:scale(0.5);opacity:0;}
+  100%{transform:scale(1);opacity:1;}
 }
 </style>
 </head>
@@ -156,40 +235,76 @@ footer{
 <main class="container">
 
   <div class="section-title">
-    <h2>Meet Our Customer Success Team</h2>
-    <p>15 Professional Leaders Driving Client Success & Growth</p>
+    <h2>Customer Success Team Gallery</h2>
+    <p>Our Leaders and Their Executive Assistants</p>
   </div>
 
-  <div class="team-gallery">
+  <div class="team-hierarchy">
 
-    <!-- 15 Team Members -->
-    <!-- Replace images with your actual files -->
+    <!-- Leaders Row -->
+    <div class="team-row">
+      <div class="team-card" data-bio="Niccole Peeler has 10 years in client success leadership. She drives strategic initiatives for client growth.">
+        <img src="images/trainer1.jpg" alt="Niccole Peeler">
+        <h3>Niccole Peeler</h3>
+        <p>Customer Success Director</p>
+      </div>
 
-    <div class="team-card"><img src="images/trainer1.jpg"><h3>Niccole Peeler</h3><p>Customer Success Director</p></div>
-    <div class="team-card"><img src="images/trainer2.jpg"><h3>Alicia Almanza</h3><p>Customer Success Manager</p></div>
-    <div class="team-card"><img src="images/trainer3.jpg"><h3>Karla Jardeloza</h3><p>Insurance Training Director</p></div>
-    <div class="team-card"><img src="images/trainer4.jpg"><h3>Gell Berona</h3><p>Executive Assistant</p></div>
-    <div class="team-card"><img src="images/trainer5.jpg"><h3>Ademar Toleran Jr</h3><p>Executive Assistant</p></div>
-    <div class="team-card"><img src="images/trainer6.jpg"><h3>Allyza Lyle Alcomendras</h3><p>Executive Assistant</p></div>
-    <div class="team-card"><img src="images/trainer7.jpg"><h3>Jonas Rosauro</h3><p>Insurance Trainer</p></div>
-    <div class="team-card"><img src="images/trainer8.jpg"><h3>Au Sagarino</h3><p>Insurance Trainer</p></div>
-    <div class="team-card"><img src="images/trainer9.jpg"><h3>Kyle Mejares</h3><p>Insurance Trainer</p></div>
-    <div class="team-card"><img src="images/trainer10.jpg"><h3>Alchanie Ay-ad Mancia</h3><p>Insurance Trainer</p></div>
-    <div class="team-card"><img src="images/trainer11.jpg"><h3>Martin Salcedo</h3><p>Team Leader</p></div>
-    <div class="team-card"><img src="images/trainer12.jpg"><h3>Edmar Quirante</h3><p>Team Leader</p></div>
-    <div class="team-card"><img src="images/trainer13.jpg"><h3>Ferdinand Alvarez Jr.</h3><p>Team Leader</p></div>
-    <div class="team-card"><img src="images/trainer14.jpg"><h3>Rezyl Jane Regondon</h3><p>Team Leader</p></div>
-    <div class="team-card"><img src="images/trainer15.jpg"><h3>Team Leader</h3><p>Team Leader</p></div>
+      <div class="team-card" data-bio="Alicia Almanza is a top-tier Customer Success Manager, specializing in client engagement and retention strategies.">
+        <img src="images/trainer2.jpg" alt="Alicia Almanza">
+        <h3>Alicia Almanza</h3>
+        <p>Customer Success Manager</p>
+      </div>
+
+      <div class="team-card" data-bio="Karla Jardeloza leads insurance training, ensuring staff are highly skilled and knowledgeable in client success.">
+        <img src="images/trainer3.jpg" alt="Karla Jardeloza">
+        <h3>Karla Jardeloza</h3>
+        <p>Insurance Training Director</p>
+      </div>
+    </div>
+
+    <!-- Lines connecting Leaders to Assistants -->
+    <div class="line" style="top:230px; height:60px;"></div>
+
+    <!-- Assistants Row -->
+    <div class="team-row">
+      <div class="team-card" data-bio="Gell Berona supports Niccole Peeler as Executive Assistant, handling operations and schedules.">
+        <img src="images/trainer4.jpg" alt="Gell Berona">
+        <h3>Gell Berona</h3>
+        <p>Executive Assistant</p>
+      </div>
+
+      <div class="team-card" data-bio="Ademar Toleran Jr supports Alicia Almanza as Executive Assistant, ensuring smooth operations.">
+        <img src="images/trainer5.jpg" alt="Ademar Toleran Jr">
+        <h3>Ademar Toleran Jr</h3>
+        <p>Executive Assistant</p>
+      </div>
+
+      <div class="team-card" data-bio="Allyza Lyle Alcomendras supports Karla Jardeloza as Executive Assistant, coordinating client programs.">
+        <img src="images/trainer6.jpg" alt="Allyza Lyle Alcomendras">
+        <h3>Allyza Lyle Alcomendras</h3>
+        <p>Executive Assistant</p>
+      </div>
+    </div>
 
   </div>
-
 </main>
 
 <footer>
   © 2025 Customer Success Management. All Rights Reserved.
 </footer>
 
+<!-- Modal -->
+<div class="modal" id="bioModal">
+  <div class="modal-content">
+    <span class="close-btn" id="closeModal">&times;</span>
+    <h3 id="modalName"></h3>
+    <p id="modalTitle"></p>
+    <p id="modalBio"></p>
+  </div>
+</div>
+
 <script>
+// Reveal pop animation
 function revealCards(){
   document.querySelectorAll('.team-card').forEach(card=>{
     const rect = card.getBoundingClientRect();
@@ -198,9 +313,32 @@ function revealCards(){
     }
   });
 }
-
 window.addEventListener('scroll', revealCards);
 window.addEventListener('load', revealCards);
+
+// Modal popup for bio
+const modal = document.getElementById('bioModal');
+const modalName = document.getElementById('modalName');
+const modalTitle = document.getElementById('modalTitle');
+const modalBio = document.getElementById('modalBio');
+const closeModal = document.getElementById('closeModal');
+
+document.querySelectorAll('.team-card').forEach(card=>{
+  card.addEventListener('click',()=>{
+    modal.classList.add('active');
+    modalName.textContent = card.querySelector('h3').textContent;
+    modalTitle.textContent = card.querySelector('p').textContent;
+    modalBio.textContent = card.dataset.bio;
+  });
+});
+
+closeModal.addEventListener('click',()=>{
+  modal.classList.remove('active');
+});
+
+modal.addEventListener('click',(e)=>{
+  if(e.target === modal) modal.classList.remove('active');
+});
 </script>
 
 </body>
