@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>About • Customer Success Management</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
@@ -14,9 +15,7 @@ body{
   color:#fff;
   background:
     linear-gradient(rgba(155,18,18,0.6), rgba(0,0,0,0.9)),
-    url('images/classroom-bg.jpg') center/cover no-repeat fixed,
-    url('images/red-gradient-bg.jpg') center/cover no-repeat fixed;
-  background-blend-mode: overlay, multiply;
+    url('images/classroom-bg.jpg') center/cover no-repeat fixed;
   overflow-x:hidden;
 }
 
@@ -44,6 +43,7 @@ nav a{
 }
 nav a:hover,nav a.active{
   color:#e50914;
+  transform:scale(1.05);
 }
 
 /* CONTAINER */
@@ -55,51 +55,21 @@ nav a:hover,nav a.active{
 }
 
 .section-title{
-  margin-bottom:30px;
+  margin-bottom:40px;
 }
-
 .section-title h2{
   font-size:2.5rem;
   margin-bottom:10px;
 }
+.section-title p{color:#ddd;}
 
-/* OVERVIEW DROPDOWN */
-.overview-toggle{
-  margin:20px auto;
-  cursor:pointer;
-  font-weight:600;
-  color:#e50914;
-  text-align:center;
-  font-size:1.1rem;
-}
-
-.overview-content{
-  max-height:0;
-  overflow:hidden;
-  transition:max-height 0.5s ease;
-  background:#fff;
-  color:#000;
-  border-radius:10px;
-  text-align:left;
-  padding:0 20px;
-}
-
-.overview-content.active{
-  padding:20px;
-  max-height:3000px;
-}
-
-.overview-content h3{
-  margin-top:20px;
-  color:#800000;
-}
-
-/* TEAM GRID */
-.team-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:30px;
-  margin-top:40px;
+/* CARDS */
+.team-row{
+  display:flex;
+  justify-content:center;
+  gap:60px;
+  flex-wrap:wrap;
+  margin-bottom:60px;
 }
 
 .team-card{
@@ -108,22 +78,20 @@ nav a:hover,nav a.active{
   border-radius:15px;
   padding:20px;
   text-align:center;
+  width:220px;
   box-shadow:0 8px 24px rgba(0,0,0,0.3);
-  transform:translateY(60px) scale(0.8);
+  transform:scale(0.8);
   opacity:0;
-  transition:all 0.6s ease;
+  transition:all 0.5s ease;
   cursor:pointer;
 }
-
 .team-card.visible{
-  transform:translateY(0) scale(1);
+  transform:scale(1);
   opacity:1;
 }
-
 .team-card:hover{
-  transform:translateY(-10px) scale(1.05);
+  transform:translateY(-8px) scale(1.05);
 }
-
 .team-card img{
   width:100%;
   height:220px;
@@ -131,14 +99,19 @@ nav a:hover,nav a.active{
   border-radius:12px;
   margin-bottom:15px;
 }
-
 .team-card h3{
   color:#800000;
   margin-bottom:5px;
 }
-
 .team-card p{
   font-weight:bold;
+}
+
+/* GRID SECTION */
+.other-team{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:30px;
 }
 
 /* MODAL */
@@ -153,14 +126,12 @@ nav a:hover,nav a.active{
   opacity:0;
   pointer-events:none;
   transition:0.3s;
-  z-index:100;
+  z-index:200;
 }
-
 .modal.active{
   opacity:1;
   pointer-events:auto;
 }
-
 .modal-content{
   background:#fff;
   color:#000;
@@ -168,31 +139,63 @@ nav a:hover,nav a.active{
   border-radius:15px;
   max-width:500px;
   width:90%;
-  text-align:left;
   position:relative;
   animation:popIn 0.4s ease forwards;
 }
-
+@keyframes popIn{
+  0%{transform:scale(0.5);opacity:0;}
+  100%{transform:scale(1);opacity:1;}
+}
 .close-btn{
   position:absolute;
   top:15px;
-  right:15px;
+  right:20px;
   font-size:1.5rem;
   cursor:pointer;
   color:#800000;
 }
 
-@keyframes popIn{
-  0%{transform:scale(0.5);opacity:0;}
-  100%{transform:scale(1);opacity:1;}
-}
-
-footer{
-  text-align:center;
-  padding:30px;
-  background:#111;
-  color:#bbb;
+/* OVERVIEW */
+.overview-section{
   margin-top:60px;
+  background:rgba(255,255,255,0.05);
+  padding:25px;
+  border-radius:15px;
+  text-align:left;
+}
+.overview-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.overview-btn{
+  background:#e50914;
+  border:none;
+  padding:8px 16px;
+  color:#fff;
+  border-radius:6px;
+  cursor:pointer;
+  font-weight:600;
+  transition:0.3s;
+}
+.overview-btn:hover{
+  background:#b20710;
+  transform:scale(1.05);
+}
+.overview-content{
+  max-height:0;
+  overflow:hidden;
+  opacity:0;
+  transition:max-height 0.6s ease, opacity 0.4s ease;
+  margin-top:15px;
+}
+.overview-content.active{
+  max-height:2000px;
+  opacity:1;
+}
+.overview-content ul{
+  padding-left:20px;
+  margin-top:10px;
 }
 </style>
 </head>
@@ -204,94 +207,144 @@ footer{
   <nav>
     <ul>
       <li><a href="index.html">Home</a></li>
-      <li><a href="about.html" class="active">Staff</a></li>
-      <li><a href="courses.html">Courses</a></li>
-      <li><a href="assignments.html">University</a></li>
-      <li><a href="game.html">Games</a></li>
-      <li><a href="contact.html">Contact</a></li>
+      <li><a href="about.html" class="active">Team</a></li>
     </ul>
   </nav>
 </header>
 
 <main class="container">
 
-  <div class="section-title">
-    <h2>Customer Success Staff</h2>
-  </div>
+<div class="section-title">
+  <h2>Customer Success Team</h2>
+  <p>Leadership, Executive Assistants, Trainers & Team Leaders</p>
+</div>
 
-  <!-- DIRECTORS OVERVIEW -->
-  <div class="overview-toggle" onclick="toggleOverview(this)">
-    ▶ Overview – Directors & Account Management
+<!-- LEADERS -->
+<div class="team-row">
+  <div class="team-card" data-bio="Provides strategic leadership and final decision authority for Customer Success.">
+    <img src="images/trainer1.jpg">
+    <h3>Niccole Peeler</h3>
+    <p>Customer Success Director</p>
   </div>
+  <div class="team-card" data-bio="Primary client contact responsible for account growth and stability.">
+    <img src="images/trainer2.jpg">
+    <h3>Alicia Almanza</h3>
+    <p>Account Manager</p>
+  </div>
+  <div class="team-card" data-bio="Oversees insurance training and staff development programs.">
+    <img src="images/trainer3.jpg">
+    <h3>Karla Jardeloza</h3>
+    <p>Training Director</p>
+  </div>
+</div>
 
+<!-- EXECUTIVE ASSISTANTS -->
+<div class="team-row">
+  <div class="team-card" data-bio="Executive Assistant supporting leadership and client coordination.">
+    <img src="images/trainer4.jpg">
+    <h3>Gell Berona</h3>
+    <p>Executive Assistant</p>
+  </div>
+  <div class="team-card" data-bio="Supports Account Management operations and scheduling.">
+    <img src="images/trainer5.jpg">
+    <h3>Ademar Toleran Jr</h3>
+    <p>Executive Assistant</p>
+  </div>
+  <div class="team-card" data-bio="Coordinates programs and client support documentation.">
+    <img src="images/trainer6.jpg">
+    <h3>Allyza Lyle Alcomendras</h3>
+    <p>Executive Assistant</p>
+  </div>
+</div>
+
+<!-- OTHER TEAM -->
+<div class="section-title">
+  <h2>Trainers & Team Leaders</h2>
+</div>
+
+<div class="other-team">
+  <div class="team-card" data-bio="Insurance Trainer specializing in onboarding and systems.">
+    <img src="images/trainer7.jpg">
+    <h3>Jonas Rosauro</h3>
+    <p>Trainer</p>
+  </div>
+  <div class="team-card" data-bio="Leads VAs and ensures performance consistency.">
+    <img src="images/trainer8.jpg">
+    <h3>Martin Salcedo</h3>
+    <p>Team Leader</p>
+  </div>
+</div>
+
+<!-- OVERVIEW SECTIONS -->
+
+<div class="overview-section">
+  <div class="overview-header">
+    <h3>Directors & Account Managers</h3>
+    <button class="overview-btn">Overview</button>
+  </div>
   <div class="overview-content">
-    <h3>Customer Success Team Overview</h3>
-    <p>The Customer Success Team manages client relationships post-sale and ensures services align with Lava standards and SOC-aligned practices.</p>
-
-    <h3>Customer Success Director (CSD)</h3>
-    <p>Provides strategic leadership, escalation management, and cross-department alignment.</p>
-
-    <h3>Account Management (AM)</h3>
-    <p>Primary client contact, conducts reviews, manages stability and growth of assigned accounts.</p>
+    <p><strong>Primary Objective:</strong> Provide leadership, client relationship management, retention strategy, and escalation authority.</p>
+    <ul>
+      <li>Strategic direction and policy oversight</li>
+      <li>Client risk management</li>
+      <li>Cross-department coordination</li>
+      <li>Final Level 2 decision authority</li>
+    </ul>
   </div>
+</div>
 
-  <!-- EXECUTIVE ASSISTANT OVERVIEW -->
-  <div class="overview-toggle" onclick="toggleOverview(this)">
-    ▶ Overview – Executive Assistants
+<div class="overview-section">
+  <div class="overview-header">
+    <h3>Executive Assistants</h3>
+    <button class="overview-btn">Overview</button>
   </div>
-
   <div class="overview-content">
-    <h3>Executive Assistants (EA)</h3>
-    <p>Provide structured administrative and coordination support to CSD and AMs.</p>
+    <p><strong>Primary Objective:</strong> Provide structured administrative and coordination support.</p>
+    <ul>
+      <li>Manage schedules and meetings</li>
+      <li>Monitor communications</li>
+      <li>Document action items</li>
+      <li>Coordinate internal follow-ups</li>
+    </ul>
   </div>
+</div>
 
-  <!-- TRAINERS OVERVIEW -->
-  <div class="overview-toggle" onclick="toggleOverview(this)">
-    ▶ Overview – Trainers
-  </div>
-
-  <div class="overview-content">
+<div class="overview-section">
+  <div class="overview-header">
     <h3>Trainers</h3>
-    <p>Deliver structured client-requested training aligned with Lava standards.</p>
+    <button class="overview-btn">Overview</button>
   </div>
-
-  <!-- TEAM LEADERS OVERVIEW -->
-  <div class="overview-toggle" onclick="toggleOverview(this)">
-    ▶ Overview – Team Leaders
-  </div>
-
   <div class="overview-content">
+    <ul>
+      <li>Deliver VA training onsite and online</li>
+      <li>Conduct system & insurance training</li>
+      <li>Coordinate with AMs and TLs</li>
+    </ul>
+  </div>
+</div>
+
+<div class="overview-section">
+  <div class="overview-header">
     <h3>Team Leaders</h3>
-    <p>Provide oversight, conduct check-ins, and act as first VA escalation point.</p>
+    <button class="overview-btn">Overview</button>
   </div>
-
-  <!-- TEAM GRID -->
-  <div class="team-grid">
-    <div class="team-card" data-bio="Strategic leadership and client oversight.">
-      <img src="images/trainer1.jpg">
-      <h3>Niccole Peeler</h3>
-      <p>Customer Success Director</p>
-    </div>
-
-    <div class="team-card" data-bio="Client engagement and retention specialist.">
-      <img src="images/trainer2.jpg">
-      <h3>Alicia Almanza</h3>
-      <p>Account Manager</p>
-    </div>
-
-    <div class="team-card" data-bio="Provides structured coordination support.">
-      <img src="images/trainer4.jpg">
-      <h3>Gell Berona</h3>
-      <p>Executive Assistant</p>
-    </div>
+  <div class="overview-content">
+    <ul>
+      <li>Oversee VA performance</li>
+      <li>Conduct regular check-ins</li>
+      <li>Escalation support</li>
+      <li>Ensure process consistency</li>
+    </ul>
   </div>
+</div>
 
 </main>
 
-<footer>
-  © 2025 Customer Success Management. All Rights Reserved.
+<footer style="text-align:center;padding:20px;background:#000;margin-top:60px;">
+© 2025 Customer Success Management
 </footer>
 
+<!-- MODAL -->
 <div class="modal" id="bioModal">
   <div class="modal-content">
     <span class="close-btn" id="closeModal">&times;</span>
@@ -302,25 +355,14 @@ footer{
 </div>
 
 <script>
-function toggleOverview(element){
-  const content = element.nextElementSibling;
-  content.classList.toggle("active");
-  element.innerHTML = content.classList.contains("active")
-    ? "▼ Overview"
-    : "▶ Overview";
-}
-
-function revealCards(){
+// Reveal animation
+window.addEventListener('load',()=>{
   document.querySelectorAll('.team-card').forEach(card=>{
-    const rect = card.getBoundingClientRect();
-    if(rect.top < window.innerHeight - 100){
-      card.classList.add('visible');
-    }
+    card.classList.add('visible');
   });
-}
-window.addEventListener('scroll', revealCards);
-window.addEventListener('load', revealCards);
+});
 
+// Modal
 const modal = document.getElementById('bioModal');
 const modalName = document.getElementById('modalName');
 const modalTitle = document.getElementById('modalTitle');
@@ -335,8 +377,20 @@ document.querySelectorAll('.team-card').forEach(card=>{
   });
 });
 
-document.getElementById('closeModal').onclick = () => modal.classList.remove('active');
-modal.onclick = e => { if(e.target === modal) modal.classList.remove('active'); };
+document.getElementById('closeModal').onclick=()=>{
+  modal.classList.remove('active');
+};
+
+modal.addEventListener('click',(e)=>{
+  if(e.target===modal) modal.classList.remove('active');
+});
+
+// Overview toggle
+document.querySelectorAll('.overview-btn').forEach(button=>{
+  button.addEventListener('click',()=>{
+    button.parentElement.nextElementSibling.classList.toggle('active');
+  });
+});
 </script>
 
 </body>
