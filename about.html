@@ -78,14 +78,14 @@ nav a:hover,nav a.active{
 
 .section-title p{color:#ddd;}
 
-/* TRAINERS */
-.trainer-gallery{
+/* CUSTOMER SUCCESS TEAM */
+.team-gallery{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
   gap:30px;
 }
 
-.trainer-card{
+.team-card{
   background:#fff;
   color:#000;
   border-radius:15px;
@@ -97,16 +97,16 @@ nav a:hover,nav a.active{
   transition:all 0.6s ease;
 }
 
-.trainer-card.visible{
+.team-card.visible{
   transform:translateY(0);
   opacity:1;
 }
 
-.trainer-card:hover{
+.team-card:hover{
   transform:translateY(-10px) scale(1.03);
 }
 
-.trainer-card img{
+.team-card img{
   width:100%;
   height:220px;
   object-fit:cover;
@@ -114,12 +114,12 @@ nav a:hover,nav a.active{
   margin-bottom:15px;
 }
 
-.trainer-card h3{
+.team-card h3{
   color:#800000;
   margin-bottom:5px;
 }
 
-.trainer-card p{
+.team-card p{
   font-weight:bold;
   color:#333;
 }
@@ -144,7 +144,7 @@ footer{
   <nav>
     <ul>
       <li><a href="index.html">Home</a></li>
-      <li><a href="about.html" class="active">Trainers</a></li>
+      <li><a href="about.html" class="active">Team</a></li>
       <li><a href="courses.html">Courses</a></li>
       <li><a href="assignments.html">University</a></li>
       <li><a href="game.html">Games</a></li>
@@ -156,30 +156,30 @@ footer{
 <main class="container">
 
   <div class="section-title">
-    <h2>Meet Our Customer Success Experts</h2>
-    <p>15 Professional Leaders in Customer Success & Client Growth</p>
+    <h2>Meet Our Customer Success Team</h2>
+    <p>15 Professional Leaders Driving Client Success & Growth</p>
   </div>
 
-  <div class="trainer-gallery">
+  <div class="team-gallery">
 
-    <!-- 15 Trainers -->
+    <!-- 15 Team Members -->
     <!-- Replace images with your actual files -->
 
-    <div class="trainer-card"><img src="images/trainer1.jpg"><h3>John Anderson</h3><p>Head of Customer Success</p></div>
-    <div class="trainer-card"><img src="images/trainer2.jpg"><h3>Maria Lopez</h3><p>Senior Success Manager</p></div>
-    <div class="trainer-card"><img src="images/trainer3.jpg"><h3>David Kim</h3><p>Onboarding Specialist</p></div>
-    <div class="trainer-card"><img src="images/trainer4.jpg"><h3>Angela Cruz</h3><p>Retention Manager</p></div>
-    <div class="trainer-card"><img src="images/trainer5.jpg"><h3>Michael Torres</h3><p>Account Manager</p></div>
-    <div class="trainer-card"><img src="images/trainer6.jpg"><h3>Sophia Reyes</h3><p>Customer Experience Lead</p></div>
-    <div class="trainer-card"><img src="images/trainer7.jpg"><h3>Daniel Wright</h3><p>Implementation Specialist</p></div>
-    <div class="trainer-card"><img src="images/trainer8.jpg"><h3>Isabella Santos</h3><p>Support Operations</p></div>
-    <div class="trainer-card"><img src="images/trainer9.jpg"><h3>James Miller</h3><p>Customer Insights Analyst</p></div>
-    <div class="trainer-card"><img src="images/trainer10.jpg"><h3>Olivia Garcia</h3><p>Success Strategist</p></div>
-    <div class="trainer-card"><img src="images/trainer11.jpg"><h3>Ethan Brown</h3><p>Renewals Manager</p></div>
-    <div class="trainer-card"><img src="images/trainer12.jpg"><h3>Chloe Rivera</h3><p>Training Specialist</p></div>
-    <div class="trainer-card"><img src="images/trainer13.jpg"><h3>Lucas Bennett</h3><p>Lifecycle Manager</p></div>
-    <div class="trainer-card"><img src="images/trainer14.jpg"><h3>Grace Thompson</h3><p>Operations Lead</p></div>
-    <div class="trainer-card"><img src="images/trainer15.jpg"><h3>Noah Martinez</h3><p>Enterprise Success Manager</p></div>
+    <div class="team-card"><img src="images/trainer1.jpg"><h3>Niccole Peeler</h3><p>Customer Success Director</p></div>
+    <div class="team-card"><img src="images/trainer2.jpg"><h3>Alicia Almanza</h3><p>Customer Success Manager</p></div>
+    <div class="team-card"><img src="images/trainer3.jpg"><h3>Karla Jardeloza</h3><p>Insurance Training Director</p></div>
+    <div class="team-card"><img src="images/trainer4.jpg"><h3>Gell Berona</h3><p>Executive Assistant</p></div>
+    <div class="team-card"><img src="images/trainer5.jpg"><h3>Ademar Toleran Jr</h3><p>Executive Assistant</p></div>
+    <div class="team-card"><img src="images/trainer6.jpg"><h3>Allyza Lyle Alcomendras</h3><p>Executive Assistant</p></div>
+    <div class="team-card"><img src="images/trainer7.jpg"><h3>Jonas Rosauro</h3><p>Insurance Trainer</p></div>
+    <div class="team-card"><img src="images/trainer8.jpg"><h3>Au Sagarino</h3><p>Insurance Trainer</p></div>
+    <div class="team-card"><img src="images/trainer9.jpg"><h3>Kyle Mejares</h3><p>Insurance Trainer</p></div>
+    <div class="team-card"><img src="images/trainer10.jpg"><h3>Alchanie Ay-ad Mancia</h3><p>Insurance Trainer</p></div>
+    <div class="team-card"><img src="images/trainer11.jpg"><h3>Martin Salcedo</h3><p>Team Leader</p></div>
+    <div class="team-card"><img src="images/trainer12.jpg"><h3>Edmar Quirante</h3><p>Team Leader</p></div>
+    <div class="team-card"><img src="images/trainer13.jpg"><h3>Ferdinand Alvarez Jr.</h3><p>Team Leader</p></div>
+    <div class="team-card"><img src="images/trainer14.jpg"><h3>Rezyl Jane Regondon</h3><p>Team Leader</p></div>
+    <div class="team-card"><img src="images/trainer15.jpg"><h3>Team Leader</h3><p>Team Leader</p></div>
 
   </div>
 
@@ -191,7 +191,7 @@ footer{
 
 <script>
 function revealCards(){
-  document.querySelectorAll('.trainer-card').forEach(card=>{
+  document.querySelectorAll('.team-card').forEach(card=>{
     const rect = card.getBoundingClientRect();
     if(rect.top < window.innerHeight - 100){
       card.classList.add('visible');
