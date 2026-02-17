@@ -3,243 +3,132 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>About • Customer Success Management</title>
+<title>Customer Success Management</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
 <style>
-/* Reset */
-* {margin:0;padding:0;box-sizing:border-box;}
+*{margin:0;padding:0;box-sizing:border-box;}
 
-/* BODY & BACKGROUND */
-body {
-  font-family: 'Poppins', sans-serif;
-  color: #fff;
-  background: linear-gradient(rgba(155,18,18,0.7), rgba(0,0,0,0.9)),
-              url('images/classroom-bg.jpg') center center / cover no-repeat fixed;
-  overflow-x: hidden;
+body{
+  font-family:'Poppins',sans-serif;
+  color:#fff;
+  background:linear-gradient(rgba(120,0,0,0.7),rgba(0,0,0,0.9)),
+  url('images/lava-bg.png') center/cover no-repeat fixed;
+  overflow-x:hidden;
 }
 
-/* CLOUDS ANIMATION */
-.clouds {
-  position: absolute;
-  top: 0; left: 0;
-  width: 200%; height: 200%;
-  background: url('images/clouds.png') repeat;
-  background-size: contain;
-  opacity: 0.08;
-  animation: cloudMove 120s linear infinite;
-  pointer-events: none;
+/* CLOUD ANIMATION */
+.clouds{
+  position:absolute;top:0;left:0;width:200%;height:200%;
+  background:url('images/clouds.png') repeat;
+  background-size:contain;
+  opacity:0.1;
+  animation:cloudMove 120s linear infinite;
+  pointer-events:none;
 }
-@keyframes cloudMove {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+@keyframes cloudMove{
+  0%{transform:translateX(0);}
+  100%{transform:translateX(-50%);}
 }
 
 /* HEADER */
-header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  background: rgba(0,0,0,0.7);
-  backdrop-filter: blur(5px);
+header{
+  position:sticky;top:0;z-index:50;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1rem 2rem;
+  background:rgba(0,0,0,0.7);
+  backdrop-filter:blur(5px);
 }
 
-.brand {
-  font-size: 1.6rem;
-  font-weight: 700;
-  text-decoration: none;
-  color: #fff;
+.brand{
+  font-size:1.6rem;
+  font-weight:700;
+  text-decoration:none;
+  color:#fff;
 }
 
-nav ul {
-  display: flex;
-  list-style: none;
-  gap: 20px;
+nav ul{display:flex;list-style:none;gap:20px;}
+nav a{
+  color:#fff;text-decoration:none;
+  padding:6px 12px;border-radius:5px;
+  transition:0.3s;
 }
-nav a {
-  color: #fff;
-  text-decoration: none;
-  padding: 6px 12px;
-  border-radius: 5px;
-  transition: 0.3s;
-}
-nav a:hover, nav a.active {
-  color: #e50914;
-  transform: scale(1.05);
+nav a:hover,nav a.active{
+  background:#ff1f1f;
+  transform:scale(1.05);
 }
 
-/* MAIN CONTAINER */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 60px 20px;
-  position: relative;
-  z-index: 5;
-  text-align: center;
+/* HERO */
+.hero{
+  text-align:center;
+  padding:8rem 2rem 10rem;
+  min-height:100vh;
+  animation:fadeIn 2s ease;
 }
 
-.section-title {
-  text-align: center;
-  margin-bottom: 40px;
-}
-.section-title h2 {
-  font-size: 2.5rem;
-  margin-bottom: 10px;
-}
-.section-title p {
-  color: #ddd;
+.hero h1{
+  font-size:3rem;
+  margin-bottom:1rem;
+  animation:fadeInDown 1.5s ease;
 }
 
-/* TEAM HIERARCHY */
-.team-hierarchy {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 60px;
-  position: relative;
+.hero p{
+  max-width:700px;
+  margin:0 auto 2rem;
+  color:#ddd;
+  line-height:1.6;
 }
 
-/* TEAM ROW */
-.team-row {
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  flex-wrap: wrap;
+.buttons{
+  display:flex;
+  justify-content:center;
+  gap:20px;
 }
 
-/* TEAM CARD */
-.team-card {
-  background: #fff;
-  color: #000;
-  border-radius: 15px;
-  padding: 20px;
-  text-align: center;
-  width: 240px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-  transform: translateY(60px) scale(0.8);
-  opacity: 0;
-  transition: all 0.6s ease;
-  cursor: pointer;
-}
-.team-card.visible {
-  transform: translateY(0) scale(1);
-  opacity: 1;
-}
-.team-card:hover {
-  transform: translateY(-10px) scale(1.05);
+.btn{
+  padding:12px 30px;
+  border-radius:50px;
+  text-decoration:none;
+  font-weight:600;
+  transition:0.3s;
 }
 
-.team-card img {
-  width: 100%;
-  height: 250px;
-  object-fit: cover;
-  object-position: top;
-  border-radius: 12px;
-  margin-bottom: 15px;
+.btn-red{background:#e50914;color:#fff;}
+.btn-red:hover{background:#ff1f1f;transform:scale(1.05);}
+
+.btn-black{background:#111;color:#fff;}
+.btn-black:hover{background:#333;transform:scale(1.05);}
+
+footer{
+  text-align:center;
+  padding:30px;
+  background:#111;
+  color:#bbb;
 }
 
-.team-card h3 {
-  color: #800000;
-  margin-bottom: 5px;
-  font-size: 1.1rem;
-}
-.team-card p {
-  font-weight: bold;
-  color: #333;
+@keyframes fadeIn{
+  from{opacity:0;}
+  to{opacity:1;}
 }
 
-/* OTHER TEAM GRID */
-.other-team {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px,1fr));
-  gap: 40px;
-  margin-top: 60px;
-  align-items: start;
-}
-
-/* MODAL */
-.modal {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  pointer-events: none;
-  transition: 0.3s;
-  z-index: 100;
-}
-.modal.active {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.modal-content {
-  background: #fff;
-  color: #000;
-  padding: 30px;
-  border-radius: 15px;
-  max-width: 500px;
-  width: 90%;
-  text-align: left;
-  position: relative;
-  animation: popIn 0.4s ease forwards;
-}
-.modal-content h3 {
-  margin-bottom: 15px;
-  color: #800000;
-}
-.modal-content p {
-  margin-bottom: 10px;
-  color: #333;
-}
-.close-btn {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: #800000;
-}
-
-/* POP ANIMATION */
-@keyframes popIn {
-  0% { transform: scale(0.5); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-/* FOOTER */
-footer {
-  text-align: center;
-  padding: 20px;
-  background: rgba(0,0,0,0.8);
-  margin-top: 60px;
-  font-size: 14px;
-}
-
-/* RESPONSIVE */
-@media (max-width: 768px){
-  .team-card { width: 90%; }
-  .team-row { gap: 20px; }
-  .other-team { gap: 20px; }
+@keyframes fadeInDown{
+  from{opacity:0;transform:translateY(-30px);}
+  to{opacity:1;transform:translateY(0);}
 }
 </style>
 </head>
+
 <body>
 
 <div class="clouds"></div>
 
 <header>
   <a href="index.html" class="brand">Customer Success Management</a>
+
   <nav>
     <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html" class="active">Team</a></li>
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="about.html">Staff</a></li>
       <li><a href="courses.html">Courses</a></li>
       <li><a href="assignments.html">University</a></li>
       <li><a href="game.html">Games</a></li>
@@ -248,150 +137,22 @@ footer {
   </nav>
 </header>
 
-<main class="container">
-  <!-- Section title -->
-  <div class="section-title">
-    <h2>Customer Success Team Gallery</h2>
-    <p>Leaders, Executive Assistants & Team Members</p>
-  </div>
+<section class="hero">
+  <h1>Welcome to Customer Success Management</h1>
+  <p>
+    Learn. Apply. Grow. Master customer retention, onboarding systems,
+    lifecycle management, and enterprise-level client success strategies.
+  </p>
 
-  <!-- LEADERS + ASSISTANTS -->
-  <div class="team-hierarchy">
-    <div class="team-row">
-      <div class="team-card" data-bio="Niccole Peeler has 10 years in client success leadership.">
-        <img src="images/trainer1.jpg" alt="Niccole Peeler">
-        <h3>Niccole Peeler</h3>
-        <p>Customer Success Director</p>
-      </div>
-      <div class="team-card" data-bio="Alicia Almanza is a top-tier Customer Success Manager.">
-        <img src="images/trainer2.jpg" alt="Alicia Almanza">
-        <h3>Alicia Almanza</h3>
-        <p>Customer Success Manager</p>
-      </div>
-      <div class="team-card" data-bio="Karla Jardeloza leads insurance training for staff.">
-        <img src="images/trainer3.jpg" alt="Karla Jardeloza">
-        <h3>Karla Jardeloza</h3>
-        <p>Insurance Training Director</p>
-      </div>
-    </div>
-    <div class="team-row">
-      <div class="team-card" data-bio="Gell Berona supports Niccole Peeler as Executive Assistant.">
-        <img src="images/trainer4.jpg" alt="Gell Berona">
-        <h3>Gell Berona</h3>
-        <p>Executive Assistant</p>
-      </div>
-      <div class="team-card" data-bio="Ademar Toleran Jr supports Alicia Almanza as Executive Assistant.">
-        <img src="images/trainer5.jpg" alt="Ademar Toleran Jr">
-        <h3>Ademar Toleran Jr</h3>
-        <p>Executive Assistant</p>
-      </div>
-      <div class="team-card" data-bio="Allyza Lyle Alcomendras supports Karla Jardeloza as Executive Assistant.">
-        <img src="images/trainer6.jpg" alt="Allyza Lyle Alcomendras">
-        <h3>Allyza Lyle Alcomendras</h3>
-        <p>Executive Assistant</p>
-      </div>
-    </div>
+  <div class="buttons">
+    <a href="courses.html" class="btn btn-red">Start Learning</a>
+    <a href="about.html" class="btn btn-black">Meet Our Staff</a>
   </div>
-
-  <!-- OTHER TEAM MEMBERS -->
-  <div class="section-title" style="margin-top:60px;">
-    <h2>Trainers & Team Leaders</h2>
-    <p>Meet the rest of our Customer Success Team</p>
-  </div>
-  <div class="other-team">
-    <div class="team-card" data-bio="Jonas Rosauro is an experienced Insurance Trainer.">
-      <img src="images/trainer7.jpg" alt="Jonas Rosauro">
-      <h3>Jonas Rosauro</h3>
-      <p>Insurance Trainer</p>
-    </div>
-    <div class="team-card" data-bio="Au Sagarino is a skilled Insurance Trainer focusing on product knowledge.">
-      <img src="images/trainer8.jpg" alt="Au Sagarino">
-      <h3>Au Sagarino</h3>
-      <p>Insurance Trainer</p>
-    </div>
-    <div class="team-card" data-bio="Kyle Mejares provides hands-on support for client services.">
-      <img src="images/trainer9.jpg" alt="Kyle Mejares">
-      <h3>Kyle Mejares</h3>
-      <p>Insurance Trainer</p>
-    </div>
-    <div class="team-card" data-bio="Alchanie Ay-ad Mancia specializes in policy knowledge and staff coaching.">
-      <img src="images/trainer10.jpg" alt="Alchanie Ay-ad Mancia">
-      <h3>Alchanie Ay-ad Mancia</h3>
-      <p>Insurance Trainer</p>
-    </div>
-    <div class="team-card" data-bio="Martin Salcedo leads his team with customer service excellence.">
-      <img src="images/trainer11.jpg" alt="Martin Salcedo">
-      <h3>Martin Salcedo</h3>
-      <p>Team Leader</p>
-    </div>
-    <div class="team-card" data-bio="Edmar Quirante ensures operational efficiency and mentors team members.">
-      <img src="images/trainer12.jpg" alt="Edmar Quirante">
-      <h3>Edmar Quirante</h3>
-      <p>Team Leader</p>
-    </div>
-    <div class="team-card" data-bio="Ferdinand Alvarez Jr. specializes in client engagement and staff coaching.">
-      <img src="images/trainer13.jpg" alt="Ferdinand Alvarez Jr.">
-      <h3>Ferdinand Alvarez Jr.</h3>
-      <p>Team Leader</p>
-    </div>
-    <div class="team-card" data-bio="Rezyl Jane Regondon manages client success initiatives and mentoring.">
-      <img src="images/trainer14.jpg" alt="Rezyl Jane Regondon">
-      <h3>Rezyl Jane Regondon</h3>
-      <p>Team Leader</p>
-    </div>
-    <div class="team-card" data-bio="Final Team Leader overseeing strategic initiatives.">
-      <img src="images/trainer15.jpg" alt="Team Leader">
-      <h3>Team Leader</h3>
-      <p>Team Leader</p>
-    </div>
-  </div>
-
-</main>
+</section>
 
 <footer>
   © 2025 Customer Success Management. All Rights Reserved.
 </footer>
-
-<!-- MODAL -->
-<div class="modal" id="bioModal">
-  <div class="modal-content">
-    <span class="close-btn" id="closeModal">&times;</span>
-    <h3 id="modalName"></h3>
-    <p id="modalTitle"></p>
-    <p id="modalBio"></p>
-  </div>
-</div>
-
-<script>
-// Reveal cards on scroll
-function revealCards() {
-  document.querySelectorAll('.team-card').forEach(card => {
-    const rect = card.getBoundingClientRect();
-    if(rect.top < window.innerHeight - 100) card.classList.add('visible');
-  });
-}
-window.addEventListener('scroll', revealCards);
-window.addEventListener('load', revealCards);
-
-// Modal popup
-const modal = document.getElementById('bioModal');
-const modalName = document.getElementById('modalName');
-const modalTitle = document.getElementById('modalTitle');
-const modalBio = document.getElementById('modalBio');
-const closeModal = document.getElementById('closeModal');
-
-document.querySelectorAll('.team-card').forEach(card => {
-  card.addEventListener('click', () => {
-    modal.classList.add('active');
-    modalName.textContent = card.querySelector('h3').textContent;
-    modalTitle.textContent = card.querySelector('p').textContent;
-    modalBio.textContent = card.dataset.bio;
-  });
-});
-
-closeModal.addEventListener('click', () => modal.classList.remove('active'));
-modal.addEventListener('click', e => { if(e.target === modal) modal.classList.remove('active'); });
-</script>
 
 </body>
 </html>
