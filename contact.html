@@ -1,190 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Contact • LAVA Classroom</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Contact • LAVA Classroom</title>
+<link rel="stylesheet" href="style.css" />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
-  <style>
-    /* Floating Labels */
-    .form-group {
-      position: relative;
-      margin-top: 20px;
-    }
+<style>
+/* Floating label styling */
+.form-group {
+  position:relative;
+  margin-top:20px;
+}
+.form-group input,
+.form-group textarea {
+  width:100%;
+  padding:14px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,0.1);
+  background:rgba(255,255,255,0.02);
+  outline:none;
+  color:var(--white);
+  transition:0.3s;
+}
+.form-group label {
+  position:absolute;
+  left:14px;
+  top:14px;
+  color:var(--muted);
+  pointer-events:none;
+  transition:0.3s;
+}
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color:#ff3c3c;
+  box-shadow:0 0 15px rgba(255,60,60,0.4);
+}
+.form-group input:focus + label,
+.form-group input:not(:placeholder-shown) + label,
+.form-group textarea:focus + label,
+.form-group textarea:not(:placeholder-shown) + label {
+  top:-8px;
+  left:10px;
+  font-size:12px;
+  color:#ff3c3c;
+  background:var(--dark);
+  padding:0 6px;
+  border-radius:4px;
+}
 
-    .form-group input,
-    .form-group textarea {
-      width: 100%;
-      padding: 14px;
-      border-radius: 10px;
-      border: 1px solid rgba(255,255,255,0.1);
-      background: rgba(255,255,255,0.02);
-      color: var(--white);
-      outline: none;
-      transition: 0.3s ease;
-    }
+/* Success Banner */
+.success-banner {
+  margin-top:18px;
+  padding:12px;
+  border-radius:8px;
+  background:linear-gradient(90deg,#ff3c3c,#ff6a6a);
+  color:white;
+  text-align:center;
+  opacity:0;
+  transform:translateY(10px);
+  transition:0.4s ease;
+}
+.success-banner.show {
+  opacity:1;
+  transform:translateY(0);
+}
 
-    .form-group label {
-      position: absolute;
-      left: 14px;
-      top: 14px;
-      color: var(--muted);
-      pointer-events: none;
-      transition: 0.3s ease;
-      background: transparent;
-    }
+/* Fancy button hover */
+.btn-red {
+  position:relative;
+  overflow:hidden;
+}
+.btn-red::after {
+  content:"";
+  position:absolute;
+  width:0;
+  height:100%;
+  left:0; top:0;
+  background:rgba(255,255,255,0.15);
+  transition:0.4s ease;
+}
+.btn-red:hover::after {
+  width:100%;
+}
+</style>
 
-    .form-group input:focus,
-    .form-group textarea:focus {
-      border-color: #ff3c3c;
-      box-shadow: 0 0 15px rgba(255,60,60,0.4);
-    }
-
-    .form-group input:focus + label,
-    .form-group input:not(:placeholder-shown) + label,
-    .form-group textarea:focus + label,
-    .form-group textarea:not(:placeholder-shown) + label {
-      top: -8px;
-      left: 10px;
-      font-size: 12px;
-      color: #ff3c3c;
-      background: var(--dark);
-      padding: 0 6px;
-      border-radius: 4px;
-    }
-
-    /* Success popup */
-    .success-popup {
-      margin-top: 15px;
-      padding: 12px;
-      border-radius: 8px;
-      background: linear-gradient(90deg,#ff3c3c,#ff6a6a);
-      color: white;
-      text-align: center;
-      opacity: 0;
-      transform: translateY(10px);
-      transition: 0.4s ease;
-    }
-
-    .success-popup.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Button hover animation */
-    .btn-red {
-      position: relative;
-      overflow: hidden;
-    }
-
-    .btn-red::after {
-      content: "";
-      position: absolute;
-      width: 0;
-      height: 100%;
-      left: 0;
-      top: 0;
-      background: rgba(255,255,255,0.1);
-      transition: 0.4s ease;
-    }
-
-    .btn-red:hover::after {
-      width: 100%;
-    }
-  </style>
 </head>
-
 <body>
-  <header class="site-header">
-    <div class="header-inner container">
-      <a class="brand" href="index.html"><span class="logo-square"></span> LAVA Classroom</a>
 
-      <nav class="main-nav" id="mainNavContact">
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="courses.html">Courses</a></li>
-          <li><a href="assignments.html">Assignments</a></li>
-          <li><a href="contact.html" class="active">Contact</a></li>
-        </ul>
-      </nav>
+<header class="site-header">
+  <div class="header-inner container">
+    <a class="brand" href="index.html">LAVA Classroom</a>
+    <nav class="main-nav" id="mainNavContact">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="courses.html">Courses</a></li>
+        <li><a href="assignments.html">Assignments</a></li>
+        <li><a href="game.html">Games</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+      </ul>
+    </nav>
 
-      <button id="navToggleContact" class="nav-toggle" aria-expanded="false" aria-controls="mainNavContact">
-        <span class="hamburger"></span>
-      </button>
+    <button id="navToggleContact" class="nav-toggle" aria-expanded="false" aria-controls="mainNavContact">
+      <span class="hamburger"></span>
+    </button>
+  </div>
+</header>
+
+<main class="container content" style="padding-top:80px;">
+  <h1 class="section-title reveal">Contact & Feedback</h1>
+  <p class="lead reveal delay-1">
+    Questions, suggestions, or trainer notes? Send a message and we’ll get back to you.
+  </p>
+
+  <!-- Netlify form -->
+  <form 
+    name="contact"
+    method="POST" 
+    data-netlify="true"
+    class="card reveal delay-2"
+    id="contactForm">
+
+    <input type="hidden" name="form-name" value="contact">
+
+    <div class="form-group">
+      <input type="text" name="name" placeholder=" " required>
+      <label>Name</label>
     </div>
-  </header>
 
-  <main class="container content" style="padding-top:80px;">
-    <h1 class="section-title reveal">Contact & Feedback</h1>
-    <p class="lead reveal delay-1">Questions, suggestions, or trainer notes? Send a message and we'll get back to you.</p>
-
-    <!-- NETLIFY FORM -->
-    <form name="contact" method="POST" data-netlify="true" class="card reveal delay-2" id="contactForm">
-
-      <input type="hidden" name="form-name" value="contact" />
-
-      <div class="form-group">
-        <input type="text" name="name" placeholder=" " required>
-        <label>Name</label>
-      </div>
-
-      <div class="form-group">
-        <input type="email" name="email" placeholder=" " required>
-        <label>Email</label>
-      </div>
-
-      <div class="form-group">
-        <textarea name="message" rows="5" placeholder=" " required></textarea>
-        <label>Message</label>
-      </div>
-
-      <div style="margin-top:18px; display:flex; gap:12px;">
-        <button class="btn btn-red" type="submit">Send Message</button>
-        <button class="btn btn-black" type="reset">Reset</button>
-      </div>
-
-      <div id="successMessage" class="success-popup">
-        ✅ Thank you for submitting your message!
-      </div>
-
-    </form>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p>© 2025 LAVA Classroom</p>
+    <div class="form-group">
+      <input type="email" name="email" placeholder=" " required>
+      <label>Email</label>
     </div>
-  </footer>
 
-  <script>
-    document.getElementById('navToggleContact').addEventListener('click', function(){
-      const nav = document.getElementById('mainNavContact');
-      const expanded = this.getAttribute('aria-expanded') === 'true' || false;
-      this.setAttribute('aria-expanded', !expanded);
-      nav.classList.toggle('open');
+    <div class="form-group">
+      <textarea name="message" rows="5" placeholder=" " required></textarea>
+      <label>Message</label>
+    </div>
+
+    <div style="margin-top:18px; display:flex; gap:12px;">
+      <button class="btn btn-red" type="submit">Send Message</button>
+      <button class="btn btn-black" type="reset">Reset</button>
+    </div>
+
+    <div id="successMessage" class="success-banner">
+      🎉 Thank you — your message has been submitted!
+    </div>
+
+  </form>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>© 2025 LAVA Classroom</p>
+  </div>
+</footer>
+
+<script>
+  /* mobile nav toggle */
+  document.getElementById('navToggleContact').addEventListener('click', function() {
+    const nav = document.getElementById('mainNavContact');
+    const expanded = this.getAttribute('aria-expanded') === 'true' || false;
+    this.setAttribute('aria-expanded', !expanded);
+    nav.classList.toggle('open');
+  });
+
+  /* show success banner */
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    document.getElementById('successMessage').classList.add('show');
+  });
+
+  /* reveal on scroll */
+  function revealOnScroll() {
+    document.querySelectorAll('.reveal').forEach(el => {
+      const r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight - 80) el.classList.add('visible');
     });
+  }
+  window.addEventListener('load', revealOnScroll);
+  window.addEventListener('scroll', revealOnScroll);
+</script>
 
-    const form = document.getElementById('contactForm');
-    const successPopup = document.getElementById('successMessage');
-
-    form.addEventListener('submit', function(e){
-      successPopup.classList.add('show');
-      setTimeout(() => {
-        successPopup.classList.remove('show');
-      }, 4000);
-    });
-
-    function revealOnScroll(){
-      document.querySelectorAll('.reveal').forEach(el=>{
-        const r = el.getBoundingClientRect();
-        if(r.top < window.innerHeight - 80) el.classList.add('visible');
-      });
-    }
-    window.addEventListener('load', revealOnScroll);
-    window.addEventListener('scroll', revealOnScroll);
-  </script>
 </body>
 </html>
