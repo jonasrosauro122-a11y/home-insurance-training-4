@@ -5,144 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Customer Success Management</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-
-<style>
-* {margin:0; padding:0; box-sizing:border-box;}
-body {
-  font-family:'Poppins',sans-serif;
-  color:#fff;
-  background: linear-gradient(rgba(120,0,0,0.7),rgba(0,0,0,0.9)), url('images/lava-bg.png') center/cover no-repeat fixed;
-  overflow-x:hidden;
-}
-
-/* CLOUD ANIMATION */
-.clouds {
-  position:absolute; top:0; left:0; width:200%; height:200%;
-  background:url('images/clouds.png') repeat;
-  background-size:contain;
-  opacity:0.1;
-  animation:cloudMove 120s linear infinite;
-  pointer-events:none;
-  z-index:1;
-}
-@keyframes cloudMove {
-  0% {transform:translateX(0);}
-  100% {transform:translateX(-50%);}
-}
-
-/* HEADER */
-header {
-  position:sticky; top:0; z-index:50;
-  display:flex; justify-content:space-between; align-items:center;
-  padding:1rem 2rem;
-  background:rgba(0,0,0,0.7);
-  backdrop-filter:blur(5px);
-}
-.brand {
-  font-size:1.6rem;
-  font-weight:700;
-  text-decoration:none;
-  color:#fff;
-}
-nav ul {display:flex; list-style:none; gap:20px;}
-nav a {
-  color:#fff; text-decoration:none;
-  padding:6px 12px; border-radius:5px;
-  transition:0.3s;
-}
-nav a:hover, nav a.active {
-  background:#ff1f1f;
-  transform:scale(1.05);
-}
-
-/* HERO */
-.hero {
-  text-align:center;
-  padding:8rem 2rem 5rem;
-  min-height:60vh;
-  position:relative;
-  z-index:2;
-}
-.hero h1 {
-  font-size:3rem;
-  margin-bottom:1rem;
-  opacity:0;
-  transform:translateY(-30px);
-  transition:all 1s ease-out;
-}
-.hero p {
-  max-width:700px;
-  margin:0 auto 2rem;
-  color:#ddd;
-  line-height:1.6;
-  opacity:0;
-  transform:translateY(-20px);
-  transition:all 1s ease-out 0.2s;
-}
-.buttons {
-  display:flex;
-  justify-content:center;
-  gap:20px;
-  opacity:0;
-  transform:translateY(20px);
-  transition:all 1s ease-out 0.4s;
-}
-.btn {
-  padding:12px 30px;
-  border-radius:50px;
-  text-decoration:none;
-  font-weight:600;
-  transition:0.3s;
-}
-.btn-red {background:#e50914; color:#fff;}
-.btn-red:hover {background:#ff1f1f; transform:scale(1.05);}
-.btn-black {background:#111; color:#fff;}
-.btn-black:hover {background:#333; transform:scale(1.05);}
-
-/* MAIN CONTENT */
-.main-content {
-  max-width:1000px;
-  margin:3rem auto;
-  padding:2rem;
-  background:rgba(0,0,0,0.6);
-  border-radius:15px;
-  font-family:'Roboto',sans-serif;
-  line-height:1.8;
-}
-.main-content h2,
-.main-content h3,
-.main-content p,
-.main-content ul {
-  opacity:0;
-  transform:translateY(30px);
-  transition:all 1s ease-out;
-}
-.main-content h2 {color:#ff1f1f; margin-bottom:1rem; font-weight:700;}
-.main-content h3 {color:#fff; margin-top:1.5rem; margin-bottom:0.5rem;}
-.main-content ul {list-style:disc inside; margin-bottom:1rem;}
-
-/* FOOTER */
-footer {
-  text-align:center;
-  padding:30px;
-  background:#111;
-  color:#bbb;
-  font-size:0.9rem;
-}
-
-/* RESPONSIVENESS */
-@media(max-width:768px){
-  .hero h1 {font-size:2.2rem;}
-  nav ul {flex-direction:column; gap:10px;}
-  .buttons {flex-direction:column;}
-}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
+<!-- CLOUDS -->
 <div class="clouds" aria-hidden="true"></div>
 
+<!-- HEADER -->
 <header>
   <a href="index.html" class="brand">Customer Success Management</a>
   <nav>
@@ -156,6 +26,7 @@ footer {
   </nav>
 </header>
 
+<!-- HERO -->
 <section class="hero">
   <h1>Welcome to Customer Success Management Team</h1>
   <p>
@@ -168,6 +39,7 @@ footer {
   </div>
 </section>
 
+<!-- MAIN CONTENT -->
 <section class="main-content">
   <h2>Customer Success Team</h2>
   <p><strong>Team expectations:</strong> The role of Customer Success (CS) is to ensure that clients achieve their desired outcomes while using Lava’s products or services, ultimately leading to retention, satisfaction, and growth.</p>
@@ -195,29 +67,69 @@ footer {
   </ul>
 </section>
 
+<!-- TEAM CARDS -->
+<section class="main-content">
+  <h2>Meet Our Team</h2>
+  <div class="team-grid">
+    <!-- Example team card -->
+    <div class="team-card" data-bio="Niccole Peeler has 10 years in client success leadership.">
+      <img src="images/trainer1.jpg" alt="Niccole Peeler">
+      <h3>Niccole Peeler</h3>
+      <p>Customer Success Director</p>
+    </div>
+    <!-- Add all other team cards here -->
+  </div>
+</section>
+
+<!-- FOOTER -->
 <footer>
   © 2025 Customer Success Management. All Rights Reserved.
 </footer>
 
+<!-- MODAL -->
+<div class="modal" id="bioModal">
+  <div class="modal-content">
+    <span class="close-btn" id="closeModal">&times;</span>
+    <h3 id="modalName"></h3>
+    <p id="modalTitle"></p>
+    <p id="modalBio"></p>
+  </div>
+</div>
+
+<!-- SCRIPT -->
 <script>
-// Scroll-triggered fade-up animation
-const animateItems = document.querySelectorAll('.hero h1, .hero p, .buttons, .main-content h2, .main-content h3, .main-content p, .main-content ul');
+// Scroll-triggered animations
+const animateItems = document.querySelectorAll('.hero h1, .hero p, .buttons, .main-content h2, .main-content h3, .main-content p, .main-content ul, .team-card');
 
 function animateOnScroll() {
   const triggerBottom = window.innerHeight / 1.1;
-
   animateItems.forEach(item => {
     const itemTop = item.getBoundingClientRect().top;
-
-    if(itemTop < triggerBottom) {
-      item.style.opacity = '1';
-      item.style.transform = 'translateY(0)';
+    if(itemTop < triggerBottom){
+      item.classList.add('visible');
     }
   });
 }
-
 window.addEventListener('scroll', animateOnScroll);
 window.addEventListener('load', animateOnScroll);
+
+// Modal popup
+const modal = document.getElementById('bioModal');
+const modalName = document.getElementById('modalName');
+const modalTitle = document.getElementById('modalTitle');
+const modalBio = document.getElementById('modalBio');
+const closeModal = document.getElementById('closeModal');
+
+document.querySelectorAll('.team-card').forEach(card=>{
+  card.addEventListener('click',()=>{
+    modal.classList.add('active');
+    modalName.textContent = card.querySelector('h3').textContent;
+    modalTitle.textContent = card.querySelector('p').textContent;
+    modalBio.textContent = card.dataset.bio;
+  });
+});
+closeModal.addEventListener('click',()=> modal.classList.remove('active'));
+modal.addEventListener('click',(e)=>{ if(e.target === modal) modal.classList.remove('active'); });
 </script>
 
 </body>
