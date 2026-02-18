@@ -5,7 +5,7 @@ body {
   font-family:'Poppins',sans-serif;
   color:#fff;
   /* FIXED BACKGROUND IMAGE WITHOUT FADE */
-  background: url('images/lava-bg.png') center/cover no-repeat fixed;
+  background: url('images/red-gradient-bg.jpg') center/cover no-repeat fixed;
   background-size: cover;
   background-position: center;
   overflow-x:hidden;
@@ -146,3 +146,4 @@ footer { text-align:center; padding:30px; background:#111; color:#bbb; font-size
   .team-card { margin:10px 0; }
   .team-card img { height:200px; }
 }
+
