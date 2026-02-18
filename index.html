@@ -28,17 +28,101 @@
 
 <!-- HERO -->
 <section class="hero">
-  <h1>Welcome to Customer Success Management Team</h1>
+  <h1>Welcome to <span class="highlight">Customer Success Management Team</span></h1>
   <p>
-The Customer Success Team is responsible for managing client relationships post-sale, supporting the successful adoption of Lava services,
-and maintaining long-term account health. The team serves as a central coordination point between clients, internal departments, 
-and Virtual Assistants to ensure services are delivered in alignment with Lava standards and SOC-aligned practices.
+    The <strong>Customer Success Team</strong> is responsible for managing client relationships post-sale,
+    supporting the successful adoption of Lava services, and maintaining long-term account health. 
+    Serving as a central coordination point between clients, internal departments, and Virtual Assistants,
+    we ensure services are delivered in alignment with <strong>Lava standards</strong> and SOC-aligned practices.
   </p>
   <div class="buttons">
     <a href="classroom.html" class="btn btn-red">Start Learning</a>
     <a href="about.html" class="btn btn-black">Meet Our Team</a>
   </div>
 </section>
+
+<style>
+/* HERO SECTION STYLING */
+.hero {
+  text-align: center;
+  padding: 120px 20px 80px;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  position: relative;
+  z-index: 5;
+  animation: fadeIn 1.2s ease forwards;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 20px;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: slideFade 1s forwards 0.2s;
+}
+
+.hero h1 .highlight {
+  background: linear-gradient(90deg, #e50914, #ff7f50);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  max-width: 850px;
+  margin: 0 auto 30px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideFade 1s forwards 0.5s;
+}
+
+.hero .buttons {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideFade 1s forwards 0.8s;
+}
+
+/* BUTTONS */
+.btn {
+  text-decoration: none;
+  padding: 12px 28px;
+  font-weight: 600;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  font-size: 1.05rem;
+}
+.btn-red {
+  background: #e50914;
+  color: #fff;
+}
+.btn-red:hover {
+  background: #ff7f50;
+  transform: scale(1.05);
+}
+.btn-black {
+  background: #000;
+  color: #fff;
+}
+.btn-black:hover {
+  background: #333;
+  transform: scale(1.05);
+}
+
+/* ANIMATION */
+@keyframes slideFade {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+</style>
 
 <!-- MAIN CONTENT SECTIONS -->
 <section class="main-content-section">
@@ -159,4 +243,5 @@ modal.addEventListener('click',(e)=>{ if(e.target === modal) modal.classList.rem
 
 </body>
 </html>
+
 
