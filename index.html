@@ -34,19 +34,22 @@
     lifecycle management, and enterprise-level client success strategies.
   </p>
   <div class="buttons">
-    <a href="courses.html" class="btn btn-red">Start Learning</a>
+    <a href="classroom.html" class="btn btn-red">Start Learning</a>
     <a href="about.html" class="btn btn-black">Meet Our Team</a>
   </div>
 </section>
 
-<!-- MAIN CONTENT -->
+<!-- MAIN CONTENT SECTIONS -->
 <section class="main-content-section">
+
+  <!-- TEAM EXPECTATIONS -->
   <div class="content-card">
     <h2>Team Expectations</h2>
     <p><strong>Team expectations:</strong> The role of Customer Success (CS) is to ensure that clients achieve their desired outcomes while using Lava’s products or services, ultimately leading to retention, satisfaction, and growth.</p>
     <p>It’s proactive, not reactive. Unlike customer support, which solves problems when they arise, Customer Success focuses on preventing issues and driving long-term value. Long-term value is achieved by aligning expectations and delivering results through training and coaching.</p>
   </div>
 
+  <!-- TEAM ROLES -->
   <div class="content-card">
     <h2>Team Roles</h2>
     <ul>
@@ -57,13 +60,16 @@
     </ul>
   </div>
 
+  <!-- ONBOARDING -->
   <div class="content-card">
     <h2>Onboarding</h2>
     <p>During onboarding, we prioritize alignment. We walk clients through our strategic plan for the year so there is clear visibility into VA development, support, and growth.</p>
     <p>Expectations are clearly defined for both sides: training support, performance monitoring, accountability, optimization guidance from us; and clear direction, timely feedback, system access, and defined priorities from the client.</p>
     <p>Ground rules on communication, performance standards, and collaboration are set from day one. VAs are reminded of three critical tasks they must never do: solicit insurance advice, bind a policy, and do premium-bearing changes.</p>
+    <p>We review required materials, workflows, and system access to ensure VAs are fully equipped for success. This structure prevents misalignment and sets the foundation for long-term growth.</p>
   </div>
 
+  <!-- ENDORSEMENTS -->
   <div class="content-card">
     <h2>Endorsements</h2>
     <ul>
@@ -72,17 +78,28 @@
       <li>Issues within the Agency: AM meeting with client, VA intends to quit, TL coaching, endorsement to AM for possible client meeting, VA performance issues handled via coaching, PIP, or IR escalation.</li>
     </ul>
   </div>
+
 </section>
 
 <!-- TEAM CARDS -->
-<section class="main-content">
+<section class="main-content-section">
   <h2>Meet Our Team</h2>
   <div class="team-grid">
-    <!-- Example team card -->
+    <!-- Example team cards -->
     <div class="team-card" data-bio="Niccole Peeler has 10 years in client success leadership.">
       <img src="images/trainer1.jpg" alt="Niccole Peeler">
       <h3>Niccole Peeler</h3>
       <p>Customer Success Director</p>
+    </div>
+    <div class="team-card" data-bio="Alicia Almanza is a top-tier Customer Success Manager.">
+      <img src="images/trainer2.jpg" alt="Alicia Almanza">
+      <h3>Alicia Almanza</h3>
+      <p>Customer Success Manager</p>
+    </div>
+    <div class="team-card" data-bio="Karla Jardeloza leads insurance training.">
+      <img src="images/trainer3.jpg" alt="Karla Jardeloza">
+      <h3>Karla Jardeloza</h3>
+      <p>Insurance Training Director</p>
     </div>
     <!-- Add all other team cards here -->
   </div>
@@ -106,7 +123,7 @@
 <!-- SCRIPT -->
 <script>
 // Scroll-triggered animations
-const animateItems = document.querySelectorAll('.hero h1, .hero p, .buttons, .main-content h2, .main-content h3, .main-content p, .main-content ul, .team-card');
+const animateItems = document.querySelectorAll('.hero h1, .hero p, .buttons, .main-content-section h2, .main-content-section h3, .main-content-section p, .main-content-section ul, .content-card, .team-card');
 
 function animateOnScroll() {
   const triggerBottom = window.innerHeight / 1.1;
@@ -141,4 +158,3 @@ modal.addEventListener('click',(e)=>{ if(e.target === modal) modal.classList.rem
 
 </body>
 </html>
-
