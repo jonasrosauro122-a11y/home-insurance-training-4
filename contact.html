@@ -6,45 +6,150 @@
   <title>Contact • LAVA Classroom</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Floating Labels */
+    .form-group {
+      position: relative;
+      margin-top: 20px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 14px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.02);
+      color: var(--white);
+      outline: none;
+      transition: 0.3s ease;
+    }
+
+    .form-group label {
+      position: absolute;
+      left: 14px;
+      top: 14px;
+      color: var(--muted);
+      pointer-events: none;
+      transition: 0.3s ease;
+      background: transparent;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: #ff3c3c;
+      box-shadow: 0 0 15px rgba(255,60,60,0.4);
+    }
+
+    .form-group input:focus + label,
+    .form-group input:not(:placeholder-shown) + label,
+    .form-group textarea:focus + label,
+    .form-group textarea:not(:placeholder-shown) + label {
+      top: -8px;
+      left: 10px;
+      font-size: 12px;
+      color: #ff3c3c;
+      background: var(--dark);
+      padding: 0 6px;
+      border-radius: 4px;
+    }
+
+    /* Success popup */
+    .success-popup {
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 8px;
+      background: linear-gradient(90deg,#ff3c3c,#ff6a6a);
+      color: white;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: 0.4s ease;
+    }
+
+    .success-popup.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Button hover animation */
+    .btn-red {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-red::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 100%;
+      left: 0;
+      top: 0;
+      background: rgba(255,255,255,0.1);
+      transition: 0.4s ease;
+    }
+
+    .btn-red:hover::after {
+      width: 100%;
+    }
+  </style>
 </head>
+
 <body>
   <header class="site-header">
     <div class="header-inner container">
       <a class="brand" href="index.html"><span class="logo-square"></span> LAVA Classroom</a>
+
       <nav class="main-nav" id="mainNavContact">
-  <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="courses.html">Courses</a></li>
-    <li><a href="assignments.html">Assignments</a></li>
-    <li><a href="game.html">Games</a></li>
-    <li><a href="contact.html" class="active">Contact</a></li>
-  </ul>
-</nav>
-      <button id="navToggleContact" class="nav-toggle" aria-expanded="false" aria-controls="mainNavContact"><span class="hamburger"></span></button>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="courses.html">Courses</a></li>
+          <li><a href="assignments.html">Assignments</a></li>
+          <li><a href="contact.html" class="active">Contact</a></li>
+        </ul>
+      </nav>
+
+      <button id="navToggleContact" class="nav-toggle" aria-expanded="false" aria-controls="mainNavContact">
+        <span class="hamburger"></span>
+      </button>
     </div>
   </header>
 
-  <main class="container content" style="padding-top:60px;">
+  <main class="container content" style="padding-top:80px;">
     <h1 class="section-title reveal">Contact & Feedback</h1>
     <p class="lead reveal delay-1">Questions, suggestions, or trainer notes? Send a message and we'll get back to you.</p>
 
-    <form class="card reveal delay-2" id="contactForm" style="margin-top:18px;" onsubmit="handleContact(event)">
-      <label for="name">Name</label>
-      <input id="name" name="name" required placeholder="Your name" style="width:100%; padding:10px; border-radius:8px; margin-top:8px; border:1px solid rgba(255,255,255,0.06); background:transparent; color:var(--white)">
+    <!-- NETLIFY FORM -->
+    <form name="contact" method="POST" data-netlify="true" class="card reveal delay-2" id="contactForm">
 
-      <label for="email" style="margin-top:12px;">Email</label>
-      <input id="email" name="email" type="email" required placeholder="you@example.com" style="width:100%; padding:10px; border-radius:8px; margin-top:8px; border:1px solid rgba(255,255,255,0.06); background:transparent; color:var(--white)">
+      <input type="hidden" name="form-name" value="contact" />
 
-      <label for="message" style="margin-top:12px;">Message</label>
-      <textarea id="message" name="message" rows="5" required placeholder="Your message..." style="width:100%; padding:10px; border-radius:8px; margin-top:8px; border:1px solid rgba(255,255,255,0.06); background:transparent; color:var(--white)"></textarea>
+      <div class="form-group">
+        <input type="text" name="name" placeholder=" " required>
+        <label>Name</label>
+      </div>
 
-      <div style="margin-top:12px; display:flex; gap:12px;">
+      <div class="form-group">
+        <input type="email" name="email" placeholder=" " required>
+        <label>Email</label>
+      </div>
+
+      <div class="form-group">
+        <textarea name="message" rows="5" placeholder=" " required></textarea>
+        <label>Message</label>
+      </div>
+
+      <div style="margin-top:18px; display:flex; gap:12px;">
         <button class="btn btn-red" type="submit">Send Message</button>
         <button class="btn btn-black" type="reset">Reset</button>
       </div>
 
-      <p id="contactStatus" style="color:var(--muted); margin-top:10px;"></p>
+      <div id="successMessage" class="success-popup">
+        ✅ Thank you for submitting your message!
+      </div>
+
     </form>
   </main>
 
@@ -62,12 +167,15 @@
       nav.classList.toggle('open');
     });
 
-    function handleContact(e){
-      e.preventDefault();
-      const status = document.getElementById('contactStatus');
-      status.textContent = 'Thanks — your message was captured (demo).';
-      e.target.reset();
-    }
+    const form = document.getElementById('contactForm');
+    const successPopup = document.getElementById('successMessage');
+
+    form.addEventListener('submit', function(e){
+      successPopup.classList.add('show');
+      setTimeout(() => {
+        successPopup.classList.remove('show');
+      }, 4000);
+    });
 
     function revealOnScroll(){
       document.querySelectorAll('.reveal').forEach(el=>{
@@ -80,4 +188,3 @@
   </script>
 </body>
 </html>
-
