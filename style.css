@@ -1,9 +1,13 @@
 /* ===================== GLOBAL ===================== */
 * { margin:0; padding:0; box-sizing:border-box; }
+
 body {
   font-family:'Poppins',sans-serif;
   color:#fff;
-  background: linear-gradient(rgba(120,0,0,0.7),rgba(0,0,0,0.9)), url('images/lava-bg.png') center/cover no-repeat fixed;
+  /* FIXED BACKGROUND IMAGE WITHOUT FADE */
+  background: url('images/lava-bg.png') center/cover no-repeat fixed;
+  background-size: cover;
+  background-position: center;
   overflow-x:hidden;
 }
 
@@ -27,8 +31,9 @@ header {
   position:sticky; top:0; z-index:50;
   display:flex; justify-content:space-between; align-items:center;
   padding:1rem 2rem;
-  background:rgba(0,0,0,0.7);
-  backdrop-filter:blur(5px);
+  /* SOLID HEADER BACKGROUND TO PREVENT FADING */
+  background:#111; 
+  /* remove backdrop-filter blur to keep color solid */
 }
 .brand { font-size:1.6rem; font-weight:700; text-decoration:none; color:#fff; }
 nav ul { display:flex; list-style:none; gap:20px; }
@@ -70,8 +75,9 @@ nav a:hover, nav a.active { background:#ff1f1f; transform:scale(1.05); }
   gap:2.5rem;
 }
 
+/* Use STRONGER opacity so background doesn't show through */
 .content-card {
-  background: rgba(0,0,0,0.6);
+  background: rgba(0,0,0,0.85);
   padding:2rem;
   border-radius:15px;
   box-shadow:0 8px 20px rgba(0,0,0,0.3);
@@ -85,25 +91,10 @@ nav a:hover, nav a.active { background:#ff1f1f; transform:scale(1.05); }
   transform:translateY(0);
 }
 
-.content-card h2 {
-  color:#ff1f1f;
-  margin-bottom:1rem;
-}
-
-.content-card h3 {
-  color:#fff;
-  margin-top:1rem;
-  margin-bottom:0.5rem;
-}
-
-.content-card p, .content-card ul {
-  color:#fff;
-  line-height:1.6;
-}
-
-.content-card ul {
-  list-style:disc inside;
-}
+.content-card h2 { color:#ff1f1f; margin-bottom:1rem; }
+.content-card h3 { color:#fff; margin-top:1rem; margin-bottom:0.5rem; }
+.content-card p, .content-card ul { color:#fff; line-height:1.6; }
+.content-card ul { list-style:disc inside; }
 
 /* ===================== TEAM CARDS ===================== */
 .team-grid { display:flex; flex-wrap:wrap; justify-content:center; }
@@ -113,24 +104,21 @@ nav a:hover, nav a.active { background:#ff1f1f; transform:scale(1.05); }
   transition: all 0.8s ease-out;
   cursor:pointer;
   border-radius:10px;
-  background:rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.85);
   padding:15px;
   text-align:center;
   margin:15px;
   box-shadow:0 4px 15px rgba(0,0,0,0.3);
 }
 .team-card.visible { opacity:1; transform:translateY(0); }
-
-/* FIXED IMAGE SIZE FOR UNIFORMITY */
 .team-card img {
-  width:100%;           /* fill card width */
-  height:250px;         /* fixed height */
-  object-fit:cover;     /* crops nicely without distortion */
+  width:100%;
+  height:250px;
+  object-fit:cover;
   border-radius:10px;
   margin-bottom:10px;
   transition: transform 0.3s;
 }
-
 .team-card:hover img { transform:scale(1.05); }
 .team-card:hover { transform:translateY(-5px); }
 
@@ -156,5 +144,5 @@ footer { text-align:center; padding:30px; background:#111; color:#bbb; font-size
   nav ul { flex-direction:column; gap:10px; }
   .buttons { flex-direction:column; }
   .team-card { margin:10px 0; }
-  .team-card img { height:200px; } /* smaller on mobile */
+  .team-card img { height:200px; }
 }
