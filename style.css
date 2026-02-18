@@ -1,4 +1,4 @@
-/* GLOBAL */
+/* ===================== GLOBAL ===================== */
 * { margin:0; padding:0; box-sizing:border-box; }
 body {
   font-family:'Poppins',sans-serif;
@@ -7,7 +7,7 @@ body {
   overflow-x:hidden;
 }
 
-/* CLOUD ANIMATION */
+/* ===================== CLOUD ANIMATION ===================== */
 .clouds {
   position:absolute; top:0; left:0; width:200%; height:200%;
   background:url('images/clouds.png') repeat;
@@ -22,7 +22,7 @@ body {
   100% {transform:translateX(-50%);}
 }
 
-/* HEADER */
+/* ===================== HEADER ===================== */
 header {
   position:sticky; top:0; z-index:50;
   display:flex; justify-content:space-between; align-items:center;
@@ -39,7 +39,7 @@ nav a {
 }
 nav a:hover, nav a.active { background:#ff1f1f; transform:scale(1.05); }
 
-/* HERO */
+/* ===================== HERO ===================== */
 .hero {
   text-align:center;
   padding:8rem 2rem 5rem;
@@ -60,23 +60,52 @@ nav a:hover, nav a.active { background:#ff1f1f; transform:scale(1.05); }
 .btn-black { background:#111; color:#fff; }
 .btn-black:hover { background:#333; transform:scale(1.05); }
 
-/* MAIN CONTENT */
-.main-content {
-  max-width:1000px; margin:3rem auto; padding:2rem;
-  background:rgba(0,0,0,0.6); border-radius:15px;
-  font-family:'Roboto',sans-serif; line-height:1.8;
+/* ===================== MAIN CONTENT (NEW CARDS) ===================== */
+.main-content-section {
+  max-width:1000px;
+  margin:3rem auto;
+  padding:0 1rem;
+  display:flex;
+  flex-direction:column;
+  gap:2.5rem; /* spacing between cards */
 }
-.main-content h2, .main-content h3, .main-content p, .main-content ul {
+
+.content-card {
+  background: rgba(0,0,0,0.6);
+  padding:2rem;
+  border-radius:15px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.3);
   opacity:0;
   transform:translateY(30px);
-  transition: all 1s ease-out;
+  transition: all 0.8s ease-out;
 }
-.main-content h2.visible, .main-content h3.visible, .main-content p.visible, .main-content ul.visible { opacity:1; transform:translateY(0); }
-.main-content h2 { color:#ff1f1f; margin-bottom:1rem; font-weight:700; }
-.main-content h3 { color:#fff; margin-top:1.5rem; margin-bottom:0.5rem; }
-.main-content ul { list-style:disc inside; margin-bottom:1rem; }
 
-/* TEAM CARDS */
+.content-card.visible {
+  opacity:1;
+  transform:translateY(0);
+}
+
+.content-card h2 {
+  color:#ff1f1f;
+  margin-bottom:1rem;
+}
+
+.content-card h3 {
+  color:#fff;
+  margin-top:1rem;
+  margin-bottom:0.5rem;
+}
+
+.content-card p, .content-card ul {
+  color:#fff;
+  line-height:1.6;
+}
+
+.content-card ul {
+  list-style:disc inside;
+}
+
+/* ===================== TEAM CARDS ===================== */
 .team-grid { display:flex; flex-wrap:wrap; justify-content:center; }
 .team-card {
   opacity:0;
@@ -95,10 +124,10 @@ nav a:hover, nav a.active { background:#ff1f1f; transform:scale(1.05); }
 .team-card:hover img { transform:scale(1.05); }
 .team-card:hover { transform:translateY(-5px); }
 
-/* FOOTER */
+/* ===================== FOOTER ===================== */
 footer { text-align:center; padding:30px; background:#111; color:#bbb; font-size:0.9rem; }
 
-/* MODAL */
+/* ===================== MODAL ===================== */
 .modal {
   position:fixed; top:0; left:0; width:100%; height:100%;
   background:rgba(0,0,0,0.8); display:flex; justify-content:center; align-items:center;
@@ -111,7 +140,7 @@ footer { text-align:center; padding:30px; background:#111; color:#bbb; font-size
 }
 .close-btn { position:absolute; top:10px; right:15px; font-size:24px; cursor:pointer; }
 
-/* RESPONSIVENESS */
+/* ===================== RESPONSIVENESS ===================== */
 @media(max-width:768px){
   .hero h1 { font-size:2.2rem; }
   nav ul { flex-direction:column; gap:10px; }
