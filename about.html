@@ -1,22 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About • Customer Success Management</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-c
+
 body{
   font-family:'Poppins',sans-serif;
   color:#fff;
   background:
     linear-gradient(rgba(155,18,18,0.6), rgba(0,0,0,0.9)),
-    url('images/classroom-bg.jpg') center/cover no-repeat fixed,
-    url('images/red-gradient-bg.jpg') center/cover no-repeat fixed;
-  background-blend-mode: overlay, multiply;
+    url('images/classroom-bg.jpg') center/cover no-repeat fixed;
   overflow-x:hidden;
 }
 
@@ -28,6 +26,7 @@ body{
   opacity:0.1;
   animation:cloudMove 120s linear infinite;
   pointer-events:none;
+  z-index:1;
 }
 @keyframes cloudMove{
   0%{transform:translateX(0);}
@@ -92,20 +91,11 @@ nav a:hover,nav a.active{
   position:relative;
 }
 
-/* LINES */
-.line{
-  position:absolute;
-  width:4px;
-  background:#e50914;
-  z-index:1;
-  left:50%;
-  transform:translateX(-50%);
-}
-
+/* TEAM ROWS */
 .team-row{
   display:flex;
   justify-content:center;
-  gap:80px;
+  gap:40px;
   flex-wrap:wrap;
 }
 
@@ -215,11 +205,17 @@ nav a:hover,nav a.active{
   0%{transform:scale(0.5);opacity:0;}
   100%{transform:scale(1);opacity:1;}
 }
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .team-row{flex-direction:column; gap:20px;}
+  .other-team{grid-template-columns:repeat(auto-fit,minmax(180px,1fr));}
+}
 </style>
 </head>
 <body>
 
-<div class="clouds"></div>
+<div class="clouds" aria-hidden="true"></div>
 
 <header>
   <a href="index.html" class="brand">Customer Success Management</a>
@@ -373,17 +369,9 @@ document.querySelectorAll('.team-card').forEach(card=>{
   });
 });
 
-closeModal.addEventListener('click',()=>{
-  modal.classList.remove('active');
-});
-
-modal.addEventListener('click',(e)=>{
-  if(e.target === modal) modal.classList.remove('active');
-});
+closeModal.addEventListener('click',()=>{ modal.classList.remove('active'); });
+modal.addEventListener('click',(e)=>{ if(e.target === modal) modal.classList.remove('active'); });
 </script>
 
 </body>
 </html>
-
-
-
