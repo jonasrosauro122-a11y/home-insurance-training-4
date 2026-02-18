@@ -1,86 +1,164 @@
-/* ===== RESET & GLOBAL ===== */
-* { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
-body {
-  background: linear-gradient(135deg,#9b1212,#000);
-  background-size:400% 400%;
-  animation: gradientShift 20s ease infinite;
-  color:white;
-  overflow-x:hidden;
-}
-@keyframes gradientShift{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About • Customer Success Management</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-/* ===== CLOUDS ===== */
-.clouds{
-  position:absolute; top:0; left:0; width:200%; height:200%;
-  background:url('images/clouds.png') repeat;
-  background-size:contain;
-  opacity:0.12;
-  animation: cloudMove 120s linear infinite;
-  pointer-events:none; z-index:0;
-}
-@keyframes cloudMove{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+<div class="clouds" aria-hidden="true"></div>
 
-/* ===== HEADER ===== */
-header{
-  position:sticky; top:0; z-index:100;
-  display:flex; justify-content:space-between; align-items:center;
-  padding:1rem 2rem; background:rgba(0,0,0,0.7); backdrop-filter:blur(5px);
-}
-.brand{color:#fff;font-size:1.5rem;font-weight:700;text-decoration:none;}
-nav ul{display:flex;list-style:none;gap:20px;flex-wrap:wrap;}
-nav a{
-  color:#fff;text-decoration:none;font-weight:500;
-  padding:6px 12px;border-radius:5px;transition:all 0.3s ease;
-}
-nav a:hover, nav a.active{background:#ff1f1f; transform:scale(1.05);}
+<header>
+  <a href="index.html" class="brand">Customer Success Management</a>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html" class="active">Team</a></li>
+      <li><a href="classroom.html">Classroom Topic</a></li>
+      <li><a href="assignments.html">University</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+</header>
 
-/* ===== HERO ===== */
-.hero{
-  text-align:center;padding:5rem 2rem;
-  background:rgba(0,0,0,0.5); position:relative; z-index:5;
-}
-.hero h1,h2{font-size:2.5rem;color:#fff;animation:fadeInDown 1.5s ease;margin-bottom:1rem;}
-.hero p{font-size:1.1rem;color:#fff;max-width:700px;margin:0 auto 2rem;line-height:1.6;}
-.hero a{
-  background:#e50914;color:#fff;text-decoration:none;padding:0.8rem 1.6rem;
-  border-radius:8px;font-weight:bold;transition:all 0.3s ease;
-}
-.hero a:hover{background:#b0060e; transform:scale(1.05);}
-@keyframes fadeInDown{from{opacity:0;transform:translateY(-20px);}to{opacity:1;transform:translateY(0);}}
+<main class="container">
+  <div class="section-title">
+    <h2>Customer Success Team Gallery</h2>
+    <p>Leaders, Executive Assistants & Team Members</p>
+  </div>
 
-/* ===== COURSES GRID ===== */
-.courses{padding:4rem 2rem;text-align:center;position:relative; z-index:5;}
-.courses h2{font-size:2rem;margin-bottom:2rem;color:#ff1f1f;}
-.course-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:1.8rem; max-width:1200px; margin:0 auto;
-}
-.course-card{
-  background: rgba(255,255,255,0.05); border:2px solid rgba(255,255,255,0.2);
-  border-radius:15px;padding:2rem 1rem; backdrop-filter:blur(8px);
-  box-shadow:0 4px 20px rgba(0,0,0,0.3);
-  transition:transform 0.3s ease, box-shadow 0.3s ease; opacity:0; transform:translateY(30px);
-  color:#fff;
-}
-.course-card.visible{opacity:1; transform:translateY(0);}
-.course-card:hover{transform:translateY(-8px); box-shadow:0 8px 25px rgba(229,9,20,0.4);}
-.course-card h3{color:#fff; font-size:1.2rem; margin-bottom:0.5rem;}
+  <div class="team-hierarchy trainers">
+    <!-- Leaders -->
+    <div class="team-card" data-bio="Niccole Peeler has 10 years in client success leadership. She drives strategic initiatives for client growth.">
+      <img src="images/trainer1.jpg" alt="Niccole Peeler">
+      <h3>Niccole Peeler</h3>
+      <p>Customer Success Director</p>
+    </div>
+    <div class="team-card" data-bio="Alicia Almanza is a top-tier Customer Success Manager, specializing in client engagement and retention strategies.">
+      <img src="images/trainer2.jpg" alt="Alicia Almanza">
+      <h3>Alicia Almanza</h3>
+      <p>Customer Success Manager</p>
+    </div>
+    <div class="team-card" data-bio="Karla Jardeloza leads insurance training, ensuring staff are highly skilled and knowledgeable in client success.">
+      <img src="images/trainer3.jpg" alt="Karla Jardeloza">
+      <h3>Karla Jardeloza</h3>
+      <p>Insurance Training Director</p>
+    </div>
 
-/* ===== TRAINERS ===== */
-.trainers{display:flex; flex-wrap:wrap; justify-content:center; gap:40px; padding:50px 20px; position:relative; z-index:5;}
-.trainer-card{
-  background: rgba(255,255,255,0.05); border-radius:20px; padding:20px; text-align:center;
-  width:220px; transition: transform 0.3s;
+    <!-- Assistants -->
+    <div class="team-card" data-bio="Gell Berona supports Niccole Peeler as Executive Assistant, handling operations and schedules.">
+      <img src="images/trainer4.jpg" alt="Gell Berona">
+      <h3>Gell Berona</h3>
+      <p>Executive Assistant</p>
+    </div>
+    <div class="team-card" data-bio="Ademar Toleran Jr supports Alicia Almanza as Executive Assistant, ensuring smooth operations.">
+      <img src="images/trainer5.jpg" alt="Ademar Toleran Jr">
+      <h3>Ademar Toleran Jr</h3>
+      <p>Executive Assistant</p>
+    </div>
+    <div class="team-card" data-bio="Allyza Lyle Alcomendras supports Karla Jardeloza as Executive Assistant, coordinating client programs.">
+      <img src="images/trainer6.jpg" alt="Allyza Lyle Alcomendras">
+      <h3>Allyza Lyle Alcomendras</h3>
+      <p>Executive Assistant</p>
+    </div>
+  </div>
+
+  <div class="section-title" style="margin-top:60px;">
+    <h2>Trainers & Team Leaders</h2>
+    <p>Meet the rest of our Customer Success Team</p>
+  </div>
+
+  <div class="other-team trainers">
+    <div class="team-card" data-bio="Jonas Rosauro is an experienced Insurance Trainer specializing in client onboarding and policy training.">
+      <img src="images/trainer7.jpg" alt="Jonas Rosauro">
+      <h3>Jonas Rosauro</h3>
+      <p>Insurance Trainer</p>
+    </div>
+    <div class="team-card" data-bio="Au Sagarino is a skilled Insurance Trainer focusing on product knowledge and client success.">
+      <img src="images/trainer8.jpg" alt="Au Sagarino">
+      <h3>Au Sagarino</h3>
+      <p>Insurance Trainer</p>
+    </div>
+    <div class="team-card" data-bio="Kyle Mejares is an Insurance Trainer providing hands-on support for client services.">
+      <img src="images/trainer9.jpg" alt="Kyle Mejares">
+      <h3>Kyle Mejares</h3>
+      <p>Insurance Trainer</p>
+    </div>
+    <div class="team-card" data-bio="Alchanie Ay-ad Mancia is an Insurance Trainer specializing in policy knowledge and staff coaching.">
+      <img src="images/trainer10.jpg" alt="Alchanie Ay-ad Mancia">
+      <h3>Alchanie Ay-ad Mancia</h3>
+      <p>Insurance Trainer</p>
+    </div>
+    <div class="team-card" data-bio="Martin Salcedo leads his team with experience in customer service excellence.">
+      <img src="images/trainer11.jpg" alt="Martin Salcedo">
+      <h3>Martin Salcedo</h3>
+      <p>Team Leader</p>
+    </div>
+    <div class="team-card" data-bio="Edmar Quirante is a Team Leader ensuring operational efficiency and mentoring team members.">
+      <img src="images/trainer12.jpg" alt="Edmar Quirante">
+      <h3>Edmar Quirante</h3>
+      <p>Team Leader</p>
+    </div>
+    <div class="team-card" data-bio="Ferdinand Alvarez Jr. is a Team Leader specializing in client engagement and staff coaching.">
+      <img src="images/trainer13.jpg" alt="Ferdinand Alvarez Jr.">
+      <h3>Ferdinand Alvarez Jr.</h3>
+      <p>Team Leader</p>
+    </div>
+    <div class="team-card" data-bio="Rezyl Jane Regondon is a Team Leader managing client success initiatives and mentoring.">
+      <img src="images/trainer14.jpg" alt="Rezyl Jane Regondon">
+      <h3>Rezyl Jane Regondon</h3>
+      <p>Team Leader</p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  © 2025 Customer Success Management. All Rights Reserved.
+</footer>
+
+<!-- MODAL -->
+<div class="modal" id="bioModal">
+  <div class="modal-content">
+    <span class="close-btn" id="closeModal">&times;</span>
+    <h3 id="modalName"></h3>
+    <p id="modalTitle"></p>
+    <p id="modalBio"></p>
+  </div>
+</div>
+
+<script>
+// Reveal animation
+function revealCards(){
+  document.querySelectorAll('.team-card').forEach(card=>{
+    const rect = card.getBoundingClientRect();
+    if(rect.top < window.innerHeight - 100){
+      card.classList.add('visible');
+    }
+  });
 }
-.trainer-card img{width:100%; border-radius:50%; border:3px solid #ff1f1f;}
-.trainer-card:hover{transform:scale(1.05);}
-.trainer-card h3{margin-top:15px;color:#ff1f1f;}
-.trainer-card p{margin-top:10px;font-size:14px;color:#fff;}
+window.addEventListener('scroll', revealCards);
+window.addEventListener('load', revealCards);
 
-/* ===== FOOTER ===== */
-footer{ text-align:center; padding:40px 20px; background:#111; color:#fff; margin-top:2rem;}
+// Modal popup
+const modal = document.getElementById('bioModal');
+const modalName = document.getElementById('modalName');
+const modalTitle = document.getElementById('modalTitle');
+const modalBio = document.getElementById('modalBio');
+const closeModal = document.getElementById('closeModal');
 
-/* ===== RESPONSIVE ===== */
-@media(max-width:768px){ .hero h1,.hero h2{font-size:2rem;} .hero p{font-size:1rem;} .trainer-card{width:45%;} }
-@media(max-width:480px){ .trainer-card{width:100%;} .courses h2{font-size:1.6rem;} }
+document.querySelectorAll('.team-card').forEach(card=>{
+  card.addEventListener('click',()=>{
+    modal.classList.add('active');
+    modalName.textContent = card.querySelector('h3').textContent;
+    modalTitle.textContent = card.querySelector('p').textContent;
+    modalBio.textContent = card.dataset.bio;
+  });
+});
+closeModal.addEventListener('click',()=> modal.classList.remove('active'));
+modal.addEventListener('click',(e)=>{ if(e.target === modal) modal.classList.remove('active'); });
+</script>
+
+</body>
+</html>
