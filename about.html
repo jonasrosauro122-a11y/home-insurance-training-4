@@ -5,16 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About • Customer Success Management</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-
 <style>
+/* ===================== GLOBAL ===================== */
 *{margin:0;padding:0;box-sizing:border-box;}
-
 body{
   font-family:'Poppins',sans-serif;
   color:#fff;
   background:
     linear-gradient(rgba(155,18,18,0.6), rgba(0,0,0,0.9)),
-    url('images/classroom-bg.jpg') center/cover no-repeat fixed;
+    url('images/classroom-bg.jpg') center/cover no-repeat fixed,
+    url('images/red-gradient-bg.jpg') center/cover no-repeat fixed;
+  background-blend-mode: overlay, multiply;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
   overflow-x:hidden;
 }
 
@@ -70,16 +74,15 @@ nav a:hover,nav a.active{
   text-align:center;
 }
 
+/* SECTION TITLE */
 .section-title{
   text-align:center;
   margin-bottom:40px;
 }
-
 .section-title h2{
   font-size:2.5rem;
   margin-bottom:10px;
 }
-
 .section-title p{color:#ddd;}
 
 /* TEAM HIERARCHY */
@@ -99,12 +102,12 @@ nav a:hover,nav a.active{
   flex-wrap:wrap;
 }
 
-/* CARDS */
+/* TEAM CARDS */
 .team-card{
-  background:#fff;
-  color:#000;
+  background: rgba(0,0,0,0.6);
+  color:#fff;
   border-radius:15px;
-  padding:20px;
+  padding:15px;
   text-align:center;
   width:220px;
   box-shadow:0 8px 24px rgba(0,0,0,0.3);
@@ -113,32 +116,27 @@ nav a:hover,nav a.active{
   transition:all 0.6s ease;
   cursor:pointer;
 }
-
 .team-card.visible{
   transform:translateY(0) scale(1);
   opacity:1;
 }
-
 .team-card:hover{
   transform:translateY(-10px) scale(1.05);
 }
-
 .team-card img{
   width:100%;
   height:220px;
-  object-fit:cover;
+  object-fit:cover; /* ensures all images same size */
   border-radius:12px;
   margin-bottom:15px;
 }
-
 .team-card h3{
-  color:#800000;
+  color:#e50914;
   margin-bottom:5px;
 }
-
 .team-card p{
   font-weight:bold;
-  color:#333;
+  color:#fff;
 }
 
 /* OTHER TEAM GRID */
@@ -163,15 +161,13 @@ nav a:hover,nav a.active{
   transition:0.3s;
   z-index:100;
 }
-
 .modal.active{
   opacity:1;
   pointer-events:auto;
 }
-
 .modal-content{
-  background:#fff;
-  color:#000;
+  background:#111;
+  color:#fff;
   padding:30px;
   border-radius:15px;
   max-width:500px;
@@ -180,24 +176,20 @@ nav a:hover,nav a.active{
   position:relative;
   animation:popIn 0.4s ease forwards;
 }
-
 .modal-content h3{
   margin-bottom:15px;
-  color:#800000;
+  color:#e50914;
 }
-
 .modal-content p{
   margin-bottom:10px;
-  color:#333;
 }
-
 .close-btn{
   position:absolute;
   top:15px;
   right:15px;
   font-size:1.5rem;
   cursor:pointer;
-  color:#800000;
+  color:#e50914;
 }
 
 /* POP ANIMATION */
@@ -214,7 +206,6 @@ nav a:hover,nav a.active{
 </style>
 </head>
 <body>
-
 <div class="clouds" aria-hidden="true"></div>
 
 <header>
@@ -236,40 +227,36 @@ nav a:hover,nav a.active{
     <p>Leaders, Executive Assistants & Team Members</p>
   </div>
 
-  <!-- LEADERS + ASSISTANTS -->
   <div class="team-hierarchy">
-    <!-- Leaders -->
     <div class="team-row">
-      <div class="team-card" data-bio="Niccole Peeler has 10 years in client success leadership. She drives strategic initiatives for client growth.">
+      <div class="team-card" data-bio="Niccole Peeler has 10 years in client success leadership.">
         <img src="images/trainer1.jpg" alt="Niccole Peeler">
         <h3>Niccole Peeler</h3>
         <p>Customer Success Director</p>
       </div>
-      <div class="team-card" data-bio="Alicia Almanza is a top-tier Customer Success Manager, specializing in client engagement and retention strategies.">
+      <div class="team-card" data-bio="Alicia Almanza is a top-tier Customer Success Manager.">
         <img src="images/trainer2.jpg" alt="Alicia Almanza">
         <h3>Alicia Almanza</h3>
         <p>Customer Success Manager</p>
       </div>
-      <div class="team-card" data-bio="Karla Jardeloza leads insurance training, ensuring staff are highly skilled and knowledgeable in client success.">
+      <div class="team-card" data-bio="Karla Jardeloza leads insurance training.">
         <img src="images/trainer3.jpg" alt="Karla Jardeloza">
         <h3>Karla Jardeloza</h3>
         <p>Insurance Training Director</p>
       </div>
     </div>
-
-    <!-- Assistants -->
     <div class="team-row">
-      <div class="team-card" data-bio="Gell Berona supports Niccole Peeler as Executive Assistant, handling operations and schedules.">
+      <div class="team-card" data-bio="Gell Berona supports Niccole Peeler as Executive Assistant.">
         <img src="images/trainer4.jpg" alt="Gell Berona">
         <h3>Gell Berona</h3>
         <p>Executive Assistant</p>
       </div>
-      <div class="team-card" data-bio="Ademar Toleran Jr supports Alicia Almanza as Executive Assistant, ensuring smooth operations.">
+      <div class="team-card" data-bio="Ademar Toleran Jr supports Alicia Almanza.">
         <img src="images/trainer5.jpg" alt="Ademar Toleran Jr">
         <h3>Ademar Toleran Jr</h3>
         <p>Executive Assistant</p>
       </div>
-      <div class="team-card" data-bio="Allyza Lyle Alcomendras supports Karla Jardeloza as Executive Assistant, coordinating client programs.">
+      <div class="team-card" data-bio="Allyza Lyle Alcomendras supports Karla Jardeloza.">
         <img src="images/trainer6.jpg" alt="Allyza Lyle Alcomendras">
         <h3>Allyza Lyle Alcomendras</h3>
         <p>Executive Assistant</p>
@@ -277,51 +264,25 @@ nav a:hover,nav a.active{
     </div>
   </div>
 
-  <!-- OTHER TEAM MEMBERS -->
   <div class="section-title" style="margin-top:60px;">
     <h2>Trainers & Team Leaders</h2>
     <p>Meet the rest of our Customer Success Team</p>
   </div>
   <div class="other-team">
-    <div class="team-card" data-bio="Jonas Rosauro is an experienced Insurance Trainer specializing in client onboarding and policy training.">
+    <div class="team-card" data-bio="Jonas Rosauro is an experienced Insurance Trainer.">
       <img src="images/trainer7.jpg" alt="Jonas Rosauro">
       <h3>Jonas Rosauro</h3>
       <p>Insurance Trainer</p>
     </div>
-    <div class="team-card" data-bio="Au Sagarino is a skilled Insurance Trainer focusing on product knowledge and client success.">
+    <div class="team-card" data-bio="Au Sagarino is a skilled Insurance Trainer.">
       <img src="images/trainer8.jpg" alt="Au Sagarino">
       <h3>Au Sagarino</h3>
       <p>Insurance Trainer</p>
     </div>
-    <div class="team-card" data-bio="Kyle Mejares is an Insurance Trainer providing hands-on support for client services.">
+    <div class="team-card" data-bio="Kyle Mejares is an Insurance Trainer.">
       <img src="images/trainer9.jpg" alt="Kyle Mejares">
       <h3>Kyle Mejares</h3>
       <p>Insurance Trainer</p>
-    </div>
-    <div class="team-card" data-bio="Alchanie Ay-ad Mancia is an Insurance Trainer specializing in policy knowledge and staff coaching.">
-      <img src="images/trainer10.jpg" alt="Alchanie Ay-ad Mancia">
-      <h3>Alchanie Ay-ad Mancia</h3>
-      <p>Insurance Trainer</p>
-    </div>
-    <div class="team-card" data-bio="Martin Salcedo leads his team with experience in customer service excellence.">
-      <img src="images/trainer11.jpg" alt="Martin Salcedo">
-      <h3>Martin Salcedo</h3>
-      <p>Team Leader</p>
-    </div>
-    <div class="team-card" data-bio="Edmar Quirante is a Team Leader ensuring operational efficiency and mentoring team members.">
-      <img src="images/trainer12.jpg" alt="Edmar Quirante">
-      <h3>Edmar Quirante</h3>
-      <p>Team Leader</p>
-    </div>
-    <div class="team-card" data-bio="Ferdinand Alvarez Jr. is a Team Leader specializing in client engagement and staff coaching.">
-      <img src="images/trainer13.jpg" alt="Ferdinand Alvarez Jr.">
-      <h3>Ferdinand Alvarez Jr.</h3>
-      <p>Team Leader</p>
-    </div>
-    <div class="team-card" data-bio="Rezyl Jane Regondon is a Team Leader managing client success initiatives and mentoring.">
-      <img src="images/trainer14.jpg" alt="Rezyl Jane Regondon">
-      <h3>Rezyl Jane Regondon</h3>
-      <p>Team Leader</p>
     </div>
   </div>
 </main>
@@ -341,7 +302,7 @@ nav a:hover,nav a.active{
 </div>
 
 <script>
-// Reveal pop animation
+// Reveal animation
 function revealCards(){
   document.querySelectorAll('.team-card').forEach(card=>{
     const rect = card.getBoundingClientRect();
@@ -353,7 +314,7 @@ function revealCards(){
 window.addEventListener('scroll', revealCards);
 window.addEventListener('load', revealCards);
 
-// Modal popup for bio
+// Modal popup
 const modal = document.getElementById('bioModal');
 const modalName = document.getElementById('modalName');
 const modalTitle = document.getElementById('modalTitle');
@@ -370,9 +331,7 @@ document.querySelectorAll('.team-card').forEach(card=>{
 });
 
 closeModal.addEventListener('click',()=>{ modal.classList.remove('active'); });
-modal.addEventListener('click',(e)=>{ if(e.target === modal) modal.classList.remove('active'); });
+modal.addEventListener('click',(e)=>{ if(e.target===modal) modal.classList.remove('active'); });
 </script>
-
 </body>
 </html>
-
