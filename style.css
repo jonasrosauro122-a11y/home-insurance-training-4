@@ -4,7 +4,6 @@
 body {
   font-family:'Poppins',sans-serif;
   color:#fff;
-  /* FIXED BACKGROUND IMAGE WITHOUT FADE */
   background: url('images/red-gradient-bg.jpg') center/cover no-repeat fixed;
   background-size: cover;
   background-position: center;
@@ -31,9 +30,7 @@ header {
   position:sticky; top:0; z-index:50;
   display:flex; justify-content:space-between; align-items:center;
   padding:1rem 2rem;
-  /* SOLID HEADER BACKGROUND TO PREVENT FADING */
-  background:#111; 
-  /* remove backdrop-filter blur to keep color solid */
+  background:#111;
 }
 .brand { font-size:1.6rem; font-weight:700; text-decoration:none; color:#fff; }
 nav ul { display:flex; list-style:none; gap:20px; }
@@ -65,7 +62,7 @@ nav a:hover, nav a.active { background:#ff1f1f; transform:scale(1.05); }
 .btn-black { background:#111; color:#fff; }
 .btn-black:hover { background:#333; transform:scale(1.05); }
 
-/* ===================== MAIN CONTENT (CARDS) ===================== */
+/* ===================== CONTENT SECTIONS ===================== */
 .main-content-section {
   max-width:1000px;
   margin:3rem auto;
@@ -74,8 +71,6 @@ nav a:hover, nav a.active { background:#ff1f1f; transform:scale(1.05); }
   flex-direction:column;
   gap:2.5rem;
 }
-
-/* Use STRONGER opacity so background doesn't show through */
 .content-card {
   background: rgba(0,0,0,0.85);
   padding:2rem;
@@ -85,19 +80,18 @@ nav a:hover, nav a.active { background:#ff1f1f; transform:scale(1.05); }
   transform:translateY(30px);
   transition: all 0.8s ease-out;
 }
-
 .content-card.visible {
   opacity:1;
   transform:translateY(0);
 }
-
 .content-card h2 { color:#ff1f1f; margin-bottom:1rem; }
 .content-card h3 { color:#fff; margin-top:1rem; margin-bottom:0.5rem; }
 .content-card p, .content-card ul { color:#fff; line-height:1.6; }
 .content-card ul { list-style:disc inside; }
 
 /* ===================== TEAM CARDS ===================== */
-.team-grid { display:flex; flex-wrap:wrap; justify-content:center; }
+.team-grid, .team-row, .other-team { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; }
+
 .team-card {
   opacity:0;
   transform:translateY(30px);
@@ -122,8 +116,25 @@ nav a:hover, nav a.active { background:#ff1f1f; transform:scale(1.05); }
 .team-card:hover img { transform:scale(1.05); }
 .team-card:hover { transform:translateY(-5px); }
 
-/* ===================== FOOTER ===================== */
-footer { text-align:center; padding:30px; background:#111; color:#bbb; font-size:0.9rem; }
+/* ===================== STAFF SUMMARIES (ABOUT.HTML) ===================== */
+.staff-summary {
+  opacity:0;
+  transform:translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  font-style:italic;
+  color:#fff;
+  max-width:900px;
+  margin:20px auto 50px auto;
+  background: rgba(0,0,0,0.5);
+  padding:15px 20px;
+  border-radius:10px;
+  line-height:1.5;
+  text-align:left;
+}
+.staff-summary.visible {
+  opacity:1;
+  transform:translateY(0);
+}
 
 /* ===================== MODAL ===================== */
 .modal {
@@ -138,6 +149,9 @@ footer { text-align:center; padding:30px; background:#111; color:#bbb; font-size
 }
 .close-btn { position:absolute; top:10px; right:15px; font-size:24px; cursor:pointer; }
 
+/* ===================== FOOTER ===================== */
+footer { text-align:center; padding:30px; background:#111; color:#bbb; font-size:0.9rem; }
+
 /* ===================== RESPONSIVENESS ===================== */
 @media(max-width:768px){
   .hero h1 { font-size:2.2rem; }
@@ -145,5 +159,5 @@ footer { text-align:center; padding:30px; background:#111; color:#bbb; font-size
   .buttons { flex-direction:column; }
   .team-card { margin:10px 0; }
   .team-card img { height:200px; }
+  .staff-summary { font-size:0.9rem; padding:10px 15px; }
 }
-
