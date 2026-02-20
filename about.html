@@ -45,14 +45,12 @@ header{
   background:rgba(0,0,0,0.7);
   backdrop-filter:blur(5px);
 }
-
 .brand{
   font-size:1.6rem;
   font-weight:700;
   text-decoration:none;
   color:#fff;
 }
-
 nav ul{display:flex;list-style:none;gap:20px;}
 nav a{
   color:#fff;text-decoration:none;
@@ -90,7 +88,7 @@ nav a:hover,nav a.active{
   display:flex;
   flex-direction:column;
   align-items:center;
-  gap:60px;
+  gap:40px;
   position:relative;
 }
 
@@ -126,7 +124,7 @@ nav a:hover,nav a.active{
 .team-card img{
   width:100%;
   height:220px;
-  object-fit:cover; /* ensures all images same size */
+  object-fit:cover;
   border-radius:12px;
   margin-bottom:15px;
 }
@@ -139,12 +137,31 @@ nav a:hover,nav a.active{
   color:#fff;
 }
 
+/* SUMMARY SECTIONS */
+.staff-summary{
+  opacity:0;
+  transform:translateY(30px);
+  transition:opacity 0.8s ease, transform 0.8s ease;
+  font-style:italic;
+  color:#fff;
+  max-width:900px;
+  margin:20px auto 50px auto;
+  background: rgba(0,0,0,0.5);
+  padding:15px 20px;
+  border-radius:10px;
+  line-height:1.5;
+}
+.staff-summary.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
 /* OTHER TEAM GRID */
 .other-team{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
   gap:30px;
-  margin-top:60px;
+  margin-top:20px;
 }
 
 /* MODAL */
@@ -227,30 +244,46 @@ nav a:hover,nav a.active{
     <p>Leaders, Executive Assistants & Team Members</p>
   </div>
 
-  <!-- LEADERS + ASSISTANTS -->
+  <!-- LEADERS -->
   <div class="team-hierarchy">
-<!-- Leaders -->
-<div class="team-row">
-  <div class="team-card" data-bio="Niccole Peeler has 10 years in client success leadership. She drives strategic initiatives for client growth.">
-    <img src="images/trainer1.jpg" alt="Niccole Peeler">
-    <h3>Niccole Peeler</h3>
-    <p>Customer Success Director</p>
-  </div>
 
-  <div class="team-card" data-bio="Karla Jardeloza leads insurance training, ensuring staff are highly skilled and knowledgeable in client success.">
-    <img src="images/trainer3.jpg" alt="Karla Jardeloza">
-    <h3>Karla Jardeloza</h3>
-    <p>Insurance Training Director</p>
-  </div>
+    <div class="staff-summary" id="summary-csd">
+      <strong>Customer Success Directors (CSD)</strong><br>
+      Provide strategic leadership, final decision authority, and cross-departmental alignment for Customer Success.  
+      Oversee client risk management and retention strategy, approve final decisions impacting client accounts.
+    </div>
 
-  <div class="team-card" data-bio="Alicia Almanza is a top-tier Customer Success Manager, specializing in client engagement and retention strategies.">
-    <img src="images/trainer2.jpg" alt="Alicia Almanza">
-    <h3>Alicia Almanza</h3>
-    <p>Customer Success Manager</p>
-  </div>
-</div>
+    <div class="team-row">
+      <div class="team-card" data-bio="Niccole Peeler has 10 years in client success leadership. She drives strategic initiatives for client growth.">
+        <img src="images/trainer1.jpg" alt="Niccole Peeler">
+        <h3>Niccole Peeler</h3>
+        <p>Customer Success Director</p>
+      </div>
+      <div class="team-card" data-bio="Karla Jardeloza leads insurance training, ensuring staff are highly skilled and knowledgeable in client success.">
+        <img src="images/trainer3.jpg" alt="Karla Jardeloza">
+        <h3>Karla Jardeloza</h3>
+        <p>Insurance Training Director</p>
+      </div>
+    </div>
 
-    <!-- Assistants -->
+    <div class="staff-summary" id="summary-am">
+      <strong>Account Managers (AM)</strong><br>
+      Serve as the primary client point of contact, manage client relationships post-onboarding, conduct regular check-ins, and escalate matters as needed.
+    </div>
+
+    <div class="team-row">
+      <div class="team-card" data-bio="Alicia Almanza is a top-tier Customer Success Manager, specializing in client engagement and retention strategies.">
+        <img src="images/trainer2.jpg" alt="Alicia Almanza">
+        <h3>Alicia Almanza</h3>
+        <p>Customer Success Manager</p>
+      </div>
+    </div>
+
+    <div class="staff-summary" id="summary-ea">
+      <strong>Executive Assistants (EA)</strong><br>
+      Provide administrative and coordination support to the CSD and AMs. Arrange schedules, manage communications, attend meetings, and maintain documentation.
+    </div>
+
     <div class="team-row">
       <div class="team-card" data-bio="Gell Berona supports Niccole Peeler as Executive Assistant, handling operations and schedules.">
         <img src="images/trainer4.jpg" alt="Gell Berona">
@@ -264,20 +297,26 @@ nav a:hover,nav a.active{
       </div>
       <div class="team-card" data-bio="Allyza Lyle Alcomendras supports Karla Jardeloza as Executive Assistant, coordinating client programs.">
         <img src="images/trainer6.jpg" alt="Allyza Lyle Alcomendras">
-        <h3>Allyza Lyle Alcomendras 3</h3>
-        <p>Executive Assistant</p>
+        <h3>Allyza Lyle Alcomendras</h3>
+        <p>Executive Assistant 3</p>
       </div>
     </div>
   </div>
 
-  <!-- OTHER TEAM MEMBERS -->
-  <div class="section-title" style="margin-top:60px;">
-    <h2>Trainers & Team Leaders</h2>
-    <p>Meet the rest of our Customer Success Team</p>
+  <!-- TRAINERS & TEAM LEADERS -->
+  <div class="staff-summary" id="summary-trainers">
+    <strong>Trainers</strong><br>
+    Deliver structured, client-requested training aligned with Lava standards. Conduct VA training, system training, coordinate with AMs and Team Leads.
   </div>
+
+  <div class="staff-summary" id="summary-tl">
+    <strong>Team Leads (TL)</strong><br>
+    Provide guidance, oversight, and consistency to VAs. Conduct check-ins, support AM escalations, and coordinate with Trainers.
+  </div>
+
   <div class="other-team">
     <div class="team-card" data-bio="is an experienced Insurance Trainer specializing in client onboarding and policy training.">
-      <img src="images/trainer7.jpg" alt="Jonas Rosauro">
+      <img src="images/trainer7.jpg" alt="Nash Rosauro">
       <h3>Nash Rosauro</h3>
       <p>Insurance Trainer</p>
     </div>
@@ -292,7 +331,7 @@ nav a:hover,nav a.active{
       <p>Insurance Trainer</p>
     </div>
     <div class="team-card" data-bio="Chanie Mancia is an Insurance Trainer specializing in policy knowledge and staff coaching.">
-      <img src="images/trainer10.jpg" alt="Alchanie Ay-ad Mancia">
+      <img src="images/trainer10.jpg" alt="Nash Mancia">
       <h3>Nash Mancia</h3>
       <p>Insurance Trainer</p>
     </div>
@@ -302,12 +341,12 @@ nav a:hover,nav a.active{
       <p>Team Leader</p>
     </div>
     <div class="team-card" data-bio="is a Team Leader ensuring operational efficiency and mentoring team members.">
-      <img src="images/trainer12.jpg" alt="Edmar Quirante">
+      <img src="images/trainer12.jpg" alt="Ed Quirante">
       <h3>Ed Quirante</h3>
       <p>Team Leader</p>
     </div>
     <div class="team-card" data-bio="is a Team Leader specializing in client engagement and staff coaching.">
-      <img src="images/trainer13.jpg" alt="Ferdinand Alvarez Jr.">
+      <img src="images/trainer13.jpg" alt="Rj Alvarez Jr.">
       <h3>Rj Alvarez Jr.</h3>
       <p>Team Leader</p>
     </div>
@@ -334,7 +373,7 @@ nav a:hover,nav a.active{
 </div>
 
 <script>
-// Reveal animation
+// Reveal animation for cards
 function revealCards(){
   document.querySelectorAll('.team-card').forEach(card=>{
     const rect = card.getBoundingClientRect();
@@ -345,6 +384,18 @@ function revealCards(){
 }
 window.addEventListener('scroll', revealCards);
 window.addEventListener('load', revealCards);
+
+// Reveal animation for staff summaries
+function revealSummaries(){
+  document.querySelectorAll('.staff-summary').forEach(summary=>{
+    const rect = summary.getBoundingClientRect();
+    if(rect.top < window.innerHeight - 100){
+      summary.classList.add('visible');
+    }
+  });
+}
+window.addEventListener('scroll', revealSummaries);
+window.addEventListener('load', revealSummaries);
 
 // Modal popup
 const modal = document.getElementById('bioModal');
@@ -367,5 +418,3 @@ modal.addEventListener('click',(e)=>{ if(e.target===modal) modal.classList.remov
 </script>
 </body>
 </html>
-
-
