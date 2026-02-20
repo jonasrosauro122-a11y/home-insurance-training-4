@@ -8,6 +8,7 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
+
 body{
   font-family:'Poppins',sans-serif;
   color:#fff;
@@ -25,7 +26,10 @@ body{
   pointer-events:none;
   z-index:1;
 }
-@keyframes cloudMove{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+@keyframes cloudMove{
+  0%{transform:translateX(0);}
+  100%{transform:translateX(-50%);}
+}
 
 /* HEADER */
 header{
@@ -69,32 +73,26 @@ nav a:hover,nav a.active{background:#ff1f1f;transform:scale(1.05);}
 .team-card img{
   width:100%;height:220px;object-fit:cover;
   border-radius:10px;margin-bottom:10px;
-  transition:transform 0.4s ease, box-shadow 0.4s ease;
-  cursor:pointer;
+  transition:transform 0.4s ease;
 }
-.team-card img:hover{
-  transform:scale(1.05);
-  box-shadow:0 0 20px rgba(255,0,0,0.5);
-}
+.team-card:hover img{transform:scale(1.05);}
 .team-card:hover{transform:translateY(-5px);}
 .team-card h3{color:#e50914;margin-bottom:5px;}
 .team-card p{font-weight:600;color:#fff;}
 
-/* STAFF SUMMARY */
+/* CLEAN STAFF SUMMARY */
 .staff-summary{
   opacity:0;transform:translateY(50px);
   transition:opacity 0.9s ease,transform 0.9s ease;
   max-width:900px;margin:50px auto 80px auto;
-  background:rgba(0,0,0,0.75);
-  padding:35px 40px;border-radius:15px;
-  line-height:1.8;font-size:17px;
-  color:#fff;text-align:center;
-  box-shadow:0 0 20px rgba(0,0,0,0.5);
+  background:rgba(0,0,0,0.6);
+  padding:30px 35px;border-radius:15px;
+  line-height:1.8;font-size:15px;
 }
 .staff-summary.visible{opacity:1;transform:translateY(0);}
 .staff-summary h4{
-  margin-bottom:20px;font-size:22px;
-  color:#ff1f1f;letter-spacing:1px;
+  margin-bottom:15px;font-size:20px;
+  color:#e50914;letter-spacing:1px;
 }
 
 /* FOOTER */
@@ -127,8 +125,8 @@ footer{
 }
 </style>
 </head>
-<body>
 
+<body>
 <div class="clouds"></div>
 
 <header>
@@ -145,6 +143,7 @@ footer{
 </header>
 
 <main class="container">
+
 <div class="section-title">
 <h2>Customer Success Team Gallery</h2>
 <p>Leadership, Executive Assistants, Trainers & Team Leaders</p>
@@ -153,40 +152,49 @@ footer{
 <!-- LEADERS -->
 <div class="team-row">
 <div class="team-card" data-bio="Niccole Peeler has 10 years in client success leadership.">
-<img src="images/trainer1.jpg"><h3>Niccole Peeler</h3><p>Customer Success Director</p></div>
+<img src="images/trainer1.jpg"><h3>Niccole Peeler</h3>
+<p>Customer Success Director</p></div>
 
 <div class="team-card" data-bio="Karla Jardeloza leads insurance training.">
-<img src="images/trainer3.jpg"><h3>Karla Jardeloza</h3><p>Insurance Training Director</p></div>
+<img src="images/trainer3.jpg"><h3>Karla Jardeloza</h3>
+<p>Insurance Training Director</p></div>
 
 <div class="team-card" data-bio="Alicia Almanza specializes in engagement and retention.">
-<img src="images/trainer2.jpg"><h3>Alicia Almanza</h3><p>Customer Success Manager</p></div>
+<img src="images/trainer2.jpg"><h3>Alicia Almanza</h3>
+<p>Customer Success Manager</p></div>
 </div>
 
 <div class="staff-summary">
 <h4>Customer Success Leadership</h4>
-The Customer Success Director (CSD) is responsible for providing strategic leadership, final decision authority, and cross-departmental alignment for Customer Success. This role establishes standards, policies, and overall direction while serving as the primary escalation point. Partners closely with Sales, IT, Finance, and Leadership, oversees client risk management and approves final decisions impacting accounts.
+The Customer Success Director (CSD) is responsible for providing strategic leadership, final decision authority, and cross-departmental alignment for Customer Success. This role establishes Customer Success standards, policies, and overall direction while serving as the primary escalation point for both client and internal matters. The CSD partners closely with Sales, IT, Finance, and Leadership to resolve complex issues, oversees client risk management and retention strategies,
+and approves final decisions that impact client accounts. For Level 2 changes, the Customer Success Director and the client hold final decision authority.
 </div>
 
 <div class="staff-summary">
 <h4>Account Management</h4>
-The Account Manager is the primary client contact, managing relationships post-onboarding, conducting check-ins and reviews, coordinating training requests, identifying risks or growth opportunities, and communicating client needs to internal teams.
+The Account Manager serves as the primary client point of contact and supports the ongoing alignment, stability, and growth of assigned accounts. This role manages client relationships post-onboarding, conducts regular check-ins and account reviews, coordinates training requests and service support, identifies risks, gaps, or growth opportunities,
+and communicates client needs to internal teams as appropriate. Account Managers escalate matters based on impact, complexity, or policy considerations.
 </div>
 
 <!-- EXECUTIVE ASSISTANTS -->
 <div class="team-row">
 <div class="team-card" data-bio="Supports Niccole Peeler with operations and scheduling.">
-<img src="images/trainer4.jpg"><h3>Gell Berona</h3><p>Executive Assistant 1</p></div>
+<img src="images/trainer4.jpg"><h3>Gell Berona</h3>
+<p>Executive Assistant 1</p></div>
 
 <div class="team-card" data-bio="Supports Alicia Almanza ensuring smooth coordination.">
-<img src="images/trainer5.jpg"><h3>Andy Toleran Jr</h3><p>Executive Assistant 2</p></div>
+<img src="images/trainer5.jpg"><h3>Andy Toleran Jr</h3>
+<p>Executive Assistant 2</p></div>
 
 <div class="team-card" data-bio="Supports Karla Jardeloza coordinating client programs.">
-<img src="images/trainer6.jpg"><h3>Allyza Alcomendras</h3><p>Executive Assistant 3</p></div>
+<img src="images/trainer6.jpg"><h3>Allyza Alcomendras</h3>
+<p>Executive Assistant 3</p></div>
 </div>
 
 <div class="staff-summary">
 <h4>Executive Assistants</h4>
-Provide structured administrative and coordination support to the CSD and AMs, managing schedules, communications, meetings, documentation, and follow-ups to ensure smooth operations.
+The Executive Assistant (EA) provides structured administrative and coordination support to the Customer Success Director (CSD) and Account Managers (AMs) to ensure clear communication, organized scheduling, and consistent documentation across client accounts. This role arranges and manages schedules for client and internal meetings, organizes and monitors email communications on behalf of assigned partners, attends client check-ins and onboarding meetings to support continuity and follow-up, creates and maintains documentation related to meetings, requests, and action items, and coordinates internal requests and follow-ups across departments based on direction from their working partner. The EA operates in a support and coordination capacity,
+ensuring information is documented, communicated, and routed appropriately while maintaining alignment with established processes and escalation paths.
 </div>
 
 <!-- TRAINERS -->
@@ -210,7 +218,8 @@ Provide structured administrative and coordination support to the CSD and AMs, m
 
 <div class="staff-summary">
 <h4>Trainers</h4>
-Deliver structured, client-requested training aligned with Lava standards. Conduct onsite/online VA sessions, deliver system, carrier, and insurance concept training, support skill development, coordinate with AMs and Team Leads, and document training outcomes.
+The Trainer’s primary objective is to deliver structured, client-requested training aligned with Lava standards and the approved training menus. This role conducts VA training sessions both onsite and online, delivers system, carrier, and insurance concept training, supports skill development and readiness, coordinates training delivery with Account Managers and Team Leads,
+and documents training completion and outcomes. All training is delivered in alignment with the approved Lava training menu, covering carriers, systems, AMS platforms, raters, insurance fundamentals, and ACORD forms.
 </div>
 
 <!-- TEAM LEADERS -->
@@ -234,7 +243,8 @@ Deliver structured, client-requested training aligned with Lava standards. Condu
 
 <div class="staff-summary">
 <h4>Team Leaders</h4>
-Provide guidance, oversight, and consistency to VAs and serve as main contact for VA & AM communications. Conduct check-ins, support escalations, review performance, coordinate with Trainers, and ensure processes and standards are followed.
+The Team Leader (TL) provides guidance, oversight, and consistency to the VAs assigned to their team and serves as the main point of contact for VA and Account Manager (AM) communications. This role conducts daily, weekly, and monthly check-in meetings with VAs, attends client check-in meetings with AMs, supports AMs with escalations and decision-making, reviews account health and performance trends, coordinates with Trainers to address skill gaps or training needs,
+ensures processes and standards are followed consistently, and escalates issues to Customer Success Leadership when appropriate. The TL serves as the first formal VA escalation point within Customer Success.
 </div>
 
 </main>
@@ -255,14 +265,13 @@ Provide guidance, oversight, and consistency to VAs and serve as main contact fo
 
 <script>
 function revealElements(){
-  document.querySelectorAll('.team-card,.staff-summary').forEach(el=>{
-    const rect=el.getBoundingClientRect();
-    if(rect.top<window.innerHeight-100 && rect.bottom>100){
-      el.classList.add('visible');
-    }else{
-      el.classList.remove('visible');
-    }
-  });
+document.querySelectorAll('.team-card,.staff-summary').forEach(el=>{
+const rect=el.getBoundingClientRect();
+if(rect.top<window.innerHeight-100 && rect.bottom>100){
+el.classList.add('visible');
+}else{
+el.classList.remove('visible');
+}});
 }
 window.addEventListener('scroll',revealElements);
 window.addEventListener('load',revealElements);
@@ -273,16 +282,14 @@ const modalTitle=document.getElementById('modalTitle');
 const modalBio=document.getElementById('modalBio');
 const closeModal=document.getElementById('closeModal');
 
-document.querySelectorAll('.team-card, .team-card img').forEach(card=>{
-  card.addEventListener('click',()=>{
-    const parentCard = card.closest('.team-card');
-    modal.classList.add('active');
-    modalName.textContent=parentCard.querySelector('h3').textContent;
-    modalTitle.textContent=parentCard.querySelector('p').textContent;
-    modalBio.textContent=parentCard.dataset.bio;
-  });
+document.querySelectorAll('.team-card').forEach(card=>{
+card.addEventListener('click',()=>{
+modal.classList.add('active');
+modalName.textContent=card.querySelector('h3').textContent;
+modalTitle.textContent=card.querySelector('p').textContent;
+modalBio.textContent=card.dataset.bio;
 });
-
+});
 closeModal.addEventListener('click',()=>modal.classList.remove('active'));
 modal.addEventListener('click',(e)=>{if(e.target===modal)modal.classList.remove('active');});
 </script>
