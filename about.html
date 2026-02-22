@@ -101,21 +101,41 @@ footer{
   background:#111;color:#bbb;font-size:0.9rem;
 }
 
-/* MODAL */
+/* MODAL - WHITE THEME */
 .modal{
   position:fixed;top:0;left:0;width:100%;height:100%;
-  background:rgba(0,0,0,0.8);
+  background:rgba(0,0,0,0.5); /* dark overlay behind white modal */
   display:flex;justify-content:center;align-items:center;
   opacity:0;pointer-events:none;transition:0.3s;
+  z-index:1000;
 }
 .modal.active{opacity:1;pointer-events:auto;}
 .modal-content{
-  background:#111;padding:30px;border-radius:15px;
-  max-width:500px;width:90%;color:#fff;position:relative;
+  background:#fff; /* white modal background */
+  padding:30px;border-radius:15px;
+  max-width:500px;width:90%;color:#111; /* black text */
+  position:relative;
+  box-shadow:0 8px 25px rgba(0,0,0,0.5);
+  transform:scale(0.8);
+  transition:transform 0.3s ease, opacity 0.3s ease;
+  z-index:1001;
+  text-align:center;
+}
+.modal.active .modal-content{
+  transform:scale(1);
+}
+.modal-content img {
+  display:block;
+  margin:0 auto 15px auto;
+  border-radius:50%;
+  width:120px;
+  height:120px;
+  object-fit:cover;
 }
 .close-btn{
   position:absolute;top:10px;right:15px;
   font-size:24px;cursor:pointer;
+  color:#111; /* X button black */
 }
 
 @media(max-width:768px){
@@ -137,7 +157,6 @@ footer{
 <li><a href="about.html" class="active">Staff</a></li>
 <li><a href="classroom.html">Classroom</a></li>
 <li><a href="assignments.html">University</a></li>
-<li><a href="contact.html">Contact</a></li>
 </ul>
 </nav>
 </header>
@@ -256,42 +275,56 @@ ensures processes and standards are followed consistently, and escalates issues 
 <!-- MODAL -->
 <div class="modal" id="bioModal">
 <div class="modal-content">
-<span class="close-btn" id="closeModal">&times;</span>
-<h3 id="modalName"></h3>
-<p id="modalTitle"></p>
-<p id="modalBio"></p>
+  <span class="close-btn" id="closeModal">&times;</span>
+  <img id="modalImg" src="" alt="Profile Picture">
+  <h3 id="modalName"></h3>
+  <p id="modalTitle"></p>
+  <p id="modalBio"></p>
 </div>
 </div>
 
 <script>
+// Reveal on scroll
 function revealElements(){
-document.querySelectorAll('.team-card,.staff-summary').forEach(el=>{
-const rect=el.getBoundingClientRect();
-if(rect.top<window.innerHeight-100 && rect.bottom>100){
-el.classList.add('visible');
-}else{
-el.classList.remove('visible');
-}});
+  document.querySelectorAll('.team-card,.staff-summary').forEach(el=>{
+    const rect = el.getBoundingClientRect();
+    if(rect.top < window.innerHeight-100 && rect.bottom>100){
+      el.classList.add('visible');
+    }else{
+      el.classList.remove('visible');
+    }
+  });
 }
 window.addEventListener('scroll',revealElements);
 window.addEventListener('load',revealElements);
 
+// Modal popup
 const modal=document.getElementById('bioModal');
 const modalName=document.getElementById('modalName');
 const modalTitle=document.getElementById('modalTitle');
 const modalBio=document.getElementById('modalBio');
+const modalImg=document.getElementById('modalImg');
 const closeModal=document.getElementById('closeModal');
 
 document.querySelectorAll('.team-card').forEach(card=>{
-card.addEventListener('click',()=>{
-modal.classList.add('active');
-modalName.textContent=card.querySelector('h3').textContent;
-modalTitle.textContent=card.querySelector('p').textContent;
-modalBio.textContent=card.dataset.bio;
+  card.addEventListener('click',()=>{
+    modal.classList.add('active');
+    modalName.textContent = card.querySelector('h3').textContent;
+    modalTitle.textContent = card.querySelector('p').textContent;
+    modalBio.textContent = card.dataset.bio;
+    modalImg.src = card.querySelector('img').src;
+  });
 });
-});
+
 closeModal.addEventListener('click',()=>modal.classList.remove('active'));
-modal.addEventListener('click',(e)=>{if(e.target===modal)modal.classList.remove('active');});
+modal.addEventListener('click',(e)=>{if(e.target===modal) modal.classList.remove('active');});
+
+// Optional: Esc key to close modal
+document.addEventListener('keydown', e => {
+  if(e.key === 'Escape' && modal.classList.contains('active')){
+    modal.classList.remove('active');
+  }
+});
 </script>
 
 </body>
