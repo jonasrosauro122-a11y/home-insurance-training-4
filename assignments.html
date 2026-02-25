@@ -96,6 +96,12 @@ nav a.active { background:#ff1f1f; }
   box-shadow:0 4px 20px rgba(0,0,0,0.3);
   transition:0.3s;
   text-align:center;
+
+  /* make all cards same height */
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  min-height:220px; /* adjust this to match AMS card height */
 }
 
 .course-card:hover {
@@ -107,11 +113,13 @@ nav a.active { background:#ff1f1f; }
   width:100%;
   border-radius:10px;
   margin-bottom:10px;
+  flex-shrink:0;
 }
 
 .course-card h3 {
   color:#fff;
   font-size:1.1rem;
+  margin-top:auto;
 }
 
 /* Footer */
@@ -148,29 +156,20 @@ footer {
 <section class="section">
   <h2>AMS</h2>
   <div class="course-grid">
-
     <div class="course-card">
       <a href="https://university.lavaautomation.com/courses/enrolled/2162664" target="_blank" style="text-decoration:none; color:inherit;">
         <img src="images/ams360.png" alt="AMS 360">
         <h3>AMS 360</h3>
       </a>
     </div>
-
     <div class="course-card">
       <a href="https://university.lavaautomation.com/courses/enrolled/2529082" target="_blank" style="text-decoration:none; color:inherit;">
         <img src="images/applied-epic.png" alt="Applied Epic">
         <h3>Applied Epic</h3>
       </a>
     </div>
-
-    <div class="course-card">
-      <h3>EZLynx</h3>
-    </div>
-
-    <div class="course-card">
-      <h3>Hawk Soft</h3>
-    </div>
-
+    <div class="course-card"><h3>EZLynx</h3></div>
+    <div class="course-card"><h3>Hawk Soft</h3></div>
   </div>
 </section>
 
@@ -178,9 +177,8 @@ footer {
 <section class="section">
   <h2>Carrier Courses</h2>
   <div class="course-grid">
-
     <div class="course-card"><h3>Bambo</h3></div>
-    <div class="course-card"><h3>Citizens Courses</h3></div
+    <div class="course-card"><h3>Citizens Courses</h3></div>
     <div class="course-card"><h3>Safeco</h3></div>
     <div class="course-card"><h3>Progressive</h3></div>
     <div class="course-card"><h3>National General</h3></div>
@@ -191,19 +189,17 @@ footer {
     <div class="course-card"><h3>Nationwide Personal Lines Course</h3></div>
     <div class="course-card"><h3>Secura Commercial Lines Course</h3></div>
     <div class="course-card"><h3>Cincinnati Insurance Personal Lines</h3></div>
-    <div class="course-card"><h3>Cincinnati Commercial  Lines</h3></div>
+    <div class="course-card"><h3>Cincinnati Commercial Lines</h3></div>
     <div class="course-card"><h3>Chubb Insurance Personal Lines</h3></div>
-    <div class="course-card"><h3>Chubb Commercial  Lines</h3></div>
+    <div class="course-card"><h3>Chubb Commercial Lines</h3></div>
     <div class="course-card"><h3>Travelers Commercial Personal Lines</h3></div>
     <div class="course-card"><h3>Travelers Personal Lines</h3></div>
-
 
     <!-- Existing courses kept intact -->
     <div class="course-card"><h3>Auto Owners Commercial Lines</h3></div>
     <div class="course-card"><h3>Auto Owners Personal Lines</h3></div>
     <div class="course-card"><h3>Erie Course</h3></div>
     <div class="course-card"><h3>Mercury Course</h3></div>
-
   </div>
 </section>
 
